@@ -151,10 +151,14 @@ std::vector<NavCmd> Navigator::planApproachDirection(int broadcastDirection, Ori
     auto turns = turnToFace(currentFacing, target);
     commands.insert(commands.end(), turns.begin(), turns.end());
 
-	Logger::info("PlanApproachDirection result:\n broadcastDirection = " + std::to_string(broadcastDirection)
+	if (!commands.empty()) {
+		Logger::info("PlanApproachDirection result:\n broadcastDirection = " + std::to_string(broadcastDirection)
 				+ "\nCurrent Facing = " + std::to_string(static_cast<int>(currentFacing))
 				+ "\nOffset count = " + std::to_string(offset)
 				+ "\nFirst command = " + std::to_string(static_cast<int>(commands[0])));
+	} else {
+		Logger::info("... No turn needed (already facing target)");
+	}
 
     // Commit to 3 steps in this direction before reconsidering
 	commands.push_back(NavCmd::Forward);

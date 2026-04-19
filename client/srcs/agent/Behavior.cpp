@@ -667,11 +667,11 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
     // a different bearing will interrupt this naturally.
     if (_navPlan.empty()) {
 		auto plan = Navigator::planApproachDirection(
-			_broadcastDirection, _broadcastReceivedFacing);  // ← saved facing, not current
+			_broadcastDirection, _state.player.orientation);  // always current
 		_navPlan.assign(plan.begin(), plan.end());
 	}
-
-    if (!_navPlan.empty()) {
+	
+	if (!_navPlan.empty()) {
         NavCmd next = _navPlan.front(); _navPlan.pop_front();
         executeNavCmd(next);
     }
