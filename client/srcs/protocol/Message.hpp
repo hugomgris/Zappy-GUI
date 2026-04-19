@@ -64,6 +64,9 @@ struct ServerMessage {
 	std::optional<int>			mapWidth;
 	std::optional<int>			mapHeight;
 	std::optional<int>			remainingSlots;
+
+	std::optional<int>			playerX;
+	std::optional<int>			playerY;
 	std::optional<Orientation>	playerOrientation;
 
 	// for voir

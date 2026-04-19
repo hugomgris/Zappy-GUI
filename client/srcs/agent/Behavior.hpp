@@ -54,6 +54,8 @@ class Behavior {
 		bool _claimSent = false;
 		bool _ignoreDone = false;
 
+		Orientation _broadcastReceivedFacing = Orientation::N;
+
 		bool _forkInProgress = false;
 
 		std::vector<std::string>    _stonesNeeded;

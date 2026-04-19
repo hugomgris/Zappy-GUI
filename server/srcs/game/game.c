@@ -214,7 +214,7 @@ static int m_game_get_team_id(char *name)
     return ERROR;
 }
 
-static int m_game_get_start_pos(int *x, int *y, direction* dir)
+int m_game_get_start_pos(int *x, int *y, direction* dir)
 {
     *x = rand() % m_server.map_x;
     *y = rand() % m_server.map_y;
@@ -616,8 +616,8 @@ int m_command_voir(void* _p, void* _arg)
     (void)_arg;
 
     p = (player*)_p;
-    log_msg(LOG_LEVEL_INFO, "Executing voir for player %d at (%d,%d)\n", 
-        p->id, p->pos.x, p->pos.y);
+    log_msg(LOG_LEVEL_INFO, "Executing voir for player %d at (%d,%d) with orientation (%d)\n", 
+        p->id, p->pos.x, p->pos.y, p->dir);
 
     lvl = p->level;
 
@@ -962,48 +962,48 @@ static int minimal_delta(int delta, int max)
     return delta;
 }
 
+// Hugo was here AND FIXED THIS
 int compute_broadcast_direction(int listener_x, int listener_y, int listener_dir,
         int emitter_x, int emitter_y, int width, int height)
 {
-    int dy;
-    int dx;
-    int dyp;
-    int dxp;
-    int K;
-    double dxw;
-    double dyw;
-    double phi;
-    
+    int     dx;
+    int     dy;
+    int     dxp;
+    int     dyp;
+    int     K;
+    double  phi;
+
     dx = minimal_delta(emitter_x - listener_x, width);
     dy = minimal_delta(emitter_y - listener_y, height);
-
     if (dx == 0 && dy == 0)
         return 0;
 
     switch (listener_dir & 3)
     {
-      case 0:
-        dxp = dx;      dyp = dy;
-        break;
-      case 1:
-        dxp =  dy;     dyp = -dx;
-        break;
-      case 2:
-        dxp = -dx;     dyp = -dy;
-        break;
-      case 3:
-        dxp = -dy;     dyp =  dx;
-        break;
+        case 0: // North: forward=-y, right=+x
+            dxp =  dx;
+            dyp = -dy;
+            break;
+        case 1: // East: forward=+x, right=+y
+            dxp =  dy;
+            dyp =  dx;
+            break;
+        case 2: // South: forward=+y, right=-x
+            dxp = -dx;
+            dyp =  dy;
+            break;
+        case 3: // West: forward=-x, right=-y
+            dxp = -dy;
+            dyp = -dx;
+            break;
     }
 
-    dxw =  dxp;
-    dyw = -dyp;
-    phi = atan2(dyw, dxw) - M_PI/2.0;
-    if (phi < 0) phi += 2*M_PI;
-
-    K = (int)floor((phi + M_PI/8.0) / (M_PI/4.0)) + 1;
+    // dxp = local right, dyp = local forward
+    // atan2(right, forward) gives clockwise angle from forward
+    phi = atan2((double)dxp, (double)dyp);
+    if (phi < 0) phi += 2 * M_PI;
+    K = (int)floor((phi + M_PI / 8.0) / (M_PI / 4.0)) + 1;
     if (K > 8) K = 1;
-
     return K;
 }
 
@@ -1623,6 +1623,27 @@ void game_get_map_size(int *width, int *height)
 {
     *width = m_server.map_x;
     *height = m_server.map_y;
+}
+
+void game_get_player_spawn(int fd, int *x, int *y, int *orientation)
+{
+    extern server m_server;
+    int i;
+
+    for (i = 0; i < m_server.client_count; i++)
+    {
+        if (m_server.clients[i] && m_server.clients[i]->socket_fd == fd)
+        {
+            player *p = m_server.clients[i]->player;
+            if (p)
+            {
+                *x           = p->pos.x;
+                *y           = p->pos.y;
+                *orientation = (int)p->dir;
+            }
+            return;
+        }
+    }
 }
 
 int game_register_observer(int fd)

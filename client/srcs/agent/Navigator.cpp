@@ -1,4 +1,5 @@
 #include "Navigator.hpp"
+#include "../helpers/Logger.hpp"
 
 // Orientation is always 0-indexed matching the server enum: N=0,E=1,S=2,W=3. Never convert this
 // NEVER CONVERT THIS
@@ -134,28 +135,35 @@ std::vector<NavCmd> Navigator::explorationStep(int& stepCount) {
 // Returns turn commands followed by one NavCmd::Forward.
 // Returns just NavCmd::Forward if direction is 0 or out of range.
 std::vector<NavCmd> Navigator::planApproachDirection(int broadcastDirection, Orientation currentFacing) {
-	std::vector<NavCmd> commands;
+    std::vector<NavCmd> commands;
 
-	// Determine how many quarter-turns right to make (0=forward, 1=right, 2=back, 3=left)
-	int offset = 0;
-	switch (broadcastDirection) {
-		case 0:             	offset = 0; break; // same tile — just step forward (shouldn't be called)
-		case 1: case 2: case 8: offset = 0; break; // forward / forward-ish
-		case 3: case 4:     	offset = 1; break; // right
-		case 5:					offset = 2; break; // behind
-		case 6: case 7:			offset = 3; break; // left
-		default:            	offset = 0; break; // unknown: go forward
-	}
+    int offset = 0;
+    switch (broadcastDirection) {
+        case 1: case 2: case 8: offset = 0; break; // forward
+		case 3: case 4:         offset = 1; break; // right  ← direction 4 hits here ✓
+		case 5:                 offset = 2; break; // behind
+		case 6: case 7:         offset = 3; break; // left
+    }
 
-	Orientation target = static_cast<Orientation>(
-		(static_cast<int>(currentFacing) + offset) % 4);
+    Orientation target = static_cast<Orientation>(
+        (static_cast<int>(currentFacing) + offset) % 4);
 
-	auto turns = turnToFace(currentFacing, target);
-	commands.insert(commands.end(), turns.begin(), turns.end());
+    auto turns = turnToFace(currentFacing, target);
+    commands.insert(commands.end(), turns.begin(), turns.end());
 
+	Logger::info("PlanApproachDirection result:\n broadcastDirection = " + std::to_string(broadcastDirection)
+				+ "\nCurrent Facing = " + std::to_string(static_cast<int>(currentFacing))
+				+ "\nOffset count = " + std::to_string(offset)
+				+ "\nFirst command = " + std::to_string(static_cast<int>(commands[0])));
+
+    // Commit to 3 steps in this direction before reconsidering
+	commands.push_back(NavCmd::Forward);
+	commands.push_back(NavCmd::Forward);
+	commands.push_back(NavCmd::Forward);
+	commands.push_back(NavCmd::Forward);
 	commands.push_back(NavCmd::Forward);
 
-	return commands;
+    return commands;
 }
 
 /*
