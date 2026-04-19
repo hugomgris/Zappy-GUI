@@ -1,139 +1,299 @@
-[2026-04-19 13:33:41] [INFO] Zappy Client starting...
-[2026-04-19 13:33:41] [INFO] Team: team1
-[2026-04-19 13:33:41] [INFO] Fork enabled: no
-[2026-04-19 13:33:41] [INFO] Normal mode enabled
-[2026-04-19 13:33:41] [INFO] Connecting to localhost:8674
-[2026-04-19 13:33:41] [WARN] TLS: Certificate verification disabled (insecure mode)
-[2026-04-19 13:33:41] [INFO] TLS context initialized successfully
-[2026-04-19 13:33:41] [INFO] WebSocket: Starting connection to localhost:8674
-[2026-04-19 13:33:41] [INFO] TLS handshake completed successfully
-[2026-04-19 13:33:41] [INFO] WebSocket: HTTP 101 Upgrade successful
-[2026-04-19 13:33:41] [INFO] WebSocket: Handshake complete, connection established
-[2026-04-19 13:33:41] [INFO] Websocket connected
-[2026-04-19 13:33:41] [INFO] Bienvenue raw message->{"type":"bienvenue","msg":"Knock knock, who's there?"}
-[2026-04-19 13:33:41] [INFO] Received bienvenue
-[2026-04-19 13:33:41] [INFO] Login raw message->{"type":"welcome","remaining_clients":8,"map_size":{"x":10,"y":10},"x":1,"y":0,"orientation":3}
-[2026-04-19 13:33:41] [INFO] Login successful
-[2026-04-19 13:33:41] [INFO] Logged in as team1
-[2026-04-19 13:33:41] [INFO] Connected! Starting main loop...
-[2026-04-19 13:33:41] [INFO] Status: level=1 behavior=1 food=0 forks=NOT TRACKED
-[2026-04-19 13:33:41] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":10,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:42] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:42] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:42] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=0with orientation [0]
-[2026-04-19 13:33:43] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=9with orientation [0]
-[2026-04-19 13:33:43] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=8with orientation [0]
-[2026-04-19 13:33:43] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=7with orientation [0]
-[2026-04-19 13:33:44] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=6with orientation [0]
-[2026-04-19 13:33:44] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=5with orientation [0]
-[2026-04-19 13:33:44] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [0]
-[2026-04-19 13:33:44] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=4with orientation [1]
-[2026-04-19 13:33:45] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=4with orientation [1]
-[2026-04-19 13:33:45] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=4with orientation [1]
-[2026-04-19 13:33:46] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:46] [INFO] Status: level=1 behavior=3 food=12 forks=NOT TRACKED
-[2026-04-19 13:33:46] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:48] [INFO] Level up! Now level 2
-[2026-04-19 13:33:48] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=4with orientation [1]
-[2026-04-19 13:33:49] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=4with orientation [1]
-[2026-04-19 13:33:49] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=4with orientation [1]
-[2026-04-19 13:33:49] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=4with orientation [1]
-[2026-04-19 13:33:49] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=4with orientation [0]
-[2026-04-19 13:33:50] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=3with orientation [0]
-[2026-04-19 13:33:50] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=2with orientation [0]
-[2026-04-19 13:33:50] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [3]
-[2026-04-19 13:33:51] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [2]
-[2026-04-19 13:33:51] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [1]
-[2026-04-19 13:33:51] [INFO] Status: level=2 behavior=2 food=12 forks=NOT TRACKED
-[2026-04-19 13:33:51] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=2with orientation [1]
-[2026-04-19 13:33:51] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:52] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=2with orientation [1]
-[2026-04-19 13:33:52] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=2with orientation [2]
-[2026-04-19 13:33:52] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=3with orientation [2]
-[2026-04-19 13:33:52] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=4with orientation [2]
-[2026-04-19 13:33:52] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:52] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:53] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=4with orientation [3]
-[2026-04-19 13:33:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=4with orientation [3]
-[2026-04-19 13:33:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=4with orientation [3]
-[2026-04-19 13:33:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [3]
-[2026-04-19 13:33:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=4with orientation [3]
-[2026-04-19 13:33:54] [INFO] Client executed DROITE while in state [2] and is now at position x=0, y=4with orientation [0]
-[2026-04-19 13:33:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=3with orientation [0]
-[2026-04-19 13:33:54] [INFO] Client executed DROITE while in state [2] and is now at position x=0, y=3with orientation [1]
-[2026-04-19 13:33:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=3with orientation [1]
-[2026-04-19 13:33:55] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=3with orientation [0]
-[2026-04-19 13:33:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=2with orientation [0]
-[2026-04-19 13:33:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=1with orientation [0]
-[2026-04-19 13:33:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=0with orientation [0]
-[2026-04-19 13:33:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=9with orientation [0]
-[2026-04-19 13:33:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=8with orientation [0]
-[2026-04-19 13:33:56] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=8with orientation [1]
-[2026-04-19 13:33:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=8with orientation [1]
-[2026-04-19 13:33:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=8with orientation [1]
-[2026-04-19 13:33:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=8with orientation [1]
-[2026-04-19 13:33:56] [INFO] Status: level=2 behavior=2 food=12 forks=NOT TRACKED
-[2026-04-19 13:33:56] [INFO] Client executed DROITE while in state [2] and is now at position x=4, y=8with orientation [2]
-[2026-04-19 13:33:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=9with orientation [2]
-[2026-04-19 13:33:56] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":9,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Client executed GAUCHE while in state [2] and is now at position x=4, y=9with orientation [1]
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:33:57] [INFO] Client executed DROITE while in state [2] and is now at position x=4, y=9with orientation [2]
-[2026-04-19 13:33:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=0with orientation [2]
-[2026-04-19 13:33:58] [INFO] Client executed GAUCHE while in state [2] and is now at position x=4, y=0with orientation [1]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=0with orientation [1]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=0with orientation [1]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=0with orientation [1]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=0with orientation [1]
-[2026-04-19 13:33:58] [INFO] Client executed DROITE while in state [2] and is now at position x=8, y=0with orientation [2]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=1with orientation [2]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=2with orientation [2]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=3with orientation [2]
-[2026-04-19 13:33:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=4with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed GAUCHE while in state [2] and is now at position x=8, y=4with orientation [1]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=4with orientation [1]
-[2026-04-19 13:33:59] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=4with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=5with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=6with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=7with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=8with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=9with orientation [2]
-[2026-04-19 13:33:59] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=0with orientation [2]
-[2026-04-19 13:34:00] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed GAUCHE while in state [2] and is now at position x=2, y=0with orientation [2]
-[2026-04-19 13:34:00] [INFO] Client executed DROITE while in state [2] and is now at position x=2, y=0with orientation [3]
-[2026-04-19 13:34:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=0with orientation [3]
-[2026-04-19 13:34:01] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=0with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=1with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=2with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=3with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=5with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=5with orientation [3]
-[2026-04-19 13:34:01] [INFO] Status: level=2 behavior=2 food=14 forks=NOT TRACKED
-[2026-04-19 13:34:01] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=5with orientation [2]
-[2026-04-19 13:34:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=6with orientation [2]
-[2026-04-19 13:34:01] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":10,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
-[2026-04-19 13:34:01] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=6with orientation [3]
-[2026-04-19 13:34:02] [ERROR] SSL_write failed: error:00000000:lib(0)::reason(0)
-[2026-04-19 13:34:02] [ERROR] flushSendQueue failed: Write error: SSL_write failed: error:00000000:lib(0)::reason(0)
-[2026-04-19 13:34:02] [ERROR] Websocket tick error: Write error: SSL_write failed: error:00000000:lib(0)::reason(0)
-[2026-04-19 13:34:02] [INFO] Network loop ended
-[2026-04-19 13:34:02] [INFO] Client exited. Final level: 2
+[2026-04-19 13:48:43] [INFO] Zappy Client starting...
+[2026-04-19 13:48:43] [INFO] Team: team1
+[2026-04-19 13:48:43] [INFO] Fork enabled: no
+[2026-04-19 13:48:43] [INFO] Normal mode enabled
+[2026-04-19 13:48:43] [INFO] Connecting to localhost:8674
+[2026-04-19 13:48:43] [WARN] TLS: Certificate verification disabled (insecure mode)
+[2026-04-19 13:48:43] [INFO] TLS context initialized successfully
+[2026-04-19 13:48:43] [INFO] WebSocket: Starting connection to localhost:8674
+[2026-04-19 13:48:43] [INFO] TLS handshake completed successfully
+[2026-04-19 13:48:43] [INFO] WebSocket: HTTP 101 Upgrade successful
+[2026-04-19 13:48:43] [INFO] WebSocket: Handshake complete, connection established
+[2026-04-19 13:48:43] [INFO] Websocket connected
+[2026-04-19 13:48:43] [INFO] Bienvenue raw message->{"type":"bienvenue","msg":"Knock knock, who's there?"}
+[2026-04-19 13:48:43] [INFO] Received bienvenue
+[2026-04-19 13:48:43] [INFO] Login raw message->{"type":"welcome","remaining_clients":8,"map_size":{"x":10,"y":10},"x":1,"y":0,"orientation":3}
+[2026-04-19 13:48:43] [INFO] Login successful
+[2026-04-19 13:48:43] [INFO] Logged in as team1
+[2026-04-19 13:48:43] [INFO] Connected! Starting main loop...
+[2026-04-19 13:48:43] [INFO] Status: level=1 behavior=1 food=0 forks=NOT TRACKED
+[2026-04-19 13:48:43] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":10,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:44] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:44] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:44] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=0with orientation [0]
+[2026-04-19 13:48:45] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=9with orientation [0]
+[2026-04-19 13:48:45] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=8with orientation [0]
+[2026-04-19 13:48:45] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=7with orientation [0]
+[2026-04-19 13:48:46] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=6with orientation [0]
+[2026-04-19 13:48:46] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=5with orientation [0]
+[2026-04-19 13:48:46] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [0]
+[2026-04-19 13:48:47] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=4with orientation [1]
+[2026-04-19 13:48:47] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=4with orientation [1]
+[2026-04-19 13:48:47] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=4with orientation [1]
+[2026-04-19 13:48:48] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:48] [INFO] Status: level=1 behavior=3 food=12 forks=NOT TRACKED
+[2026-04-19 13:48:48] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:50] [INFO] Level up! Now level 2
+[2026-04-19 13:48:50] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=4with orientation [1]
+[2026-04-19 13:48:51] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=4with orientation [1]
+[2026-04-19 13:48:51] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=4with orientation [1]
+[2026-04-19 13:48:51] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=4with orientation [1]
+[2026-04-19 13:48:52] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=4with orientation [0]
+[2026-04-19 13:48:52] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=3with orientation [0]
+[2026-04-19 13:48:52] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=2with orientation [0]
+[2026-04-19 13:48:52] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [3]
+[2026-04-19 13:48:53] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [2]
+[2026-04-19 13:48:53] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=2with orientation [1]
+[2026-04-19 13:48:53] [INFO] Status: level=2 behavior=2 food=12 forks=NOT TRACKED
+[2026-04-19 13:48:53] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=2with orientation [1]
+[2026-04-19 13:48:53] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":0,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=2with orientation [1]
+[2026-04-19 13:48:54] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=2with orientation [2]
+[2026-04-19 13:48:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=3with orientation [2]
+[2026-04-19 13:48:54] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=4with orientation [2]
+[2026-04-19 13:48:55] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:55] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:55] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=4with orientation [3]
+[2026-04-19 13:48:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=4with orientation [3]
+[2026-04-19 13:48:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=4with orientation [3]
+[2026-04-19 13:48:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=4with orientation [3]
+[2026-04-19 13:48:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=4with orientation [3]
+[2026-04-19 13:48:55] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=4with orientation [3]
+[2026-04-19 13:48:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=4with orientation [3]
+[2026-04-19 13:48:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=4with orientation [3]
+[2026-04-19 13:48:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [3]
+[2026-04-19 13:48:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=4with orientation [3]
+[2026-04-19 13:48:56] [INFO] Client executed DROITE while in state [2] and is now at position x=0, y=4with orientation [0]
+[2026-04-19 13:48:56] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=3with orientation [0]
+[2026-04-19 13:48:57] [INFO] Client executed DROITE while in state [2] and is now at position x=0, y=3with orientation [1]
+[2026-04-19 13:48:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=3with orientation [1]
+[2026-04-19 13:48:57] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=3with orientation [0]
+[2026-04-19 13:48:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=2with orientation [0]
+[2026-04-19 13:48:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=1with orientation [0]
+[2026-04-19 13:48:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=0with orientation [0]
+[2026-04-19 13:48:57] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=9with orientation [0]
+[2026-04-19 13:48:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=8with orientation [0]
+[2026-04-19 13:48:58] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=8with orientation [1]
+[2026-04-19 13:48:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=8with orientation [1]
+[2026-04-19 13:48:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=8with orientation [1]
+[2026-04-19 13:48:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=8with orientation [1]
+[2026-04-19 13:48:58] [INFO] Status: level=2 behavior=2 food=12 forks=NOT TRACKED
+[2026-04-19 13:48:58] [INFO] Client executed DROITE while in state [2] and is now at position x=4, y=8with orientation [2]
+[2026-04-19 13:48:58] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=9with orientation [2]
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":9,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:59] [INFO] Client executed GAUCHE while in state [2] and is now at position x=4, y=9with orientation [1]
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:48:59] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:00] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:00] [INFO] Client executed DROITE while in state [2] and is now at position x=4, y=9with orientation [2]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=0with orientation [2]
+[2026-04-19 13:49:00] [INFO] Client executed GAUCHE while in state [2] and is now at position x=4, y=0with orientation [1]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=0with orientation [1]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=0with orientation [1]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=0with orientation [1]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=0with orientation [1]
+[2026-04-19 13:49:00] [INFO] Client executed DROITE while in state [2] and is now at position x=8, y=0with orientation [2]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=1with orientation [2]
+[2026-04-19 13:49:00] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=2with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=3with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=4with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed GAUCHE while in state [2] and is now at position x=8, y=4with orientation [1]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=4with orientation [1]
+[2026-04-19 13:49:01] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=4with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=5with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=6with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=7with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=8with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=9with orientation [2]
+[2026-04-19 13:49:01] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=0with orientation [2]
+[2026-04-19 13:49:02] [INFO] Client executed DROITE while in state [2] and is now at position x=9, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=0with orientation [3]
+[2026-04-19 13:49:02] [INFO] Client executed GAUCHE while in state [2] and is now at position x=2, y=0with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed DROITE while in state [2] and is now at position x=2, y=0with orientation [3]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=0with orientation [3]
+[2026-04-19 13:49:03] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=0with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=1with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=2with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=3with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=4with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=5with orientation [2]
+[2026-04-19 13:49:03] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=5with orientation [3]
+[2026-04-19 13:49:03] [INFO] Status: level=2 behavior=2 food=14 forks=NOT TRACKED
+[2026-04-19 13:49:03] [INFO] Client executed GAUCHE while in state [2] and is now at position x=1, y=5with orientation [2]
+[2026-04-19 13:49:04] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=6with orientation [2]
+[2026-04-19 13:49:04] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":10,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:04] [INFO] Client executed DROITE while in state [2] and is now at position x=1, y=6with orientation [3]
+[2026-04-19 13:49:04] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:04] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:04] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:04] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:05] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=6with orientation [3]
+[2026-04-19 13:49:05] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=6with orientation [3]
+[2026-04-19 13:49:05] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=6with orientation [3]
+[2026-04-19 13:49:05] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=6with orientation [3]
+[2026-04-19 13:49:05] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:05] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:05] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:05] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":0,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=2, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=1, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=0, y=6with orientation [3]
+[2026-04-19 13:49:06] [INFO] Client executed FORWARD while in state [2] and is now at position x=9, y=6with orientation [3]
+[2026-04-19 13:49:07] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":13,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:07] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":13,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:07] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":13,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:07] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":13,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=8, y=6with orientation [3]
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=6with orientation [3]
+[2026-04-19 13:49:07] [INFO] Client executed DROITE while in state [2] and is now at position x=7, y=6with orientation [0]
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=5with orientation [0]
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=4with orientation [0]
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=3with orientation [0]
+[2026-04-19 13:49:07] [INFO] Client executed GAUCHE while in state [2] and is now at position x=7, y=3with orientation [3]
+[2026-04-19 13:49:07] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=3with orientation [3]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=3with orientation [3]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=3with orientation [3]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=3with orientation [3]
+[2026-04-19 13:49:08] [INFO] Client executed DROITE while in state [2] and is now at position x=3, y=3with orientation [0]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=2with orientation [0]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=1with orientation [0]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=0with orientation [0]
+[2026-04-19 13:49:08] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=9with orientation [0]
+[2026-04-19 13:49:08] [INFO] Status: level=2 behavior=2 food=13 forks=NOT TRACKED
+[2026-04-19 13:49:09] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=8with orientation [0]
+[2026-04-19 13:49:09] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=7with orientation [0]
+[2026-04-19 13:49:09] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=6with orientation [0]
+[2026-04-19 13:49:09] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":11,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:09] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=5with orientation [0]
+[2026-04-19 13:49:10] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:10] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:10] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:10] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:10] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":0,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=4with orientation [0]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=3, y=3with orientation [0]
+[2026-04-19 13:49:10] [INFO] Client executed DROITE while in state [2] and is now at position x=3, y=3with orientation [1]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=4, y=3with orientation [1]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=3with orientation [1]
+[2026-04-19 13:49:10] [INFO] Client executed GAUCHE while in state [2] and is now at position x=5, y=3with orientation [0]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=5, y=2with orientation [0]
+[2026-04-19 13:49:10] [INFO] Client executed DROITE while in state [2] and is now at position x=5, y=2with orientation [1]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=6, y=2with orientation [1]
+[2026-04-19 13:49:10] [INFO] Client executed FORWARD while in state [2] and is now at position x=7, y=2with orientation [1]
+[2026-04-19 13:49:11] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:11] [INFO] Behavior: stones ready but food too low (14), collecting food before rally
+[2026-04-19 13:49:11] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:11] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:11] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":14,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] Responding to rally because enought food:16
+[2026-04-19 13:49:12] [INFO] Going to MovingToRally state from position x=7, y=2 and orientation [1]
+[2026-04-19 13:49:12] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":18,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":18,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] PlanApproachDirection result:
+ broadcastDirection = 4
+Current Facing = 1
+Offset count = 1
+First command = 2
+[2026-04-19 13:49:12] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":18,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":18,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:12] [INFO] Client executed DROITE while in state [6] and is now at position x=7, y=2with orientation [2]
+[2026-04-19 13:49:12] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=3with orientation [2]
+[2026-04-19 13:49:12] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=4with orientation [2]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=5with orientation [2]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=6with orientation [2]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=7with orientation [2]
+[2026-04-19 13:49:13] [INFO] PlanApproachDirection result:
+ broadcastDirection = 3
+Current Facing = 2
+Offset count = 1
+First command = 2
+[2026-04-19 13:49:13] [INFO] Client executed DROITE while in state [6] and is now at position x=7, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=6, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=5, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=4, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] Client executed FORWARD while in state [6] and is now at position x=2, y=7with orientation [3]
+[2026-04-19 13:49:13] [INFO] ... No turn needed (already facing target)
+[2026-04-19 13:49:13] [INFO] Status: level=2 behavior=6 food=18 forks=NOT TRACKED
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=1, y=7with orientation [3]
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=0, y=7with orientation [3]
+[2026-04-19 13:49:14] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":16,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=9, y=7with orientation [3]
+[2026-04-19 13:49:14] [INFO] PlanApproachDirection result:
+ broadcastDirection = 4
+Current Facing = 3
+Offset count = 1
+First command = 2
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=7with orientation [3]
+[2026-04-19 13:49:14] [INFO] Client executed DROITE while in state [6] and is now at position x=8, y=7with orientation [0]
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=6with orientation [0]
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=5with orientation [0]
+[2026-04-19 13:49:14] [INFO] PlanApproachDirection result:
+ broadcastDirection = 4
+Current Facing = 0
+Offset count = 1
+First command = 2
+[2026-04-19 13:49:14] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=4with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=3with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=2with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed DROITE while in state [6] and is now at position x=8, y=2with orientation [1]
+[2026-04-19 13:49:15] [INFO] PlanApproachDirection result:
+ broadcastDirection = 7
+Current Facing = 1
+Offset count = 3
+First command = 1
+[2026-04-19 13:49:15] [INFO] Client executed GAUCHE while in state [6] and is now at position x=8, y=2with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=1with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=0with orientation [0]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=8, y=9with orientation [0]
+[2026-04-19 13:49:15] [INFO] PlanApproachDirection result:
+ broadcastDirection = 6
+Current Facing = 0
+Offset count = 3
+First command = 1
+[2026-04-19 13:49:15] [INFO] Client executed GAUCHE while in state [6] and is now at position x=8, y=9with orientation [3]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=7, y=9with orientation [3]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=6, y=9with orientation [3]
+[2026-04-19 13:49:15] [INFO] Client executed FORWARD while in state [6] and is now at position x=5, y=9with orientation [3]
+[2026-04-19 13:49:16] [INFO] PlanApproachDirection result:
+ broadcastDirection = 3
+Current Facing = 3
+Offset count = 1
+First command = 2
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=4, y=9with orientation [3]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=9with orientation [3]
+[2026-04-19 13:49:16] [INFO] Client executed DROITE while in state [6] and is now at position x=3, y=9with orientation [0]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=8with orientation [0]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=7with orientation [0]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=6with orientation [0]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=5with orientation [0]
+[2026-04-19 13:49:16] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=4with orientation [0]
+[2026-04-19 13:49:18] [INFO] Status: level=2 behavior=7 food=16 forks=NOT TRACKED
+[2026-04-19 13:49:19] [INFO] Refreshed inventory: {"type":"response","cmd":"inventaire","inventaire":{"nourriture":12,"linemate":1,"deraumere":1,"sibur":2,"mendiane":0,"phiras":0,"thystame":0}}
+[2026-04-19 13:49:22] [INFO] ... No turn needed (already facing target)
+[2026-04-19 13:49:22] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=3with orientation [0]
+[2026-04-19 13:49:22] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=2with orientation [0]
+[2026-04-19 13:49:22] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=1with orientation [0]
+[2026-04-19 13:49:23] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=0with orientation [0]
+[2026-04-19 13:49:23] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=9with orientation [0]
+[2026-04-19 13:49:23] [INFO] ... No turn needed (already facing target)
+[2026-04-19 13:49:23] [INFO] Client executed FORWARD while in state [6] and is now at position x=3, y=8with orientation [0]
+[2026-04-19 13:49:23] [INFO] Status: level=2 behavior=6 food=12 forks=NOT TRACKED
+[2026-04-19 13:49:24] [WARN] TLS read: peer closed connection
+[2026-04-19 13:49:24] [ERROR] Websocket tick error: Peer closed connection
+[2026-04-19 13:49:24] [INFO] Network loop ended
+[2026-04-19 13:49:24] [INFO] Client exited. Final level: 2
