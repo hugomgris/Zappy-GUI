@@ -729,17 +729,28 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	// Leader path: keep broadcasting RALLY so late-arriving followers
-// can still find us. Check player count between broadcasts.
-if (_state.vision.empty()) {
-		setVisionStale();
-		return;
-	}
+	// can still find us. Check player count between broadcasts.
+	if (_state.vision.empty()) {
+			setVisionStale();
+			return;
+		}
 
-	const auto& req = levelReq(_state.player.level);
+	/* const auto& req = levelReq(_state.player.level);
 	if (_state.vision[0].playerCount >= req.players) {
 		Logger::info("Behavior: Rallying — enough players (" +
 			std::to_string(_state.vision[0].playerCount) + "/" +
 			std::to_string(req.players) + "), incantating");
+		_isRallying = false;
+		_aiState = AIState::Incantating;
+		_incantationReady = false;
+		_stonesPlaced = false;
+	}  */
+
+	const auto& req = levelReq(_state.player.level);
+	if (_peerConfirmedCount >= req.players - 1) {
+		Logger::info("Behavior: Rallying — all peers confirmed (" +
+			std::to_string(_peerConfirmedCount) + "/" +
+			std::to_string(req.players - 1) + "), incantating");
 		_isRallying = false;
 		_aiState = AIState::Incantating;
 		_incantationReady = false;
@@ -805,6 +816,8 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 			if (_state.player.food() >= FOOD_SAFE) {
 				Logger::info("Responding to rally because enought food:" + std::to_string(_state.player.food()));
 				_stonesReady = false;
+				_sender.cancelAll();
+				_commandInFlight = false; 
 				clearNavPlan();
 				if (direction == 0) {
 					Logger::info("Going to Rallying state");
