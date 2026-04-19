@@ -53,6 +53,7 @@ class Behavior {
 
 		bool _claimSent = false;
 		bool _ignoreDone = false;
+		bool _hereSent = false;
 
 		Orientation _broadcastReceivedFacing = Orientation::N;
 
