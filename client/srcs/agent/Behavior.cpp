@@ -687,6 +687,20 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
+	if (_pendingLevelUp) {
+		_pendingLevelUp = false;
+		_state.player.level++;
+		Logger::info("Behavior: Rallying level_up — now level " +
+			std::to_string(_state.player.level));
+		disbandRally(false);
+		_stonesPlaced = false;
+		_incantationReady = false;
+		_aiState = (_state.player.level >= 8) ? AIState::Idle : AIState::CollectStones;
+		setInventoryStale();
+		setVisionStale();
+		return;
+	}
+
 	if (nowMs - _rallyingTimeoutMs >= 30000) {
 		Logger::warn("Behavior: Rallying timed out");
 		bool wasLeader = _isLeader;
