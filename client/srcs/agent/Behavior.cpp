@@ -31,6 +31,7 @@ Behavior::Behavior(Sender& sender, WorldState& state) : _sender(sender), _state(
 void Behavior::disbandRally(bool wasLeader) {
 	_stonesReady			= false;
 	_claimSent				= false;
+	_hereSent				= false;
 	_isLeader				= false;
 	_isMovingToRally		= false;
 	_isRallying				= false;
@@ -710,7 +711,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (!_isLeader) {
-		// Follower: if direction is no longer 0, the leader moved — chase again
 		if (_broadcastDirection != 0) {
 			_isRallying = false;
 			_isMovingToRally = false;
@@ -718,13 +718,15 @@ void Behavior::tickRallying(int64_t nowMs) {
 			return;
 		}
 
-		// Announce we're here
-		_commandInFlight = true;
-		_sender.sendBroadcast("HERE:" + std::to_string(_state.player.level));
-		_sender.expect("broadcast", [this](const ServerMessage&) {
-			_commandInFlight = false;
-			setVisionStale();
-		});
+		if (!_hereSent) {
+			_hereSent = true;
+			_commandInFlight = true;
+			_sender.sendBroadcast("HERE:" + std::to_string(_state.player.level));
+			_sender.expect("broadcast", [this](const ServerMessage&) {
+				_commandInFlight = false;
+				setVisionStale();
+			});
+		}
 		return;
 	}
 
@@ -877,6 +879,8 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		try { level = std::stoi(text.substr(5)); } catch (...) { return; }
 
 		if (!_isLeader || level != _state.player.level) return;
+
+		if (_aiState == AIState::Incantating) return;
 
 		_peerConfirmedCount++;
 		Logger::info("Behavior: peer HERE (total=" +
