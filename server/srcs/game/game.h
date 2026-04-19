@@ -14,6 +14,7 @@ int game_get_client_count();
 int game_get_team_count();
 int game_get_team_remaining_clients(int fd);
 void game_get_map_size(int *width, int *height);
+void game_get_player_spawn(int fd, int *x, int *y, int *orientation);
 
 int game_kill_player(int fd);
 

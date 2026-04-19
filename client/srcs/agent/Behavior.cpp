@@ -72,6 +72,16 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 						case Orientation::W: _state.player.x--; break;
 						default: break;
 					}
+
+					// wrap around the world
+					_state.player.x = ((_state.player.x % _state.mapWidth)  + _state.mapWidth)  % _state.mapWidth;
+                    _state.player.y = ((_state.player.y % _state.mapHeight) + _state.mapHeight) % _state.mapHeight;
+
+					Logger::info("Client executed FORWARD while in state [" +
+								std::to_string(static_cast<int>(_aiState)) + "] and is now at position x=" +
+								std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) +
+								"with orientation [" + std::to_string(static_cast<int>(_state.player.orientation)) + "]");
+
 					setVisionStale();
 				} else {
 					clearNavPlan();
@@ -92,6 +102,12 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 						case Orientation::W: _state.player.orientation = Orientation::S; break;
 						default: break;
 					}
+
+					Logger::info("Client executed GAUCHE while in state [" +
+								std::to_string(static_cast<int>(_aiState)) + "] and is now at position x=" +
+								std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) +
+								"with orientation [" + std::to_string(static_cast<int>(_state.player.orientation)) + "]");
+
 					setVisionStale();
 				} else {
 					clearNavPlan();
@@ -112,6 +128,12 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 						case Orientation::W: _state.player.orientation = Orientation::N; break;
 						default: break;
 					}
+
+					Logger::info("Client executed DROITE while in state [" +
+								std::to_string(static_cast<int>(_aiState)) + "] and is now at position x=" +
+								std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) +
+								"with orientation [" + std::to_string(static_cast<int>(_state.player.orientation)) + "]");
+
 					setVisionStale();
 				} else {
 					clearNavPlan();
@@ -429,6 +451,10 @@ void Behavior::tickLeading(int64_t nowMs) {
 		_lastRallyBroadcastMs = nowMs;
 		_rallyBroadcastCount++;
 		_commandInFlight = true;
+		
+		Logger::info("Leader sending RALLY broadcast from position x=" +
+					std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y));
+
 		_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
 		_sender.expect("broadcast", [this](const ServerMessage&) {
 			_commandInFlight = false;
@@ -575,72 +601,80 @@ void Behavior::tickIncantating() {
 
 // moving to rally tick
 void Behavior::tickMovingToRally(int64_t nowMs) {
-	// One-time init
-	if (!_isMovingToRally) {
-		_isMovingToRally = true;
-		_movingToRallyTimeoutMs = nowMs;
-		_navTarget.clear();  // ← add this
-		clearNavPlan();
-		return;
-	}
+    // One-time init
+    if (!_isMovingToRally) {
+        _isMovingToRally = true;
+        _movingToRallyTimeoutMs = nowMs;
+        _navTarget.clear();
+        clearNavPlan();
+        return;
+    }
 
-	if (nowMs - _movingToRallyTimeoutMs >= 30000) {
-		Logger::warn("Behavior: MovingToRally timed out");
-		disbandRally(false);
-		_aiState = AIState::Idle;
-		return;
-	}
+    if (nowMs - _movingToRallyTimeoutMs >= 30000) {
+        Logger::warn("Behavior: MovingToRally timed out");
+        disbandRally(false);
+        _aiState = AIState::Idle;
+        return;
+    }
 
-	if (_state.player.food() < FOOD_CRITICAL) {
-		Logger::warn("Behavior: MovingToRally — food critical, disbanding");
-		disbandRally(false);
-		_aiState = AIState::CollectFood;
-		return;
-	}
+    if (_state.player.food() < FOOD_CRITICAL) {
+        Logger::warn("Behavior: MovingToRally — food critical, disbanding");
+        disbandRally(false);
+        _aiState = AIState::CollectFood;
+        return;
+    }
 
-	// Haven't heard a RALLY broadcast yet — wait in place
-	if (_broadcastDirection == -1) {
-		// Haven't heard RALLY yet — don't just spin. Do opportunistic food/exploration
-		// so we don't starve waiting for the leader's first broadcast.
-		if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
-			_commandInFlight = true;
-			_sender.sendPrend("nourriture");
-			_sender.expect("prend nourriture", [this](const ServerMessage& msg) {
-				_commandInFlight = false;
-				if (msg.isOk()) _state.player.inventory.nourriture++;
-				setVisionStale();
-			});
-		} else {
-			// Explore one step so we're not frozen
-			auto plan = Navigator::explorationStep(_explorationStep);
-			_navPlan.assign(plan.begin(), plan.end());
-			if (!_navPlan.empty()) {
-				NavCmd next = _navPlan.front(); _navPlan.pop_front();
-				executeNavCmd(next);
-			}
-		}
-		return;
-	}
+	if (!_state.vision.empty() && _state.vision[0].playerCount >= 2) {
+        clearNavPlan();
+        _isMovingToRally = false;
+        _aiState = AIState::Rallying;
+        setVisionStale();
+        return;
+    }
 
-	// Already on the leader's tile
-	if (_broadcastDirection == 0) {
-		_isMovingToRally = false;
-		_aiState = AIState::Rallying;
-		setVisionStale();
-		return;
-	}
+    // Haven't heard a RALLY broadcast yet — explore rather than spin
+    if (_broadcastDirection == -1) {
+        if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
+            _commandInFlight = true;
+            _sender.sendPrend("nourriture");
+            _sender.expect("prend nourriture", [this](const ServerMessage& msg) {
+                _commandInFlight = false;
+                if (msg.isOk()) _state.player.inventory.nourriture++;
+                setVisionStale();
+            });
+        } else {
+            auto plan = Navigator::explorationStep(_explorationStep);
+            _navPlan.assign(plan.begin(), plan.end());
+            if (!_navPlan.empty()) {
+                NavCmd next = _navPlan.front(); _navPlan.pop_front();
+                executeNavCmd(next);
+            }
+        }
+        return;
+    }
 
-	// Step toward the leader using the most recent broadcast direction
-	if (_navPlan.empty()) {
+    // Already on the leader's tile — transition immediately, even mid-plan
+    if (_broadcastDirection == 0) {
+        clearNavPlan();
+        _isMovingToRally = false;
+        _aiState = AIState::Rallying;
+        setVisionStale();
+        return;
+    }
+
+    // Build a new approach plan only when the current one is exhausted.
+    // onBroadcast clears the plan on direction update, so a new RALLY with
+    // a different bearing will interrupt this naturally.
+    if (_navPlan.empty()) {
 		auto plan = Navigator::planApproachDirection(
-			_broadcastDirection, _state.player.orientation);
+			_broadcastDirection, _broadcastReceivedFacing);  // ← saved facing, not current
 		_navPlan.assign(plan.begin(), plan.end());
 	}
 
-	if (!_navPlan.empty()) {
-		NavCmd next = _navPlan.front(); _navPlan.pop_front();
-		executeNavCmd(next);
-	}
+    if (!_navPlan.empty()) {
+        NavCmd next = _navPlan.front(); _navPlan.pop_front();
+        executeNavCmd(next);
+    }
 }
 
 
@@ -738,12 +772,11 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		// If client is the leader echoing back to itself -> ignore
 		if (_isLeader) return;
 
-		// Always store the direction even during ClaimingLeader,
-		// so if our claim comes back KO we already know where to go.
+		int previousDirection = _broadcastDirection;
 		_broadcastDirection = direction;
+		_broadcastReceivedFacing = _state.player.orientation;  // snapshot facing NOW
 
-		// if state is already moving to rally, trigger a path recompute
-		if (_aiState == AIState::MovingToRally) {
+		if (_aiState == AIState::MovingToRally && direction != previousDirection) {
 			clearNavPlan();
 		}
 
@@ -765,14 +798,16 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 					_isRallying = false;
 					_aiState = AIState::Rallying;
 				} else {
-					Logger::info("Going to MovingToRally state");
+					Logger::info("Going to MovingToRally state from position x=" + std::to_string(_state.player.x) +
+								", y=" + std::to_string(_state.player.y) + " and orientation [" + std::to_string(static_cast<int>(_state.player.orientation)) + "]");
 					_isMovingToRally = false;
 					_aiState = AIState::MovingToRally;
 				}
-			}
-			Logger::info("Received rally call when in state [" +
+			} else {
+				Logger::info("Received rally call when in state [" +
 							std::to_string(static_cast<int>(_aiState)) +
-							"] buf NOT ENOUGH FOOD:" + std::to_string(_state.player.food()));
+							"] but NOT ENOUGH FOOD:" + std::to_string(_state.player.food()));
+			}
 			return;
 		}
 

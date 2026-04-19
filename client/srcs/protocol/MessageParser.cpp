@@ -45,6 +45,12 @@ ServerMessage MessageParser::parse(const std::string& raw) {
 		if (root.contains("remaining_clients") && root.at("remaining_clients").is_number())
 			msg.remainingSlots = root.at("remaining_clients").get<int>();
 
+		if (root.contains("x") && root.at("x").is_number())
+			msg.playerX = root.at("x").get<int>();
+
+		if (root.contains("y") && root.at("y").is_number())
+			msg.playerY = root.at("y").get<int>();
+			
 		if (root.contains("orientation") && root.at("orientation").is_number())
 			msg.playerOrientation = static_cast<Orientation>(root.at("orientation").get<int>());
 

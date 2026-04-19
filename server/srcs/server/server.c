@@ -409,6 +409,13 @@ static int m_handle_login_client(int fd, cJSON *root)
     cJSON_AddNumberToObject(map_size, "y", map_y);
     cJSON_AddItemToObject(response, "map_size", map_size);
 
+    int player_x, player_y, player_orientation;
+    game_get_player_spawn(fd, &player_x, &player_y, &player_orientation);
+
+    cJSON_AddNumberToObject(response, "x", player_x);
+    cJSON_AddNumberToObject(response, "y", player_y);
+    cJSON_AddNumberToObject(response, "orientation", player_orientation);
+
     json = cJSON_PrintUnformatted(response);
     if (!json) { cJSON_Delete(response); return ERROR; }
 
