@@ -412,6 +412,54 @@ static void m_game_remove_player_from_tile(player *p)
     p->next_on_tile = p->prev_on_tile = NULL;
 }
 
+/* Clear the leader flag for `level` on the team identified by team_id.
+ * Safe to call even if the flag is already clear.                       */
+void m_team_clear_leader_flag(int team_id, int level)
+{
+    if (team_id < 0 || team_id >= m_server.team_count)
+        return;
+    if (level < 1 || level > 8)
+        return;
+    m_server.teams[team_id].leader_flags &= (uint8_t)(~(1u << (level - 1)));
+}
+
+static void m_cleanup_stale_leaders(int64_t current_time)
+{
+    static int64_t last_cleanup = 0;
+    
+    // Run cleanup every 10 seconds
+    if (current_time - last_cleanup < 10000)
+        return;
+    last_cleanup = current_time;
+    
+    for (int team_id = 0; team_id < m_server.team_count; team_id++) {
+        for (int level = 1; level <= 8; level++) {
+            uint8_t bit = (uint8_t)(1u << (level - 1));
+            if (m_server.teams[team_id].leader_flags & bit) {
+                // Check if the leader still exists and is alive
+                int leader_exists = 0;
+                for (int i = 0; i < m_server.client_count; i++) {
+                    client *c = m_server.clients[i];
+                    if (c && c->player && 
+                        c->player->team_id == team_id && 
+                        c->player->level == level &&
+                        c->player->is_leader) {  // You may need to add an is_leader flag to player struct
+                        leader_exists = 1;
+                        break;
+                    }
+                }
+                
+                if (!leader_exists) {
+                    log_msg(LOG_LEVEL_WARN, 
+                        "Stale leadership detected for team %d level %d — clearing flag\n",
+                        team_id, level);
+                    m_team_clear_leader_flag(team_id, level);
+                }
+            }
+        }
+    }
+}
+
 static void m_game_move_player(player *p, int new_x, int new_y)
 {
     m_game_remove_player_from_tile(p);
@@ -422,7 +470,7 @@ static void m_game_move_player(player *p, int new_x, int new_y)
     m_game_add_player_to_tile(MAP(new_x, new_y), p);
 }
 
-static int m_game_get_client_from_fd(int fd, client **c)
+int m_game_get_client_from_fd(int fd, client **c)
 {
     int i;
 
@@ -1040,17 +1088,6 @@ static int m_command_broadcast(void* _p, void* _arg)
     return server_create_response_to_command(emitter->id, "broadcast", NULL, "ok");
 }
 
-/* Clear the leader flag for `level` on the team identified by team_id.
- * Safe to call even if the flag is already clear.                       */
-static void m_team_clear_leader_flag(int team_id, int level)
-{
-    if (team_id < 0 || team_id >= m_server.team_count)
-        return;
-    if (level < 1 || level > 8)
-        return;
-    m_server.teams[team_id].leader_flags &= (uint8_t)(~(1u << (level - 1)));
-}
-
 /*
  * claim_leader  — sent by a client that wants to be rally-leader for its
  *                 current level.
@@ -1090,6 +1127,7 @@ static int m_command_claim_leader(void* _p, void* _arg)
     }
 
     t->leader_flags |= bit;
+    p->is_leader = 1; 
     log_msg(LOG_LEVEL_INFO,
         "claim_leader: player %d (team %s, level %d) — OK, now leader\n",
         p->id, t->name, p->level);
@@ -1117,6 +1155,7 @@ static int m_command_disband_leader(void* _p, void* _arg)
 
     p = (player*)_p;
     m_team_clear_leader_flag(p->team_id, p->level);
+    p->is_leader = 0;
 
     log_msg(LOG_LEVEL_INFO,
         "disband_leader: player %d (team id %d, level %d) disbanded\n",
@@ -1212,6 +1251,7 @@ static int m_command_real_incantation(void* _p, void* _arg)
         if (p2->level == initial_level)
         {
             p2->level++;
+            p2->is_leader = 0; 
             // server_create_response_to_command(p2->id, "incantation", NULL, "Level up!");
             server_create_response_msg(p2->id, "event", NULL, "level_up");
         }
@@ -1815,6 +1855,11 @@ int game_player_die(client *c)
         return SUCCESS;
     }
 
+    log_msg(LOG_LEVEL_INFO, "Player %d died, clearing leadership flags\n", c->player->id);
+    for (int level = 1; level <= 8; level++) {
+        m_team_clear_leader_flag(c->player->team_id, level);
+    }
+
     m_game_print_players_on_tile(MAP(c->player->pos.x, c->player->pos.y));
     log_msg(LOG_LEVEL_DEBUG, "Player %d has died. '%d', '%d'\n", c->socket_fd, c->player->die_time, c->player->start_time);
     log_msg(LOG_LEVEL_DEBUG, "Actual time: %d\n", time_api_get_local()->current_time_units);
@@ -1936,6 +1981,8 @@ int game_play()
     }
 
     m_game_update_winner_state();
+    
+    m_cleanup_stale_leaders(t_api->current_time_units);
 
     /* check if players can play and then make them play */
     if (!has_played)

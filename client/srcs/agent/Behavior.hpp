@@ -57,6 +57,9 @@ class Behavior {
 		bool _shouldStopMoving = false;
 		bool _waitingForBroadcast = false;
 
+		int64_t _lastMovingToRallyVisionMs = 0;
+		int64_t _lastInventoryRefreshMs    = 0;
+
 		Orientation _broadcastReceivedFacing = Orientation::N;
 
 		bool _forkInProgress = false;
