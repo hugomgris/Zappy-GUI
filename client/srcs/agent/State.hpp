@@ -27,6 +27,12 @@ struct WorldState {
 	// If the server ever adds this field, the optional handles it correctly.
 	void onWelcome(const ServerMessage& msg) {
 		std::cout << msg.raw << std::endl;
+		if (msg.playerX.has_value())
+			player.x = msg.playerX.value();
+
+		if (msg.playerY.has_value())
+			player.y = msg.playerY.value();
+			
 		if (msg.playerOrientation.has_value())
 			player.orientation = msg.playerOrientation.value();
 		

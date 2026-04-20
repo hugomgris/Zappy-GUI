@@ -59,6 +59,9 @@ Result Agent::waitForBienvenue(int64_t& nowMs, int timeoutMs) {
 			std::string text(frame.payload.begin(), frame.payload.end());
 			ServerMessage msg = MessageParser::parse(text);
 			if (msg.type == MsgType::Bienvenue) {
+
+				Logger::info("Bienvenue raw message->" + msg.raw);
+
 				Logger::info("Received bienvenue");
 				return Result::success();
 			}
@@ -94,7 +97,10 @@ Result Agent::performLogin(int64_t& nowMs, int timeoutMs) {
 
             if (msg.type == MsgType::Welcome) {
                 _state.onWelcome(msg);
+
+				Logger::info("Login raw message->" + msg.raw);
 				Logger::info("Login successful");
+
                 return Result::success();
             }
             if (msg.type == MsgType::Error)
@@ -215,7 +221,7 @@ void Agent::processIncomingMessages(int64_t nowMs) {
 					break;
 
 				case MsgType::Broadcast:
-					// TODO
+					_behavior.onBroadcast(msg);
 					break;
 
 				case MsgType::GameEnd:
