@@ -51,6 +51,9 @@ void Behavior::disbandRally(bool wasLeader) {
 	_waitingForBroadcast = false;
 	_rallyLevel				= 0;
 	_rallyBroadcastCount	= 0;
+	_lastMovingToRallyVisionMs = 0;
+	_waitingForBroadcast       = false;
+	_movingToRallyTimeoutMs = 0;
 	clearNavPlan();
 
 	if (wasLeader) {
@@ -71,7 +74,6 @@ void Behavior::disbandRally(bool wasLeader) {
 
     if (!wasLeader) {
         _broadcastDirection = -1;
-        _movingToRallyTimeoutMs = 0;
 		setVisionStale();
     }
 }
@@ -166,9 +168,8 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 void Behavior::tick(int64_t nowMs) {
 	if (hasCommandInFlight()) return;
 
-	static int64_t lastInventoryRefresh = 0;
-	if (nowMs - lastInventoryRefresh > 5000) {
-		lastInventoryRefresh = nowMs;
+	if (nowMs - _lastInventoryRefreshMs > 5000) {
+		_lastInventoryRefreshMs = nowMs;
 		if (!isInventoryStale() && !hasCommandInFlight()) {
 			refreshInventory();
 			return;
@@ -176,11 +177,11 @@ void Behavior::tick(int64_t nowMs) {
 	}
 
 	if (_aiState == AIState::MovingToRally) {
-		static int64_t lastMovingToRallyVision = 0;
+
 		// If the nav plan just emptied we may be on the leader's tile — refresh immediately
 		bool navJustDrained = _navPlan.empty() && _waitingForBroadcast;
-		if (isVisionStale() && (navJustDrained || nowMs - lastMovingToRallyVision > 2000)) {
-			lastMovingToRallyVision = nowMs;
+		if (isVisionStale() && (navJustDrained || nowMs - _lastMovingToRallyVisionMs > 2000)) {
+			_lastMovingToRallyVisionMs = nowMs;
 			refreshVision();
 			return;
 		}
@@ -486,6 +487,7 @@ void Behavior::tickIdle() {
 	if (_forkInProgress) return;
 	_aiState = AIState::CollectStones;
 }
+
 void Behavior::tickClaimingLeader() {
 	if (_claimSent) return;
 
@@ -707,13 +709,13 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
     }
 	
 	// One-time init
-    if (!_isMovingToRally) {
-        _isMovingToRally = true;
-        _movingToRallyTimeoutMs = nowMs;
-        _navTarget.clear();
-        clearNavPlan();
-        return;
-    }
+    if (_movingToRallyTimeoutMs == 0) {
+		_isMovingToRally = true;
+		_movingToRallyTimeoutMs = nowMs;
+		_navTarget.clear();
+		clearNavPlan();
+		return;
+	}
 
     if (nowMs - _movingToRallyTimeoutMs >= 30000) {
         Logger::warn("Behavior: MovingToRally timed out");
@@ -735,7 +737,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         clearNavPlan();
         _isMovingToRally = false;
         _aiState = AIState::Rallying;
-        setVisionStale();
+        //setVisionStale();
         return;
     }
 
@@ -790,11 +792,12 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 
 void Behavior::tickRallying(int64_t nowMs) {
 	if (!_isRallying) {
-		_isRallying = true;
-		_rallyingTimeoutMs = nowMs;
-		setVisionStale();
-		return;
-	}
+        _isRallying = true;
+        _rallyingTimeoutMs = nowMs;
+        _broadcastDirection = 0;  // ← clear it here, we're committed to rallying
+        setVisionStale();
+        return;
+    }
 
 	if (_state.player.food() < FOOD_CRITICAL) {
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
@@ -845,9 +848,14 @@ void Behavior::tickRallying(int64_t nowMs) {
 			_sender.sendBroadcast("HERE:" + std::to_string(_state.player.level));
 			_sender.expect("broadcast", [this](const ServerMessage&) {
 				_commandInFlight = false;
-				setVisionStale();
+				// intentionally no setVisionStale() here — we're just waiting
 			});
+			return;
 		}
+
+		// HERE already sent — just idle. Don't call setVisionStale() in a hot loop.
+		// The engine will wake us again via onBroadcast (DONE/direction change)
+		// or _pendingLevelUp. Do nothing.
 		return;
 	}
 
