@@ -9,4 +9,7 @@ make fclean -C server
 echo "=== cleaning Client ==="
 make fclean -C client
 
+echo "=== cleaning Logs ==="
+cd logs && rm -rf *
+
 echo "=== CLEAN ==="
