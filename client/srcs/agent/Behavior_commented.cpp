@@ -4,14 +4,16 @@
 #include <limits>
 
 static const LevelReq& levelReq(int level) {
+	// recipe: index 0 = level 1->2, index 6 = level 7->8
+	// order: players -> nourriture, linemate, deraumere, sibur, mendiane, phiras, thystame
 	static const LevelReq table[7] = {
-		{ 1, { 0, 1, 0, 0, 0, 0, 0 } },
-		{ 2, { 0, 1, 1, 1, 0, 0, 0 } },
-		{ 2, { 0, 2, 0, 1, 0, 2, 0 } },
-		{ 4, { 0, 1, 1, 2, 0, 1, 0 } }, 
-		{ 4, { 0, 1, 2, 1, 3, 0, 0 } },
-		{ 6, { 0, 1, 2, 3, 0, 1, 0 } }, 
-		{ 6, { 0, 2, 2, 2, 2, 2, 1 } },
+		{ 1, { 0, 1, 0, 0, 0, 0, 0 } }, // 1→2
+		{ 2, { 0, 1, 1, 1, 0, 0, 0 } }, // 2→3
+		{ 2, { 0, 2, 0, 1, 0, 2, 0 } }, // 3→4
+		{ 4, { 0, 1, 1, 2, 0, 1, 0 } }, // 4→5
+		{ 4, { 0, 1, 2, 1, 3, 0, 0 } }, // 5→6
+		{ 6, { 0, 1, 2, 3, 0, 1, 0 } }, // 6→7
+		{ 6, { 0, 2, 2, 2, 2, 2, 1 } }, // 7→8
 	};
 
 	if (level < 1 || level > 7)
@@ -24,14 +26,18 @@ static const std::vector<std::string> STONE_PRIORITY = {
 };
 
 static int foodRallyForLevel(int level) {
+    // Required followers: level 2→1, level 3→1, level 4→3, level 5→3, level 6→5, level 7→5
+    // Each follower may walk ~10 tiles. Leader stands still the whole time.
+    // f=10: 1 food unit ≈ 12.6 real-world server ticks ≈ 1.26 seconds
+    // Budget: ~20 food per follower needed + base 10 for leader survival
     static const int table[7] = {
-        16,
-        24,
-        24,
-        40,
-        40,
-        60,
-        60,
+        16,  // L1→2 (solo, FOOD_RALLY irrelevant)
+        24,  // L2→3 (1 follower)
+        24,  // L3→4 (1 follower)
+        40,  // L4→5 (3 followers)
+        40,  // L5→6 (3 followers)
+        60,  // L6→7 (5 followers)
+        60,  // L7→8 (5 followers)
     };
     if (level < 1 || level > 7) return 24;
     return table[level - 1];
@@ -39,6 +45,7 @@ static int foodRallyForLevel(int level) {
 
 Behavior::Behavior(Sender& sender, WorldState& state) : _sender(sender), _state(state) {}
 
+// helpers
 void Behavior::disbandRally(bool wasLeader) {
 	_stonesReady			= false;
 	_claimSent				= false;
@@ -48,7 +55,6 @@ void Behavior::disbandRally(bool wasLeader) {
 	_isRallying				= false;
 	_peerConfirmedCount		= 0;
 	_broadcastDirection		= -1;
-	_waitingForBroadcast = false;
 	_rallyLevel				= 0;
 	_rallyBroadcastCount	= 0;
 	clearNavPlan();
@@ -66,6 +72,8 @@ void Behavior::disbandRally(bool wasLeader) {
 		_sender.expect("broadcast", [](const ServerMessage&) {});
 
 		_commandInFlight = true;
+
+		//TODO: vision stale here too?
 	}
 
 
@@ -93,6 +101,7 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 						default: break;
 					}
 
+					// wrap around the world
 					_state.player.x = ((_state.player.x % _state.mapWidth)  + _state.mapWidth)  % _state.mapWidth;
                     _state.player.y = ((_state.player.y % _state.mapHeight) + _state.mapHeight) % _state.mapHeight;
 
@@ -163,6 +172,7 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 	}
 }
 
+// entrypoint -> state tick dispatcher
 void Behavior::tick(int64_t nowMs) {
 	if (hasCommandInFlight()) return;
 
@@ -176,17 +186,16 @@ void Behavior::tick(int64_t nowMs) {
 	}
 
 	if (_aiState == AIState::MovingToRally) {
-		static int64_t lastMovingToRallyVision = 0;
-		// If the nav plan just emptied we may be on the leader's tile — refresh immediately
-		bool navJustDrained = _navPlan.empty() && _waitingForBroadcast;
-		if (isVisionStale() && (navJustDrained || nowMs - lastMovingToRallyVision > 2000)) {
-			lastMovingToRallyVision = nowMs;
-			refreshVision();
-			return;
-		}
-	} else {
-		if (isVisionStale()) { refreshVision(); return; }
-	}
+        // Only refresh vision every 2 seconds to save time
+        static int64_t lastMovingToRallyVision = 0;
+        if (isVisionStale() && (nowMs - lastMovingToRallyVision > 2000)) {
+            lastMovingToRallyVision = nowMs;
+            refreshVision();
+            return;
+        }
+    } else {
+        if (isVisionStale()) { refreshVision(); return; }
+    }
 
 	if (isInventoryStale()) { refreshInventory(); return; }
 
@@ -229,7 +238,7 @@ void Behavior::refreshVision() {
 }
 
 void Behavior::refreshInventory() {
-	if (_commandInFlight) return;
+	if (_commandInFlight) return; // TODO: needed?
 
 	_commandInFlight = true;
 	_sender.sendInventaire();
@@ -245,13 +254,17 @@ void Behavior::refreshInventory() {
 	});
 }
 
+// food collection tick
 void Behavior::tickCollectFood() {
+	// EMERGENCY: if food is 0 or 1, do NOTHING except try to pick up food
 	if (_state.player.food() <= 1) {
+		// Force vision refresh to ensure we have current tile data
 		if (isVisionStale()) {
 			refreshVision();
 			return;
 		}
 		
+		// If there's ANY food on current tile, pick it up NOW
 		if (_state.countItemOnCurrentTile("nourriture") > 0) {
 			clearNavPlan();
 			_commandInFlight = true;
@@ -271,6 +284,7 @@ void Behavior::tickCollectFood() {
 			return;
 		}
 		
+		// Try to navigate toward visible food before moving randomly
 		if (_state.visionHasItem("nourriture")) {
 			auto tile = _state.nearestTileWithItem("nourriture");
 			if (tile.has_value()) {
@@ -286,6 +300,7 @@ void Behavior::tickCollectFood() {
 			}
 		}
 
+		// Only move randomly as absolute last resort
 		Logger::error("CRITICAL: Food = " + std::to_string(_state.player.food()) +
 					" but no food visible! Moving randomly!");
 		if (_navPlan.empty()) {
@@ -323,6 +338,7 @@ void Behavior::tickCollectFood() {
 		});
 		return;
 	} else {
+		// Log what IS on the current tile
 		if (!_state.vision.empty()) {
 			std::string items;
 			for (const auto& item : _state.vision[0].items) {
@@ -364,6 +380,7 @@ void Behavior::tickCollectFood() {
 	}
 }
 
+// stone gathering tick
 void Behavior::tickCollectStones() {
 	if (_state.player.food() < FOOD_CRITICAL) {
 		_aiState = AIState::CollectFood;
@@ -394,6 +411,9 @@ void Behavior::tickCollectStones() {
 	if (_stonesNeeded.empty()) {
 		const LevelReq& req = levelReq(_state.player.level);
 		if (!_easyMode && req.players > 1) {
+			// Require a real food buffer before starting rally —
+			// both the leader (who stands still broadcasting) and the
+			// follower (who walks toward the leader) need food headroom.
 			if (_state.player.food() < foodRallyForLevel(_state.player.level)) {
 				Logger::info("Behavior: stones ready but food too low (" +
 					std::to_string(_state.player.food()) +
@@ -416,6 +436,7 @@ void Behavior::tickCollectStones() {
 		return;
 	}
 
+	// pick up a needed stone that's already under our feet
 	for (const auto& stone : _stonesNeeded) {
 		if (_state.countItemOnCurrentTile(stone)) {
 			clearNavPlan();
@@ -430,6 +451,7 @@ void Behavior::tickCollectStones() {
 		}
 	}
 
+	// opportunistic food while collecting stones
 	if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
 		_commandInFlight = true;
 		_sender.sendPrend("nourriture");
@@ -482,11 +504,19 @@ void Behavior::tickCollectStones() {
 	}
 }
 
+// idle tick -> TODO: either give this a use or get rid of it
 void Behavior::tickIdle() {
 	if (_forkInProgress) return;
 	_aiState = AIState::CollectStones;
 }
+
+// claming leader micro state tick
 void Behavior::tickClaimingLeader() {
+	// Hard latch: once we've sent claim_leader, do nothing until
+	// the response callback transitions us out of this state.
+	// Without this, the tick loop re-enters here on every cycle
+	// because vision/inventory refreshes clear _commandInFlight
+	// before the switch dispatch runs.
 	if (_claimSent) return;
 
 	_claimSent = true;
@@ -498,34 +528,38 @@ void Behavior::tickClaimingLeader() {
 	_sender.sendClaimLeader();
 	_sender.expect("claim_leader", [this](const ServerMessage& msg) {
 		_commandInFlight = false;
-		_claimSent = false;
+		_claimSent = false;   // reset latch regardless of outcome
 
 		if (msg.isOk()) {
 			Logger::info("Behavior: claim_leader OK — entering Leading");
 			_isLeader             = true;
 			_rallyLevel           = _state.player.level;
 			_peerConfirmedCount   = 0;
-			_lastRallyBroadcastMs = 0;
-			_leadingTimeoutMs     = 0;
+			_lastRallyBroadcastMs = 0;   // force immediate first broadcast
+			_leadingTimeoutMs     = 0;   // tickLeading init guard uses 0
 			_aiState = AIState::Leading;
 
 		} else {
 			 Logger::info("Behavior: claim_leader KO — entering MovingToRally as follower");
 			_isLeader        = false;
 			_isMovingToRally = false;
+			// Don't overwrite a direction we already cached from a RALLY broadcast
 			if (_broadcastDirection <= 0 )
-				_broadcastDirection = -1;
+				_broadcastDirection = -1;  // only reset if we haven't heard RALLY yet
 			_aiState = AIState::MovingToRally;
 		}
 	});
 }
 
+// leading tick
 void Behavior::tickLeading(int64_t nowMs) {
+	// One-time init (re-entrance guard via _leadingTimeoutMs == 0)
 	if (_leadingTimeoutMs == 0) {
 		_leadingTimeoutMs     = nowMs;
-		_lastRallyBroadcastMs = nowMs - 600;
+		_lastRallyBroadcastMs = nowMs - 600; // force immediate broadcast
 		_rallyBroadcastCount  = 0;
 		Logger::info("Behavior: Leading — level " + std::to_string(_state.player.level));
+		// No return, no setVisionStale — fall through to broadcast logic below
 	}
 
 	if (nowMs - _leadingTimeoutMs >= 30000) {
@@ -542,6 +576,9 @@ void Behavior::tickLeading(int64_t nowMs) {
 		return;
 	}
 
+	// Periodic RALLY broadcast — always send at least 3 before checking
+	// player count, so followers have a real window to hear us even if
+	// they were mid-ClaimingLeader when we first broadcast.
 	if (nowMs - _lastRallyBroadcastMs >= 500) {
 		_lastRallyBroadcastMs = nowMs;
 		_rallyBroadcastCount++;
@@ -557,6 +594,7 @@ void Behavior::tickLeading(int64_t nowMs) {
 		return;
 	}
 
+	// Don't check player count until we've broadcast at least 3 times
 	if (_rallyBroadcastCount < 3) {
 		return;
 	}
@@ -572,19 +610,22 @@ void Behavior::tickLeading(int64_t nowMs) {
 			std::to_string(_state.vision[0].playerCount) + "/" +
 			std::to_string(req.players) + "), moving to Rallying");
 		_aiState = AIState::Rallying;
-		_isRallying = false;
+		_isRallying = false; // let tickRallying re-init
 	} else {
 		setVisionStale();
 	}
 }
 
+// incantation tick
 void Behavior::tickIncantating() {
+	// Step 1: get fresh vision
 	if (!_incantationReady) {
 		setVisionStale();
 		_incantationReady = true;
 		return;
 	}
 
+	// Step 2: place required stones (one per tick)
 	if (!_stonesPlaced) {
 		if (_easyMode) {
 			auto& tile = _state.vision[0];
@@ -635,6 +676,7 @@ void Behavior::tickIncantating() {
 		return;
 	}
 
+	// Step 3: verify stones are present
 	if (_staleVision) return;
 
 	auto& tile = _state.vision[0];
@@ -660,6 +702,7 @@ void Behavior::tickIncantating() {
 		return;
 	}
 
+	// Step 4: fire incantation
 	_commandInFlight = true;
 	_sender.sendIncantation();
 	_sender.expect("incantation", [this](const ServerMessage& msg) {
@@ -669,6 +712,7 @@ void Behavior::tickIncantating() {
 		_stonesPlaced = false;
 		_incantationReady = false;
 
+		// If we were the leader, release the server flag now
 		if (_isLeader) {
 			_sender.sendDisbandLeader();
 			_sender.expect("disband_leader", [](const ServerMessage&) {});
@@ -687,6 +731,7 @@ void Behavior::tickIncantating() {
 	});
 }
 
+// moving to rally tick
 void Behavior::tickMovingToRally(int64_t nowMs) {
 	if (_broadcastDirection == 0) {
 		clearNavPlan();
@@ -739,6 +784,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         return;
     }
 
+	// Opportunistic food pickup - ALWAYS check, not just when lost
 	if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
 		_commandInFlight = true;
 		_sender.sendPrend("nourriture");
@@ -750,8 +796,9 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 		return;
 	}
 
+    // Haven't heard a RALLY broadcast yet — explore rather than spin
     if (_broadcastDirection == -1) {
-        if (hasCommandInFlight()) return;
+        if (hasCommandInFlight()) return; // TODO: needed?
 
 		auto plan = Navigator::explorationStep(_explorationStep);
 		_navPlan.assign(plan.begin(), plan.end());
@@ -763,6 +810,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         return;
     }
 
+    // Already on the leader's tile — transition immediately, even mid-plan
 	if (_broadcastDirection == 0) {
 		clearNavPlan();
 		_isMovingToRally = false;
@@ -770,15 +818,11 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 		return;
 	}
 
+	// Only build a new plan when the current one is exhausted
 	if (_navPlan.empty() && _broadcastDirection != -1 && _broadcastDirection != 0) {
-		if (_waitingForBroadcast) {
-			// Consumed the last plan; don't re-plan until a fresh broadcast updates direction
-			return;
-		}
 		auto plan = Navigator::planApproachDirection(_broadcastDirection, _state.player.orientation);
 		_navPlan.assign(plan.begin(), plan.end());
 		Logger::info("Built new approach plan with " + std::to_string(plan.size()) + " commands");
-		_waitingForBroadcast = true;  // arm the gate; onBroadcast will clear it
 	}
 	
 	if (!_navPlan.empty()) {
@@ -788,6 +832,8 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 	}
 }
 
+
+// rallying tick
 void Behavior::tickRallying(int64_t nowMs) {
 	if (!_isRallying) {
 		_isRallying = true;
@@ -796,10 +842,12 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
+	// TODO: decide if leader should also disband
+	// maybe add a super critical threshold (1?)
 	if (_state.player.food() < FOOD_CRITICAL) {
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
-		bool wasLeader = _isLeader;
-		disbandRally(wasLeader);
+		bool wasLeader = _isLeader;   // ← capture before disbandRally clears it
+		disbandRally(wasLeader);      // ← was always passing false!
 		_aiState = AIState::CollectFood;
 		return;
 	}
@@ -809,8 +857,8 @@ void Behavior::tickRallying(int64_t nowMs) {
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
 			std::to_string(_state.player.level));
-		_sender.cancelAll();
-		_commandInFlight = false;
+		_sender.cancelAll();        // ← first: fire & drop all callbacks
+		_commandInFlight = false;   // ← then: reset flag (cancelAll may have dirtied it)
 		disbandRally(false);
 		_stonesPlaced = false;
 		_incantationReady = false;
@@ -832,12 +880,13 @@ void Behavior::tickRallying(int64_t nowMs) {
 		if (_broadcastDirection != 0) {
 			_isRallying = false;
 			_isMovingToRally = false;
-			clearNavPlan();
+			clearNavPlan();  // Clear before leaving
 			_aiState = AIState::MovingToRally;
 			return;
 		}
-
-		clearNavPlan();
+		
+		// CRITICAL: Ensure we never move in Rallying state
+		clearNavPlan();  // Keep nav plan empty
 
 		if (!_hereSent) {
 			_hereSent = true;
@@ -851,10 +900,23 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
+	// Leader path: keep broadcasting RALLY so late-arriving followers
+	// can still find us. Check player count between broadcasts.
 	if (_state.vision.empty()) {
 			setVisionStale();
 			return;
 		}
+
+	/* const auto& req = levelReq(_state.player.level);
+	if (_state.vision[0].playerCount >= req.players) {
+		Logger::info("Behavior: Rallying — enough players (" +
+			std::to_string(_state.vision[0].playerCount) + "/" +
+			std::to_string(req.players) + "), incantating");
+		_isRallying = false;
+		_aiState = AIState::Incantating;
+		_incantationReady = false;
+		_stonesPlaced = false;
+	}  */
 
 	const auto& req = levelReq(_state.player.level);
 	if (_peerConfirmedCount >= req.players - 1) {
@@ -866,6 +928,8 @@ void Behavior::tickRallying(int64_t nowMs) {
 		_incantationReady = false;
 		_stonesPlaced = false;
 	} else {
+		// Not enough players yet — keep broadcasting RALLY so followers
+		// who missed Leading-phase broadcasts can still navigate here.
 		if (nowMs - _lastRallyBroadcastMs >= 500) {
 			_lastRallyBroadcastMs = nowMs;
 			_commandInFlight = true;
@@ -879,6 +943,7 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 }
 
+// reaction to peer messages manager
 void Behavior::onBroadcast(const ServerMessage& msg) {
 	if (!msg.messageText.has_value()) return;
 	const std::string& text = msg.messageText.value();
@@ -889,16 +954,24 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 	Logger::debug("Behavior::onBroadcast: dir=" + std::to_string(direction) +
 		" msg='" + text + "'");
 
+	// ── RALLY:<level> ────────────────────────────────────────────────────
+	// Leader is calling followers.  Because the server arbitrates who the
+	// leader is, we no longer need to handle the "rival leader" race here.
+	// If we receive RALLY and we're in ClaimingLeader or CollectStones,
+	// we know the server will (or has already) answered our own claim with
+	// "ko", so we can safely ignore broadcasts while in those states.
 	if (text.rfind("RALLY:", 0) == 0) {
 		int level = 0;
 		try { level = std::stoi(text.substr(6)); } catch (...) { return; }
 
 		if (level != _state.player.level) return;
 
+		// If client is the leader echoing back to itself -> ignore
 		if (_isLeader) return;
 
 		int previousDirection = _broadcastDirection;
 		
+		// CRITICAL: Check for direction 0 FIRST - this means we're on the leader's tile
 		if (direction == 0) {
 			Logger::info("Behavior: ON LEADER'S TILE!");
 			_sender.cancelAll();
@@ -910,26 +983,23 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 			return;
 		}
 		
+		// For non-zero directions, update the cached direction
 		_broadcastDirection = direction;
     	_broadcastReceivedFacing = _state.player.orientation;
-		_waitingForBroadcast = false;  // fresh direction received, safe to plan again
-
+		
+		// If direction changed while moving, clear the plan to recalculate
 		if (_aiState == AIState::MovingToRally && direction != previousDirection) {
-			// Only discard the plan if it hasn't started executing yet (first command is a turn).
-			// If the next command is Forward, the player just turned and needs that step —
-			// dropping it leaves them rotated with no movement, causing drift.
-			bool planStartsWithForward = !_navPlan.empty() &&
-				_navPlan.front() == NavCmd::Forward;
-			if (!planStartsWithForward) {
-				clearNavPlan();
-			}
+			clearNavPlan();
 		}
 
+		// While still collecting or claiming, just cache the direction;
+		// don't interrupt those states.
 		if (_aiState == AIState::Incantating) {
 			return;
 		}
 
 		if (_aiState == AIState::CollectFood && _state.player.food() < FOOD_CRITICAL * 2) {
+			// Don't interrupt emergency food collection
 			return;
 		}
 
@@ -954,10 +1024,14 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 			return;
 		}
 
+		// For ClaimingLeader: cache direction but don't change state —
+		// the claim_leader callback will handle the transition.
 		if (_aiState == AIState::ClaimingLeader) {
 			return;
 		}
 
+		// Need to move toward the leader.
+		// Re-trigger MovingToRally if we're not already in a rally state
 		if (_aiState != AIState::MovingToRally && _aiState != AIState::Rallying) {
 			Logger::info("Behavior: RALLY dir=" + std::to_string(direction) +
 						" → MovingToRally");
@@ -969,6 +1043,8 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		return;
 	}
 
+	// ── HERE:<level> ─────────────────────────────────────────────────────
+	// A follower has arrived on our tile.  Only the leader cares.
 	if (text.rfind("HERE:", 0) == 0) {
 		int level = 0;
 		try { level = std::stoi(text.substr(5)); } catch (...) { return; }
@@ -990,6 +1066,9 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		return;
 	}
 
+	// ── DONE:<level> ─────────────────────────────────────────────────────
+	// The leader is disbanding.  Followers in rally states should go Idle
+	// and look for a new leader (by going through ClaimingLeader again).
 	if (text.rfind("DONE:", 0) == 0) {
 		if (_isLeader || _ignoreDone) return; 
 		
