@@ -54,7 +54,16 @@ void Behavior::disbandRally(bool wasLeader) {
 		_sender.expect("broadcast", [](const ServerMessage&) {});
 
 		_commandInFlight = true;
+
+		//TODO: vision stale here too?
 	}
+
+
+    if (!wasLeader) {
+        _broadcastDirection = -1;
+        _movingToRallyTimeoutMs = 0;
+		setVisionStale();
+    }
 }
 
 void Behavior::executeNavCmd(NavCmd cmd) {
@@ -181,6 +190,8 @@ void Behavior::refreshVision() {
 			_state.vision = msg.vision.value();
 			_staleVision = false;
 
+			Logger::info("Refreshed vision: " + msg.raw);
+
 			if (!_navPlan.empty() && !_navTarget.empty() &&
 				!_state.visionHasItem(_navTarget)) {
 				Logger::debug("Behavior: target '" + _navTarget +
@@ -210,6 +221,48 @@ void Behavior::refreshInventory() {
 
 // food collection tick
 void Behavior::tickCollectFood() {
+	// EMERGENCY: if food is 0 or 1, do NOTHING except try to pick up food
+	if (_state.player.food() <= 1) {
+		// Force vision refresh to ensure we have current tile data
+		if (isVisionStale()) {
+			refreshVision();
+			return;
+		}
+		
+		// If there's ANY food on current tile, pick it up NOW
+		if (_state.countItemOnCurrentTile("nourriture") > 0) {
+			clearNavPlan();
+			_commandInFlight = true;
+			_sender.sendPrend("nourriture");
+			_sender.expect("prend nourriture", [this](const ServerMessage& msg) {
+				_commandInFlight = false;
+				if (msg.isOk()) {
+					_state.player.inventory.nourriture++;
+					setInventoryStale();
+					Logger::info("Emergency food pickup successful! Food now: " + 
+								std::to_string(_state.player.food()));
+				} else {
+					Logger::error("Emergency food pickup FAILED!");
+				}
+				setVisionStale();
+			});
+			return;
+		}
+		
+		// No food on current tile - move ONE tile and pray
+		Logger::error("CRITICAL: Food = " + std::to_string(_state.player.food()) + 
+					" but no food on current tile! Moving randomly!");
+		if (_navPlan.empty()) {
+			auto plan = Navigator::explorationStep(_explorationStep);
+			_navPlan.assign(plan.begin(), plan.end());
+		}
+		if (!_navPlan.empty()) {
+			NavCmd next = _navPlan.front(); _navPlan.pop_front();
+			executeNavCmd(next);
+		}
+		return;
+	}
+	
 	int foodTarget = (_stonesReady) ? FOOD_RALLY : FOOD_SAFE;
 	if (_state.player.inventory.nourriture >= foodTarget) {
 		_stonesReady = false;
@@ -219,6 +272,8 @@ void Behavior::tickCollectFood() {
 	}
 
 	if (_state.countItemOnCurrentTile("nourriture")) {
+		Logger::info("Found food on current tile! Picking up. Food in inventory: " + 
+				std::to_string(_state.player.inventory.nourriture));
 		clearNavPlan();
 		_commandInFlight = true;
 		_sender.sendPrend("nourriture");
@@ -231,6 +286,16 @@ void Behavior::tickCollectFood() {
 			setVisionStale();
 		});
 		return;
+	} else {
+		// Log what IS on the current tile
+		if (!_state.vision.empty()) {
+			std::string items;
+			for (const auto& item : _state.vision[0].items) {
+				items += item + " ";
+			}
+			Logger::info("Current tile has: " + items + " Food count: " + 
+						std::to_string(_state.countItemOnCurrentTile("nourriture")));
+		}
 	}
 
 	if (_state.visionHasItem("nourriture")) {
@@ -348,6 +413,21 @@ void Behavior::tickCollectStones() {
 			setVisionStale();
 		});
 		return;
+	}
+
+	if (_state.player.food() < FOOD_SAFE && _state.visionHasItem("nourriture")) {
+		clearNavPlan();
+		auto tile = _state.nearestTileWithItem("nourriture");
+		if (tile.has_value()) {
+			auto plan = Navigator::planPath(_state.player.orientation, tile->localX, tile->localY);
+			_navPlan.assign(plan.begin(), plan.end());
+			_navTarget = "nourriture";
+			if (!_navPlan.empty()) {
+				NavCmd next = _navPlan.front(); _navPlan.pop_front();
+				executeNavCmd(next);
+			}
+			return;
+		}
 	}
 
 	std::string previousTarget = _navTarget;
@@ -617,6 +697,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         _aiState = AIState::Idle;
         return;
     }
+	
 
     if (_state.player.food() < FOOD_CRITICAL) {
         Logger::warn("Behavior: MovingToRally — food critical, disbanding");
@@ -624,6 +705,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         _aiState = AIState::CollectFood;
         return;
     }
+	
 
 	if (!_state.vision.empty() && _state.vision[0].playerCount >= 2) {
         clearNavPlan();
@@ -633,24 +715,28 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
         return;
     }
 
+	// Opportunistic food pickup - ALWAYS check, not just when lost
+	if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
+		_commandInFlight = true;
+		_sender.sendPrend("nourriture");
+		_sender.expect("prend nourriture", [this](const ServerMessage& msg) {
+			_commandInFlight = false;
+			if (msg.isOk()) _state.player.inventory.nourriture++;
+			setVisionStale();
+		});
+		return;
+	}
+
     // Haven't heard a RALLY broadcast yet — explore rather than spin
     if (_broadcastDirection == -1) {
-        if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
-            _commandInFlight = true;
-            _sender.sendPrend("nourriture");
-            _sender.expect("prend nourriture", [this](const ServerMessage& msg) {
-                _commandInFlight = false;
-                if (msg.isOk()) _state.player.inventory.nourriture++;
-                setVisionStale();
-            });
-        } else {
-            auto plan = Navigator::explorationStep(_explorationStep);
-            _navPlan.assign(plan.begin(), plan.end());
-            if (!_navPlan.empty()) {
-                NavCmd next = _navPlan.front(); _navPlan.pop_front();
-                executeNavCmd(next);
-            }
-        }
+        
+		auto plan = Navigator::explorationStep(_explorationStep);
+		_navPlan.assign(plan.begin(), plan.end());
+		if (!_navPlan.empty()) {
+			NavCmd next = _navPlan.front(); _navPlan.pop_front();
+			executeNavCmd(next);
+		}
+        
         return;
     }
 
@@ -692,7 +778,8 @@ void Behavior::tickRallying(int64_t nowMs) {
 	// maybe add a super critical threshold (1?)
 	if (_state.player.food() < FOOD_CRITICAL) {
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
-		disbandRally(false);
+		bool wasLeader = _isLeader;   // ← capture before disbandRally clears it
+		disbandRally(wasLeader);      // ← was always passing false!
 		_aiState = AIState::CollectFood;
 		return;
 	}
@@ -702,8 +789,8 @@ void Behavior::tickRallying(int64_t nowMs) {
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
 			std::to_string(_state.player.level));
-		_commandInFlight = false;
-    	_sender.cancelAll();
+		_sender.cancelAll();        // ← first: fire & drop all callbacks
+		_commandInFlight = false;   // ← then: reset flag (cancelAll may have dirtied it)
 		disbandRally(false);
 		_stonesPlaced = false;
 		_incantationReady = false;
@@ -822,6 +909,11 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		// don't interrupt those states.
 		// TODO: return when collecting stones?
 		if (_aiState == AIState::Incantating) {
+			return;
+		}
+
+		if (_aiState == AIState::CollectFood && _state.player.food() < FOOD_CRITICAL * 2) {
+			// Don't interrupt emergency food collection
 			return;
 		}
 
