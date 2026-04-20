@@ -161,8 +161,10 @@ void Behavior::tick(int64_t nowMs) {
 	static int64_t lastInventoryRefresh = 0;
 	if (nowMs - lastInventoryRefresh > 5000) {
 		lastInventoryRefresh = nowMs;
-		if (!isInventoryStale() && !hasCommandInFlight())
+		if (!isInventoryStale() && !hasCommandInFlight()) {
 			refreshInventory();
+			return;
+		}
 	}
 
 	if (isVisionStale())    { refreshVision();    return; }
@@ -249,9 +251,25 @@ void Behavior::tickCollectFood() {
 			return;
 		}
 		
-		// No food on current tile - move ONE tile and pray
-		Logger::error("CRITICAL: Food = " + std::to_string(_state.player.food()) + 
-					" but no food on current tile! Moving randomly!");
+		// Try to navigate toward visible food before moving randomly
+		if (_state.visionHasItem("nourriture")) {
+			auto tile = _state.nearestTileWithItem("nourriture");
+			if (tile.has_value()) {
+				if (_navPlan.empty()) {
+					auto plan = Navigator::planPath(_state.player.orientation, tile->localX, tile->localY);
+					_navPlan.assign(plan.begin(), plan.end());
+				}
+				if (!_navPlan.empty()) {
+					NavCmd next = _navPlan.front(); _navPlan.pop_front();
+					executeNavCmd(next);
+				}
+				return;
+			}
+		}
+
+		// Only move randomly as absolute last resort
+		Logger::error("CRITICAL: Food = " + std::to_string(_state.player.food()) +
+					" but no food visible! Moving randomly!");
 		if (_navPlan.empty()) {
 			auto plan = Navigator::explorationStep(_explorationStep);
 			_navPlan.assign(plan.begin(), plan.end());
