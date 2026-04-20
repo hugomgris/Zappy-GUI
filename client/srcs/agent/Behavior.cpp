@@ -25,6 +25,24 @@ static const std::vector<std::string> STONE_PRIORITY = {
 	"thystame", "phiras", "mendiane", "sibur", "deraumere", "linemate"
 };
 
+static int foodRallyForLevel(int level) {
+    // Required followers: level 2→1, level 3→1, level 4→3, level 5→3, level 6→5, level 7→5
+    // Each follower may walk ~10 tiles. Leader stands still the whole time.
+    // f=10: 1 food unit ≈ 12.6 real-world server ticks ≈ 1.26 seconds
+    // Budget: ~20 food per follower needed + base 10 for leader survival
+    static const int table[7] = {
+        16,  // L1→2 (solo, FOOD_RALLY irrelevant)
+        24,  // L2→3 (1 follower)
+        24,  // L3→4 (1 follower)
+        40,  // L4→5 (3 followers)
+        40,  // L5→6 (3 followers)
+        60,  // L6→7 (5 followers)
+        60,  // L7→8 (5 followers)
+    };
+    if (level < 1 || level > 7) return 24;
+    return table[level - 1];
+}
+
 Behavior::Behavior(Sender& sender, WorldState& state) : _sender(sender), _state(state) {}
 
 // helpers
@@ -281,7 +299,7 @@ void Behavior::tickCollectFood() {
 		return;
 	}
 	
-	int foodTarget = (_stonesReady) ? FOOD_RALLY : FOOD_SAFE;
+	int foodTarget = (_stonesReady) ? foodRallyForLevel(_state.player.level) : FOOD_SAFE;
 	if (_state.player.inventory.nourriture >= foodTarget) {
 		_stonesReady = false;
 		_aiState = AIState::CollectStones;
@@ -381,7 +399,7 @@ void Behavior::tickCollectStones() {
 			// Require a real food buffer before starting rally —
 			// both the leader (who stands still broadcasting) and the
 			// follower (who walks toward the leader) need food headroom.
-			if (_state.player.food() < FOOD_RALLY) {
+			if (_state.player.food() < foodRallyForLevel(_state.player.level)) {
 				Logger::info("Behavior: stones ready but food too low (" +
 					std::to_string(_state.player.food()) +
 					"), collecting food before rally");
