@@ -688,11 +688,22 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
+	// TODO: decide if leader should also disband
+	// maybe add a super critical threshold (1?)
+	if (_state.player.food() < FOOD_CRITICAL) {
+		Logger::warn("Behavior: Rallying — food critical, disbanding");
+		disbandRally(false);
+		_aiState = AIState::CollectFood;
+		return;
+	}
+
 	if (_pendingLevelUp) {
 		_pendingLevelUp = false;
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
 			std::to_string(_state.player.level));
+		_commandInFlight = false;
+    	_sender.cancelAll();
 		disbandRally(false);
 		_stonesPlaced = false;
 		_incantationReady = false;
