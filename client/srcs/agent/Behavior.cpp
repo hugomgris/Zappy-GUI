@@ -37,6 +37,20 @@ static int foodRallyForLevel(int level) {
     return table[level - 1];
 }
 
+static int foodFollowForLevel(int level) {
+    static const int table[7] = {
+        12,
+        14,
+        16,
+        18,
+        18,
+        22,
+        22,
+    };
+    if (level < 1 || level > 7) return 24;
+    return table[level - 1];
+}
+
 Behavior::Behavior(Sender& sender, WorldState& state) : _sender(sender), _state(state) {}
 
 void Behavior::disbandRally(bool wasLeader) {
@@ -215,7 +229,7 @@ void Behavior::refreshVision() {
 			_state.vision = msg.vision.value();
 			_staleVision = false;
 
-			Logger::info("Refreshed vision: " + msg.raw);
+			Logger::info("Refreshed vision at x=" + std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) + ": " + msg.raw);
 
 			if (!_navPlan.empty() && !_navTarget.empty() &&
 				!_state.visionHasItem(_navTarget)) {
@@ -237,7 +251,7 @@ void Behavior::refreshInventory() {
 	_sender.expect("inventaire", [this](const ServerMessage& msg) {
 		_commandInFlight = false;
 		if (msg.inventory.has_value()) {
-			Logger::info("Refreshed inventory: " + msg.raw);
+			Logger::info("Refreshed inventory at x=" + std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) + ": " + msg.raw);
 			_state.player.inventory = msg.inventory.value();
 			_staleInventory = false;
 		} else if (msg.isKo()) {
@@ -942,7 +956,7 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		}
 
 		if (_aiState == AIState::CollectFood || _aiState == AIState::CollectStones) {
-			if (_state.player.food() >= FOOD_SAFE) {
+			if (_state.player.food() >= foodFollowForLevel(_state.player.level)) {
 				Logger::info("Responding to rally because enough food:" + std::to_string(_state.player.food()));
 				_stonesReady = false;
 				_sender.cancelAll();
