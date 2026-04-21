@@ -791,7 +791,6 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 
 void Behavior::tickRallying(int64_t nowMs) {
 	if (!_isRallying) {
-		Logger::info("cucufu1");
         _isRallying = true;
         _rallyingTimeoutMs = nowMs;
         setVisionStale();
@@ -799,7 +798,6 @@ void Behavior::tickRallying(int64_t nowMs) {
     }
 
 	if (_state.player.food() < FOOD_CRITICAL) {
-		Logger::info("cucufu2");
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
@@ -808,7 +806,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (_incantationReady) {
-		Logger::info("CUCUFUYYYYYYY");
 		Logger::warn("LEADER going into INCANTATON state");
 		_isRallying = false;
 		_aiState = AIState::Incantating;
@@ -819,7 +816,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (_pendingLevelUp) {
-		Logger::info("cucufu3");
 		_pendingLevelUp = false;
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
@@ -837,7 +833,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (nowMs - _rallyingTimeoutMs >= 30000) {
-		Logger::info("cucufu4");
 		Logger::warn("Behavior: Rallying timed out");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
@@ -847,19 +842,16 @@ void Behavior::tickRallying(int64_t nowMs) {
 
 	if (!_isLeader) {
 		if (_broadcastDirection != 0) {
-			Logger::info("cucufu5");
 			_isRallying = false;
 			_isMovingToRally = false;
 			clearNavPlan();
 			_aiState = AIState::MovingToRally;
 			return;
 		}
-		Logger::info("cucufu6");
 		return;
 	}
 
 	if (_state.vision.empty()) {
-			Logger::info("cucufu7");
 			setVisionStale();
 			return;
 		}
@@ -871,7 +863,7 @@ void Behavior::tickRallying(int64_t nowMs) {
 			_readyForIncantationTime = nowMs;
 			Logger::info("All peers confirmed, waiting 2 seconds...");
 		}
-		if (nowMs - _readyForIncantationTime >= 2000) {
+		if (nowMs - _readyForIncantationTime >= 1000) {
 			Logger::info("Grace period ended, incantating");
 			_aiState = AIState::Incantating;
 			_incantationReady = false;
@@ -879,24 +871,9 @@ void Behavior::tickRallying(int64_t nowMs) {
 			return;
 		}
 	}
-	/* if (_peerConfirmedCount < req.players - 1) {
-		Logger::info("cucufu8");
-		if (nowMs - _lastRallyBroadcastMs >= 500) {
-			_lastRallyBroadcastMs = nowMs;
-			_commandInFlight = true;
-			_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
-			_sender.expect("broadcast", [this](const ServerMessage&) {
-				_commandInFlight = false;
-			});
-			return;
-		}
-	} else {
-		_incantationReady = true;
-	} */
 
 	// Broadcast RALLY during grace period AND when still waiting for peers
 	if (nowMs - _lastRallyBroadcastMs >= 500) {
-		Logger::info("cucufu9");
 		_lastRallyBroadcastMs = nowMs;
 		_commandInFlight = true;
 		_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
@@ -905,8 +882,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 		});
 		return;
 	}
-
-	Logger::info("cucufuXXXX");
 
 	setVisionStale();
 }
