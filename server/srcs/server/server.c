@@ -558,6 +558,15 @@ static int m_handle_client_event(int fd)
         else
             log_net_disconnect(fd, "recv error");
 
+        client *c;
+        if (m_game_get_client_from_fd(fd, &c) == SUCCESS && c && c->player) {
+            log_msg(LOG_LEVEL_INFO, "Client %d disconnecting, clearing leadership flags\n", fd);
+            if (c->player->is_leader) {
+                m_team_clear_leader_flag(c->player->team_id, c->player->leader_level);
+                c->player->is_leader = 0;
+            }
+        }
+
         REMOVE_CLIENT(fd);
         return SUCCESS;
     }

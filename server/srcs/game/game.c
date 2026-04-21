@@ -384,6 +384,19 @@ static int m_send_map_observer(void* _p, void* _arg)
 //     }
 // }
 
+static void m_print_tile(int x, int y) {
+    tile *t = MAP(x, y);
+    printf("Tile contents (%d,%d): ", x, y);
+        if (t->players)
+            printf("Players: %d\n", t->players->id);
+        else
+            printf("No players\n");
+        printf("Items: ");
+        printf("Nourriture: %d, Linemate: %d, Deraumere: %d, Sibur: %d, Mendiane: %d, Phiras: %d, Thystame: %d\n",
+            t->items.nourriture, t->items.linemate, t->items.deraumere,
+            t->items.sibur, t->items.mendiane, t->items.phiras, t->items.thystame);
+}
+
 int m_game_add_player_to_tile(tile *t, player *p)
 {
     p->next_on_tile = t->players;
@@ -412,6 +425,54 @@ static void m_game_remove_player_from_tile(player *p)
     p->next_on_tile = p->prev_on_tile = NULL;
 }
 
+/* Clear the leader flag for `level` on the team identified by team_id.
+ * Safe to call even if the flag is already clear.                       */
+void m_team_clear_leader_flag(int team_id, int level)
+{
+    if (team_id < 0 || team_id >= m_server.team_count)
+        return;
+    if (level < 1 || level > 8)
+        return;
+    m_server.teams[team_id].leader_flags &= (uint8_t)(~(1u << (level - 1)));
+}
+
+static void m_cleanup_stale_leaders(int64_t current_time)
+{
+    static int64_t last_cleanup = 0;
+    
+    // Run cleanup every 10 seconds
+    if (current_time - last_cleanup < 10000)
+        return;
+    last_cleanup = current_time;
+    
+    for (int team_id = 0; team_id < m_server.team_count; team_id++) {
+        for (int level = 1; level <= 8; level++) {
+            uint8_t bit = (uint8_t)(1u << (level - 1));
+            if (m_server.teams[team_id].leader_flags & bit) {
+                // Check if the leader still exists and is alive
+                int leader_exists = 0;
+                for (int i = 0; i < m_server.client_count; i++) {
+                    client *c = m_server.clients[i];
+                    if (c && c->player && 
+                        c->player->team_id == team_id && 
+                        c->player->leader_level == level &&
+                        c->player->is_leader) {  // You may need to add an is_leader flag to player struct
+                        leader_exists = 1;
+                        break;
+                    }
+                }
+                
+                if (!leader_exists) {
+                    log_msg(LOG_LEVEL_WARN, 
+                        "Stale leadership detected for team %d level %d — clearing flag\n",
+                        team_id, level);
+                    m_team_clear_leader_flag(team_id, level);
+                }
+            }
+        }
+    }
+}
+
 static void m_game_move_player(player *p, int new_x, int new_y)
 {
     m_game_remove_player_from_tile(p);
@@ -422,7 +483,7 @@ static void m_game_move_player(player *p, int new_x, int new_y)
     m_game_add_player_to_tile(MAP(new_x, new_y), p);
 }
 
-static int m_game_get_client_from_fd(int fd, client **c)
+int m_game_get_client_from_fd(int fd, client **c)
 {
     int i;
 
@@ -616,8 +677,8 @@ int m_command_voir(void* _p, void* _arg)
     (void)_arg;
 
     p = (player*)_p;
-    log_msg(LOG_LEVEL_INFO, "Executing voir for player %d at (%d,%d) with orientation (%d)\n", 
-        p->id, p->pos.x, p->pos.y, p->dir);
+    log_msg(LOG_LEVEL_INFO, "Executing voir for player %d  at level %d at (%d,%d) with orientation (%d)\n", 
+        p->id, p->level, p->pos.x, p->pos.y, p->dir);
 
     lvl = p->level;
 
@@ -709,7 +770,7 @@ static int m_command_inventaire(void* _p, void* _arg)
     (void)_arg;
 
     p = (player*)_p;
-    log_msg(LOG_LEVEL_INFO, "Executing inventaire for player %d\n", p->id);
+    log_msg(LOG_LEVEL_INFO, "Executing inventaire for player %d  at level %d\n", p->id, p->level);
 
     root = cJSON_CreateObject();
     cJSON_AddStringToObject(root, "type", "response");
@@ -868,8 +929,12 @@ static int m_command_prend(void* _p, void* _arg)
         ret =  server_create_response_to_command(p->id, "prend", "Unknown type.", "ko");
     else if (m_helper_items_to_tiles(MAP(p->pos.x, p->pos.y), p, -1, type) == ERROR)
         ret = server_create_response_to_command(p->id, "prend", arg, "ko");
-    else
+    else {
         ret = server_create_response_to_command(p->id, "prend", arg, "ok");
+
+        log_msg(LOG_LEVEL_WARN, "Player %d picked %s at tile %d-%d\n", p->id, arg, p->pos.x, p->pos.y);
+        m_print_tile(p->pos.x, p->pos.y);
+    }
 
     return ret;
 }
@@ -901,8 +966,11 @@ static int m_command_pose(void* _p, void* _arg)
         ret = server_create_response_to_command(p->id, "pose", "Unknown type.", "ko");
     else if (m_helper_items_to_tiles(MAP(p->pos.x, p->pos.y), p, 1, type) == ERROR)
         ret = server_create_response_to_command(p->id, "pose", arg, "ko");
-    else
+    else {
         ret = server_create_response_to_command(p->id, "pose", arg, "ok");
+        log_msg(LOG_LEVEL_WARN, "Player %d POSED %s at tile %d-%d\n", p->id, arg, p->pos.x, p->pos.y);
+        m_print_tile(p->pos.x, p->pos.y);
+    }
 
     return ret;
 }
@@ -1040,17 +1108,6 @@ static int m_command_broadcast(void* _p, void* _arg)
     return server_create_response_to_command(emitter->id, "broadcast", NULL, "ok");
 }
 
-/* Clear the leader flag for `level` on the team identified by team_id.
- * Safe to call even if the flag is already clear.                       */
-static void m_team_clear_leader_flag(int team_id, int level)
-{
-    if (team_id < 0 || team_id >= m_server.team_count)
-        return;
-    if (level < 1 || level > 8)
-        return;
-    m_server.teams[team_id].leader_flags &= (uint8_t)(~(1u << (level - 1)));
-}
-
 /*
  * claim_leader  — sent by a client that wants to be rally-leader for its
  *                 current level.
@@ -1090,6 +1147,8 @@ static int m_command_claim_leader(void* _p, void* _arg)
     }
 
     t->leader_flags |= bit;
+    p->is_leader = 1; 
+    p->leader_level = p->level;
     log_msg(LOG_LEVEL_INFO,
         "claim_leader: player %d (team %s, level %d) — OK, now leader\n",
         p->id, t->name, p->level);
@@ -1116,11 +1175,12 @@ static int m_command_disband_leader(void* _p, void* _arg)
     (void)_arg;
 
     p = (player*)_p;
-    m_team_clear_leader_flag(p->team_id, p->level);
+    m_team_clear_leader_flag(p->team_id, p->leader_level);
+    p->is_leader = 0;
 
     log_msg(LOG_LEVEL_INFO,
-        "disband_leader: player %d (team id %d, level %d) disbanded\n",
-        p->id, p->team_id, p->level);
+        "disband_leader: player %d team %d — clearing bit for leader_level=%d (current level=%d)\n",
+        p->id, p->team_id, p->leader_level, p->level);
 
     return server_create_response_to_command(p->id, "disband_leader", NULL, "ok");
 }
@@ -1147,23 +1207,46 @@ static int m_game_check_can_incantation(player* p, bool check_items)
 
     reqs = &level_reqs[p->level - 1]; /* if level 1, we need first position */
 
-    /**/
+    /*
+    Hugo: adding logs
+    */
     if (check_items == true)
     {
-        if (t->items.nourriture < reqs->inv.nourriture)
+        if (t->items.nourriture < reqs->inv.nourriture) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW NOURRITURE\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.linemate < reqs->inv.linemate)
+        }
+        if (t->items.linemate < reqs->inv.linemate) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW LINEMATE\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.deraumere < reqs->inv.deraumere)
+        }
+        if (t->items.deraumere < reqs->inv.deraumere) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW DERAUMERE\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.sibur < reqs->inv.sibur)
+        }
+        if (t->items.sibur < reqs->inv.sibur) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW SIBUR\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.mendiane < reqs->inv.mendiane)
+        }
+        if (t->items.mendiane < reqs->inv.mendiane) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW MENDIANE\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.phiras < reqs->inv.phiras)
+        }
+        if (t->items.phiras < reqs->inv.phiras) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW PHIRAS\n", p->id, p->level, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
-        if (t->items.thystame < reqs->inv.thystame)
+        }
+        if (t->items.thystame < reqs->inv.thystame) {
+            log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW THYSTAME\n", p->id, p->level, p->pos.x, p->pos.y);
+            m_print_tile(p->pos.x, p->pos.y);
             return ERROR;
+        }
     }
 
     p_count = 0;
@@ -1175,8 +1258,11 @@ static int m_game_check_can_incantation(player* p, bool check_items)
         p2 = p2->next_on_tile;
     }
 
-    if (p_count < reqs->player_number)
+    if (p_count < reqs->player_number) {
+        log_msg(LOG_LEVEL_WARN, "Failed to run incantation for player %d for level %d at position %d-%d. Reason: LOW PLAYERS -> count=%d vs reqs=%d\n", p->id, p->level, p->pos.x, p->pos.y, p_count, reqs->player_number);
+        m_print_tile(p->pos.x, p->pos.y);
         return ERROR;
+    }
 
     return SUCCESS;
 }
@@ -1212,6 +1298,7 @@ static int m_command_real_incantation(void* _p, void* _arg)
         if (p2->level == initial_level)
         {
             p2->level++;
+            p2->is_leader = 0; 
             // server_create_response_to_command(p2->id, "incantation", NULL, "Level up!");
             server_create_response_msg(p2->id, "event", NULL, "level_up");
         }
@@ -1539,7 +1626,7 @@ static int m_command_avance(void* _p, void* _arg)
     arg = (char*)_arg;
     
     // ADD THIS DEBUG
-    log_msg(LOG_LEVEL_INFO, "Executing avance for player %d at (%d,%d) facing %d\n", 
+    log_msg(LOG_LEVEL_INFO, "Executing avance for player %d  at level %d at (%d,%d) facing %d\n", 
             p->id, p->pos.x, p->pos.y, p->dir);
     
     new_x = p->pos.x;
@@ -1815,6 +1902,12 @@ int game_player_die(client *c)
         return SUCCESS;
     }
 
+    log_msg(LOG_LEVEL_INFO, "Player %d died, clearing leadership flags\n", c->player->id);
+    if (c->player->is_leader) {
+        m_team_clear_leader_flag(c->player->team_id, c->player->leader_level);
+        c->player->is_leader = 0;
+    }
+
     m_game_print_players_on_tile(MAP(c->player->pos.x, c->player->pos.y));
     log_msg(LOG_LEVEL_DEBUG, "Player %d has died. '%d', '%d'\n", c->socket_fd, c->player->die_time, c->player->start_time);
     log_msg(LOG_LEVEL_DEBUG, "Actual time: %d\n", time_api_get_local()->current_time_units);
@@ -1936,6 +2029,8 @@ int game_play()
     }
 
     m_game_update_winner_state();
+    
+    m_cleanup_stale_leaders(t_api->current_time_units);
 
     /* check if players can play and then make them play */
     if (!has_played)
