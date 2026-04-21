@@ -28,10 +28,10 @@ static int foodRallyForLevel(int level) {
         16,
         24,
         24,
+        32,
+        32,
         40,
         40,
-        60,
-        60,
     };
     if (level < 1 || level > 7) return 24;
     return table[level - 1];
@@ -39,13 +39,13 @@ static int foodRallyForLevel(int level) {
 
 static int foodFollowForLevel(int level) {
     static const int table[7] = {
+        10,
+        10,
         12,
-        14,
         16,
-        18,
-        18,
-        22,
-        22,
+        16,
+        20,
+        20,
     };
     if (level < 1 || level > 7) return 24;
     return table[level - 1];
@@ -392,7 +392,7 @@ void Behavior::tickCollectStones() {
 
 	if (_state.player.food() > FOOD_FORK && _state.player.level >= 2 && _state.forkEnabled) {
 		Logger::info("Fork call triggered");
-		_aiState = AIState::Idle;
+		_aiState = AIState::CollectStones;
 		clearNavPlan();
 		_commandInFlight = true;
 		_sender.sendFork();
@@ -530,12 +530,16 @@ void Behavior::tickClaimingLeader() {
 			_aiState = AIState::Leading;
 
 		} else {
-			 Logger::info("Behavior: claim_leader KO — entering MovingToRally as follower");
-			_isLeader        = false;
+			Logger::info("Behavior: claim_leader KO — entering MovingToRally as follower");
+			_isLeader = false;
 			_isMovingToRally = false;
-			if (_broadcastDirection <= 0 )
+			if (_broadcastDirection < 0)
 				_broadcastDirection = -1;
-			_aiState = AIState::MovingToRally;
+			
+			if (_broadcastDirection == 0)
+				_aiState = AIState::Rallying;   // already there, skip MovingToRally
+			else
+				_aiState = AIState::MovingToRally;
 		}
 	});
 }
@@ -551,7 +555,7 @@ void Behavior::tickLeading(int64_t nowMs) {
 	if (nowMs - _leadingTimeoutMs >= 30000) {
 		Logger::warn("Behavior: Leading timed out — disbanding");
 		disbandRally(true);
-		_aiState = AIState::Idle;
+		_aiState = AIState::CollectStones;
 		return;
 	}
 
@@ -723,7 +727,7 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
     if (nowMs - _movingToRallyTimeoutMs >= 30000) {
         Logger::warn("Behavior: MovingToRally timed out");
         disbandRally(false);
-        _aiState = AIState::Idle;
+        _aiState = AIState::CollectStones;
         return;
     }
 	
@@ -787,7 +791,6 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 
 void Behavior::tickRallying(int64_t nowMs) {
 	if (!_isRallying) {
-		Logger::info("cucufu1");
         _isRallying = true;
         _rallyingTimeoutMs = nowMs;
         setVisionStale();
@@ -795,7 +798,6 @@ void Behavior::tickRallying(int64_t nowMs) {
     }
 
 	if (_state.player.food() < FOOD_CRITICAL) {
-		Logger::info("cucufu2");
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
@@ -803,9 +805,7 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
-	// TODO: needed?
 	if (_incantationReady) {
-		Logger::info("CUCUFUYYYYYYY");
 		Logger::warn("LEADER going into INCANTATON state");
 		_isRallying = false;
 		_aiState = AIState::Incantating;
@@ -816,14 +816,14 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (_pendingLevelUp) {
-		Logger::info("cucufu3");
 		_pendingLevelUp = false;
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
 			std::to_string(_state.player.level));
 		_sender.cancelAll();
 		_commandInFlight = false;
-		disbandRally(true);
+		//disbandRally(true);
+		disbandRally(_isLeader);
 		_stonesPlaced = false;
 		_incantationReady = false;
 		_aiState = (_state.player.level >= 8) ? AIState::Idle : AIState::CollectStones;
@@ -833,52 +833,47 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (nowMs - _rallyingTimeoutMs >= 30000) {
-		Logger::info("cucufu4");
 		Logger::warn("Behavior: Rallying timed out");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
-		_aiState = AIState::Idle;
+		_aiState = AIState::CollectStones;
 		return;
 	}
 
 	if (!_isLeader) {
 		if (_broadcastDirection != 0) {
-			Logger::info("cucufu5");
 			_isRallying = false;
 			_isMovingToRally = false;
 			clearNavPlan();
 			_aiState = AIState::MovingToRally;
 			return;
 		}
-		Logger::info("cucufu6");
 		return;
 	}
 
 	if (_state.vision.empty()) {
-			Logger::info("cucufu7");
 			setVisionStale();
 			return;
 		}
 
 	const auto& req = levelReq(_state.player.level);
-	if (_peerConfirmedCount < req.players - 1) {
-		Logger::info("cucufu8");
-		if (nowMs - _lastRallyBroadcastMs >= 500) {
-			_lastRallyBroadcastMs = nowMs;
-			_commandInFlight = true;
-			_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
-			_sender.expect("broadcast", [this](const ServerMessage&) {
-				_commandInFlight = false;
-			});
+	if (_peerConfirmedCount >= req.players - 1) {
+		if (!_incantationReady) {
+			_incantationReady = true;
+			_readyForIncantationTime = nowMs;
+			Logger::info("All peers confirmed, waiting 2 seconds...");
+		}
+		if (nowMs - _readyForIncantationTime >= 1000) {
+			Logger::info("Grace period ended, incantating");
+			_aiState = AIState::Incantating;
+			_incantationReady = false;
+			_isRallying = false;
 			return;
 		}
-	} else {
-		_incantationReady = true;
 	}
 
 	// Broadcast RALLY during grace period AND when still waiting for peers
 	if (nowMs - _lastRallyBroadcastMs >= 500) {
-		Logger::info("cucufu9");
 		_lastRallyBroadcastMs = nowMs;
 		_commandInFlight = true;
 		_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
@@ -887,8 +882,6 @@ void Behavior::tickRallying(int64_t nowMs) {
 		});
 		return;
 	}
-
-	Logger::info("cucufuXXXX");
 
 	setVisionStale();
 }
@@ -1002,7 +995,6 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		const auto& req = levelReq(_state.player.level);
 		int needed = req.players - 1;
 
-		// *** FIX: don't count beyond what we need ***
 		if (_peerConfirmedCount >= needed) return;
 
 		_peerConfirmedCount++;
@@ -1017,6 +1009,24 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 	}
 
 	if (text.rfind("DONE:", 0) == 0) {
+		if (_isLeader) return;
+		int level = 0;
+		try { level = std::stoi(text.substr(5)); } catch (...) { return; }
+		if (level != _state.player.level) return;
+
+		_sender.cancelAll();
+		_commandInFlight = false;
+
+		if (_aiState == AIState::MovingToRally || _aiState == AIState::Rallying
+			|| _broadcastDirection != -1 || _hereSent) {
+			disbandRally(false);
+			if (_aiState != AIState::CollectFood && _aiState != AIState::Incantating)
+				_aiState = AIState::CollectStones;
+		}
+		return;
+	}
+
+	/* if (text.rfind("DONE:", 0) == 0) {
 		Logger::info("DONE received at position x=" + std::to_string(_state.player.x) + 
 					", y=" + std::to_string(_state.player.y));
 		
@@ -1038,7 +1048,7 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 			_aiState = AIState::CollectStones;
 		}
 		return;
-	}
+	} */
 }
 
 // resource helpers

@@ -137,6 +137,8 @@ void Agent::networkLoop() {
 	int reconnectAttempts = 0;
 	
 	while (_running) {
+		auto tickStart = std::chrono::steady_clock::now();
+		
 		nowMs = std::chrono::duration_cast<std::chrono::milliseconds>(
 			std::chrono::steady_clock::now().time_since_epoch()).count();
 
@@ -183,7 +185,15 @@ void Agent::networkLoop() {
 			lastStatusTime = nowMs;
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		// Adaptive sleep
+		auto tickElapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+			std::chrono::steady_clock::now() - tickStart).count();
+		int sleepMs = std::max(0LL, 50LL - tickElapsed);
+		
+		if (sleepMs > 0) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(sleepMs));
+		}
+		// If sleepMs is 0 or negative, already beind SO NO SLEEP
 	}
 
 	_running = false;
