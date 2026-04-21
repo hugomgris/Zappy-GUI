@@ -561,8 +561,9 @@ static int m_handle_client_event(int fd)
         client *c;
         if (m_game_get_client_from_fd(fd, &c) == SUCCESS && c && c->player) {
             log_msg(LOG_LEVEL_INFO, "Client %d disconnecting, clearing leadership flags\n", fd);
-            for (int level = 1; level <= 8; level++) {
-                m_team_clear_leader_flag(c->player->team_id, level);
+            if (c->player->is_leader) {
+                m_team_clear_leader_flag(c->player->team_id, c->player->leader_level);
+                c->player->is_leader = 0;
             }
         }
 

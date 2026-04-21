@@ -76,6 +76,7 @@ typedef struct player_s
     int id; /* Sockfd */
     int team_id;
     int level;
+    int leader_level;
     int is_leader;
     position pos;
     direction dir;
