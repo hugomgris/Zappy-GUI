@@ -54,6 +54,11 @@ class Behavior {
 		bool _claimSent = false;
 		bool _ignoreDone = false;
 		bool _hereSent = false;
+		bool _shouldStopMoving = false;
+		bool _waitingForBroadcast = false;
+
+		int64_t _lastMovingToRallyVisionMs = 0;
+		int64_t _lastInventoryRefreshMs    = 0;
 
 		Orientation _broadcastReceivedFacing = Orientation::N;
 
@@ -67,7 +72,7 @@ class Behavior {
 		static constexpr int FOOD_FORK      = 24;
 		static constexpr int FOOD_RALLY     = 16;
 		static constexpr int FOOD_SAFE      = 12;
-		static constexpr int FOOD_CRITICAL  = 4;
+		static constexpr int FOOD_CRITICAL  = 6;
 
 		void executeNavCmd(NavCmd cmd);
 

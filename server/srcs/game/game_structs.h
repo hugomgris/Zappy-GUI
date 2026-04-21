@@ -76,6 +76,8 @@ typedef struct player_s
     int id; /* Sockfd */
     int team_id;
     int level;
+    int leader_level;
+    int is_leader;
     position pos;
     direction dir;
     inventory inv;
@@ -135,6 +137,7 @@ typedef struct
     int socket_fd;
     player* player;
     event_buffer event_buffer;
+    int is_leader;
 } client;
 
 typedef struct

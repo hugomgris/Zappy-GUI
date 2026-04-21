@@ -19,7 +19,7 @@ echo "=== Starting Server ==="
 pkill -f zappy || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd server && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > ../logs/server_log_normal_probe_ten_clients.txt 2>&1 &)
+(cd server && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > ../logs/server_log_normal_probe_four_clients.txt 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
 echo "=== Running server/run.sh ==="
@@ -29,9 +29,8 @@ echo "=== Building Client ==="
 make -C client
 
 echo "=== Running Clients ==="
-for i in {1..9}; do
-    ./client/client localhost 8674 team1 --no-fork 2> logs/client_log_normal_probe_ten_clients_${i}.txt &
+for i in {1..3}; do
+    ./client/client localhost 8674 team1 --no-fork 2> logs/client_log_normal_probe_four_clients_${i}.txt &
     sleep 0.5
 done
-./client/client localhost 8674 team1 --no-fork 2> logs/client_log_normal_probe_ten_clients_10.txt
-wait
+./client/client localhost 8674 team1 --no-fork 2> logs/client_log_normal_probe_four_clients_4.txt

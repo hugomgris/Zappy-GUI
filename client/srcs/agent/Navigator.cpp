@@ -134,40 +134,36 @@ std::vector<NavCmd> Navigator::explorationStep(int& stepCount) {
 //
 // Returns turn commands followed by one NavCmd::Forward.
 // Returns just NavCmd::Forward if direction is 0 or out of range.
-std::vector<NavCmd> Navigator::planApproachDirection(int broadcastDirection, Orientation currentFacing) {
-    std::vector<NavCmd> commands;
-
-    int offset = 0;
-    switch (broadcastDirection) {
-        case 1: case 2: case 8: offset = 0; break; // forward
-		case 3: case 4:         offset = 1; break; // right  ← direction 4 hits here ✓
-		case 5:                 offset = 2; break; // behind
-		case 6: case 7:         offset = 3; break; // left
-    }
-
-    Orientation target = static_cast<Orientation>(
-        (static_cast<int>(currentFacing) + offset) % 4);
-
-    auto turns = turnToFace(currentFacing, target);
-    commands.insert(commands.end(), turns.begin(), turns.end());
-
-	if (!commands.empty()) {
-		Logger::info("PlanApproachDirection result:\n broadcastDirection = " + std::to_string(broadcastDirection)
-				+ "\nCurrent Facing = " + std::to_string(static_cast<int>(currentFacing))
-				+ "\nOffset count = " + std::to_string(offset)
-				+ "\nFirst command = " + std::to_string(static_cast<int>(commands[0])));
-	} else {
-		Logger::info("... No turn needed (already facing target)");
+std::vector<NavCmd> Navigator::planApproachDirection(int broadcastDirection, Orientation /*currentFacing*/) {
+	std::vector<NavCmd> commands;
+	
+	Logger::info("DIRECTION RESULT = " + std::to_string(broadcastDirection));
+	
+	switch (broadcastDirection) {
+		case 1: case 2: case 8:
+			break;
+			
+		case 3: case 4:
+			// Right quadrant - turn right once
+			commands.push_back(NavCmd::TurnRight);
+			break;
+			
+		case 5:
+			// Behind - turn around (two rights or two lefts)
+			commands.push_back(NavCmd::TurnRight);
+			commands.push_back(NavCmd::TurnRight);
+			break;
+			
+		case 6: case 7:
+			// Left quadrant - turn left once
+			commands.push_back(NavCmd::TurnLeft);
+			break;
 	}
-
-    // Commit to 3 steps in this direction before reconsidering
+	
+	// Always move forward after turning (or if already facing forward)
 	commands.push_back(NavCmd::Forward);
-	commands.push_back(NavCmd::Forward);
-	commands.push_back(NavCmd::Forward);
-	commands.push_back(NavCmd::Forward);
-	commands.push_back(NavCmd::Forward);
-
-    return commands;
+	
+	return commands;
 }
 
 /*
