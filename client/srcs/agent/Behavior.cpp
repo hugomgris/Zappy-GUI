@@ -37,6 +37,20 @@ static int foodRallyForLevel(int level) {
     return table[level - 1];
 }
 
+static int foodFollowForLevel(int level) {
+    static const int table[7] = {
+        12,
+        14,
+        16,
+        18,
+        18,
+        22,
+        22,
+    };
+    if (level < 1 || level > 7) return 24;
+    return table[level - 1];
+}
+
 Behavior::Behavior(Sender& sender, WorldState& state) : _sender(sender), _state(state) {}
 
 void Behavior::disbandRally(bool wasLeader) {
@@ -69,12 +83,16 @@ void Behavior::disbandRally(bool wasLeader) {
 		_sender.expect("broadcast", [](const ServerMessage&) {});
 
 		_commandInFlight = true;
+
+		Logger::info("Client with level " + std::to_string(_state.player.level) + " disbanded as LEADER");
 	}
 
 
     if (!wasLeader) {
         _broadcastDirection = -1;
 		setVisionStale();
+
+		Logger::info("Client with level " + std::to_string(_state.player.level) + " disbanded as FOLLOWER");
     }
 }
 
@@ -215,7 +233,7 @@ void Behavior::refreshVision() {
 			_state.vision = msg.vision.value();
 			_staleVision = false;
 
-			Logger::info("Refreshed vision: " + msg.raw);
+			Logger::info("Refreshed vision in state [" + std::to_string(static_cast<int>(_aiState)) + "] at x=" + std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) + ": " + msg.raw);
 
 			if (!_navPlan.empty() && !_navTarget.empty() &&
 				!_state.visionHasItem(_navTarget)) {
@@ -237,7 +255,7 @@ void Behavior::refreshInventory() {
 	_sender.expect("inventaire", [this](const ServerMessage& msg) {
 		_commandInFlight = false;
 		if (msg.inventory.has_value()) {
-			Logger::info("Refreshed inventory: " + msg.raw);
+			Logger::info("Refreshed inventory in state [" + std::to_string(static_cast<int>(_aiState)) + "] at x=" + std::to_string(_state.player.x) + ", y=" + std::to_string(_state.player.y) + ": " + msg.raw);
 			_state.player.inventory = msg.inventory.value();
 			_staleInventory = false;
 		} else if (msg.isKo()) {
@@ -527,7 +545,7 @@ void Behavior::tickLeading(int64_t nowMs) {
 		_leadingTimeoutMs     = nowMs;
 		_lastRallyBroadcastMs = nowMs - 600;
 		_rallyBroadcastCount  = 0;
-		Logger::info("Behavior: Leading — level " + std::to_string(_state.player.level));
+		Logger::info("Behavior: Leading - level " + std::to_string(_state.player.level));
 	}
 
 	if (nowMs - _leadingTimeoutMs >= 30000) {
@@ -538,7 +556,7 @@ void Behavior::tickLeading(int64_t nowMs) {
 	}
 
 	if (_state.player.food() < FOOD_CRITICAL) {
-		Logger::warn("Behavior: Leading — food critical, disbanding");
+		Logger::warn("Behavior: Leading - food critical, disbanding");
 		disbandRally(true);
 		_aiState = AIState::CollectFood;
 		return;
@@ -566,17 +584,6 @@ void Behavior::tickLeading(int64_t nowMs) {
 	if (_state.vision.empty()) {
 		setVisionStale();
 		return;
-	}
-
-	const auto& req = levelReq(_state.player.level);
-	if (_state.vision[0].playerCount >= req.players) {
-		Logger::info("Behavior: Leading — enough players (" +
-			std::to_string(_state.vision[0].playerCount) + "/" +
-			std::to_string(req.players) + "), moving to Rallying");
-		_aiState = AIState::Rallying;
-		_isRallying = false;
-	} else {
-		setVisionStale();
 	}
 }
 
@@ -671,11 +678,7 @@ void Behavior::tickIncantating() {
 		_stonesPlaced = false;
 		_incantationReady = false;
 
-		if (_isLeader) {
-			_sender.sendDisbandLeader();
-			_sender.expect("disband_leader", [](const ServerMessage&) {});
-			_isLeader = false;
-		}
+		disbandRally(true);
 
 		if (_pendingLevelUp) {
 			_state.player.level++;
@@ -733,14 +736,6 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
     }
 	
 
-	if (!_state.vision.empty() && _state.vision[0].playerCount >= 2) {
-        clearNavPlan();
-        _isMovingToRally = false;
-        _aiState = AIState::Rallying;
-        //setVisionStale();
-        return;
-    }
-
 	if (_state.player.food() < FOOD_SAFE && _state.countItemOnCurrentTile("nourriture")) {
 		_commandInFlight = true;
 		_sender.sendPrend("nourriture");
@@ -792,14 +787,15 @@ void Behavior::tickMovingToRally(int64_t nowMs) {
 
 void Behavior::tickRallying(int64_t nowMs) {
 	if (!_isRallying) {
+		Logger::info("cucufu1");
         _isRallying = true;
         _rallyingTimeoutMs = nowMs;
-        _broadcastDirection = 0;  // ← clear it here, we're committed to rallying
         setVisionStale();
         return;
     }
 
 	if (_state.player.food() < FOOD_CRITICAL) {
+		Logger::info("cucufu2");
 		Logger::warn("Behavior: Rallying — food critical, disbanding");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
@@ -807,14 +803,27 @@ void Behavior::tickRallying(int64_t nowMs) {
 		return;
 	}
 
+	// TODO: needed?
+	if (_incantationReady) {
+		Logger::info("CUCUFUYYYYYYY");
+		Logger::warn("LEADER going into INCANTATON state");
+		_isRallying = false;
+		_aiState = AIState::Incantating;
+		_incantationReady = false;
+		_stonesPlaced = false;
+		_readyForIncantation = false;
+		return;
+	}
+
 	if (_pendingLevelUp) {
+		Logger::info("cucufu3");
 		_pendingLevelUp = false;
 		_state.player.level++;
 		Logger::info("Behavior: Rallying level_up — now level " +
 			std::to_string(_state.player.level));
 		_sender.cancelAll();
 		_commandInFlight = false;
-		disbandRally(false);
+		disbandRally(true);
 		_stonesPlaced = false;
 		_incantationReady = false;
 		_aiState = (_state.player.level >= 8) ? AIState::Idle : AIState::CollectStones;
@@ -824,6 +833,7 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (nowMs - _rallyingTimeoutMs >= 30000) {
+		Logger::info("cucufu4");
 		Logger::warn("Behavior: Rallying timed out");
 		bool wasLeader = _isLeader;
 		disbandRally(wasLeader);
@@ -833,47 +843,26 @@ void Behavior::tickRallying(int64_t nowMs) {
 
 	if (!_isLeader) {
 		if (_broadcastDirection != 0) {
+			Logger::info("cucufu5");
 			_isRallying = false;
 			_isMovingToRally = false;
 			clearNavPlan();
 			_aiState = AIState::MovingToRally;
 			return;
 		}
-
-		clearNavPlan();
-
-		if (!_hereSent) {
-			_hereSent = true;
-			_commandInFlight = true;
-			_sender.sendBroadcast("HERE:" + std::to_string(_state.player.level));
-			_sender.expect("broadcast", [this](const ServerMessage&) {
-				_commandInFlight = false;
-				// intentionally no setVisionStale() here — we're just waiting
-			});
-			return;
-		}
-
-		// HERE already sent — just idle. Don't call setVisionStale() in a hot loop.
-		// The engine will wake us again via onBroadcast (DONE/direction change)
-		// or _pendingLevelUp. Do nothing.
+		Logger::info("cucufu6");
 		return;
 	}
 
 	if (_state.vision.empty()) {
+			Logger::info("cucufu7");
 			setVisionStale();
 			return;
 		}
 
 	const auto& req = levelReq(_state.player.level);
-	if (_peerConfirmedCount >= req.players - 1) {
-		Logger::info("Behavior: Rallying — all peers confirmed (" +
-			std::to_string(_peerConfirmedCount) + "/" +
-			std::to_string(req.players - 1) + "), incantating");
-		_isRallying = false;
-		_aiState = AIState::Incantating;
-		_incantationReady = false;
-		_stonesPlaced = false;
-	} else {
+	if (_peerConfirmedCount < req.players - 1) {
+		Logger::info("cucufu8");
 		if (nowMs - _lastRallyBroadcastMs >= 500) {
 			_lastRallyBroadcastMs = nowMs;
 			_commandInFlight = true;
@@ -881,10 +870,27 @@ void Behavior::tickRallying(int64_t nowMs) {
 			_sender.expect("broadcast", [this](const ServerMessage&) {
 				_commandInFlight = false;
 			});
-		} else {
-			setVisionStale();
+			return;
 		}
+	} else {
+		_incantationReady = true;
 	}
+
+	// Broadcast RALLY during grace period AND when still waiting for peers
+	if (nowMs - _lastRallyBroadcastMs >= 500) {
+		Logger::info("cucufu9");
+		_lastRallyBroadcastMs = nowMs;
+		_commandInFlight = true;
+		_sender.sendBroadcast("RALLY:" + std::to_string(_state.player.level));
+		_sender.expect("broadcast", [this](const ServerMessage&) {
+			_commandInFlight = false;
+		});
+		return;
+	}
+
+	Logger::info("cucufuXXXX");
+
+	setVisionStale();
 }
 
 void Behavior::onBroadcast(const ServerMessage& msg) {
@@ -908,13 +914,22 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		int previousDirection = _broadcastDirection;
 		
 		if (direction == 0) {
-			Logger::info("Behavior: ON LEADER'S TILE!");
+			Logger::info("Behavior: ON LEADER'S TILE! (direction 0 from server)");
 			_sender.cancelAll();
 			_commandInFlight = false;
 			clearNavPlan();
 			_broadcastDirection = direction;
 			_isMovingToRally = false;
+			_isRallying = false;
 			_aiState = AIState::Rallying;
+			
+			if (!_hereSent) {
+				Logger::info("SENDING HERE");
+				
+				_hereSent = true;
+				_sender.sendBroadcast("HERE:" + std::to_string(_state.player.level));
+				_sender.expect("broadcast", [this](const ServerMessage&) {});
+			}
 			return;
 		}
 		
@@ -942,14 +957,14 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		}
 
 		if (_aiState == AIState::CollectFood || _aiState == AIState::CollectStones) {
-			if (_state.player.food() >= FOOD_SAFE) {
+			if (_state.player.food() >= foodFollowForLevel(_state.player.level)) {
 				Logger::info("Responding to rally because enough food:" + std::to_string(_state.player.food()));
 				_stonesReady = false;
 				_sender.cancelAll();
 				_commandInFlight = false; 
 				clearNavPlan();
 				
-				Logger::info("Going to MovingToRally state from position x=" + std::to_string(_state.player.x) +
+				Logger::info("Going to MovingToRally state at level " + std::to_string(_state.player.level) + " from position x=" + std::to_string(_state.player.x) +
 							", y=" + std::to_string(_state.player.y) + " and orientation [" + 
 							std::to_string(static_cast<int>(_state.player.orientation)) + "]");
 				_isMovingToRally = false;
@@ -982,15 +997,18 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 		try { level = std::stoi(text.substr(5)); } catch (...) { return; }
 
 		if (!_isLeader || level != _state.player.level) return;
-
 		if (_aiState == AIState::Incantating) return;
 
-		_peerConfirmedCount++;
-		Logger::info("Behavior: peer HERE (total=" +
-			std::to_string(_peerConfirmedCount) + ")");
-
 		const auto& req = levelReq(_state.player.level);
-		if (_peerConfirmedCount >= req.players - 1) {
+		int needed = req.players - 1;
+
+		// *** FIX: don't count beyond what we need ***
+		if (_peerConfirmedCount >= needed) return;
+
+		_peerConfirmedCount++;
+		Logger::info("Behavior: peer HERE (total=" + std::to_string(_peerConfirmedCount) + ")");
+
+		if (_peerConfirmedCount >= needed) {
 			Logger::info("Behavior: all peers confirmed → Rallying");
 			_aiState = AIState::Rallying;
 			_isRallying = false;
@@ -999,16 +1017,22 @@ void Behavior::onBroadcast(const ServerMessage& msg) {
 	}
 
 	if (text.rfind("DONE:", 0) == 0) {
-		if (_isLeader || _ignoreDone) return; 
+		Logger::info("DONE received at position x=" + std::to_string(_state.player.x) + 
+					", y=" + std::to_string(_state.player.y));
+		
+		// Don't check _isLeader or _ignoreDone here - let the condition below handle it
+		if (_isLeader) return;
 		
 		int level = 0;
 		try { level = std::stoi(text.substr(5)); } catch (...) { return; }
 
 		if (level != _state.player.level) return;
 
-		if (_aiState == AIState::MovingToRally ||
-			_aiState == AIState::Rallying)
-		{
+		// CRITICAL: Cancel any in-flight command immediately
+		_sender.cancelAll();
+		_commandInFlight = false;
+		
+		if (_aiState == AIState::MovingToRally || _aiState == AIState::Rallying) {
 			Logger::info("Behavior: DONE received — disbanding, back to CollectStones");
 			disbandRally(false);
 			_aiState = AIState::CollectStones;
