@@ -57,6 +57,9 @@ class Behavior {
 		bool _shouldStopMoving = false;
 		bool _waitingForBroadcast = false;
 
+		bool _readyForIncantation = false;
+    	int64_t _readyForIncantationTime = 0;
+
 		int64_t _lastMovingToRallyVisionMs = 0;
 		int64_t _lastInventoryRefreshMs    = 0;
 
