@@ -64,7 +64,8 @@ class BehaviorTest : public ::testing::Test {
         MockWebsocketClient ws;   // reuse the one from SenderTest
         FakeSender          sender{ws};
         WorldState          state;
-        Behavior            behavior{sender, state};
+        std::string         name = "team1";
+        Behavior            behavior{sender, state, name};
 
         void SetUp() override {
             // vision and inventory start stale by default
