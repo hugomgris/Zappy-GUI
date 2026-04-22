@@ -23,6 +23,9 @@ struct WorldState {
 	int						mapHeight = 0;
 	bool					forkEnabled = false;
 
+	std::string serverHost;
+	int serverPort;
+
 	// NOTE: server does not send orientation in welcome; player starts at N by default.
 	// If the server ever adds this field, the optional handles it correctly.
 	void onWelcome(const ServerMessage& msg) {
