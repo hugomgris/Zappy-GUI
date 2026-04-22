@@ -27,6 +27,7 @@ void printUsage(const char* progName) {
 
 int main(int argc, char **argv) {
 	signal(SIGPIPE, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN); // to reap zombie processes (fork related)
 
 	bool forkEnabled = true;
 	bool debugMode = false;
