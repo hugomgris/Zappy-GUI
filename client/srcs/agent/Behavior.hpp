@@ -26,63 +26,68 @@ struct LevelReq {
 
 class Behavior {
 	private:
-		Sender&             _sender;
-		WorldState&         _state;
-		bool                _commandInFlight = false;
-		bool                _staleVision = true;
-		bool                _staleInventory = true;
-		std::deque<NavCmd>  _navPlan;
-		std::string         _navTarget;
-		int                 _explorationStep = 0;
+		Sender&						_sender;
+		WorldState&					_state;
+		bool						_commandInFlight = false;
+		bool						_staleVision = true;
+		bool						_staleInventory = true;
+		std::deque<NavCmd> 			_navPlan;
+		std::string					_navTarget;
+		int							_explorationStep = 0;
 
-		AIState _aiState = AIState::CollectFood;
-		bool    _easyMode = false;
-		bool    _pendingLevelUp = false;
+		std::string					_teamName;
 
-		bool    _isLeader = false;
-		bool    _isMovingToRally = false;
-		bool    _isRallying = false;
-		int     _rallyLevel = 0;
-		int     _broadcastDirection = 0;
-		int     _peerConfirmedCount = 0;
-		int     _rallyBroadcastCount = 0;
-		int64_t _lastRallyBroadcastMs = 0;
-		int64_t _leadingTimeoutMs = 0;
-		int64_t _movingToRallyTimeoutMs = 0;
-		int64_t _rallyingTimeoutMs = 0;
+		AIState						_aiState = AIState::CollectFood;
+		bool						_easyMode = false;
+		bool						_pendingLevelUp = false;
 
-		bool _claimSent = false;
-		bool _ignoreDone = false;
-		bool _hereSent = false;
-		bool _shouldStopMoving = false;
-		bool _waitingForBroadcast = false;
+		bool						_isLeader = false;
+		bool						_isMovingToRally = false;
+		bool						_isRallying = false;
+		int							_rallyLevel = 0;
+		int							_broadcastDirection = 0;
+		int							_peerConfirmedCount = 0;
+		int							_rallyBroadcastCount = 0;
+		int64_t						_lastRallyBroadcastMs = 0;
+		int64_t						_leadingTimeoutMs = 0;
+		int64_t						_movingToRallyTimeoutMs = 0;
+		int64_t						_rallyingTimeoutMs = 0;
 
-		bool _readyForIncantation = false;
-    	int64_t _readyForIncantationTime = 0;
+		bool						_claimSent = false;
+		bool						_ignoreDone = false;
+		bool						_hereSent = false;
+		bool						_shouldStopMoving = false;
+		bool						_waitingForBroadcast = false;
 
-		int64_t _lastMovingToRallyVisionMs = 0;
-		int64_t _lastInventoryRefreshMs    = 0;
+		bool						_readyForIncantation = false;
+    	int64_t						_readyForIncantationTime = 0;
 
-		Orientation _broadcastReceivedFacing = Orientation::N;
+		int64_t						_lastMovingToRallyVisionMs = 0;
+		int64_t						_lastInventoryRefreshMs    = 0;
 
-		bool _forkInProgress = false;
+		Orientation					_broadcastReceivedFacing = Orientation::N;
+
+		bool						_forkInProgress = false;
 
 		std::vector<std::string>    _stonesNeeded;
 		bool                        _incantationReady;
 		bool                        _stonesPlaced;
 		bool                        _stonesReady = false;
 
-		static constexpr int FOOD_FORK      = 24;
-		static constexpr int FOOD_RALLY     = 16;
-		static constexpr int FOOD_SAFE      = 12;
-		static constexpr int FOOD_CRITICAL  = 6;
+		int64_t						_claimJitterEndMs = 0;
+		int64_t						_lastTickMs = 0;
+
+		static constexpr int 		FOOD_FORK      = 24;
+		static constexpr int 		FOOD_RALLY     = 16;
+		static constexpr int 		FOOD_SAFE      = 12;
+		static constexpr int 		FOOD_CRITICAL  = 6;
 
 		void executeNavCmd(NavCmd cmd);
 
 		void disbandRally(bool wasLeader);
 
 	public:
-		Behavior(Sender& sender, WorldState& state);
+		Behavior(Sender& sender, WorldState& state, std::string& teamName);
 		~Behavior() = default;
 
 		void tick(int64_t nowMs);
