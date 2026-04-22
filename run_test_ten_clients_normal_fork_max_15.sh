@@ -30,7 +30,7 @@ make -C client
 
 echo "=== Running Clients ==="
 for i in {1..9}; do
-    ./client/client localhost 8674 team1 2> logs/client_log_normal_probe_ten_clients_fork_max_15${i}.txt &
+    ./client/client localhost 8674 team1 2> logs/client_log_normal_probe_ten_clients_fork_max_15_${i}.txt &
     sleep 0.5
 done
 ./client/client localhost 8674 team1 2> logs/client_log_normal_probe_ten_clients_fork_max_15_10.txt

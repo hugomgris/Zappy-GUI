@@ -980,6 +980,7 @@ void Behavior::tickForking() {
 		if (msg.isOk()) {
 			Logger::info("Behavior: fork OK - egg laid, entering WaitingForHatch");
 			_forkSentMs       = _lastTickMs;
+			_lastForkMs       = _lastTickMs;
 			_lastHatchPollMs  = _lastTickMs;
 			_hatchTimeoutMs   = _lastTickMs + HATCH_TIMEOUT_MS;
 			_pendingEggCount++;
@@ -1261,11 +1262,12 @@ VisionTile Behavior::getNearestTileWithNeededResource() {
 }
 
 bool Behavior::shouldFork() const {
-	if (_state.player.level < FORK_MIN_LEVEL)	return false;
-	if (_state.player.food() < FOOD_FORK)		return false;
-	if (!_state.forkEnabled)					return false;
-	if (_pendingEggCount >= MAX_PENDING_EGGS)	return false;
-	if (_forkInProgress || _forkSent)			return false;
+	if (_state.player.level < FORK_MIN_LEVEL)			return false;
+	if (_state.player.food() < FOOD_FORK)				return false;
+	if (!_state.forkEnabled)							return false;
+	if (_pendingEggCount >= MAX_PENDING_EGGS)			return false;
+	if (_forkInProgress || _forkSent)					return false;
+	if (_lastTickMs - _lastForkMs < FORK_COOLDOWN_MS)	return false; 
 
 	if (_aiState == AIState::Leading ||
 		_aiState == AIState::ClaimingLeader ||
@@ -1288,37 +1290,28 @@ void Behavior::spawnChildClient() {
     }
 
     if (pid == 0) {
-        // Child process - redirect stderr BEFORE execl()
-        
-        // Determine team number from team name (extract "team1" -> "1", "team2" -> "2")
-        std::string teamNumber = _teamName.substr(4);  // Assumes "teamX" format
-        
-        // Create log filename
+        // Child process
+        std::string teamNumber = _teamName.substr(4);
         std::string logFile = "logs/client_log_normal_egg_team" + teamNumber + "_" + std::to_string(getpid()) + ".txt";
         
-        // Open log file and redirect stderr (and optionally stdout)
         int fd = open(logFile.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
         if (fd >= 0) {
-            dup2(fd, STDERR_FILENO);  // Redirect stderr (where your logs go)
-            // dup2(fd, STDOUT_FILENO);  // Uncomment if you want stdout too
+            dup2(fd, STDERR_FILENO);
             close(fd);
-        } else {
-            // If we can't open log file, at least try to write somewhere
-            std::cerr << "Failed to open log file: " << logFile << std::endl;
         }
         
         std::string host = _state.serverHost;
         std::string port = std::to_string(_state.serverPort);
         std::string team = _teamName;
 
+        // Use positional arguments, NOT named flags
         execl("./client/client",
-            "./client/client",
-            "-h", host.c_str(),
-            "-p", port.c_str(),
-            "-n", team.c_str(),
-            NULL);
+              "./client/client",
+              host.c_str(),    // positional host
+              port.c_str(),    // positional port
+              team.c_str(),    // positional team name
+              NULL);
 
-        // If we reach here, execl failed
         std::cerr << "execl failed: " << strerror(errno) << std::endl;
         _exit(1);
     }
