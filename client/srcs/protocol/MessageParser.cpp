@@ -145,6 +145,12 @@ ServerMessage MessageParser::parse(const std::string& raw) {
 		if (root.contains("winner_team_id") && root["winner_team_id"].is_number())
 			msg.winnerTeamId = root["winner_team_id"].get<int>();
 	}
+
+	// connect_nbr case
+	if (msg.type == MsgType::Response && msg.cmd == "connect_nbr") {
+		if (root.contains("arg") && root.at("arg").is_string())
+			msg.connectNbr = std::stoi(root.at("arg").get<std::string>());
+	}
 	
 	return msg;
 }

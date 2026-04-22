@@ -79,6 +79,9 @@ struct ServerMessage {
 	std::optional<std::string> messageText;
 	std::optional<int> broadcastDirection; // 0 - same tile, 1-8 = octants (server told)
 
+	// for connect_nrb
+	std::optional<int> connectNbr;
+
 	bool isOk()         const { return status == "ok"; }
 	bool isKo()         const { return status == "ko"; }
 	bool isInProgress() const { return status == "in_progress"; }

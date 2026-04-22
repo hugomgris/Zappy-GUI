@@ -3,6 +3,10 @@
 
 #include <limits>
 #include <cstdlib>
+#include <unistd.h>
+#include <cerrno>
+#include <cstring>
+#include <fcntl.h>
 
 static const LevelReq& levelReq(int level) {
 	static const LevelReq table[7] = {
@@ -211,14 +215,16 @@ void Behavior::tick(int64_t nowMs) {
 	if (isInventoryStale()) { refreshInventory(); return; }
 
 	switch (_aiState) {
-		case AIState::CollectFood:      tickCollectFood();           break;
-		case AIState::CollectStones:    tickCollectStones();         break;
-		case AIState::Idle:             tickIdle();                  break;
-		case AIState::Incantating:      tickIncantating();           break;
-		case AIState::ClaimingLeader:   tickClaimingLeader();        break;
-		case AIState::Leading:          tickLeading(nowMs);          break;
-		case AIState::MovingToRally:    tickMovingToRally(nowMs);    break;
-		case AIState::Rallying:         tickRallying(nowMs);         break;
+		case AIState::CollectFood:      tickCollectFood();				break;
+		case AIState::CollectStones:    tickCollectStones();			break;
+		case AIState::Idle:             tickIdle();						break;
+		case AIState::Incantating:      tickIncantating();				break;
+		case AIState::ClaimingLeader:   tickClaimingLeader();			break;
+		case AIState::Leading:          tickLeading(nowMs);				break;
+		case AIState::MovingToRally:    tickMovingToRally(nowMs);		break;
+		case AIState::Rallying:         tickRallying(nowMs);			break;
+		case AIState::Forking:			tickForking();					break;
+		case AIState::WaitingForHatch:	tickWaitingForHatch(nowMs);		break;
 	}
 }
 
@@ -390,21 +396,9 @@ void Behavior::tickCollectStones() {
 		return;
 	}
 
-	if (_state.player.food() > FOOD_FORK && _state.player.level >= 2 && _state.forkEnabled) {
-		Logger::info("Fork call triggered");
-		_aiState = AIState::CollectStones;
+	if (shouldFork()) {
+		_aiState = AIState::Forking;
 		clearNavPlan();
-		_commandInFlight = true;
-		_sender.sendFork();
-		_sender.expect("fork", [this](const ServerMessage& msg) {
-			(void)msg;
-			_aiState = AIState::CollectStones;
-			setVisionStale();
-			setInventoryStale();
-			_forkInProgress = false;
-			_commandInFlight = false;
-		});
-		_forkInProgress = true;
 		return;
 	}
 
@@ -968,6 +962,87 @@ void Behavior::tickRallying(int64_t nowMs) {
 	setVisionStale();
 }
 
+void Behavior::tickForking() {
+	if (_forkSent) return;
+
+	_forkSent        = true;
+	_commandInFlight = true;
+
+	Logger::info("Behavior: sending fork at level " +
+		std::to_string(_state.player.level) +
+		" food=" + std::to_string(_state.player.food()));
+
+	_sender.sendFork();
+	_sender.expect("fork", [this](const ServerMessage& msg) {
+		_commandInFlight = false;
+		_forkSent        = false;
+
+		if (msg.isOk()) {
+			Logger::info("Behavior: fork OK - egg laid, entering WaitingForHatch");
+			_forkSentMs       = _lastTickMs;
+			_lastHatchPollMs  = _lastTickMs;
+			_hatchTimeoutMs   = _lastTickMs + HATCH_TIMEOUT_MS;
+			_pendingEggCount++;
+			_forkInProgress   = true;
+			_aiState          = AIState::WaitingForHatch;
+		} else {
+			Logger::warn("Behavior: fork KO - back to CollectStones");
+			_forkInProgress = false;
+			_aiState        = AIState::CollectStones;
+		}
+	});
+}
+
+void Behavior::tickWaitingForHatch(int64_t nowMs) {
+	if (_state.player.food() < FOOD_CRITICAL) {
+		Logger::warn("Behavior: WatchingForHatch - food critical, abandoning wait");
+		_forkInProgress = false;
+		_pendingEggCount = std::max(0, _pendingEggCount - 1);
+		_aiState = AIState::CollectFood;
+		return;
+	}
+
+	// absolute timeout-> egg dead or hatch missed
+	if (nowMs >= _hatchTimeoutMs) {
+		Logger::warn("Behavior: WaitinForHatch timed out - egg may have died");
+		_forkInProgress = false;
+		_pendingEggCount = std::max(0, _pendingEggCount - 1);
+		_aiState = AIState::CollectStones;
+		return;
+	}
+
+	// wait for enough real time to start polling
+	if (nowMs - _lastHatchPollMs < _hatchPollIntervalMs)
+		return;
+
+	_lastHatchPollMs = nowMs;
+	_connectNbrInFlight = true;
+	_commandInFlight = true;
+
+	_sender.sendConnectNbr();
+	_sender.expect("connect_nbr", [this](const ServerMessage& msg) {
+		_commandInFlight = false;
+		_connectNbrInFlight = false;
+
+		if (!msg.connectNbr.has_value()) {
+			Logger::warn("Behaior: connect_nbr respnse malformed");
+			return;
+		}
+
+		int slots = msg.connectNbr.value();
+		Logger::info("Behavior: connect_nbr = " + std::to_string(slots));
+
+		if (slots > 0) {
+			Logger::info("Behavior: egg hatched! Slot available - spawning child process");
+			_pendingEggCount = std::max(0, _pendingEggCount - 1);
+			_forkInProgress = false;
+			spawnChildClient();
+			_aiState = AIState::CollectStones;
+		}
+		// slots == 0, keep waiting
+	});
+}
+
 void Behavior::onBroadcast(const ServerMessage& msg) {
 	if (!msg.messageText.has_value()) return;
 	const std::string& text = msg.messageText.value();
@@ -1183,4 +1258,70 @@ VisionTile Behavior::getNearestTileWithNeededResource() {
 	}
 
 	return nearest;
+}
+
+bool Behavior::shouldFork() const {
+	if (_state.player.level < FORK_MIN_LEVEL)	return false;
+	if (_state.player.food() < FOOD_FORK)		return false;
+	if (!_state.forkEnabled)					return false;
+	if (_pendingEggCount >= MAX_PENDING_EGGS)	return false;
+	if (_forkInProgress || _forkSent)			return false;
+
+	if (_aiState == AIState::Leading ||
+		_aiState == AIState::ClaimingLeader ||
+		_aiState == AIState::MovingToRally ||
+		_aiState == AIState::Rallying ||
+		_aiState == AIState::Incantating)
+		return false;
+
+	return true;
+}
+
+void Behavior::spawnChildClient() {
+    Logger::info("Behavior: spawning child AI process for team " + _teamName);
+
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        Logger::error("Behavior: fork() syscall failed: " + std::string(strerror(errno)));
+        return;
+    }
+
+    if (pid == 0) {
+        // Child process - redirect stderr BEFORE execl()
+        
+        // Determine team number from team name (extract "team1" -> "1", "team2" -> "2")
+        std::string teamNumber = _teamName.substr(4);  // Assumes "teamX" format
+        
+        // Create log filename
+        std::string logFile = "logs/client_log_normal_egg_team" + teamNumber + "_" + std::to_string(getpid()) + ".txt";
+        
+        // Open log file and redirect stderr (and optionally stdout)
+        int fd = open(logFile.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (fd >= 0) {
+            dup2(fd, STDERR_FILENO);  // Redirect stderr (where your logs go)
+            // dup2(fd, STDOUT_FILENO);  // Uncomment if you want stdout too
+            close(fd);
+        } else {
+            // If we can't open log file, at least try to write somewhere
+            std::cerr << "Failed to open log file: " << logFile << std::endl;
+        }
+        
+        std::string host = _state.serverHost;
+        std::string port = std::to_string(_state.serverPort);
+        std::string team = _teamName;
+
+        execl("./client/client",
+            "./client/client",
+            "-h", host.c_str(),
+            "-p", port.c_str(),
+            "-n", team.c_str(),
+            NULL);
+
+        // If we reach here, execl failed
+        std::cerr << "execl failed: " << strerror(errno) << std::endl;
+        _exit(1);
+    }
+
+    Logger::info("Behavior: child AI process spawned, pid=" + std::to_string(pid));
 }

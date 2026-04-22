@@ -9,14 +9,16 @@
 #include <deque>
 
 enum class AIState {
-	Idle,			// 0
-	CollectFood,	// 1
-	CollectStones,	// 2
-	Incantating,	// 3
-	ClaimingLeader,	// 4
-	Leading,		// 5
-	MovingToRally,	// 6
-	Rallying		// 7
+	Idle,				// 0
+	CollectFood,		// 1
+	CollectStones,		// 2
+	Incantating,		// 3
+	ClaimingLeader,		// 4
+	Leading,			// 5
+	MovingToRally,		// 6
+	Rallying,			// 7
+	Forking,			// 8
+	WaitingForHatch,	//9
 };
 
 struct LevelReq {
@@ -67,8 +69,6 @@ class Behavior {
 
 		Orientation					_broadcastReceivedFacing = Orientation::N;
 
-		bool						_forkInProgress = false;
-
 		std::vector<std::string>    _stonesNeeded;
 		bool                        _incantationReady;
 		bool                        _stonesPlaced;
@@ -77,10 +77,30 @@ class Behavior {
 		int64_t						_claimJitterEndMs = 0;
 		int64_t						_lastTickMs = 0;
 
+		bool						_forkInProgress = false;
+		bool						_forkSent = false;
+		int64_t						_forkSentMs = 0;
+
+		int64_t						_hatchPollIntervalMs = 2000;
+		int64_t						_lastHatchPollMs = 0;
+		int64_t						_hatchTimeoutMs = 0;
+
+		int							_pendingEggCount = 0;
+
+		bool						_connectNbrInFlight = false;
+
 		static constexpr int 		FOOD_FORK      = 24;
 		static constexpr int 		FOOD_RALLY     = 16;
 		static constexpr int 		FOOD_SAFE      = 12;
 		static constexpr int 		FOOD_CRITICAL  = 6;
+
+		static constexpr int FORK_MIN_LEVEL			= 2;
+		static constexpr int HATCH_DELAY_UNITS		= 600;
+		static constexpr int UNITS_PER_MS			= 10;
+		static constexpr int HATCH_DELAY_MS			= HATCH_DELAY_UNITS * UNITS_PER_MS;
+		static constexpr int HATCH_POLL_STARTS_MS	= HATCH_DELAY_MS + 1000;
+		static constexpr int HATCH_TIMEOUT_MS		= 30000;
+		static constexpr int MAX_PENDING_EGGS		= 2;
 
 		void executeNavCmd(NavCmd cmd);
 
@@ -99,6 +119,8 @@ class Behavior {
 		void tickLeading(int64_t nowMs);
 		void tickMovingToRally(int64_t nowMs);
 		void tickRallying(int64_t nowMs);
+		void tickForking();
+		void tickWaitingForHatch(int64_t nowMs);
 
 		void refreshVision();
 		void refreshInventory();
@@ -123,4 +145,7 @@ class Behavior {
 		VisionTile getNearestTileWithNeededResource();
 		void setPendingLevelUp(bool val) { _pendingLevelUp = val; }
 		void setEasyMode(bool enabled) { _easyMode = enabled; }
+
+		bool shouldFork() const;
+		void spawnChildClient();
 };
