@@ -748,6 +748,9 @@ void Behavior::tickIncantating() {
 	}
 
 	_commandInFlight = true;
+
+	Logger::info("Client sending incantation for team " + _teamName + "at level " + std::to_string(_state.player.level));
+
 	_sender.sendIncantation();
 	_sender.expect("incantation", [this](const ServerMessage& msg) {
 		if (msg.isInProgress()) return;
@@ -883,7 +886,7 @@ void Behavior::tickRallying(int64_t nowMs) {
 	}
 
 	if (_incantationReady) {
-		Logger::warn("LEADER going into INCANTATON state");
+		Logger::warn("LEADER going into INCANTATION state");
 		_isRallying = false;
 		_aiState = AIState::Incantating;
 		_incantationReady = false;
