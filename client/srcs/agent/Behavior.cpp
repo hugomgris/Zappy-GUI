@@ -749,7 +749,7 @@ void Behavior::tickIncantating() {
 
 	_commandInFlight = true;
 
-	Logger::info("Client sending incantation for team " + _teamName + "at level " + std::to_string(_state.player.level));
+	Logger::info("Client sending incantation for team " + _teamName + " at level " + std::to_string(_state.player.level));
 
 	_sender.sendIncantation();
 	_sender.expect("incantation", [this](const ServerMessage& msg) {
