@@ -4,7 +4,10 @@
 
 Agent::Agent(const std::string& host, const int port, const std::string& teamName, const std::string& key)
 	: _host(host), _port(port), _teamName(teamName), _key(key),
-	 _sender(_ws), _behavior(_sender, _state, _teamName) {}
+	 _sender(_ws), _behavior(_sender, _state, _teamName) {
+		_state.serverHost = host;
+		_state.serverPort = port;
+	 }
 
 Agent::~Agent() {
 	stop();
