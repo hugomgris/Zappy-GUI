@@ -2,7 +2,6 @@
 #include "../helpers/Logger.hpp"
 
 #include <limits>
-#include <cstdlib>
 
 static const LevelReq& levelReq(int level) {
 	static const LevelReq table[7] = {
@@ -55,46 +54,46 @@ static int foodFollowForLevel(int level) {
 Behavior::Behavior(Sender& sender, WorldState& state, std::string& teamName) : _sender(sender), _state(state), _teamName(teamName) {}
 
 void Behavior::disbandRally(bool wasLeader) {
-	_stonesReady				= false;
-	_claimSent					= false;
-	_hereSent					= false;
-	_isLeader					= false;
-	_isMovingToRally			= false;
-	_isRallying					= false;
-	_peerConfirmedCount			= 0;
-	_broadcastDirection			= -1;
-	_waitingForBroadcast		= false;
-	_rallyLevel					= 0;
-	_rallyBroadcastCount		= 0;
-	_lastMovingToRallyVisionMs	= 0;
-	_movingToRallyTimeoutMs		= 0;
-	_claimJitterEndMs			= 0;
-	_leadingTimeoutMs			= 0;
-	_rallyingTimeoutMs			= 0;
+	_stonesReady			= false;
+	_claimSent				= false;
+	_hereSent				= false;
+	_isLeader				= false;
+	_isMovingToRally		= false;
+	_isRallying				= false;
+	_peerConfirmedCount		= 0;
+	_broadcastDirection		= -1;
+	_waitingForBroadcast = false;
+	_rallyLevel				= 0;
+	_rallyBroadcastCount	= 0;
+	_lastMovingToRallyVisionMs = 0;
+	_waitingForBroadcast       = false;
+	_movingToRallyTimeoutMs = 0;
 	clearNavPlan();
 
 	if (wasLeader) {
-		int levelAtDisband = _state.player.level;
 		_sender.sendDisbandLeader();
-		_sender.expect("disband_leader", [this, levelAtDisband](const ServerMessage&) {
+		_sender.expect("disband_leader", [this](const ServerMessage&) {
+			_commandInFlight = false;
 			_ignoreDone = false;
-			_commandInFlight = true;
-			_sender.sendBroadcast("DONE:" + _teamName + ":" + std::to_string(levelAtDisband));
-			_sender.expect("broadcast", [this](const ServerMessage&) {
-				_commandInFlight = false;
-			});
 		});
+		
+		_ignoreDone = true; 
 
-		_ignoreDone = true;
+		_sender.sendBroadcast("DONE:" + _teamName + ":" + std::to_string(_state.player.level));
+		_sender.expect("broadcast", [](const ServerMessage&) {});
+
 		_commandInFlight = true;
 
 		Logger::info("Client with level " + std::to_string(_state.player.level) + " disbanded as LEADER");
-	} else {
-		_broadcastDirection = -1;
+	}
+
+
+    if (!wasLeader) {
+        _broadcastDirection = -1;
 		setVisionStale();
 
 		Logger::info("Client with level " + std::to_string(_state.player.level) + " disbanded as FOLLOWER");
-	}
+    }
 }
 
 void Behavior::executeNavCmd(NavCmd cmd) {
@@ -185,7 +184,6 @@ void Behavior::executeNavCmd(NavCmd cmd) {
 }
 
 void Behavior::tick(int64_t nowMs) {
-	_lastTickMs = nowMs;
 	if (hasCommandInFlight()) return;
 
 	if (nowMs - _lastInventoryRefreshMs > 5000) {
@@ -222,6 +220,7 @@ void Behavior::tick(int64_t nowMs) {
 	}
 }
 
+// refreshers
 void Behavior::refreshVision() {
 	if (_commandInFlight) return; 
 
@@ -428,12 +427,15 @@ void Behavior::tickCollectStones() {
 			_aiState = AIState::ClaimingLeader;
 			clearNavPlan();
 		} else {
+			// For level 1, don't go directly to Incantating if stone not on tile
 			if (_state.player.level == 1) {
+				// Check if current tile has linemate
 				if (_state.countItemOnCurrentTile("linemate") >= req.stones.linemate) {
 					_aiState = AIState::Incantating;
 				} else {
+					// Need to find a tile with linemate
 					Logger::info("Level 1: need to find linemate on ground");
-					_aiState = AIState::CollectStones;
+					_aiState = AIState::CollectStones;  // Stay in CollectStones to find linemate
 				}
 			} else {
 				_aiState = AIState::Incantating;
@@ -518,15 +520,6 @@ void Behavior::tickIdle() {
 void Behavior::tickClaimingLeader() {
 	if (_claimSent) return;
 
-	if (_claimJitterEndMs == 0) {
-		int jitterMs = (std::rand() % 8) * 100;
-		_claimJitterEndMs = _lastTickMs + jitterMs;
-		Logger::info("Behavior: ClaimingLeader — jitter " + std::to_string(jitterMs) + "ms");
-		return;
-	}
-	if (_lastTickMs < _claimJitterEndMs)
-		return;
-
 	_claimSent = true;
 	_commandInFlight = true;
 
@@ -548,44 +541,21 @@ void Behavior::tickClaimingLeader() {
 			_aiState = AIState::Leading;
 
 		} else {
-			Logger::info("Behavior: claim_leader KO — resetting rally state");
-			_isLeader             = false;
-			_isMovingToRally      = false;
-			_isRallying           = false;
-			_claimSent            = false;
-			_hereSent             = false;
-			_peerConfirmedCount   = 0;
-			_rallyBroadcastCount  = 0;
-			_waitingForBroadcast  = false;
-			_leadingTimeoutMs     = 0;
-			_movingToRallyTimeoutMs = 0;
-			_rallyingTimeoutMs    = 0;
-			clearNavPlan();
-
-			if (_broadcastDirection == 0) {
-				Logger::info("Behavior: claim_leader KO — already on leader tile → Rallying");
-				_aiState = AIState::Rallying;
-			} else if (_broadcastDirection > 0) {
-				Logger::info("Behavior: claim_leader KO — known direction " +
-					std::to_string(_broadcastDirection) + " → MovingToRally");
-				_aiState = AIState::MovingToRally;
-			} else {
-				Logger::info("Behavior: claim_leader KO — no leader broadcast seen yet → CollectStones");
+			Logger::info("Behavior: claim_leader KO — entering MovingToRally as follower");
+			_isLeader = false;
+			_isMovingToRally = false;
+			if (_broadcastDirection < 0)
 				_broadcastDirection = -1;
-				_aiState = AIState::CollectStones;
-			}
+			
+			if (_broadcastDirection == 0)
+				_aiState = AIState::Rallying;
+			else
+				_aiState = AIState::MovingToRally;
 		}
 	});
 }
 
 void Behavior::tickLeading(int64_t nowMs) {
-	if (!_isLeader) {
-		Logger::error("Behavior: tickLeading called but _isLeader is false — recovering");
-		disbandRally(false);
-		_aiState = AIState::CollectStones;
-		return;
-	}
-
 	if (_leadingTimeoutMs == 0) {
 		_leadingTimeoutMs     = nowMs;
 		_lastRallyBroadcastMs = nowMs - 600;
@@ -630,10 +600,6 @@ void Behavior::tickLeading(int64_t nowMs) {
 		setVisionStale();
 		return;
 	}
-
-	Logger::info("Behavior: Leading — initial broadcast burst done, entering Rallying");
-	_isRallying = false;
-	_aiState = AIState::Rallying;
 }
 
 void Behavior::tickIncantating() {
@@ -648,6 +614,7 @@ void Behavior::tickIncantating() {
 	if (_state.player.level == 1) {
         auto& tile = _state.vision[0];
         if (tile.countItem("linemate") >= requirements.stones.linemate) {
+            // Stones already on tile, incant!
             _commandInFlight = true;
             _sender.sendIncantation();
             _sender.expect("incantation", [this](const ServerMessage& msg) {
@@ -666,6 +633,7 @@ void Behavior::tickIncantating() {
             });
             return;
         } else {
+            // No linemate on tile, go collect one
             Logger::info("Level 1: no linemate on tile, collecting...");
             _aiState = AIState::CollectStones;
             _incantationReady = false;
@@ -756,20 +724,15 @@ void Behavior::tickIncantating() {
 		_stonesPlaced = false;
 		_incantationReady = false;
 
+		disbandRally(true);
+
 		if (_pendingLevelUp) {
-			int oldLevel = _state.player.level;
 			_state.player.level++;
 			Logger::info("Level up! Now level " + std::to_string(_state.player.level) + " in team " + _teamName);
 			_pendingLevelUp = false;
-
-			disbandRally(_isLeader);
-
-			(void)oldLevel;
 			_aiState = (_state.player.level >= 8) ? AIState::Idle : AIState::CollectStones;
 		} else {
 			Logger::warn("Incantation failed (ko/timeout), restarting stone collection");
-
-			disbandRally(_isLeader);
 			_aiState = AIState::CollectStones;
 		}
 	});
@@ -1140,6 +1103,7 @@ void Behavior::computeMissingStones() {
 	_stonesNeeded.clear();
 
 	if (_state.player.level == 1) {
+		// Level 1 needs linemate on ground, not in inventory
 		if (_state.countItemOnCurrentTile("linemate") < 1) {
 			_stonesNeeded.push_back("linemate");
 		}
