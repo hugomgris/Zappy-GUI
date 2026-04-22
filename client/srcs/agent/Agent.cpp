@@ -4,7 +4,7 @@
 
 Agent::Agent(const std::string& host, const int port, const std::string& teamName, const std::string& key)
 	: _host(host), _port(port), _teamName(teamName), _key(key),
-	 _sender(_ws), _behavior(_sender, _state) {}
+	 _sender(_ws), _behavior(_sender, _state, _teamName) {}
 
 Agent::~Agent() {
 	stop();
@@ -117,7 +117,6 @@ Result Agent::performLogin(int64_t& nowMs, int timeoutMs) {
 	}
 }
 
-// TODO: One thing worth adding is a _lastError field to Agent so Step 8 can surface it, but that's genuinely a later concern
 Result Agent::run() {
 	_running = true;
 	_networkThread = std::make_unique<std::thread>(&Agent::networkLoop, this);
@@ -185,7 +184,6 @@ void Agent::networkLoop() {
 			lastStatusTime = nowMs;
 		}
 
-		// Adaptive sleep
 		auto tickElapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
 			std::chrono::steady_clock::now() - tickStart).count();
 		int sleepMs = std::max(0LL, 50LL - tickElapsed);

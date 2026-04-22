@@ -28,7 +28,7 @@ void printUsage(const char* progName) {
 int main(int argc, char **argv) {
 	signal(SIGPIPE, SIG_IGN);
 
-	bool forkEnabled = true;  // forking is on by default
+	bool forkEnabled = true;
 	bool debugMode = false;
 
 	static struct option long_options[] = {
