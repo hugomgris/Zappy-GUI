@@ -74,6 +74,9 @@ class Behavior {
 		bool                        _stonesPlaced;
 		bool                        _stonesReady = false;
 
+		int64_t						_claimJitterEndMs = 0;
+		int64_t						_lastTickMs = 0;
+
 		static constexpr int 		FOOD_FORK      = 24;
 		static constexpr int 		FOOD_RALLY     = 16;
 		static constexpr int 		FOOD_SAFE      = 12;
