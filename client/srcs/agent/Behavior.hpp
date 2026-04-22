@@ -80,6 +80,7 @@ class Behavior {
 		bool						_forkInProgress = false;
 		bool						_forkSent = false;
 		int64_t						_forkSentMs = 0;
+		int64_t						_lastForkMs = 0;
 
 		int64_t						_hatchPollIntervalMs = 2000;
 		int64_t						_lastHatchPollMs = 0;
@@ -94,13 +95,14 @@ class Behavior {
 		static constexpr int 		FOOD_SAFE      = 12;
 		static constexpr int 		FOOD_CRITICAL  = 6;
 
-		static constexpr int FORK_MIN_LEVEL			= 2;
-		static constexpr int HATCH_DELAY_UNITS		= 600;
-		static constexpr int UNITS_PER_MS			= 10;
-		static constexpr int HATCH_DELAY_MS			= HATCH_DELAY_UNITS * UNITS_PER_MS;
-		static constexpr int HATCH_POLL_STARTS_MS	= HATCH_DELAY_MS + 1000;
-		static constexpr int HATCH_TIMEOUT_MS		= 30000;
-		static constexpr int MAX_PENDING_EGGS		= 2;
+		static constexpr int 		FORK_MIN_LEVEL			= 2;
+		static constexpr int 		HATCH_DELAY_UNITS		= 600;
+		static constexpr int 		UNITS_PER_MS			= 10;
+		static constexpr int 		HATCH_DELAY_MS			= HATCH_DELAY_UNITS * UNITS_PER_MS;
+		static constexpr int 		HATCH_POLL_STARTS_MS	= HATCH_DELAY_MS + 1000;
+		static constexpr int 		HATCH_TIMEOUT_MS		= 30000;
+		static constexpr int 		MAX_PENDING_EGGS		= 2;
+		static constexpr int64_t	FORK_COOLDOWN_MS	= 60000;
 
 		void executeNavCmd(NavCmd cmd);
 
