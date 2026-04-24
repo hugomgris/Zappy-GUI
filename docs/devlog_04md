@@ -240,7 +240,7 @@ With all these diagrams, I'd say we've broken down the AI logic design pretty we
 		 ║     ║    ║            ░░░░░░░░░░░░░░░░░░░░             ·              |					  ║             |      |
 		 ║     ║    ║                     |                       ·              |					  ║             |      |
 		 ║     ║    ║          (stones ready for level)           · (food >= level threadshold)		  ║         (DISBAND)  |
-		 ║     ║	║		    & (food >= threshold)            ·       & (received RALLY)		      ║             |      |
+		 ║     ║	║		    & (food >= threshold)             ·       & (received RALLY)	      ║             |      |
 		 ║     ║	║                     ↓                       ·              |                    ║             |      |
 		 ║     ║ (TIMEOUT)		░░░░░░░░░░░░░░░░░░░░░             ·              |                (TIMEOUT)         |      |
 		 ║     ║	║			░   ClaimingLeader  ░          (RALLY)           |                    ║             |      |
