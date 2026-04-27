@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Rally-Ho!](#41---rally-ho)
 2. [Going With the Flowing](#42---going-with-the-flowing)
-3. [Everything the light touches](#43-everything-the-light-touches)
+3. [Everything the Light Touches](#43-everything-the-light-touches)
 
 <br>
 <br>
@@ -282,7 +282,7 @@ Damn, this is extremely cool, if I can say so myself. I think I spent the good p
 <br>
 <br>
 
-# 4.3 Everything the light touches
+# 4.3 Everything the Light Touches
 *One day, this will all be yours*. The only thing left in my notes is the stuff regarding **client forking**. The implementation of this pipelines is honestly more relying in server side code, which is where the slot opening and assigning occurs for both initial and new, forked clients along the game's execution, but there's a couple of things worth a look in our client code. The first one being how to set it up, the second one how to limit it. 
 
 Setting the fork pipeline in the client's Behavior is the simples thing. At this point we have all the tools we could ever need to do so, we just need to decide on the conditions and placement of the side-tracking logic in which a client will, via `Sender`'s functions, call `fork()`, then `connect_nbr()`. To me, the best to place this possibility is in the core state, `CollectStones` (you can easily identify it as such in the last diagram above, it being the biggest box with the most connections, both inwards and outwards), which can have a derivation point based mainly in food amount. If a client's reservers of `nourriture` go above `FOOD_FORK`, they can try to spawn a new, child client, which will then try to connect to the server and, if accepted, join the team as a new client. There's some constrains regarding the time it takes for the egg produced by forking to hatch, as well as how much will the server wait for a new possible connection to occur before closing it up, but that's just some timestamp juggling, old news for us, champions of this AI behavior. With a couple of extra `AIState`s to set the client in i-want-to-fork mode and in i-am-waiting-for-the-egg-to-hatch predicament, we're preemium. Just be sure to hook up both success and failure to the necessary fallback routes and nothing should break.
