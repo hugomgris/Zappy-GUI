@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b5nsmlb226g46"]
+
+[ext_resource type="Script" uid="uid://mnldneloj622" path="res://scenes/camera/CameraRig.gd" id="1_hqrhs"]
+
+[node name="CameraRig" type="Node3D" unique_id=2126781270]
+script = ExtResource("1_hqrhs")
+
+[node name="Pitch" type="Node3D" parent="." unique_id=791709577]
+unique_name_in_owner = true
+
+[node name="ZoomArm" type="Node3D" parent="Pitch" unique_id=434484253]
+unique_name_in_owner = true
+
+[node name="Camera" type="Camera3D" parent="Pitch/ZoomArm" unique_id=559500220]
+unique_name_in_owner = true
+projection = 1
+size = 10.0
+near = 0.01

@@ -308,7 +308,7 @@ look and means zoom is linear (doubling `size` shows twice as much world).
 input. Instead, maintain a `_target` for each controlled value and lerp toward
 it every frame. This gives smooth, readable motion.
 
-```gdscript
+```python
 # scenes/camera/CameraRig.gd
 extends Node3D
 

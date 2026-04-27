@@ -1,19 +1,27 @@
 [gd_scene format=3 uid="uid://d0xctmv1abu8k"]
 
 [ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
+[ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
 
 [sub_resource type="Environment" id="Environment_vyk5b"]
 
 [node name="Main" type="Node3D" unique_id=1701611592]
 script = ExtResource("1_u1xfj")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2040511582]
+transform = Transform3D(-0.88294756, -0.38597324, 0.26726055, 0, 0.5692795, 0.82214403, -0.46947157, 0.72591007, -0.50264394, 0, 0, 0)
+light_color = Color(0.946858, 0.8275552, 0.9503184, 1)
+shadow_enabled = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=110986714]
 environment = SubResource("Environment_vyk5b")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1335348836]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.40914237)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=949057320]
-transform = Transform3D(0.7309368, -0.35197505, 0.58467484, -2.3904922e-10, 0.8567354, 0.515756, -0.682445, -0.3769852, 0.62621963, 1.2961072, 0.9811599, 1.3476162)
-
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=860110254]
+
+[node name="CameraRig" parent="." unique_id=2126781270 instance=ExtResource("2_nha0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06045866, 0)
+
+[node name="Pitch" parent="CameraRig" index="0" unique_id=791709577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4236774, 6.968405)
+
+[editable path="CameraRig"]
