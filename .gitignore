@@ -1,21 +1,38 @@
-run_session.local.env.vscode/
-.gitignore
-log.txt
+# ------------------------------
+# Godot
+# ------------------------------
+# Godot 4 editor cache and import database
+.godot/
+
+# Godot 3 import cache (safe to keep ignored in mixed/legacy setups)
+.import/
+
+# Mono/C# crash dumps
+mono_crash.*.json
+
+# ------------------------------
+# IDE / local tooling
+# ------------------------------
 .vscode/
-.gitignore
-log.txt
+run_session.local.env.vscode/
+
+# ------------------------------
+# Logs
+# ------------------------------
 *.log
 log.txt
-*.blend1
-*.a
-*.o
-*.so
 server/log.txt
 server_stdout.txt
 client_cpp/test.log
-.vscode/
-.gitignore
-log.txt
-.vscode/
-.gitignore
-log.txt
+
+# ------------------------------
+# Native build artifacts
+# ------------------------------
+*.a
+*.o
+*.so
+
+# ------------------------------
+# DCC temp files
+# ------------------------------
+*.blend1
