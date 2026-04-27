@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://d0xctmv1abu8k"]
+
+[ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
+
+[sub_resource type="Environment" id="Environment_vyk5b"]
+
+[node name="Main" type="Node3D" unique_id=1701611592]
+script = ExtResource("1_u1xfj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=110986714]
+environment = SubResource("Environment_vyk5b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1335348836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.40914237)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=949057320]
+transform = Transform3D(0.7309368, -0.35197505, 0.58467484, -2.3904922e-10, 0.8567354, 0.515756, -0.682445, -0.3769852, 0.62621963, 1.2961072, 0.9811599, 1.3476162)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=860110254]

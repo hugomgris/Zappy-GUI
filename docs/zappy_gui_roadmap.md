@@ -144,7 +144,7 @@ const RESOURCE_NAMES: Array[String] = [
 ]
 
 # --- Enums ---
-enum Orientation { NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4 }
+enum Orientation { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 }
 enum TileType { BASIC, ARCH_1F, ARCH_2F, ARCH_3F }
 enum PlayerStatus { NORMAL, INCANTATION, BROADCASTING, DEAD }
 
@@ -197,7 +197,7 @@ signal time_unit_changed(t: int)
 signal game_over(winning_team: String)
 
 # --- Inner classes for typed data ---
-class TileData:
+class TileState:
     var pos: Vector2i
     var resources: Dictionary  # resource_name -> int
     var player_ids: Array[int]
@@ -234,7 +234,7 @@ class EggData:
     var pos: Vector2i
 
 # --- Accessors ---
-func get_tile(pos: Vector2i) -> TileData:
+func get_tile(pos: Vector2i) -> TileState:
     return tiles.get(pos)
 
 func get_player(id: int) -> PlayerData:
