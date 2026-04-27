@@ -3,6 +3,9 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 export ZAPPY_EASY_ASCENSION=1
 
 # Cleanup function to kill the server when the script exits
@@ -13,20 +16,20 @@ cleanup() {
 trap cleanup EXIT
 
 echo "=== Building Server ==="
-make -C server
+make -C "$ROOT_DIR/server"
 
 echo "=== Starting Server ==="
 pkill -f zappy || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd server && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > ../logs/server_log_easy_probe_single_client.txt 2>&1 &)
+(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > "$ROOT_DIR/logs/server_log_easy_probe_single_client.txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
 echo "=== Running server/run.sh ==="
-(cd server && ./run.sh)
+(cd "$ROOT_DIR/server" && ./run.sh)
 
 echo "=== Building Client ==="
-make -C client
+make -C "$ROOT_DIR/client"
 
 echo "=== Running Client ==="
-./client/client localhost 8674 team1 2> logs/client_log_easy_probe_single_client.txt
+"$ROOT_DIR/client/client" localhost 8674 team1 2> "$ROOT_DIR/logs/client_log_easy_probe_single_client.txt"
