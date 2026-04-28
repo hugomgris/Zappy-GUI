@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://mdf1xirs5l2m"]
+
+[ext_resource type="PackedScene" uid="uid://ct528yf8a25q7" path="res://assets/models/tile_arch_02.glb" id="1_dncee"]
+
+[node name="tile_arch_02" unique_id=2031756046 instance=ExtResource("1_dncee")]

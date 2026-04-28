@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
 [ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
+[ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
 
 [sub_resource type="Environment" id="Environment_vyk5b"]
 
@@ -16,12 +17,13 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=110986714]
 environment = SubResource("Environment_vyk5b")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=860110254]
-
 [node name="CameraRig" parent="." unique_id=2126781270 instance=ExtResource("2_nha0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06045866, 0)
 
 [node name="Pitch" parent="CameraRig" index="0" unique_id=791709577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4236774, 6.968405)
+
+[node name="WorldRoot" type="Node3D" parent="." unique_id=2016771896]
+script = ExtResource("3_q24mn")
 
 [editable path="CameraRig"]
