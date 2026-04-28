@@ -36,3 +36,4 @@ client_cpp/test.log
 # DCC temp files
 # ------------------------------
 *.blend1
+gui/refs/Zappy.pur

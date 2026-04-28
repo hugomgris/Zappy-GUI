@@ -1,3 +1,4 @@
+# Axonometric camera manager (set up + controller)
 extends Node3D
 
 @onready var _pitch: Node3D = %Pitch
@@ -79,11 +80,9 @@ func _apply_lerp(delta: float) -> void:
 	_pos_target.z = clamp(_pos_target.z, _bounds.position.y,
 						_bounds.position.y + _bounds.size.y)
 						
-	print(_pos_target, "-", _camera.position)
 	position = position.lerp(_pos_target, t)
 	rotation.y = lerp_angle(rotation.y, _yaw_target, t)
 	_camera.size = lerpf(_camera.size, _size_target, t)
-	print("yaw: ", rotation_degrees.y, " target: ", rad_to_deg(_yaw_target))
 	
 func focus_on(world_pos: Vector3) -> void:
 	_pos_target = Vector3(world_pos.x, 0.0, world_pos.z)

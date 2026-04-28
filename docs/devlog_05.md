@@ -91,7 +91,6 @@ const TEAM_COLORS: Dictionary = {
 
 As you can see, nothing crazy, just the bare minimum we'll need to reach our first milestones. On the `GameData` side we'll have to be more exhaustive, but once again, very simple stuff. This will be the **single source of truth** for all game states, and it will hold all the data. It won't build visuals, move players, or interpret commands. This is just the place were systems will read from while being wired to its signals, always listening for changes. Will settle on this:
 ```python
-```gdscript
 # scripts/autoloads/GameData.gd
 extends Node
 
@@ -187,10 +186,6 @@ I'm sure there must be dozens of ways of setting up an axonometric camera rig in
 
 To me, this is one of those *things* that can easily start feeling a bit overwhelming because of the terminology and the accumulation of operation layers. Not that the camera rig we have in mind is a complex thing, but learning how it works in detail and how to, well, script it can so easilly throw us into the "yeah, whatever, let's just make this work, I saw a script that did the thing" mood, so we need to tread carefully. After all, the point right now is to **learn** how to set up an axonometric camera in Godot in multiple fronts: theoretically, conceptually, godot-editor-wise, script-wise, etc. So I'd rather take it slow, lay out every single consideration that I think is important for the process, make decisions and only after doing so, go into script writing mode. Sorry if this becomes tedious, but sometimes this is the best course of action. Trust the process if you don't trust me.
 
-<br>
-
-### Orthographic Perspective Basics and Godot Node Configuration
-
 Whatever our paths may be, what we're trying to achieve is the same: a camera with no perspective distortion at all, under which gaze all our tiles and their contents will read clearly regardless of distance, with depth implied by the fixed angle rather than vanishing points. I chose this orthographic set up because 1) I like it and 2) it will be easier to apprehend at *Zappy*'s default high speed. We don't need immersion, but ease of read and data representation. And Godot, specifically, makes the setup exremely easy, we just need to set the `Camera3D` node's projection to `PROJECTION_ORTHOGONAL` and control the scale via `Camera3D.size`, instead of field of view. Around this, my way of building an axonometric Godot camera is via a **nested set of `Node3D` nodes ending in a `Camera3D`. Something like this:
 
 ```
@@ -212,28 +207,130 @@ This structure has each of its nodes doing **exactly one thing**, and the separa
 >
 > As a clarification, in orthographic mode distance doesn't actually change what the camera sees. Physical distance from the subject is irrelevant to the rendered size. **For this project, zoom is instead controlled by `Camera3D.size`**, the larger the value, the more world fits in the frame. The `ZoomArm` translation matters if we ever want to avoid clipping through geometry, but the visual "zoom" sensation comes from changing `size`, not from moving the arm.
 
-<br>
+Now, the script itself is comprised of only a handful of functions, and really it is as basic as a short piece of code containing 1) initial setup of the camera, 2) keyboard and mouse hooks, and 3) lerp helpers. There's really nothing else needed for now, and all together looks like this:
+
+```python
+# Axonometric camera manager (set up + controller)
+extends Node3D
+
+@onready var _pitch: Node3D = %Pitch
+@onready var _zoom_arm: Node3D = %ZoomArm
+@onready var _camera: Camera3D = %Camera
+
+@export var move_speed: float = 8.0
+@export var zoom_speed: float = 2.0
+@export var lerp_speed: float = 12.0
+@export var pitch_angle_deg: float = 30.0
+@export var initial_yaw_deg: float = 45.0
+
+var _pos_target: Vector3 = Vector3.ZERO
+var _size_target: float = 10.0
+var _yaw_target: float = 0.0
+var _bounds: Rect2 = Rect2()
+var _initialized: bool = false
+
+func _ready() -> void:
+	_pitch.rotation_degrees.x = -pitch_angle_deg
+	rotation_degrees.y = initial_yaw_deg
+	_yaw_target = PI * 0.25
+	rotation.y = _yaw_target
+	_camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+	
+func initialize_for_map(size: Vector2i) -> void:
+	var spacing: float = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
+	var center := Vector3((size.x - 1) * spacing * 0.5, 0.0,
+							(size.y - 1) * spacing * 0.5)
+							
+	var span: float = max(size.x, size.y) * spacing
+							
+	position = center
+	_pos_target = center
+	_size_target = span * 0.7
+	_camera.size = _size_target
+	
+	var pad: float = span * 0.5
+	_bounds = Rect2(center.x - span - pad, center.z - span - pad,
+					span * 2.0 + pad * 2.0, span * 2.0 + pad * 2.0)
+					
+	_initialized = true
+
+func _process(delta: float) -> void:
+	if not _initialized:
+		return
+	_handle_keyboard(delta)
+	_apply_lerp(delta)
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_size_target = max(2.0, _size_target - zoom_speed)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_size_target = min(60.0, _size_target + zoom_speed)
+			
+	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
+		var drag: Vector2 = event.relative * 0.02
+		_pos_target += Vector3(-drag.x, 0.0, -drag.y).rotated(Vector3.UP, rotation.y)
+
+func _handle_keyboard(delta: float) -> void:
+	var dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if dir != Vector2.ZERO:
+		var world_dir := Vector3(dir.x, 0.0, dir.y).rotated(Vector3.UP, rotation.y)
+		_pos_target += world_dir * move_speed * delta
+		
+	if Input.is_action_just_pressed("rotate_left"):
+		_yaw_target -= PI * 0.5
+	if Input.is_action_just_pressed("rotate_right"):
+		_yaw_target += PI * 0.5
+	
+	_yaw_target = wrapf(_yaw_target, -PI, PI)
+
+func _apply_lerp(delta: float) -> void:
+	var t: float = clamp(lerp_speed * delta, 0.0, 1.0)
+	
+	_pos_target.x = clamp(_pos_target.x, _bounds.position.x,
+						_bounds.position.x + _bounds.size.x)
+	_pos_target.z = clamp(_pos_target.z, _bounds.position.y,
+						_bounds.position.y + _bounds.size.y)
+						
+	position = position.lerp(_pos_target, t)
+	rotation.y = lerp_angle(rotation.y, _yaw_target, t)
+	_camera.size = lerpf(_camera.size, _size_target, t)
+	
+func focus_on(world_pos: Vector3) -> void:
+	_pos_target = Vector3(world_pos.x, 0.0, world_pos.z)
+
+```
+
+There are, though, a healthy amount of considerations to be extracted from this script, some related to general workings (like how to manage the lerping and how to setup the initial values for the correct Axonometric POV), some related to the *hows* of Godot.
 
 ### Coordinate systems and local vs world
 
-Alongside all of this, we obviously need to have in mind some considerations regarding how Godot manages coordinate systems, as well as the usual clash between local and world space. In Godot (4), **every `Node3D` has a `local space` and a `world space`**:
+First of all, we need to have in mind some considerations regarding how Godot manages coordinate systems, as well as the usual clash between local and world space. In Godot, **every `Node3D` has a `local space` and a `world space`**:
 - **World space** is fixed: X points right, Y points up, Z points towards the viewer (out of the screen)
-- **Local space** is relative to the node's current transform. If you rotate the node 45° on Y, it slocal X aaxis no longer points world-right, it points world-northeast.
+- **Local space** is relative to the node's current transform. If you rotate the node 45° on Y, its local X axis no longer points world-right, it points world-northeast.
 
-So, when we call `node.position += Vector3(1, 0, 0)`, we move it in **local space**. When we call `node.global_position += Vector3(1, 0, 0)`, we move it in **world space**. And for us, this means that in regards to the camera rig:
-- **Panning** should happen in **world space**, but adjusted for the rig's current yaw (check the head diagram!!). If the camera is rotated 90° and the player presses "pan right", we want to move in the rig's local X direction, not the world X. That's why pan input is rotated by `rotation.y` before being applied:
+For the camera rig:
+
+- **Panning** happens in **world space**, but the input direction is first rotated by the rig's current yaw so that "right" on the keyboard always means "right from the camera's perspective" rather than always meaning "world +X". The .rotated() call transforms the input intent, not the coordinate space of the movement itself. The input vector is rotated by the rig's yaw before being applied, so that movement always follows the camera's facing direction. This is equivalent to moving in local space, but done explicitly in world space rather than relying on the node's transform to do it implicitly.
 
 ```python
-var world_dir := Vector3(dir.x, 0.0, dir.y). rotated(Vector3.UP, rotation.y)
+var world_dir := Vector3(dir.x, 0.0, dir.y).rotated(Vector3.UP, rotation.y)
 _pos_target += world_dir * speed * delta
 ```
+
+> *We avoid something like `translate_object_local()` to avoid implicit transformations. Scripting it via world tranform * yaw rotation vector makes the line self explanatory. Code = documentation, and so on*
+
 - **Pitch** is applied in `Pitch` node's local X, which is already correctly oriented because `CameraRig`'s yaw has been applied at the parent level.
 - **Zoom** (changing `Camera3D.size`) operates in camera space and doesn't need any coordinate transform
+
+> If you want to dig deeper into the screen space drag translation into the camera's position transformation with the consideration of the yaw (what a horrible way to sum this up), we can briefly break it down. What we're doing is taking the `drag vector`, which starts in screen space (mouse X maps to world X, mouse Y maps to world Z) and spuning it to align with where the camera is actually facing. Moving a vector in its space to another position is done via **vector addition**, which in our case means taking the rig's actual position and adding to it the drag->movement result. The spun part is straight forwardly done via `.rotation(AXIS, ANGLE)`, which we do by taking the Y axis (`Vector3.UP`) and the yaw value (`rotation.y`).
+>
+> Under the hood, this is computed via **[Rodrigues rotation](https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula)**, which rotates the vector around the given axis by the given angle. To my understanding, this is the equivalent to constructing a rotation matrix around that axis and multiplying, just in a more efficient way (by reducing steps and etc).
 
 <br>
 
 ### Lerping It Up
-Not that this is extremely important for the rig to be considered to be *working*, but without lerping its movement (or anything in a game-design context, mostly), moving the camera around would be robotic and aweful. Laying out what lerping is and entrails here goes beyond the scope of this log, so let's just leave it in what is strictly relevant for our camera rig script: **we'll work in a separation of the `target` and the `current` position values so that we can interpolate movements along every `_process()` frame/tick**. In other words, an input event modifies a `_target` variable immediately, and `_process()` sequentially lerps the current status to the lerped target.
+Not that this is extremely important for the rig to be considered to be *working*, but without lerping its movement (or anything in a game-design context, mostly), moving the camera around would be robotic and awfully snapping. Laying out what [lerping](https://en.wikipedia.org/wiki/Linear_interpolation) is and entrails here goes beyond the scope of this log, so let's just leave it in what is strictly relevant for our camera rig script: **we'll work in a separation of the `target` and the `current` position values so that we can interpolate movements along every `_process()` frame/tick**. In other words, an input event modifies a `_target` variable immediately, and `_process()` sequentially lerps the current status to the lerped target.
 
 ```python
 # On input:
@@ -249,7 +346,7 @@ position = position.lerp(_pos_target, lerp_speed * delta)
 >
 > Some advice: `lerp_speed * delta` can exceed 1.0 at low framerates (for example, `lerp_speed = 12, delta = 0.1` -> `t = 1.2`). `lerp()` with `t > 1` overshoots. So, **ALWAYS CLAMP**: `clamp(lerp_speed * delta, 0.0, 1.0)`;
 >
-> Some other advice: **for rotation use `lerp_angle()`** instead of `lerpf()`. `lerp_angle` correctly handles the wraparound at +-180°, so a rotation from 350° to 10° goes through 0° instead of spinning 340° the wrong way. I learned about this the hard way. Don't be like me.
+> Some further advice: **for rotation use `lerp_angle()`** instead of `lerpf()`. `lerp_angle` correctly handles the wraparound at +-180°, so a rotation from 350° to 10° goes through 0° instead of spinning 340° the wrong way. I learned about this the hard way. Don't be like me.
 
 <br>
 
@@ -361,5 +458,3 @@ The bounds are set in `initialize_for_map()` with some padding so the edges of t
 
 <br>
 
-### Actually Writing This
-After setting up the camera scene with the node structure from above, as well as enabling the orthographical mode in the `Camera3D` node (with a size, let's say, of `10.0`) and a `-30` rotation in the x axis of `Pitch`'s inspector, it's advisable to go testable step by testable step. My approaching strategy is to 
