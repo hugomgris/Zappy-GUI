@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bfechh30dly2h"]
+
+[ext_resource type="PackedScene" uid="uid://bvcfyta2fxf3f" path="res://scenes/world/tiles/tile_RED_light_model.tscn" id="1_reuwv"]
+[ext_resource type="Script" uid="uid://cvo5l8kyr3kvf" path="res://scenes/world/tiles/TileController.gd" id="1_uaetr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uaetr"]
+
+[node name="Area3D" type="Area3D" unique_id=408848363]
+script = ExtResource("1_uaetr")
+
+[node name="testCube_RED" parent="." unique_id=95224689 instance=ExtResource("1_reuwv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=285171305]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_uaetr")

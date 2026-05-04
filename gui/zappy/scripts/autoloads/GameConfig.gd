@@ -2,7 +2,7 @@
 extends Node
 
 # MAP
-const TILE_SIZE: float = 1.0
+const TILE_SIZE: float = 2.0
 const TILE_GAP: float = 0.0
 
 # TIMING
@@ -24,7 +24,7 @@ const RESOURCE_NAMES: Array[String]  = [
 
 # ENUMS
 enum Orientation { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 }
-enum TileType { BASIC, ARCH_1F, ARCH_2F, ARCH_3F }
+enum TileType { RED_LIGHT, RED_DARK }
 enum PlayerStatus { NORMAL, INCANTATION, BROADCASTING, DEAD }
 
 # TEAMS

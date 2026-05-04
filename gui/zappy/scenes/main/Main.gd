@@ -1,6 +1,6 @@
-extends Node3D
+extends Control
 
-@onready var _camera_rig: Node3D = $CameraRig
+@onready var _camera_rig: Node3D = %CameraRig
 
 func _ready() -> void:
 	GameData.map_size = Vector2i(10, 10)
