@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d0xctmv1abu8k"]
+
+[ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
+[ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
+[ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
+[ext_resource type="Shader" uid="uid://biwxn8iamfho5" path="res://assets/shaders/PPTest.gdshader" id="4_gyg6b"]
+
+[sub_resource type="Environment" id="Environment_vyk5b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dc040"]
+shader = ExtResource("4_gyg6b")
+shader_parameter/scanline_intensity = 0.15
+shader_parameter/curvature_amount = 0.05
+shader_parameter/vignette_strength = 1.4
+shader_parameter/chromatic_aberration = 0.003
+shader_parameter/grain_amount = 0.03
+shader_parameter/resolution = Vector2(0, 0)
+
+[node name="Main" type="Node3D" unique_id=1701611592]
+script = ExtResource("1_u1xfj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2040511582]
+transform = Transform3D(-0.88294756, -0.38597324, 0.26726055, 0, 0.5692795, 0.82214403, -0.46947157, 0.72591007, -0.50264394, 0, 0, 0)
+light_color = Color(0.946858, 0.8275552, 0.9503184, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=110986714]
+environment = SubResource("Environment_vyk5b")
+
+[node name="CameraRig" parent="." unique_id=2126781270 instance=ExtResource("2_nha0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06045866, 0)
+
+[node name="Pitch" parent="CameraRig" index="0" unique_id=791709577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4236774, 6.968405)
+
+[node name="WorldRoot" type="Node3D" parent="." unique_id=2016771896]
+script = ExtResource("3_q24mn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2046344645]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=352093684]
+material = SubResource("ShaderMaterial_dc040")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[editable path="CameraRig"]
