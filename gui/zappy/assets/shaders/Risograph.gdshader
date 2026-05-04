@@ -38,8 +38,8 @@ uniform float dot_opacity_variation = 0.75;
 uniform float dot_shape_variation   = 0.9;
 
 // ── Paper ────────────────────────────────────────────────────────────────────
-uniform float paper_grain_amount = 0.03;
-uniform float paper_grain_size   = 0.8;
+uniform float paper_grain_amount = 0.07;
+uniform float paper_grain_size   = 1.0;
 
 // ── Misregistration ──────────────────────────────────────────────────────────
 uniform vec2 offset_top_px   = vec2(0.0, 0.0);
@@ -48,13 +48,13 @@ uniform vec2 offset_right_px = vec2(0.0, 0.0);
 uniform vec2 screen_size     = vec2(1920.0, 1080.0);
 
 // ── Animation ────────────────────────────────────────────────────────────────
-uniform float anim_speed          = 8.0;
+uniform float anim_speed          = 2.0;
 uniform float anim_strength       = 0.15;
-uniform float anim_density_jitter = 0.08;
+uniform float anim_density_jitter = 0.00;
 
 uniform float halftone_anim_strength  = 0.4;
-uniform float halftone_size_anim      = 0.2;
-uniform float halftone_opacity_anim   = 0.15;
+uniform float halftone_size_anim      = 0.5;
+uniform float halftone_opacity_anim   = 0.5;
 
 // ── Global frame jitter ───────────────────────────────────────────────────────
 // The "handcrafted cel" effect: every frame the whole plate shifts/breathes
