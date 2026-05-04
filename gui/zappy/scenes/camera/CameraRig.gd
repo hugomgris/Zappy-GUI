@@ -21,44 +21,43 @@ var _initialized: bool = false
 var _grid_center: Vector3 = Vector3.ZERO
 var _structural_offset: Vector3 = Vector3.ZERO
 
+
 func _ready() -> void:
 	_pitch.rotation_degrees.x = -pitch_angle_deg
 	rotation_degrees.y = initial_yaw_deg
-	_yaw_target = initial_yaw_deg
+	_yaw_target = deg_to_rad(initial_yaw_deg)   # was: initial_yaw_deg (degrees — wrong!)
 	rotation.y = _yaw_target
 	_camera.projection = Camera3D.PROJECTION_ORTHOGONAL
 	
 func initialize_for_map(size: Vector2i) -> void:
 	var spacing: float = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
-	var grid_center := Vector3((size.x - 1) * spacing * 0.5, 0.0,
-								(size.y - 1) * spacing * 0.5)
+	var grid_center := Vector3(
+		(size.x - 1) * spacing * 0.5,
+		0.0,
+		(size.y - 1) * spacing * 0.5
+	)
 	var span: float = max(size.x, size.y) * spacing
 
-	position    = grid_center
-	_pos_target = grid_center
 	_size_target = span * margin_offset
 	_camera.size = _size_target
+	_grid_center = grid_center
 
-	await get_tree().process_frame
+	# Set yaw first so _compute_recentering_correction uses the right angle
+	rotation.y = deg_to_rad(initial_yaw_deg)
+	_yaw_target = deg_to_rad(initial_yaw_deg)
 
-	var cam_world_pos := _camera.global_position
-	var cam_forward   := -_camera.global_basis.z
-
-	var t := -cam_world_pos.y / cam_forward.y
-	var ground_hit := cam_world_pos + cam_forward * t
-
-	var correction := grid_center - ground_hit
-	correction.y = 0.0
-
-	position    = grid_center + correction
-	_pos_target = position
+	# Use the same analytical correction the rotation system uses
+	_pos_target = _compute_recentering_correction(_yaw_target)
+	position = _pos_target
 
 	var pad := span * 0.5
-	_bounds = Rect2(position.x - span - pad, position.z - span - pad,
-					span * 2.0 + pad * 2.0,  span * 2.0 + pad * 2.0)
-					
-	_grid_center = grid_center
-	
+	_bounds = Rect2(
+		grid_center.x - span - pad,
+		grid_center.z - span - pad,
+		span * 2.0 + pad * 2.0,
+		span * 2.0 + pad * 2.0
+	)
+
 	_initialized = true
 
 func _process(delta: float) -> void:

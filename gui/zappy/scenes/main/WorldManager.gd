@@ -27,7 +27,7 @@ func _build_map() -> void:
 	
 	var spacing = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
 	
-	for x in GameData.map_size.y:
+	for x in GameData.map_size.x:
 		for y in GameData.map_size.y:
 			var pos := Vector2i(x, y)
 			var tile_type: GameConfig.TileType = PatternBuilder.tile_type_for(pos.x, pos.y)
