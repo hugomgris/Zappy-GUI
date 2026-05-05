@@ -1,0 +1,2 @@
+- Design print layout for the window
+- Design logo
