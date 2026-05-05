@@ -81,10 +81,7 @@ render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewportContainer/SubViewport" unique_id=2126781270 instance=ExtResource("2_nha0i")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06045866, 0)
-
-[node name="Pitch" parent="SubViewportContainer/SubViewport/CameraRig" index="0" unique_id=791709577]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4236774, 6.968405)
+lerp_speed = 5.0
 
 [node name="Camera" parent="SubViewportContainer/SubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.355984)

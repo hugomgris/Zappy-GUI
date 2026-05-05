@@ -12,6 +12,11 @@ extends Node3D
 @export var initial_yaw_deg: float = 22.5
 @export var margin_offset: float = 1.5
 
+@export var animation_fps: float = 12.0
+
+var _anim_accum: float = 0.0
+var _initial_camera_size: float
+
 var _pos_target: Vector3 = Vector3.ZERO
 var _size_target: float = 10.0
 var _yaw_target: float = 0.0
@@ -19,8 +24,6 @@ var _bounds: Rect2 = Rect2()
 var _initialized: bool = false
 
 var _grid_center: Vector3 = Vector3.ZERO
-var _structural_offset: Vector3 = Vector3.ZERO
-
 
 func _ready() -> void:
 	_pitch.rotation_degrees.x = -pitch_angle_deg
@@ -40,6 +43,7 @@ func initialize_for_map(size: Vector2i) -> void:
 
 	_size_target = span * margin_offset
 	_camera.size = _size_target
+	_initial_camera_size = _size_target
 	_grid_center = grid_center
 
 	# Set yaw first so _compute_recentering_correction uses the right angle
@@ -57,21 +61,30 @@ func initialize_for_map(size: Vector2i) -> void:
 		span * 2.0 + pad * 2.0,
 		span * 2.0 + pad * 2.0
 	)
-
+	
+	_camera.position.z = span * 2.0
+	
 	_initialized = true
 
 func _process(delta: float) -> void:
 	if not _initialized:
 		return
+	
 	_handle_keyboard(delta)
-	_apply_lerp(delta)
+	
+	_anim_accum += delta
+	var anim_step := 1.0 / animation_fps
+	if _anim_accum >= anim_step:
+		_anim_accum = fmod(_anim_accum, anim_step)
+		_apply_lerp(anim_step)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_size_target = max(2.0, _size_target - zoom_speed)
+			_size_target = max(6.0, _size_target - zoom_speed)
+			print(_size_target)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_size_target = min(60.0, _size_target + zoom_speed)
+			_size_target = min(_initial_camera_size, _size_target + zoom_speed)
 			
 	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
 		var drag: Vector2 = event.relative * 0.02
