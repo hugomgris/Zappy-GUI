@@ -4,12 +4,13 @@
 [ext_resource type="Shader" uid="uid://5vjpxf8o6ymp" path="res://assets/shaders/Risograph.gdshader" id="2_gyg6b"]
 [ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
 [ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
+[ext_resource type="PackedScene" uid="uid://4uiuigixqyqy" path="res://assets/models/zappyLogo_MonoColors.glb" id="5_dc040"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
 shader = ExtResource("2_gyg6b")
 shader_parameter/ink1 = Vector3(0.85, 0.15, 0.3)
-shader_parameter/ink2 = Vector3(0.135, 0.685, 0.035)
-shader_parameter/ink3 = Vector3(0.55, 0.525, 0.65)
+shader_parameter/ink2 = Vector3(0.82, 0.685, 0.035)
+shader_parameter/ink3 = Vector3(0.285, 0.525, 0.65)
 shader_parameter/ink4 = Vector3(0.2, 0.8, 0.7)
 shader_parameter/ink5 = Vector3(0.9, 0.2, 0.6)
 shader_parameter/ink6 = Vector3(0.95, 0.75, 0.1)
@@ -81,7 +82,6 @@ render_target_update_mode = 4
 
 [node name="CameraRig" parent="SubViewportContainer/SubViewport" unique_id=2126781270 instance=ExtResource("2_nha0i")]
 unique_name_in_owner = true
-lerp_speed = 5.0
 
 [node name="Camera" parent="SubViewportContainer/SubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.355984)
@@ -92,5 +92,8 @@ environment = SubResource("Environment_vyk5b")
 
 [node name="WorldRoot" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=2016771896]
 script = ExtResource("3_q24mn")
+
+[node name="zappyLogo_MonoColors" parent="SubViewportContainer/SubViewport/WorldRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -5.625, -0.845, 0)
 
 [editable path="SubViewportContainer/SubViewport/CameraRig"]
