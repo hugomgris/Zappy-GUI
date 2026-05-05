@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
 [ext_resource type="Shader" uid="uid://5vjpxf8o6ymp" path="res://assets/shaders/Risograph.gdshader" id="2_gyg6b"]
 [ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
+[ext_resource type="Script" uid="uid://dnfup02hmdbsw" path="res://scenes/ui/hud/LogoHandler.gd" id="3_1rhdn"]
 [ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
 [ext_resource type="PackedScene" uid="uid://4uiuigixqyqy" path="res://assets/models/zappyLogo_MonoColors.glb" id="5_dc040"]
 
@@ -55,6 +56,10 @@ shader_parameter/transparent_background = false
 background_mode = 1
 background_color = Color(1, 1, 1, 1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_1rhdn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rhdn"]
+
 [node name="Main" type="Control" unique_id=1298653520]
 layout_mode = 3
 anchors_preset = 0
@@ -69,31 +74,70 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.9999998, 0.9993431, 0.9046173, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1405036999]
+[node name="PostProcessing" type="SubViewportContainer" parent="." unique_id=1405036999]
 material = SubResource("ShaderMaterial_gyg6b")
 layout_mode = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=308586066]
+[node name="Compositor" type="SubViewport" parent="PostProcessing" unique_id=1713541890]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="CameraRig" parent="SubViewportContainer/SubViewport" unique_id=2126781270 instance=ExtResource("2_nha0i")]
+[node name="GameWorldTexture" type="TextureRect" parent="PostProcessing/Compositor" unique_id=902173941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LogoTexture" type="Sprite2D" parent="PostProcessing/Compositor" unique_id=982580421]
+position = Vector2(296, 102)
+script = ExtResource("3_1rhdn")
+
+[node name="GameSubViewport" type="SubViewport" parent="." unique_id=308586066]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 3
+
+[node name="CameraRig" parent="GameSubViewport" unique_id=2126781270 instance=ExtResource("2_nha0i")]
 unique_name_in_owner = true
 
-[node name="Camera" parent="SubViewportContainer/SubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
+[node name="Camera" parent="GameSubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.355984)
 current = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=110986714]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="GameSubViewport" unique_id=110986714]
 environment = SubResource("Environment_vyk5b")
 
-[node name="WorldRoot" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=2016771896]
+[node name="WorldRoot" type="Node3D" parent="GameSubViewport" unique_id=2016771896]
 script = ExtResource("3_q24mn")
 
-[node name="zappyLogo_MonoColors" parent="SubViewportContainer/SubViewport/WorldRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -5.625, -0.845, 0)
+[node name="LogoViewport" type="SubViewport" parent="." unique_id=2057420778]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(529, 140)
 
-[editable path="SubViewportContainer/SubViewport/CameraRig"]
+[node name="LogoCamera" type="Camera3D" parent="LogoViewport" unique_id=315319403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.860374, 0.11969566, 20.972458)
+projection = 1
+size = 3.373
+
+[node name="LogoRoot" type="Node3D" parent="LogoViewport" unique_id=2065157317]
+
+[node name="zappyLogo_MonoColors" parent="LogoViewport/LogoRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -44.731842, -0.845, 18.1664)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LogoViewport/LogoRoot" unique_id=1682144150]
+transform = Transform3D(9.85, 0, 0, 0, -4.3055718e-07, -9.85, 0, 9.85, -4.3055718e-07, -39.56103, 0, 17.001888)
+visible = false
+mesh = SubResource("PlaneMesh_1rhdn")
+surface_material_override/0 = SubResource("StandardMaterial3D_1rhdn")
+
+[editable path="GameSubViewport/CameraRig"]
