@@ -9,14 +9,10 @@ var _tile_scenes: Dictionary # TileType -> PackedScene
 
 func _ready() -> void:
 	_tile_scenes = {
-		GameConfig.TileType.BASIC:
-			preload("res://scenes/world/tiles/tile_base.tscn"),
-		GameConfig.TileType.ARCH_1F:
-			preload("res://scenes/world/tiles/tile_arch_1F.tscn"),
-		GameConfig.TileType.ARCH_2F:
-			preload("res://scenes/world/tiles/tile_arch_2F.tscn"),
-		GameConfig.TileType.ARCH_3F:
-			preload("res://scenes/world/tiles/tile_arch_3F.tscn"),
+		GameConfig.TileType.RED_LIGHT:
+			preload("res://scenes/world/tiles/tile_RED_light.tscn"),
+		GameConfig.TileType.RED_DARK:
+			preload("res://scenes/world/tiles/tile_RED_dark.tscn")
 	}
 	GameData.world_initialized.connect(_on_world_initialized)
 	
@@ -25,28 +21,21 @@ func _on_world_initialized() -> void:
 
 
 func _build_map() -> void:
-	# Clear previous tiles
 	for child in get_children():
 		child.queue_free()
 	_tiles.clear()
 	
 	var spacing = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
-	var pattern = PatternBuilder.select_pattern(debugMode, GameData.map_size)
 	
-	for x in GameData.map_size.y:
+	for x in GameData.map_size.x:
 		for y in GameData.map_size.y:
 			var pos := Vector2i(x, y)
-			var tile_type: GameConfig.TileType = PatternBuilder.tile_type_for(pattern, pos.x, pos.y, GameData.map_size)
+			var tile_type: GameConfig.TileType = PatternBuilder.tile_type_for(pos.x, pos.y)
 			var tile: Area3D = _tile_scenes[tile_type].instantiate()
 			tile.position = Vector3(x * spacing, 0.0, y * spacing)
 			tile.setup(pos)
 			add_child(tile)
 			_tiles[pos] = tile
-			
-			#checkerboard darkening
-			if (x + y) % 2 == 1:
-				print("at ", x, "-", y)
-				PatternBuilder.darken_tile(tile)
 				
 			# Connect hover to HUD tooltip sistem (signal bus or direct)
 			tile.hovered.connect(_on_tile_hovered)

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://be1l3joe57ao6"]
+
+[ext_resource type="PackedScene" uid="uid://dvykmm3cu4y5o" path="res://assets/models/testCube_RED_DARK.glb" id="1_8mme1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mme1"]
+albedo_color = Color(0.3491902, 0, 0, 1)
+
+[node name="testCube_RED_DARK" unique_id=584290806 instance=ExtResource("1_8mme1")]
+
+[node name="CubeRED_DARK" parent="." index="0" unique_id=1172687608]
+transform = Transform3D(0.99, 0, 0, 0, 0.99, 0, 0, 0, 0.99, 0, 0, 0)
+
+[node name="Outine" parent="." index="1" unique_id=1796995303]
+surface_material_override/0 = SubResource("StandardMaterial3D_8mme1")

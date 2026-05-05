@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://diaxa7owghw1u"]
-
-[ext_resource type="PackedScene" uid="uid://phynp2c21rv7" path="res://assets/models/tile_arch_01.glb" id="1_5xboo"]
-
-[node name="tile_arch_01" unique_id=888918242 instance=ExtResource("1_5xboo")]
