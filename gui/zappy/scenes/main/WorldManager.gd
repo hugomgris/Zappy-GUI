@@ -41,6 +41,7 @@ func _build_map() -> void:
 			tile.hovered.connect(_on_tile_hovered)
 			tile.unhovered.connect(_on_tile_unhovered)
 			
+## Returns tile scene from sent position value X-Y
 func get_tile(pos: Vector2i) -> TileController:
 	return _tiles.get(pos)
 	

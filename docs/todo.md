@@ -1,2 +1,41 @@
+- Pickup from phase 3
+    - Command processor
+    - Mock server
+- Phase 4
+    - Resource manager
+    - Player manager
+    - Egg manager
+    - Movement animations
+- Phase 5
+    - UI layer
+    - Tooltip manager
+    - HUD
+- Phase 6
+    - Network layer
+    - Start/Connection screen
+    - Serverver Connection Manager
+    - Protocol Parser
+    - Reconnections
+- Phase 7
+    - Extended animations
+        - Prend, Pose, Call for Rally, Here broadcast, Incantation, Level up, death
+- Performance and cleanup
+    - Animation staggering 
+    - Tile generation batching
+    - Signal safety
+    - Code comments and final documentation
+    
+
+- (Re)Design
+    - Cuby
+        - Model
+        - flair/face/etc
+        - Animations
+    - All other character models
+    - Resources
+    - Eggs
+    - Ornaments
+
+
 - Design print layout for the window
 - Design logo

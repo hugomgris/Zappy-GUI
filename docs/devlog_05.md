@@ -458,3 +458,6 @@ The bounds are set in `initialize_for_map()` with some padding so the edges of t
 
 <br>
 
+---
+
+At this point, with the basic world building pipeline recovered and a camera script that somewhat worked (somewhat, here, means that it didn't work at all when stress testing, but we'll dedicate a whole log to it), I felt the pressing need to step aside from scripting for a little while and think about what aesthetic and visual direction I wanted to take this GUI. Back when I was first working on it, several possibilities where on top of the table, so my first step in this line needed to be a dreadful decision-making one. And of course, I chose what might be one of the hardest paths I came up with. But more on that in the next log. Next: **shader writing our way into the world of hopes and dreams**.
