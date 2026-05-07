@@ -18,8 +18,7 @@ signal game_over(winning_team: String)
 
 func process_command(cmd: Dictionary) -> void:
 	var command: String = cmd.get("cmd", "")
-	print("status=", cmd.get("status"))
-
+	
 	if command.is_empty():
 		if (cmd.has("type") and cmd.get("type") == "event" and \
 			cmd.has("status") and cmd.get("status") == "level_up"):
@@ -47,8 +46,6 @@ func process_command(cmd: Dictionary) -> void:
 			push_error("CommandProcessor: unknown command '%s'" % command)
 
 func _avance(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd"))
-
 	var id: int = cmd.get("player_id", -1)
 	var player := GameData.get_player(id)
 	if not player:
@@ -71,8 +68,6 @@ func _avance(cmd: Dictionary) -> void:
 	return
 	
 func _rotate(cmd: Dictionary, direction: int) -> void:
-	print("processing rotation with direction ", direction)
-
 	var id: int = cmd.get("player_id", -1)
 	var new_orientation: int = GameData.players[id].orientation + 1 if direction > 0 else GameData.players[id].orientation - 1
 
@@ -80,15 +75,11 @@ func _rotate(cmd: Dictionary, direction: int) -> void:
 	elif new_orientation < 1: new_orientation = 4
 	GameData.players[id].orientation = new_orientation
 
-	print("new orientation = ", new_orientation)
-
 	player_rotated.emit(id, new_orientation)
 
 	return
 
 func _prend(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd"), " on player ", cmd.get("player_id"), " targetting ", cmd.get("arg"))
-
 	var id: int = cmd.get("player_id")
 	var pos: Vector2i = GameData.players[id].pos
 	var target: String = cmd.get("arg")
@@ -103,8 +94,6 @@ func _prend(cmd: Dictionary) -> void:
 	return
 
 func _pose(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd"), " on player ", cmd.get("player_id"), " targetting ", cmd.get("arg"))
-
 	var id: int = cmd.get("player_id")
 	var pos: Vector2i = GameData.players[id].pos
 	var target: String = cmd.get("arg")
@@ -118,8 +107,6 @@ func _pose(cmd: Dictionary) -> void:
 	return
 
 func _fork(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd"), " from player ", cmd.get("player_id"))
-
 	var id: int = cmd.get("player_id")
 	var data = GameData.EggData.new(id)
 	data.id = GameData.eggs.size()
@@ -151,12 +138,8 @@ func _death(cmd: Dictionary) -> void:
 	return
 
 func _level_up(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd", ""), " for player ", cmd.get("player_id"))
-
 	var id: int = cmd.get("player_id")
 	GameData.players[id].level = min(8, GameData.players[id].level + 1)
-
-	print("player ", id, " is now level ", GameData.players[id].level)
 
 	player_leveled_up.emit(id, GameData.players[id].level)
 

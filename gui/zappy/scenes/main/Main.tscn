@@ -79,7 +79,6 @@ offset_bottom = 1080.0
 mouse_filter = 2
 
 [node name="Compositor" type="SubViewport" parent="PostProcessing" unique_id=1713541890]
-handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
@@ -98,7 +97,6 @@ script = ExtResource("3_1rhdn")
 
 [node name="GameSubViewport" type="SubViewport" parent="." unique_id=308586066]
 unique_name_in_owner = true
-handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 3
 
@@ -115,20 +113,21 @@ environment = SubResource("Environment_vyk5b")
 [node name="WorldRoot" type="Node3D" parent="GameSubViewport" unique_id=2016771896]
 script = ExtResource("3_q24mn")
 
+[node name="ResourceManager" type="Node3D" parent="GameSubViewport" unique_id=451965037]
+
 [node name="LogoViewport" type="SubViewport" parent="." unique_id=2057420778]
 unique_name_in_owner = true
 transparent_bg = true
-handle_input_locally = false
 size = Vector2i(529, 140)
 
 [node name="LogoCamera" type="Camera3D" parent="LogoViewport" unique_id=315319403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.860374, 0.11969566, 20.972458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.202, 0.11969566, 20.972458)
 projection = 1
 size = 3.373
 
 [node name="LogoRoot" type="Node3D" parent="LogoViewport" unique_id=2065157317]
 
 [node name="zappyLogo_MonoColors" parent="LogoViewport/LogoRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -44.731842, -0.845, 18.1664)
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -141.07346, -0.845, 18.1664)
 
 [editable path="GameSubViewport/CameraRig"]
