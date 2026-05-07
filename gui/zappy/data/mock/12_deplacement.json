@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "deplacement",
+  "status": "1",
+  "player_id": 7
+}

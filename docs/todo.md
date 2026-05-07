@@ -39,3 +39,9 @@
 
 - Design print layout for the window
 - Design logo
+
+Documentation/logging:
+- Shaders
+- Camera tweaks
+- Command pipeline + entity managers
+- Tweens/animations

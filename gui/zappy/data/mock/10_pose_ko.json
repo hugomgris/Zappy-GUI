@@ -1,0 +1,7 @@
+{
+  "type": "response",
+  "cmd": "pose",
+  "arg": "sibur",
+  "status": "ko",
+  "player_id": 4
+}
