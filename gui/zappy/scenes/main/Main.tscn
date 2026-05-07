@@ -65,6 +65,7 @@ albedo_color = Color(0, 1, 1, 1)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_u1xfj")
+use_mock = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1031470465]
 layout_mode = 1
