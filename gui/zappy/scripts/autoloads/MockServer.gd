@@ -2,7 +2,7 @@ extends Node
 
 @export var commands_path: String = "res://data/mock/"
 @export var connection_path: String = commands_path + "connection/"
-@export var interval: float = 0.08
+@export var interval: float = 0.5
 @export var auto_start: bool = false
 
 var _files: Array[String] = []
@@ -38,8 +38,12 @@ func _dispatch_next() -> void:
 
 	if data.is_empty():
 		return
-	if data.get("status", "ok") != "ok" : return
-	CommandProcessor.process_command(data)
+
+	if data.has("status"):
+		var status: String = data.get("status", "ko")
+		if (status == "ok" or status == "level_up"):
+			CommandProcessor.process_command(data)
+	
 
 func _load_mock_initial_state() -> void:
 	var dir := DirAccess.open(connection_path)
@@ -82,18 +86,92 @@ func _load_json(path: String) -> Dictionary:
 	return json.data if json.parse(file.get_as_text()) == OK else {}
 
 func _parse_initial_state_data(data: Dictionary) -> void:
-	print("PARSING INIT STATE")
-	if data.has("map"):
-		var map: Dictionary = data.get("map")
-		
-		if map.has("width"):
-			var map_width: int = data.get("map").get("width")
-			GameData.map_size.x = map_width
-			print("width-X ", map_width)
+	if not (data.has("map") and data.has("players") and data.has("game")):
+		push_error("MockServer: parsing state json has missing field")
+		return
 
-		if map.has("height"):
-			var map_height: int = data.get("map").get("height")
-			GameData.map_size.y = map_height
-			print("height-Y ", map_height)
+	_load_map_data_from_file(data.get("map"))
+	_load_player_data_from_file(data.get("players"))
+	_load_game_data_from_file(data.get("game"))
+				
+	return
+
+func _load_map_data_from_file(map: Dictionary) -> void:
+	if not (map.has("width") and map.has("height")) \
+		or not (map.has("tiles")):
+		return
+
+	var map_size := Vector2i(map.get("width"), map.get("height"))
+	GameData.map_size = map_size
+
+	var tiles: Array = map.get("tiles")
+	for raw_tile in tiles:
+		var tile_pos := Vector2i(raw_tile.x, raw_tile.y)
+		var tile = GameData.TileState.new(tile_pos)
+
+		if not raw_tile.has("resources"):
+			push_error("MockServer: parsed tile has no resource field")
+			return
+		elif not raw_tile.has("players"):
+			push_error("MockServer: parsed tile has no resource player")
+			return
+
+		_parse_tile_resources_data(tile, raw_tile.get("resources"))
+		_parse_tile_player_data(tile, raw_tile.get("players"))
+		
+		GameData.tiles[tile_pos] = tile
+
+	return
+	
+func _parse_tile_resources_data(tile: GameData.TileState, resources: Dictionary) -> void:
+	for r in GameConfig.RESOURCE_NAMES:
+		if not resources.has(r):
+			push_error("MockServer: tile resource data is missing ", r)
+			return
+		
+		tile.resources[r] = resources[r]
+
+	return
+
+func _parse_tile_player_data(tile: GameData.TileState, players: Array) -> void:
+	for i in range(players.size()):
+		tile.player_ids.append(players[i])
+	return
+
+func _load_player_data_from_file(players: Array) -> void:
+	for i in range(players.size()):
+		var player: Dictionary = players[i]
+
+		if not (player.has("id") and player.has("position") \
+				and player.has("orientation") and player.has("level") \
+				and player.has("team") and player.has("inventory")):
+			push_error("MockServer: player field has missing sub-field")
+			return
+
+		var id: int = player.id
+		var data = GameData.PlayerData.new(id)
+
+		data.pos = Vector2i( player.position.get("x"),  player.position.get("y"))
+		data.orientation = player.orientation
+		data.level = player.level
+		data.team = player.team
+		data.inventory = player.inventory
+		data.status = GameConfig.PlayerStatus.NORMAL
+
+		GameData.players[id] = data
+	
+	return
+
+func _load_game_data_from_file(game: Dictionary) -> void:
+	if not (game.has("tick") and game.has("time_unit") and game.has("teams")):
+		push_error("MockServer: game data field has missing sub-fileds")
+		return
+
+	GameData.tick = game.get("tick")
+	GameData.time_unit = game.get("time_unit")
+	
+	for i in range(game.teams.size()):
+		var team: Dictionary = game.teams[i]
+		GameData.teams[team.get("name")] = { "player_count": team.get("player_count"), "remaining_connections": team.get("remaining_connections")}
 
 	return
