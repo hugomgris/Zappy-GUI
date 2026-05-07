@@ -82,11 +82,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_size_target = max(6.0, _size_target - zoom_speed)
-			print(_size_target)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_size_target = min(_initial_camera_size, _size_target + zoom_speed)
 			
 	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
+		print("dragging")
 		var drag: Vector2 = event.relative * 0.02
 		_pos_target += Vector3(-drag.x, 0.0, -drag.y).rotated(Vector3.UP, rotation.y)
 
