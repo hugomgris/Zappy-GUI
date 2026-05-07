@@ -49,17 +49,12 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.1
+shader_parameter/frame_ink_shimmer = 0.04
 shader_parameter/transparent_background = false
 
 [sub_resource type="Environment" id="Environment_vyk5b"]
 background_mode = 1
 background_color = Color(1, 1, 1, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_1rhdn"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1rhdn"]
-albedo_color = Color(0, 1, 1, 1)
 
 [node name="Main" type="Control" unique_id=1298653520]
 layout_mode = 3
@@ -135,10 +130,5 @@ size = 3.373
 
 [node name="zappyLogo_MonoColors" parent="LogoViewport/LogoRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -44.731842, -0.845, 18.1664)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LogoViewport/LogoRoot" unique_id=1682144150]
-transform = Transform3D(60.22, 0, 0, 0, 60.22, 0, 0, 0, 60.22, 2.4468727, 0, 7.2159843)
-mesh = SubResource("PlaneMesh_1rhdn")
-surface_material_override/0 = SubResource("StandardMaterial3D_1rhdn")
 
 [editable path="GameSubViewport/CameraRig"]
