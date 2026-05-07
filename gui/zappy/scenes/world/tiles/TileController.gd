@@ -22,6 +22,7 @@ func _ready() -> void:
 	# slot population from child Marker3D nodes
 	_resource_slots = _collect_markers("ResourceSlots")
 	_player_slots = _collect_markers("PlayerSlots")
+
 	
 	_resource_slot_occupied.resize(_resource_slots.size())
 	_resource_slot_occupied.fill(false)
@@ -68,3 +69,11 @@ func _collect_markers(parent_name: String) -> Array[Marker3D]:
 			result.append(child)
 			
 	return result
+
+func get_player_scene_from_id(id: int, tile: TileController) -> Node3D:		
+	for i in range(_player_slots.size()):
+		var player_scene: Node3D = _player_slots[i].get_child(0)
+		if player_scene and player_scene.get_player_id() == id:
+			return player_scene
+
+	return null
