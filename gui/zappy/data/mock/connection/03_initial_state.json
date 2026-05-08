@@ -49,7 +49,7 @@
     },
     {
       "id": 3,
-      "position": { "x": 3, "y": 3 },
+      "position": { "x": 2, "y": 3 },
       "orientation": 3,
       "level": 1,
       "team": "team2",

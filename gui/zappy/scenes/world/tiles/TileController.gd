@@ -42,8 +42,12 @@ func occupy_resource_slot(index: int, scene: Node3D) -> void:
 		
 func free_resource_slot(index: int) -> void:
 	_resource_slot_occupied[index] = false
-	for child in _resource_slots[index].getChildren():
-		child.queue_free()
+	var scene: Node3D = _resource_slots[index].get_child(0)
+	if not scene:
+		push_error("TileController: free_resource_slot failed to find resource scene at index ", index)
+		return
+
+	scene.queue_free()
 
 func get_free_player_slot() -> int:
 	return _player_slot_occupied.find(false)
@@ -54,8 +58,13 @@ func occupy_player_slot(index: int, scene: Node3D) -> void:
 	
 func free_player_slot(index: int) -> void:
 	_player_slot_occupied[index] = false
-	for child in _player_slots[index].getChildren():
-			child.enqueue_free()
+	var scene: Node3D = _player_slots[index].get_child(0)
+	if not scene:
+		push_error("TileController: free_player_slot failed to find player scene at index ", index)
+		return
+
+	scene.queue_free()
+	
 
 func _collect_markers(parent_name: String) -> Array[Marker3D]:
 	var result: Array[Marker3D] = []	
@@ -70,10 +79,29 @@ func _collect_markers(parent_name: String) -> Array[Marker3D]:
 			
 	return result
 
-func get_player_scene_from_id(id: int, tile: TileController) -> Node3D:		
+func get_player_marker_from_slot(slot: int) -> Marker3D:
+	return _player_slots[slot]
+
+func get_player_scene_from_id(id: int) -> Node3D:		
 	for i in range(_player_slots.size()):
 		var player_scene: Node3D = _player_slots[i].get_child(0)
 		if player_scene and player_scene.get_player_id() == id:
 			return player_scene
 
 	return null
+
+func find_player_occupied_index_from_player_id(id: int) -> int:
+	for i in range(_player_slots.size()):
+		var player_scene: Node3D = _player_slots[i].get_child(0)
+		if player_scene and player_scene.get_player_id() == id:
+			return i
+
+	return -1
+
+#debug tools
+func get_occupied_player_slots_amount() -> int:
+	var count: int = 0
+	for i in range(_player_slots.size()):
+		count += _player_slots[i].get_child_count()
+		
+	return count
