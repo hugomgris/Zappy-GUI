@@ -41,7 +41,7 @@
     },
     {
       "id": 2,
-      "position": { "x": 2, "y": 2 },
+      "position": { "x": 3, "y": 1 },
       "orientation": 2,
       "level": 2,
       "team": "team1",
@@ -49,16 +49,16 @@
     },
     {
       "id": 3,
-      "position": { "x": 2, "y": 3 },
-      "orientation": 3,
+      "position": { "x": 1, "y": 3 },
+      "orientation": 4,
       "level": 1,
       "team": "team2",
       "inventory": { "nourriture": 20, "linemate": 0, "deraumere": 0, "sibur": 3, "mendiane": 0, "phiras": 0, "thystame": 2 }
     },
     {
       "id": 4,
-      "position": { "x": 4, "y": 4 },
-      "orientation": 4,
+      "position": { "x": 3, "y": 3 },
+      "orientation": 3,
       "level": 1,
       "team": "team2",
       "inventory": { "nourriture": 50, "linemate": 0, "deraumere": 3, "sibur": 3, "mendiane": 0, "phiras": 0, "thystame": 0 }

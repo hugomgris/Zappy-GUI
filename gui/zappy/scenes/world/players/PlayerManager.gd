@@ -3,7 +3,7 @@ extends Node3D
 @onready var world_root: Node3D = %WorldRoot
 
 const SCENES: Dictionary = {
-	"test": preload("res://scenes/world/players/player_test.tscn")
+	"test": preload("res://scenes/world/players/test_player.tscn")
 }
 
 var _players: Dictionary = {}
@@ -87,9 +87,6 @@ func _on_player_moved(id: int, from: Vector2i, to: Vector2i) -> void:
 		0.0, 1.0, duration
 	)
 	
-	#tween.tween_property(scene, "global_position", target_pos, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	#tween.tween_callback(_move_player_between_tiles.bind(id, from, to))
-	
 	return
 
 func _on_player_rotated(id: int, new_orientation: int) -> void:
@@ -125,8 +122,6 @@ func _on_player_rotated(id: int, new_orientation: int) -> void:
 			player_scene.global_rotation = start_rotation.lerp(target_rotation_vector, q_t),
 		0.0, 1.0, duration
 	)
-
-	#tween.tween_property(player_scene, "global_rotation:y", player_scene.global_rotation.y + delta, 0.5)
 
 	return
 
