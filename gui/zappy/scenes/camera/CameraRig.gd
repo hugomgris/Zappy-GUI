@@ -79,6 +79,9 @@ func _process(delta: float) -> void:
 		_apply_lerp(anim_step)
 	
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		print("motion received, mask: ", event.button_mask)
+		
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_size_target = max(6.0, _size_target - zoom_speed)
