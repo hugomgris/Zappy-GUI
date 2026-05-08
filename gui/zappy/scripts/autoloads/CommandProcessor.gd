@@ -1,7 +1,7 @@
 extends Node
 
 # Signals
-signal player_moved(id: int, from: Vector2i, to: Vector2i, orientation: int)
+signal player_moved(id: int, from: Vector2i, to: Vector2i)
 signal player_rotated(id: int, new_orientation: int)
 signal player_died(id: int)
 signal player_leveled_up(id: int, new_level: int)
@@ -63,7 +63,7 @@ func _avance(cmd: Dictionary) -> void:
 		new_tile.player_ids.append(id)
 	player.pos = to
 
-	player_moved.emit(id, from, to, player.orientation)
+	player_moved.emit(id, from, to)
 
 	return
 	

@@ -45,7 +45,7 @@ func _spawn_player(id: int) -> void:
 	return
 
 # signal responders
-func _on_player_moved(id: int, from: Vector2i, to: Vector2i, orientation: int) -> void:		
+func _on_player_moved(id: int, from: Vector2i, to: Vector2i) -> void:		
 	var scene = _players[id]
 	if not scene:
 		push_warning("PlayerManager: player scene not found for id ", id)
@@ -61,19 +61,34 @@ func _on_player_moved(id: int, from: Vector2i, to: Vector2i, orientation: int) -
 		push_warning("PlayerManager: to_tile not found at pos ", to)
 		return
 	
-	var spacing: int = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
+	var spacing: float = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
 	var dx: int = to.x - from.x
 	var dy: int = to.y - from.y
 	
-	#if abs(dx) > 1:
-		#scene.global_position.x = abs(dx)
-	#elif abs(dy) > 1:
-		#scene.global_position.z = abs(dy)
-		
-	scene.global_position.x += dx * spacing
-	scene.global_position.z += dy * spacing
+	var pos_before: Vector3 = scene.global_position
+	var target_pos: Vector3 = pos_before + Vector3(dx * spacing, 0, dy * spacing)
 	
 	_move_player_between_tiles(id, from, to)
+	
+	scene.global_position = pos_before
+	
+	var tween = scene.create_tween()
+	var start_pos: Vector3 = scene.global_position
+	var duration: float = 0.3
+	var steps: int = 12
+	var total_frames: int = int(steps * duration)
+	
+	tween.tween_method(
+		func(t: float):
+			var frame: int = int(t * total_frames)
+			var q_t: float = float(frame) / float(total_frames)
+			
+			scene.global_position = start_pos.lerp(target_pos, q_t),
+		0.0, 1.0, duration
+	)
+	
+	#tween.tween_property(scene, "global_position", target_pos, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	#tween.tween_callback(_move_player_between_tiles.bind(id, from, to))
 	
 	return
 
@@ -91,7 +106,27 @@ func _on_player_rotated(id: int, new_orientation: int) -> void:
 		push_warning("PlayerManager: failed to fetch player_scene from id ", id)
 		return
 	
-	_rotate_player_from_orientation(player_scene, new_orientation)
+	var target_y: float = _calculate_rotation_radians(new_orientation)
+	
+	var delta : float = wrapf(target_y - player_scene.global_rotation.y, -PI, PI)
+	var target_rotation_vector = Vector3(player_scene.global_rotation.x, player_scene.global_rotation.y + delta, player_scene.global_rotation.z)
+	
+	var tween = player_scene.create_tween()
+	var start_rotation = player_scene.global_rotation
+	var duration: float = 0.3
+	var steps: int = 12
+	var total_frames: int = int(steps * duration)
+
+	tween.tween_method(
+		func(t: float):
+			var frame: int = int(t * total_frames)
+			var q_t: float = float(frame) / float(total_frames)
+
+			player_scene.global_rotation = start_rotation.lerp(target_rotation_vector, q_t),
+		0.0, 1.0, duration
+	)
+
+	#tween.tween_property(player_scene, "global_rotation:y", player_scene.global_rotation.y + delta, 0.5)
 
 	return
 
@@ -101,19 +136,15 @@ func _on_player_leveled_up(id: int, new_level: int) -> void:
 		
 # helpers
 func _rotate_player_from_orientation(scene: Node3D, orientation: int) -> void:
+	scene.global_rotation.y = _calculate_rotation_radians(orientation)
+			
+func _calculate_rotation_radians(orientation: int) -> float:
 	match orientation:
-		1:
-			scene.global_rotation.y = 0
-			return
-		2:
-			scene.global_rotation.y = deg_to_rad(-90)
-			return
-		3:
-			scene.global_rotation.y = deg_to_rad(180)
-			return
-		4:
-			scene.global_rotation.y = deg_to_rad(90)
-			return
+		1: return 0.0
+		2: return deg_to_rad(-90)
+		3: return deg_to_rad(180)
+		4: return deg_to_rad(90)
+	return 0.0
 
 func _move_player_between_tiles(id: int, from: Vector2i, to: Vector2i) -> void:
 	var from_tile : TileController = world_root.get_tile(from)
@@ -126,13 +157,17 @@ func _move_player_between_tiles(id: int, from: Vector2i, to: Vector2i) -> void:
 		push_warning("PlayerManager: to_tile not found at pos ", to)
 		return
 		
+	var from_slot: int = from_tile.find_player_occupied_index_from_player_id(id)
+	if from_slot == -1:
+		push_warning("PlayerManager: player ", id, " not found in any slot on from_tile")
+			
 	var scene = from_tile.get_player_scene_from_id(id)
-	to_tile.free_player_slot(0)
-	from_tile.occupy_player_slot(1, scene)
+	from_tile.free_player_slot(from_slot)
 	
-	print(from_tile._player_slots[0].get_child_count())
-	print(to_tile._player_slots[0].get_child_count())
-	
-	to_tile.add_child(scene)
+	var to_slot: int = to_tile.get_free_player_slot()
+	if to_slot == -1:
+		push_warning("PlayerManager: no free slot on to_tile at ", to)
+		
+	to_tile.occupy_player_slot(to_slot, scene)
 	
 	return

@@ -59,12 +59,8 @@ func occupy_player_slot(index: int, scene: Node3D) -> void:
 func free_player_slot(index: int) -> void:
 	_player_slot_occupied[index] = false
 	var scene: Node3D = _player_slots[index].get_child(0)
-	if not scene:
-		push_error("TileController: free_player_slot failed to find player scene at index ", index)
-		return
-
-	scene.queue_free()
-	
+	if scene:
+		_player_slots[index].remove_child(scene)
 
 func _collect_markers(parent_name: String) -> Array[Marker3D]:
 	var result: Array[Marker3D] = []	
