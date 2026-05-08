@@ -4,7 +4,8 @@ extends Node3D
 @onready var world_root: Node3D = %WorldRoot
 
 const SCENES: Dictionary = {
-	"nourriture": preload("res://scenes/world/resources/nourriture.tscn")
+	"nourriture": preload("res://scenes/world/resources/nourriture.tscn"),
+	"linemate": preload("res://scenes/world/resources/linemate.tscn")
 }
 
 func _ready() -> void:
@@ -18,11 +19,12 @@ func _place_initial_resources() -> void:
 		for resource in tile_data.resources:
 			var quantity: int = tile_data.resources[resource]
 			if quantity > 0:
+				print(resource)
 				_place_resource(GameData.tiles[tile].pos, resource, quantity)
 	return
 
 func _place_resource(pos: Vector2i, resource: String, quantity: int) -> void:
-	if not resource == "nourriture": return # until all the other resource scenes are up
+	if not resource == "nourriture" and not resource == "linemate": return # until all the other resource scenes are up
 	var tile : TileController = world_root.get_tile(pos)
 	if not tile:
 		push_warning("ResourceManager: Tile not found at pos ", pos)
@@ -32,8 +34,8 @@ func _place_resource(pos: Vector2i, resource: String, quantity: int) -> void:
 	if slot == -1:
 		push_warning("ResourceManager: Tile full when attempting to place ", resource)
 		return
-	
-	var scene: Node3D = SCENES["nourriture"].instantiate()
+
+	var scene: Node3D = SCENES[resource].instantiate()
 	tile.occupy_resource_slot(slot, scene)
 			
 	

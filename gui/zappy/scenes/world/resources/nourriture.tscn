@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://c2n5uqs3k4x3l"]
 
+[ext_resource type="Script" uid="uid://cauvkvg5cqqdf" path="res://scenes/world/resources/ResourceController.gd" id="1_i3rcq"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_kkfhu"]
 size = Vector3(0.2, 0.2, 0.2)
 
@@ -47,6 +49,7 @@ shadow_mesh = SubResource("ArrayMesh_5uo8b")
 albedo_color = Color(0, 0, 0.3491902, 1)
 
 [node name="Nourriture" type="Node3D" unique_id=1242765517]
+script = ExtResource("1_i3rcq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=620233304]
 mesh = SubResource("BoxMesh_kkfhu")

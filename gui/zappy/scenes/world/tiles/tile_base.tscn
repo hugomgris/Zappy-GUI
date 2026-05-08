@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cvo5l8kyr3kvf" path="res://scenes/world/tiles/TileController.gd" id="1_07wp2"]
 [ext_resource type="PackedScene" uid="uid://bxmjo4gfdirtw" path="res://scenes/world/tiles/tile_base_model.tscn" id="1_oqp2m"]
-[ext_resource type="Material" path="res://assets/textures/TileMaterial.tres" id="3_jl8q7"]
+[ext_resource type="Material" uid="uid://jpgjvia5t5ga" path="res://assets/textures/TileMaterial.tres" id="3_jl8q7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1abcd"]
 
@@ -88,7 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.2, 0)
 [node name="mesh" parent="." unique_id=14021460 instance=ExtResource("1_oqp2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="basic_tile" parent="mesh" index="0" unique_id=1163043404]
+[node name="basic_tile" parent="mesh" index="0" unique_id=835843803]
 material_override = ExtResource("3_jl8q7")
 
 [editable path="mesh"]

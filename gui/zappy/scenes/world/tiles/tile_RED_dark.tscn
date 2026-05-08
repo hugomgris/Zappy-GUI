@@ -2,13 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://be1l3joe57ao6" path="res://scenes/world/tiles/tile_RED_dark_model.tscn" id="1_0hqqu"]
 [ext_resource type="Script" uid="uid://cvo5l8kyr3kvf" path="res://scenes/world/tiles/TileController.gd" id="1_kxasy"]
+[ext_resource type="PackedScene" uid="uid://71t65q4m35v5" path="res://scenes/world/tiles/tile_RED_dark_V2.tscn" id="2_kxasy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uaetr"]
 
 [node name="Area3D" type="Area3D" unique_id=408848363]
 script = ExtResource("1_kxasy")
 
-[node name="testCube_RED_DARK" parent="." unique_id=676152116 instance=ExtResource("1_0hqqu")]
+[node name="tile_RED_dark" parent="." unique_id=733355947 instance=ExtResource("2_kxasy")]
+
+[node name="testCube_RED_DARK" parent="." unique_id=584290806 instance=ExtResource("1_0hqqu")]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=285171305]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -81,6 +85,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0.75)
 
 [node name="PlayerSlots" type="Node3D" parent="." unique_id=524447459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="PlayerSlot_TopLeft" type="Marker3D" parent="PlayerSlots" unique_id=1923363976]
 unique_name_in_owner = true

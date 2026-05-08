@@ -46,11 +46,9 @@ func initialize_for_map(size: Vector2i) -> void:
 	_initial_camera_size = _size_target
 	_grid_center = grid_center
 
-	# Set yaw first so _compute_recentering_correction uses the right angle
 	rotation.y = deg_to_rad(initial_yaw_deg)
 	_yaw_target = deg_to_rad(initial_yaw_deg)
 
-	# Use the same analytical correction the rotation system uses
 	_pos_target = _compute_recentering_correction(_yaw_target)
 	position = _pos_target
 
