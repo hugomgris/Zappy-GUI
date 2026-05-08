@@ -26,5 +26,5 @@ func _ready() -> void:
 	_camera_rig.initialize_for_map(GameData.map_size)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		game_sub_viewport.push_input(event)
+	if event is InputEventMouseButton or event is InputEventMouseMotion:
+		$GameSubViewport.push_input(event)

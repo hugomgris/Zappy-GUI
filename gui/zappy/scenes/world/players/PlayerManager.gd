@@ -47,7 +47,6 @@ func _on_player_moved(id: int, from: Vector2i, to: Vector2i, orientation: int) -
 	return
 
 func _on_player_rotated(id: int, new_orientation: int) -> void:
-	print("rotating to new orientation ", new_orientation)
 	var player_data: GameData.PlayerData = GameData.get_player(id)
 	var pos: Vector2i = player_data.pos
 	

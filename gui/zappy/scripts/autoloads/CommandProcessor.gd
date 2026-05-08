@@ -68,11 +68,6 @@ func _avance(cmd: Dictionary) -> void:
 	return
 	
 func _rotate(cmd: Dictionary, direction: int) -> void:
-	if direction == 1:
-		print("DROIT")
-	elif direction == -1:
-		print("GUACHE")
-
 	var id: int = cmd.get("player_id", -1)
 	var new_orientation: int = GameData.players[id].orientation + 1 if direction > 0 else GameData.players[id].orientation - 1
 
