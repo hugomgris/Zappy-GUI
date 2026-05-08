@@ -12,6 +12,7 @@ func _apply() -> void:
 	var target := BASE_SIZE * logo_scale
 	scale = target / BASE_SIZE
 	position = BASE_POS + (BASE_SIZE * logo_scale * 0.5)
+	position.x = 1920 - position.x
 
 func _process(_delta: float) -> void:
 	_apply()

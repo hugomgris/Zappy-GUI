@@ -48,6 +48,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.75)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0.75)
 
+[node name="ResourceSlot_TopLeft2" type="Marker3D" parent="ResourceSlots" unique_id=639542757]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.2, -0.75)
+
+[node name="ResourceSlot_TopMiddle2" type="Marker3D" parent="ResourceSlots" unique_id=1330180540]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.75)
+
+[node name="ResourceSlot_TopRight2" type="Marker3D" parent="ResourceSlots" unique_id=2084023869]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, -0.75)
+
+[node name="ResourceSlot_Middleleft2" type="Marker3D" parent="ResourceSlots" unique_id=94808266]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.2, 0)
+
+[node name="ResourceSlot_MiddleRight2" type="Marker3D" parent="ResourceSlots" unique_id=1854390343]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0)
+
+[node name="ResourceSlot_BottomLeft2" type="Marker3D" parent="ResourceSlots" unique_id=1223517]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.2, 0.75)
+
+[node name="ResourceSlot_BottomMiddle2" type="Marker3D" parent="ResourceSlots" unique_id=808607764]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.75)
+
+[node name="ResourceSlot_BottomRight2" type="Marker3D" parent="ResourceSlots" unique_id=2019138974]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.2, 0.75)
+
 [node name="PlayerSlots" type="Node3D" parent="." unique_id=524447459]
 
 [node name="PlayerSlot_TopLeft" type="Marker3D" parent="PlayerSlots" unique_id=1923363976]
@@ -83,5 +115,41 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.5)
 
 [node name="PlayerSlot_BottomRight" type="Marker3D" parent="PlayerSlots" unique_id=1049158098]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0.5)
+
+[node name="PlayerSlot_TopLeft2" type="Marker3D" parent="PlayerSlots" unique_id=1359954984]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, -0.5)
+
+[node name="PlayerSlot_TopCenter2" type="Marker3D" parent="PlayerSlots" unique_id=731273835]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.5)
+
+[node name="PlayerSlot_TopRight2" type="Marker3D" parent="PlayerSlots" unique_id=1423690536]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, -0.5)
+
+[node name="PlayerSlot_MiddleLeft2" type="Marker3D" parent="PlayerSlots" unique_id=1979053821]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0)
+
+[node name="PlayerSlot_MiddleCenter2" type="Marker3D" parent="PlayerSlots" unique_id=442539484]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="PlayerSlot_MiddleRight2" type="Marker3D" parent="PlayerSlots" unique_id=1796888954]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0)
+
+[node name="PlayerSlot_BottomLeft2" type="Marker3D" parent="PlayerSlots" unique_id=1208574125]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.2, 0.5)
+
+[node name="PlayerSlot_BottomMiddle2" type="Marker3D" parent="PlayerSlots" unique_id=608969398]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.5)
+
+[node name="PlayerSlot_BottomRight2" type="Marker3D" parent="PlayerSlots" unique_id=1059269383]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0.5)
