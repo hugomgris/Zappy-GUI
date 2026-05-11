@@ -37,7 +37,7 @@ func _spawn_player(id: int) -> void:
 		push_warning("PlayerManager: Tile full when attempting to place player ", id)
 		return
 	
-	var scene: Node3D = SCENES["test"].instantiate()
+	var scene: Area3D = SCENES["test"].instantiate()
 	scene.assign_player_id(id)
 	tile.occupy_player_slot(slot, scene)
 	_players[id] = scene
@@ -99,7 +99,7 @@ func _on_player_rotated(id: int, new_orientation: int) -> void:
 		push_warning("PlayerManager: tile not found at pos ", pos)
 		return
 	
-	var player_scene: Node3D = tile.get_player_scene_from_id(id)
+	var player_scene: Area3D = tile.get_player_scene_from_id(id)
 	if not player_scene:
 		push_warning("PlayerManager: failed to fetch player_scene from id ", id)
 		return
@@ -131,7 +131,7 @@ func _on_player_leveled_up(id: int, new_level: int) -> void:
 	return
 		
 # helpers
-func _rotate_player_from_orientation(scene: Node3D, orientation: int) -> void:
+func _rotate_player_from_orientation(scene: Area3D, orientation: int) -> void:
 	scene.global_rotation.y = _calculate_rotation_radians(orientation)
 			
 func _calculate_rotation_radians(orientation: int) -> float:

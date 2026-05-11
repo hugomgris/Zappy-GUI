@@ -45,7 +45,7 @@ uniform float paper_grain_size   = 1.0;
 uniform vec2 offset_top_px   = vec2(0.0, 0.0);
 uniform vec2 offset_left_px  = vec2(0.0, 0.0);
 uniform vec2 offset_right_px = vec2(0.0, 0.0);
-uniform vec2 screen_size     = vec2(1920.0, 1080.0);
+uniform vec2 screen_size     = vec2(1080.0, 1080.0);
 
 // ── Animation ────────────────────────────────────────────────────────────────
 uniform float anim_speed          = 2.0;

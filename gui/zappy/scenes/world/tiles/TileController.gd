@@ -36,7 +36,7 @@ func setup(pos: Vector2i) -> void:
 func get_free_resource_slot() -> int:
 	return _resource_slot_occupied.find(false)
 	
-func occupy_resource_slot(index: int, scene: Node3D) -> void:
+func occupy_resource_slot(index: int, scene: Area3D) -> void:
 		_resource_slot_occupied[index] = true
 		_resource_slots[index].add_child(scene) # add scene as child to the marker3D
 		
@@ -45,13 +45,13 @@ func free_resource_slot(index: int) -> void:
 	if _resource_slots[index].get_child_count() == 0:
 		push_error("TileController: free_resource_slot found no scene at index ", index)
 		return
-	var scene: Node3D = _resource_slots[index].get_child(0)
+	var scene: Area3D = _resource_slots[index].get_child(0)
 	_resource_slots[index].remove_child(scene)
 
 func get_free_player_slot() -> int:
 	return _player_slot_occupied.find(false)
 	
-func occupy_player_slot(index: int, scene: Node3D) -> void:
+func occupy_player_slot(index: int, scene: Area3D) -> void:
 	_player_slot_occupied[index] = true
 	_player_slots[index].add_child(scene)
 	
@@ -60,7 +60,7 @@ func free_player_slot(index: int) -> void:
 	if _player_slots[index].get_child_count() == 0:
 		push_error("TileController: free_player_slot found no scene at index ", index)
 		return
-	var scene: Node3D = _player_slots[index].get_child(0)
+	var scene: Area3D = _player_slots[index].get_child(0)
 	_player_slots[index].remove_child(scene)
 
 func _collect_markers(parent_name: String) -> Array[Marker3D]:
@@ -79,11 +79,11 @@ func _collect_markers(parent_name: String) -> Array[Marker3D]:
 func get_player_marker_from_slot(slot: int) -> Marker3D:
 	return _player_slots[slot]
 
-func get_player_scene_from_id(id: int) -> Node3D:
+func get_player_scene_from_id(id: int) -> Area3D:
 	for i in range(_player_slots.size()):
 		if _player_slots[i].get_child_count() == 0:
 			continue
-		var player_scene: Node3D = _player_slots[i].get_child(0)
+		var player_scene: Area3D = _player_slots[i].get_child(0)
 		if player_scene.get_player_id() == id:
 			return player_scene
 	return null
@@ -92,7 +92,7 @@ func find_player_occupied_index_from_player_id(id: int) -> int:
 	for i in range(_player_slots.size()):
 		if _player_slots[i].get_child_count() == 0:
 			continue
-		var player_scene: Node3D = _player_slots[i].get_child(0)
+		var player_scene: Area3D = _player_slots[i].get_child(0)
 		if player_scene.get_player_id() == id:
 			return i
 	return -1
@@ -109,7 +109,7 @@ func get_resource_scene_from_name(resource_name: String) -> Area3D:
 func get_resource_scene_index(resource_name: String) -> int:
 	for i in range(_resource_slots.size()):
 		if (_resource_slots[i].get_child_count()):
-			var target_scene: Node3D = _resource_slots[i].get_child(0)
+			var target_scene: Area3D = _resource_slots[i].get_child(0)
 			if target_scene.name == resource_name:
 				return i
 	

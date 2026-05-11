@@ -9,8 +9,8 @@ extends Node3D
 @export var zoom_speed: float = 2.0
 @export var lerp_speed: float = 5.0
 @export var pitch_angle_deg: float = 60.0
-@export var initial_yaw_deg: float = 22.5
-@export var margin_offset: float = 1.5
+@export var initial_yaw_deg: float = 0.0 #22.5
+@export var margin_offset: float = 1.25
 
 @export var animation_fps: float = 12.0
 

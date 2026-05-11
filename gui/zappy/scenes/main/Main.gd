@@ -10,11 +10,11 @@ extends Control
 
 func _ready() -> void:
 	$PostProcessing/Compositor/GameWorldTexture.texture = game_sub_viewport.get_texture()
-
 	$PostProcessing/Compositor/LogoTexture.texture = logo_viewport.get_texture()
 	
 	var mat := $PostProcessing.material as ShaderMaterial
-	mat.set_shader_parameter("screen_size", Vector2(1920, 1080))
+	# Match your actual window size
+	mat.set_shader_parameter("screen_size", Vector2(1080, 1080))
 	
 	if use_mock:
 		MockServer.build_mock_initial_game_state()
