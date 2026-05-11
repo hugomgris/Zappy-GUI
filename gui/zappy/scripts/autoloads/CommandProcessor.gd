@@ -18,7 +18,6 @@ signal game_over(winning_team: String)
 
 func process_command(cmd: Dictionary) -> void:
 	var command: String = cmd.get("cmd", "")
-	print("launching ", command)
 	if command.is_empty():
 		if (cmd.has("type") and cmd.get("type") == "event" and \
 			cmd.has("status") and cmd.get("status") == "level_up"):

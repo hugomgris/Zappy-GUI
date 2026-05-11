@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 
 @export var float_height: float = 0.08
 @export var float_speed: float = 1.2
@@ -22,6 +22,6 @@ func _process(delta: float) -> void:
 		_time += anim_step * float_speed
 		position = _origin + Vector3(0.0, sin(_time) * float_height, 0.0)
 
-func scale_by_quantity(quantity: float) -> void:
-	print("received quantity of ", quantity)
+func transform_by_quantity(quantity: float) -> void:
 	scale = Vector3.ONE * (quantity * scale_quantity_factor + 1.0)
+	_origin.y = 0.0 + quantity * 0.01

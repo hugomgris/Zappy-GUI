@@ -18,6 +18,7 @@ var _anim_accum: float = 0.0
 var _initial_camera_size: float
 
 var _pos_target: Vector3 = Vector3.ZERO
+var _pitch_target: Vector3 = Vector3.ZERO
 var _size_target: float = 10.0
 var _yaw_target: float = 0.0
 var _bounds: Rect2 = Rect2()
@@ -27,6 +28,7 @@ var _grid_center: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	_pitch.rotation_degrees.x = -pitch_angle_deg
+	print("at ready _pitch.rotation_degrees.x=", _pitch.rotation_degrees.x)
 	rotation_degrees.y = initial_yaw_deg
 	_yaw_target = deg_to_rad(initial_yaw_deg)   # was: initial_yaw_deg (degrees — wrong!)
 	rotation.y = _yaw_target
@@ -85,14 +87,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 	if event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_MIDDLE:
 		var drag: Vector2 = event.relative * 0.02
-		_pos_target += Vector3(-drag.x, 0.0, -drag.y).rotated(Vector3.UP, rotation.y)
+		if Input.is_action_pressed("shift"):
+			_pitch_target = Vector3(rad_to_deg(drag.y), 0, 0)
+		else:
+			_pos_target += Vector3(-drag.x, 0.0, -drag.y).rotated(Vector3.UP, rotation.y)
 
 func _handle_keyboard(delta: float) -> void:
 	var dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if dir != Vector2.ZERO:
 		var world_dir := Vector3(dir.x, 0.0, dir.y).rotated(Vector3.UP, rotation.y)
 		_pos_target += world_dir * move_speed * delta
-
+	
 	if Input.is_action_just_pressed("rotate_left"):
 		_yaw_target -= PI * 0.5
 		_yaw_target = wrapf(_yaw_target, -PI, PI)
@@ -112,7 +117,9 @@ func _apply_lerp(delta: float) -> void:
 						_bounds.position.y + _bounds.size.y)
 						
 	position = position.lerp(_pos_target, t)
-	rotation.y = lerp_angle(rotation.y, _yaw_target, t)
+	_pitch.rotation_degrees.x = lerp_angle(_pitch.rotation_degrees.x, _pitch_target.x, t)
+	print("At lerp - _pitch.rotation_degrees.x=", _pitch.rotation_degrees.x)
+	rotation.y = lerpf(rotation.y, _yaw_target, t)
 	_camera.size = lerpf(_camera.size, _size_target, t)
 
 func _compute_recentering_correction(target_yaw: float) -> Vector3:

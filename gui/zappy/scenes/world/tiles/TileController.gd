@@ -97,10 +97,10 @@ func find_player_occupied_index_from_player_id(id: int) -> int:
 			return i
 	return -1
 
-func get_resource_scene_from_name(resource_name: String) -> Node3D:
+func get_resource_scene_from_name(resource_name: String) -> Area3D:
 	for i in range(_resource_slots.size()):
 		if (_resource_slots[i].get_child_count()):
-			var target_scene: Node3D = _resource_slots[i].get_child(0)
+			var target_scene: Area3D = _resource_slots[i].get_child(0)
 			if target_scene.name == resource_name:
 				return target_scene
 	
