@@ -75,7 +75,7 @@ func _on_player_moved(id: int, from: Vector2i, to: Vector2i) -> void:
 	
 	var tween = scene.create_tween()
 	var start_pos: Vector3 = scene.global_position
-	var duration: float = 0.3
+	var duration: float = 0.3 # TODO: duration of tweens must be related to time units/tick speed to fully occur
 	var steps: int = 12
 	var total_frames: int = int(steps * duration)
 	

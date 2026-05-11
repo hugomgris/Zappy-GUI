@@ -97,14 +97,23 @@ func find_player_occupied_index_from_player_id(id: int) -> int:
 			return i
 	return -1
 
-func get_resource_scene_from_name(name: String) -> Node3D:
+func get_resource_scene_from_name(resource_name: String) -> Node3D:
 	for i in range(_resource_slots.size()):
-		if (_resource_slots[i].get_children_count() > 0):
-			var target_scene: Node3D = _resource_slots[i].get_node(name)
-			if target_scene:
+		if (_resource_slots[i].get_child_count()):
+			var target_scene: Node3D = _resource_slots[i].get_child(0)
+			if target_scene.name == resource_name:
 				return target_scene
 	
 	return null
+	
+func get_resource_scene_index(resource_name: String) -> int:
+	for i in range(_resource_slots.size()):
+		if (_resource_slots[i].get_child_count()):
+			var target_scene: Node3D = _resource_slots[i].get_child(0)
+			if target_scene.name == resource_name:
+				return i
+	
+	return -1
 
 #debug tools
 func get_occupied_player_slots_amount() -> int:
