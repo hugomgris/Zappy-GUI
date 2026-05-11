@@ -154,3 +154,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.5)
 [node name="PlayerSlot_BottomRight2" type="Marker3D" parent="PlayerSlots" unique_id=1059269383]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0.5)
+
+[editable path="tile_RED_dark"]

@@ -2,7 +2,7 @@ extends Node
 
 @export var commands_path: String = "res://data/mock/"
 @export var connection_path: String = commands_path + "connection/"
-@export var interval: float = 0.07
+@export var interval: float = 0.25
 @export var auto_start: bool = false
 
 var _files: Array[String] = []

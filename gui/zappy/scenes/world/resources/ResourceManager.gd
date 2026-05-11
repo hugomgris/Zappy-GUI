@@ -40,8 +40,20 @@ func _place_resource(pos: Vector2i, resource: String, quantity: int) -> void:
 	
 	return
 
-func _on_resource_placed(id: int, tile_pos: Vector2i, resource: String) -> void:
-	return
+func _on_resource_placed(id: int, pos: Vector2i, resource: String, reserve: int) -> void:
+	var tile : TileController = world_root.get_tile(pos)
+	if not tile:
+		push_warning("ResourceManager: Tile not found at pos ", pos)
+		return
+	
+	var resource_scene: Node3D = tile.get_resource_scene_from_name(resource)
+	if resource_scene:
+		resource_scene.scale_by_quantity(reserve)
+		return
+	else:
+		var scene: Node3D = SCENES[resource].instantiate()
+		tile.occupy_resource_slot(tile.get_free_resource_slot(), scene)
+		return
 
 func _on_resource_taken(id: int, pos: Vector2i, resource: String, reserve: int) -> void:
 	var tile : TileController = world_root.get_tile(pos)
@@ -50,15 +62,11 @@ func _on_resource_taken(id: int, pos: Vector2i, resource: String, reserve: int) 
 		return
 	
 	var resource_scene: Node3D = tile.get_resource_scene_from_name(resource)
-	#for child in resource_slots.get_children():
-		#print(child.get_children_count())
+	if not resource_scene:
+		push_warning("ResourceManageR: Tile has no resource scene for ", resource)
 	
-	#if (reserve > 1):
-		#
-	#else:
-		#print("get rid of scene")
+	if (reserve > 1):
+		resource_scene.scale_by_quantity(reserve)
+	else:
+		tile.free_resource_slot(tile.get_resource_scene_index(resource))
 	return
-
-# connect signals
-# place and remove functions
-# quantity -> scale

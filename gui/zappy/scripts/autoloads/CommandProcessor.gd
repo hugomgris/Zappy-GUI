@@ -6,7 +6,7 @@ signal player_rotated(id: int, new_orientation: int)
 signal player_died(id: int)
 signal player_leveled_up(id: int, new_level: int)
 signal player_status_changed(id: int, status: GameConfig.PlayerStatus)
-signal resource_placed(id: int, tile_pos: Vector2i, resource: String)
+signal resource_placed(id: int, tile_pos: Vector2i, resource: String, quantity: int)
 signal resource_taken(id: int, tile_pos: Vector2i, resource: String, reserve: int)
 signal egg_laid(egg_id: int, tile_pos: Vector2i)
 signal egg_hatched(egg_id: int)
@@ -18,7 +18,7 @@ signal game_over(winning_team: String)
 
 func process_command(cmd: Dictionary) -> void:
 	var command: String = cmd.get("cmd", "")
-	
+	print("launching ", command)
 	if command.is_empty():
 		if (cmd.has("type") and cmd.get("type") == "event" and \
 			cmd.has("status") and cmd.get("status") == "level_up"):
@@ -70,8 +70,7 @@ func _avance(cmd: Dictionary) -> void:
 func _rotate(cmd: Dictionary, direction: int) -> void:
 	var id: int = cmd.get("player_id", -1)
 	var new_orientation: int = GameData.players[id].orientation + 1 if direction > 0 else GameData.players[id].orientation - 1
-
-
+	
 	if new_orientation > 4:
 		new_orientation = 1
 	elif new_orientation < 1:
@@ -106,7 +105,7 @@ func _pose(cmd: Dictionary) -> void:
 	if (player_reserve > 0):
 		GameData.tiles[pos].resources[target] += 1
 		GameData.players[id].inventory[target] -= 1
-		resource_placed.emit(id, pos, target)
+		resource_placed.emit(id, pos, target, GameData.tiles[pos].resources[target])
 
 	return
 

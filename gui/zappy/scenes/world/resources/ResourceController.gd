@@ -23,4 +23,5 @@ func _process(delta: float) -> void:
 		position = _origin + Vector3(0.0, sin(_time) * float_height, 0.0)
 
 func scale_by_quantity(quantity: float) -> void:
-	scale = scale * (quantity * scale_quantity_factor + 1.0)
+	print("received quantity of ", quantity)
+	scale = Vector3.ONE * (quantity * scale_quantity_factor + 1.0)
