@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dvykmm3cu4y5o"
-path="res://.godot/imported/testCube_RED_DARK.glb-48d16370191f20e73fe9910c1a604649.scn"
+uid="uid://deec5bmvnhuqa"
+path="res://.godot/imported/tile_RED_light.glb-782d339a622c6ab2edee23cf9883a106.scn"
 
 [deps]
 
-source_file="res://assets/models/testCube_RED_DARK.glb"
-dest_files=["res://.godot/imported/testCube_RED_DARK.glb-48d16370191f20e73fe9910c1a604649.scn"]
+source_file="res://assets/models/tiles/tile_RED_light.glb"
+dest_files=["res://.godot/imported/tile_RED_light.glb-782d339a622c6ab2edee23cf9883a106.scn"]
 
 [params]
 

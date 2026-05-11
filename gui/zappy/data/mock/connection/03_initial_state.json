@@ -4,7 +4,7 @@
     "height": 5,
     "tiles": [
       { "x": 0, "y": 0, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
-      { "x": 1, "y": 0, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 1, "y": 0, "resources": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 2, "y": 0, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
       { "x": 3, "y": 0, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 4, "y": 0, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
@@ -14,7 +14,7 @@
       { "x": 3, "y": 1, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 4, "y": 1, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 0, "y": 2, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
-      { "x": 1, "y": 2, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 1, "y": 2, "resources": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 2, "y": 2, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
       { "x": 3, "y": 2, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 4, "y": 2, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
@@ -26,7 +26,7 @@
       { "x": 0, "y": 4, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
       { "x": 1, "y": 4, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 2, "y": 4, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
-      { "x": 3, "y": 4, "resources": { "nourriture": 2, "linemate": 2, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 3, "y": 4, "resources": { "nourriture": 5, "linemate": 10, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 4, "y": 4, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] }
     ]
   },

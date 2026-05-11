@@ -6,4 +6,4 @@
 [node name="linemate" type="Node3D" unique_id=1242765517]
 script = ExtResource("1_tv46a")
 
-[node name="test_linemate2" parent="." unique_id=118672033 instance=ExtResource("2_5nfm7")]
+[node name="test_linemate" parent="." unique_id=118672033 instance=ExtResource("2_5nfm7")]

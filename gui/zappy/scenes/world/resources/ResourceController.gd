@@ -3,6 +3,7 @@ extends Node3D
 @export var float_height: float = 0.08
 @export var float_speed: float = 1.2
 @export var animation_fps: float = 12.0
+@export var scale_quantity_factor: float = 0.1
 
 var _anim_accum: float = 0.0
 
@@ -20,3 +21,6 @@ func _process(delta: float) -> void:
 		_anim_accum = fmod(_anim_accum, anim_step)
 		_time += anim_step * float_speed
 		position = _origin + Vector3(0.0, sin(_time) * float_height, 0.0)
+
+func scale_by_quantity(quantity: float) -> void:
+	scale = scale * (quantity * scale_quantity_factor + 1.0)

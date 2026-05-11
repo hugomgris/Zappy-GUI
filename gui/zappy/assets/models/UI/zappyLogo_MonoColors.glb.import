@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cnpmyopov231g"
-path="res://.godot/imported/tile_RED_dark.glb-f40ad44826c63db8c3845d060003d654.scn"
+uid="uid://4uiuigixqyqy"
+path="res://.godot/imported/zappyLogo_MonoColors.glb-7b62333803fb648a6855114a6eedd706.scn"
 
 [deps]
 
-source_file="res://assets/models/tile_RED_dark.glb"
-dest_files=["res://.godot/imported/tile_RED_dark.glb-f40ad44826c63db8c3845d060003d654.scn"]
+source_file="res://assets/models/UI/zappyLogo_MonoColors.glb"
+dest_files=["res://.godot/imported/zappyLogo_MonoColors.glb-7b62333803fb648a6855114a6eedd706.scn"]
 
 [params]
 
