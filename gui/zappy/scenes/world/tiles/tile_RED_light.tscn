@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://cvo5l8kyr3kvf" path="res://scenes/world/tiles/TileController.gd" id="1_uaetr"]
 [ext_resource type="PackedScene" uid="uid://c1k2ntcl5kxxf" path="res://scenes/world/tiles/tile_RED_light_model.tscn" id="2_du34p"]
+[ext_resource type="PackedScene" uid="uid://dtiuwcujfeh8h" path="res://scenes/world/tiles/tile_GREEN_dark_model.tscn" id="2_mwivw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uaetr"]
 
 [node name="TileArea" type="Area3D" unique_id=408848363]
 script = ExtResource("1_uaetr")
+
+[node name="tile_GREEN_dark" parent="." unique_id=356640597 instance=ExtResource("2_mwivw")]
+visible = false
 
 [node name="tile_RED_light" parent="." unique_id=1197458402 instance=ExtResource("2_du34p")]
 

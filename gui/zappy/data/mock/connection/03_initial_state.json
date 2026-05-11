@@ -1,7 +1,7 @@
 {
   "map": {
-    "width": 5,
-    "height": 5,
+    "width": 15,
+    "height": 15,
     "tiles": [
       { "x": 0, "y": 0, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
       { "x": 1, "y": 0, "resources": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
