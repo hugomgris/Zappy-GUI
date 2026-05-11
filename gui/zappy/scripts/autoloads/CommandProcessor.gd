@@ -7,7 +7,7 @@ signal player_died(id: int)
 signal player_leveled_up(id: int, new_level: int)
 signal player_status_changed(id: int, status: GameConfig.PlayerStatus)
 signal resource_placed(id: int, tile_pos: Vector2i, resource: String)
-signal resource_taken(id: int, tile_pos: Vector2i, resource: String)
+signal resource_taken(id: int, tile_pos: Vector2i, resource: String, reserve: int)
 signal egg_laid(egg_id: int, tile_pos: Vector2i)
 signal egg_hatched(egg_id: int)
 signal egg_died(egg_id: int)
@@ -88,12 +88,12 @@ func _prend(cmd: Dictionary) -> void:
 	var pos: Vector2i = GameData.players[id].pos
 	var target: String = cmd.get("arg")
 
-	
 	var tile_reserve: int = GameData.tiles[pos].resources[target]
 	if tile_reserve > 0:
+		# Take resource from tile, add it to player inventory
 		GameData.tiles[pos].resources[target] -= 1
 		GameData.players[id].inventory[target] += 1
-		resource_taken.emit(id, pos, target)
+		resource_taken.emit(id, pos, target, tile_reserve)
 
 	return
 

@@ -13,6 +13,7 @@ func _ready() -> void:
 	CommandProcessor.player_moved.connect(_on_player_moved)
 	CommandProcessor.player_rotated.connect(_on_player_rotated)
 	CommandProcessor.player_leveled_up.connect(_on_player_leveled_up)
+	# TODO: wire signal to trigger prend/pose animations?
 
 
 func _spawn_players() -> void:

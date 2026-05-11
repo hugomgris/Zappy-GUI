@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uaetr"]
 
-[node name="Area3D" type="Area3D" unique_id=408848363]
+[node name="TileArea" type="Area3D" unique_id=408848363]
 script = ExtResource("1_uaetr")
 
 [node name="tile_RED_light" parent="." unique_id=1197458402 instance=ExtResource("2_du34p")]

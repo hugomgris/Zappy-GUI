@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://deec5bmvnhuqa"
-path="res://.godot/imported/tile_RED_light.glb-7d049bbbf400e8111481aa2a9cd27a7d.scn"
+uid="uid://b2rcwbht7vapu"
+path="res://.godot/imported/test_nourriture.glb-869175f6600b6aaf08a409dd0c60cab1.scn"
 
 [deps]
 
-source_file="res://assets/models/tile_RED_light.glb"
-dest_files=["res://.godot/imported/tile_RED_light.glb-7d049bbbf400e8111481aa2a9cd27a7d.scn"]
+source_file="res://assets/models/resources/test_nourriture.glb"
+dest_files=["res://.godot/imported/test_nourriture.glb-869175f6600b6aaf08a409dd0c60cab1.scn"]
 
 [params]
 

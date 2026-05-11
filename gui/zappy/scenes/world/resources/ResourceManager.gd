@@ -19,7 +19,6 @@ func _place_initial_resources() -> void:
 		for resource in tile_data.resources:
 			var quantity: int = tile_data.resources[resource]
 			if quantity > 0:
-				print(resource)
 				_place_resource(GameData.tiles[tile].pos, resource, quantity)
 	return
 
@@ -37,14 +36,27 @@ func _place_resource(pos: Vector2i, resource: String, quantity: int) -> void:
 
 	var scene: Node3D = SCENES[resource].instantiate()
 	tile.occupy_resource_slot(slot, scene)
-			
+	scene.scale_by_quantity(quantity)
 	
 	return
 
 func _on_resource_placed(id: int, tile_pos: Vector2i, resource: String) -> void:
 	return
 
-func _on_resource_taken(id: int, tile_pos: Vector2i, resource: String) -> void:
+func _on_resource_taken(id: int, pos: Vector2i, resource: String, reserve: int) -> void:
+	var tile : TileController = world_root.get_tile(pos)
+	if not tile:
+		push_warning("ResourceManager: Tile not found at pos ", pos)
+		return
+	
+	var resource_scene: Node3D = tile.get_resource_scene_from_name(resource)
+	#for child in resource_slots.get_children():
+		#print(child.get_children_count())
+	
+	#if (reserve > 1):
+		#
+	#else:
+		#print("get rid of scene")
 	return
 
 # connect signals

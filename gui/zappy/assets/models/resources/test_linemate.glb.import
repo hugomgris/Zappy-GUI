@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://4uiuigixqyqy"
-path="res://.godot/imported/zappyLogo_MonoColors.glb-45b95dcc8e493c98e68be57fcb0346da.scn"
+uid="uid://cj1m5l5830ny0"
+path="res://.godot/imported/test_linemate.glb-06e8a177614b6805f6d3f469f70d3c8a.scn"
 
 [deps]
 
-source_file="res://assets/models/zappyLogo_MonoColors.glb"
-dest_files=["res://.godot/imported/zappyLogo_MonoColors.glb-45b95dcc8e493c98e68be57fcb0346da.scn"]
+source_file="res://assets/models/resources/test_linemate.glb"
+dest_files=["res://.godot/imported/test_linemate.glb-06e8a177614b6805f6d3f469f70d3c8a.scn"]
 
 [params]
 
