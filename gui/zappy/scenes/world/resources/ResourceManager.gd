@@ -34,9 +34,9 @@ func _place_resource(pos: Vector2i, resource: String, quantity: int) -> void:
 		push_warning("ResourceManager: Tile full when attempting to place ", resource)
 		return
 
-	var scene: Node3D = SCENES[resource].instantiate()
+	var scene: Area3D = SCENES[resource].instantiate()
 	tile.occupy_resource_slot(slot, scene)
-	scene.scale_by_quantity(quantity)
+	scene.transform_by_quantity(quantity)
 	
 	return
 
@@ -46,12 +46,12 @@ func _on_resource_placed(id: int, pos: Vector2i, resource: String, reserve: int)
 		push_warning("ResourceManager: Tile not found at pos ", pos)
 		return
 	
-	var resource_scene: Node3D = tile.get_resource_scene_from_name(resource)
+	var resource_scene: Area3D = tile.get_resource_scene_from_name(resource)
 	if resource_scene:
-		resource_scene.scale_by_quantity(reserve)
+		resource_scene.transform_by_quantity(reserve)
 		return
 	else:
-		var scene: Node3D = SCENES[resource].instantiate()
+		var scene: Area3D = SCENES[resource].instantiate()
 		tile.occupy_resource_slot(tile.get_free_resource_slot(), scene)
 		return
 
@@ -61,12 +61,12 @@ func _on_resource_taken(id: int, pos: Vector2i, resource: String, reserve: int) 
 		push_warning("ResourceManager: Tile not found at pos ", pos)
 		return
 	
-	var resource_scene: Node3D = tile.get_resource_scene_from_name(resource)
+	var resource_scene: Area3D = tile.get_resource_scene_from_name(resource)
 	if not resource_scene:
 		push_warning("ResourceManageR: Tile has no resource scene for ", resource)
 	
 	if (reserve > 1):
-		resource_scene.scale_by_quantity(reserve)
+		resource_scene.transform_by_quantity(reserve)
 	else:
 		tile.free_resource_slot(tile.get_resource_scene_index(resource))
 	return
