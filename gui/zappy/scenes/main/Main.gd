@@ -25,6 +25,8 @@ func _ready() -> void:
 	GameData.world_initialized.emit()
 	_camera_rig.initialize_for_map(GameData.map_size)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
-		$GameSubViewport.push_input(event)
+		print("check")
+		var adjusted = event.xformed_by(Transform2D(0, -Vector2(80, 80)))
+		$GameSubViewport.push_unhandled_input(adjusted)
