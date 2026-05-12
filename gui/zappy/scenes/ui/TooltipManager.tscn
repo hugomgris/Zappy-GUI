@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxe8mg447gnv3"]
+
+[ext_resource type="Script" uid="uid://dl8vkjpk8u4h" path="res://scenes/ui/TooltipManager.gd" id="1_16046"]
+
+[node name="Tooltips" type="CanvasLayer" unique_id=434041064]
+script = ExtResource("1_16046")
+
+[node name="TileTooltip" type="Panel" parent="." unique_id=1954389420]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerTooltip" type="Panel" parent="." unique_id=358256612]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResourceTooltip" type="Panel" parent="." unique_id=1828821890]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EggTooltip" type="Panel" parent="." unique_id=1204571234]
+offset_right = 40.0
+offset_bottom = 40.0

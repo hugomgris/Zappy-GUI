@@ -7,7 +7,6 @@ extends CanvasLayer
 
 var _active_panel: Panel = null
 
-
 func _ready() -> void:
 	_hide_all()
 	
@@ -16,7 +15,7 @@ func show_tile(pos: Vector2i) -> void:
 	if not data:
 		return
 		
-	tile_tooltip.populate(data)
+	#tile_tooltip.populate(data)
 	_show(tile_tooltip)
 	
 func show_player(id: int) -> void:
@@ -28,6 +27,7 @@ func show_player(id: int) -> void:
 	_show(player_tooltip)
 	
 func hide_all() -> void:
+	print("HIDING PANELSS")
 	_hide_all()
 	
 func _process(delta:float) -> void:
