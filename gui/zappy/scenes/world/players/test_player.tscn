@@ -11,7 +11,7 @@ size = Vector3(0.5, 0.5, 0.5)
 script = ExtResource("1_w3nuy")
 
 [node name="characters_cuby" parent="." unique_id=1216707273 instance=ExtResource("2_doucm")]
-transform = Transform3D(0.28797975, 0.19891624, 0, -0.19891624, 0.28797975, 0, 0, 0, 0.35, -0.008357801, -0.27962837, 0)
+transform = Transform3D(0.35000002, 0, 0, 0, 0.35000002, 0, 0, 0, 0.35, -0.008357801, -0.27962837, 0)
 
 [node name="test_player2" parent="." unique_id=591658142 instance=ExtResource("2_iphl7")]
 visible = false
