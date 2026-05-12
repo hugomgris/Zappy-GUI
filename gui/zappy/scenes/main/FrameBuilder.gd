@@ -7,7 +7,7 @@ const GRID_END    = 6        # inclusive, 6 cells = 810px
 
 const COLOR_A      = Color(0.0, 0.485, 0.0, 1.0)
 const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)
-const BORDER_COLOR = Color(0.0, 0.0, 0.0, 1.0)
+const BORDER_COLOR = Color(0.856, 0.856, 0.856, 1.0)
 const BORDER_WIDTH = 5.0
 
 func _ready():

@@ -12,12 +12,13 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
 shader = ExtResource("2_gyg6b")
-shader_parameter/ink1 = Vector3(0.85, 0.15, 0.3)
+shader_parameter/ink1 = Vector3(0.96, -0.055, 0.3)
 shader_parameter/ink2 = Vector3(0, 0.575, 0.75)
 shader_parameter/ink3 = Vector3(0, 0.65, 0.285)
 shader_parameter/ink4 = Vector3(0.405, 0.8, 0.7)
 shader_parameter/ink5 = Vector3(0.9, 0.2, 0.6)
 shader_parameter/ink6 = Vector3(0.95, 0.75, 0.1)
+shader_parameter/ink7 = Vector3(0.15, 0.12, 0.1)
 shader_parameter/background = Vector3(0.865, 0.87, 0.815)
 shader_parameter/ink1_opacity = 0.9
 shader_parameter/ink2_opacity = 0.85
@@ -25,11 +26,12 @@ shader_parameter/ink3_opacity = 0.85
 shader_parameter/ink4_opacity = 0.85
 shader_parameter/ink5_opacity = 0.85
 shader_parameter/ink6_opacity = 0.85
+shader_parameter/ink7_opacity = 0.92
 shader_parameter/stipple_scale = 1200.0
 shader_parameter/stipple_size = 1.2
 shader_parameter/stipple_softness = 1.15
 shader_parameter/stipple_jitter = 0.8
-shader_parameter/density_dark = 1.18
+shader_parameter/density_dark = 1.2
 shader_parameter/density_light = 0.6
 shader_parameter/noise_density_scale = 0.9
 shader_parameter/noise_threshold = 0.7
@@ -39,10 +41,10 @@ shader_parameter/dot_opacity_variation = 0.75
 shader_parameter/dot_shape_variation = 0.9
 shader_parameter/paper_grain_amount = 0.03
 shader_parameter/paper_grain_size = 0.25
-shader_parameter/offset_top_px = Vector2(0, 0)
-shader_parameter/offset_left_px = Vector2(0, 0)
-shader_parameter/offset_right_px = Vector2(0, 0)
-shader_parameter/screen_size = Vector2(1920, 1080)
+shader_parameter/offset_top_px = Vector2(1, 1)
+shader_parameter/offset_left_px = Vector2(-1, 0)
+shader_parameter/offset_right_px = Vector2(0, -2)
+shader_parameter/screen_size = Vector2(1080, 1080)
 shader_parameter/anim_speed = 2.0
 shader_parameter/anim_strength = 0.15
 shader_parameter/anim_density_jitter = 0.0
@@ -104,10 +106,6 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LogoTexture" type="Sprite2D" parent="PostProcessing/Compositor" unique_id=982580421]
-visible = false
-script = ExtResource("3_1rhdn")
-
 [node name="FrameRoot" type="Control" parent="PostProcessing/Compositor" unique_id=2144885571]
 layout_mode = 3
 anchors_preset = 15
@@ -116,6 +114,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_ostsq")
+
+[node name="LogoTexture" type="Sprite2D" parent="PostProcessing/Compositor" unique_id=982580421]
+script = ExtResource("3_1rhdn")
 
 [node name="GameSubViewport" type="SubViewport" parent="." unique_id=308586066]
 unique_name_in_owner = true
@@ -132,10 +133,10 @@ current = true
 [node name="LogoViewport" type="SubViewport" parent="." unique_id=2057420778]
 unique_name_in_owner = true
 transparent_bg = true
-size = Vector2i(350, 90)
+size = Vector2i(135, 135)
 
 [node name="LogoCamera" type="Camera3D" parent="LogoViewport" unique_id=315319403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.202, 0.11969566, 20.972458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -140.32588, 0.11969566, 20.972458)
 projection = 1
 size = 3.373
 
