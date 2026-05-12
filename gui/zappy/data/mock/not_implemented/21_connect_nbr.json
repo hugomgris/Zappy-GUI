@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "connect_nbr",
+  "arg": "3",
+  "player_id": 4
+}

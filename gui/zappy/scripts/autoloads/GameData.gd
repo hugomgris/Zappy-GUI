@@ -1,13 +1,12 @@
 # GAME DATA - SOURCE OF TRUTH, WHERE OTHER SYSTEMS READ FOR AND REACT TO ITS SIGNALS
 extends Node
 
-
 # STATE
 var map_size: Vector2i = Vector2i.ZERO
 var time_unit: int = 100
 var tick: int = 0
 var teams: Dictionary = {} # team_name -> { player_count, connections }
-var tiles: Dictionary = {} # Vector2i -> TileData
+var tiles: Dictionary = {} # Vector2i -> TileState
 var players: Dictionary = {} # int (id) -> PlayerData
 var eggs: Dictionary = {} # int (id) -> EggData
 
@@ -61,6 +60,12 @@ class EggData:
 	var layer_id: int
 	var team: String
 	var pos: Vector2i
+
+	func _init(lid: int) -> void:
+		id = -1
+		layer_id = lid
+		team = ""
+		pos = Vector2i(-1, -1)
 	
 # ACCESORS
 func get_tile(pos: Vector2i) -> TileState:

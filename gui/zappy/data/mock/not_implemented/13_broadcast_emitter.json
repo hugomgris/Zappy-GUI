@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "broadcast",
+  "status": "ok",
+  "player_id": 4
+}

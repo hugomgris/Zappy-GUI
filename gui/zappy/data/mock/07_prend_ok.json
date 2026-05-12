@@ -1,0 +1,7 @@
+{
+  "type": "response",
+  "cmd": "prend",
+  "arg": "linemate",
+  "status": "ok",
+  "player_id": 4
+}

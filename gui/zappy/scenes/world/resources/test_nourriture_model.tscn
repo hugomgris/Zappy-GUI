@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://de1ub2y41a13m"]
+
+[ext_resource type="PackedScene" uid="uid://b2rcwbht7vapu" path="res://assets/models/resources/test_nourriture.glb" id="1_v217c"]
+
+[node name="test_nourriture" unique_id=1521815445 instance=ExtResource("1_v217c")]
