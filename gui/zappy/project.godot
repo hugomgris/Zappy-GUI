@@ -21,12 +21,12 @@ GameConfig="*uid://cid7tfmmb5fre"
 GameData="*uid://ugt4xoj4o7um"
 CommandProcessor="*uid://lyotwwm5mbvl"
 MockServer="*uid://boy3xd26y2nuh"
+TooltipManager="*uid://bxe8mg447gnv3"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1080
-window/size/mode=3
 window/size/borderless=true
 
 [input]

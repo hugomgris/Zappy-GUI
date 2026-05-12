@@ -50,3 +50,4 @@ Documentation/logging:
 - Camera tweaks
 - Command pipeline + entity managers
 - Tweens/animations
+- Raycasting hovering pipeline
