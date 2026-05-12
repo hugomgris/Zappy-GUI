@@ -37,3 +37,6 @@ client_cpp/test.log
 # ------------------------------
 *.blend1
 gui/refs/Zappy.pur
+.vscode/
+.gitignore
+log.txt

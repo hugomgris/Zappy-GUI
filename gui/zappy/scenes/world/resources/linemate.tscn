@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://rw6mllpcfbtm"]
+
+[ext_resource type="Script" uid="uid://cauvkvg5cqqdf" path="res://scenes/world/resources/ResourceController.gd" id="1_tv46a"]
+[ext_resource type="PackedScene" uid="uid://c2rxho5nhekbv" path="res://scenes/world/resources/linemate_old.tscn" id="2_5ho5a"]
+[ext_resource type="PackedScene" uid="uid://cmn2itfsokxt1" path="res://scenes/world/resources/test_linemate_model.tscn" id="2_5nfm7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5nfm7"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[node name="linemate" type="Area3D" unique_id=800927402]
+script = ExtResource("1_tv46a")
+
+[node name="linemate" parent="." unique_id=1823860810 instance=ExtResource("2_5ho5a")]
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, -0.128, 0)
+
+[node name="test_linemate" parent="." unique_id=118672033 instance=ExtResource("2_5nfm7")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1073373460]
+shape = SubResource("BoxShape3D_5nfm7")

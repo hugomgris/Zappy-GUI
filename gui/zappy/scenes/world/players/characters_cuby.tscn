@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ccscly8m3r30s"]
+
+[ext_resource type="PackedScene" uid="uid://bybvtagr00x8h" path="res://scenes/world/players/characters_cuby.glb" id="1_ter2r"]
+
+[node name="characters_cuby" unique_id=1216707273 instance=ExtResource("1_ter2r")]
+
+[node name="body" parent="." index="0" unique_id=2074010512]
+transform = Transform3D(0.9958384, -0.0643755, -0.06451054, 0.06451055, 0.997917, 1.0395422e-05, 0.0643755, -0.004171963, 0.99791694, 0.4141747, 2.5247445, -0.09545612)
+
+[node name="Skeleton3D" parent="body/left_arm" parent_id_path=PackedInt32Array(1485693568) index="0" unique_id=287318885]
+bones/1/rotation = Quaternion(0.11305514, -6.5023897e-09, 0.017906176, 0.9934274)
+bones/2/rotation = Quaternion(0.113055155, -4.9790647e-09, 0.017906163, 0.9934274)
+bones/3/rotation = Quaternion(0.11305517, 1.406961e-09, 0.017906155, 0.9934274)
+bones/4/rotation = Quaternion(0.113055184, 3.1063043e-09, 0.01790614, 0.9934274)
+
+[node name="Skeleton3D" parent="body/right_arm" parent_id_path=PackedInt32Array(1495568944) index="0" unique_id=1745654465]
+bones/1/rotation = Quaternion(0.1109581, -2.6946223e-09, 0.017574036, 0.99366975)
+bones/2/rotation = Quaternion(0.11095813, -1.0576075e-08, 0.017574029, 0.99366975)
+bones/3/rotation = Quaternion(0.11095816, -1.6581254e-08, 0.017574027, 0.99366975)
+bones/4/rotation = Quaternion(0.11095813, -2.2178149e-08, 0.017574022, 0.99366975)
+
+[node name="Skeleton3D" parent="right_leg" parent_id_path=PackedInt32Array(415352764) index="0" unique_id=1483475093]
+bones/0/rotation = Quaternion(-1e-45, 0, -0.069936514, 0.9975515)
+bones/2/rotation = Quaternion(-1.2513508e-13, 1.381763e-14, 0.10145729, 0.9948399)
+
+[node name="Skeleton3D" parent="left_leg" parent_id_path=PackedInt32Array(718638517) index="0" unique_id=1528911496]
+bones/0/rotation = Quaternion(-1e-45, 0, -0.12540029, 0.9921063)
+bones/2/rotation = Quaternion(-1.3212555e-13, 5.7604996e-15, 0.062423926, 0.99804974)
+
+[node name="AnimationPlayer" parent="." index="3" unique_id=1395987495]
+autoplay = &"idle"

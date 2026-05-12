@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "droite",
+  "status": "ok",
+  "player_id": 3
+}
