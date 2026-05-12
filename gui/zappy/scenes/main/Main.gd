@@ -10,7 +10,6 @@ extends Control
 
 func _ready() -> void:
 	$PostProcessing/Compositor/GameWorldTexture.texture = game_sub_viewport.get_texture()
-	$PostProcessing/Compositor/LogoTexture.texture = logo_viewport.get_texture()
 	
 	var mat := $PostProcessing.material as ShaderMaterial
 	# Match your actual window size
