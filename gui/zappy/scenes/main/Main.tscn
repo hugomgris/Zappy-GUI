@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bd5uok3x27m7g" path="res://assets/UI_images/a_sheet_placeholder.png" id="7_jsdfw"]
 [ext_resource type="Texture2D" uid="uid://bgd2jv53tqvw4" path="res://assets/UI_images/y_placeholder.png" id="7_p5fgu"]
 [ext_resource type="Script" uid="uid://b63b7cjar5ayy" path="res://scenes/world/players/PlayerManager.gd" id="8_ko0rf"]
+[ext_resource type="Script" uid="uid://dl8vkjpk8u4h" path="res://scenes/ui/TooltipManager.gd" id="15_tck0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
 shader = ExtResource("2_gyg6b")
@@ -288,5 +289,26 @@ script = ExtResource("6_sjxhf")
 
 [node name="PlayerManager" type="Node3D" parent="." unique_id=2011238981]
 script = ExtResource("8_ko0rf")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1142655336]
+
+[node name="Tooltips" type="CanvasLayer" parent="." unique_id=894429523]
+script = ExtResource("15_tck0d")
+
+[node name="TileTooltip" type="Panel" parent="Tooltips" unique_id=1248921172]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerTooltip" type="Panel" parent="Tooltips" unique_id=770578964]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResourceTooltip" type="Panel" parent="Tooltips" unique_id=1657847280]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EggTooltip" type="Panel" parent="Tooltips" unique_id=1258080619]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [editable path="GameSubViewport/CameraRig"]
