@@ -1,6 +1,9 @@
 # GAME CONFIG - DATA CONTAINER
 extends Node
 
+# Window
+const WINDOW_SIZE := Vector2i(1080, 1080)
+
 # MAP
 const TILE_SIZE: float = 2.0
 const TILE_GAP: float = 0.0

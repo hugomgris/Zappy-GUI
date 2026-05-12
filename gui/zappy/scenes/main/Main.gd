@@ -27,6 +27,5 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventMouseMotion:
-		print("check")
 		var adjusted = event.xformed_by(Transform2D(0, -Vector2(80, 80)))
 		$GameSubViewport.push_unhandled_input(adjusted)
