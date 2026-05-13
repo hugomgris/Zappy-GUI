@@ -7,6 +7,10 @@ extends Control
 
 var _active_panel: Panel = null
 var _compositor_mouse := Vector2.ZERO
+var _tooltips: Control = null
+
+func initialize(tooltips: Control) -> void:
+	_tooltips = tooltips
 
 func _ready() -> void:
 	_hide_all()
