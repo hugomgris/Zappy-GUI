@@ -10,6 +10,7 @@ extends Control
 @export var logo_scale := 1.0
 
 var _hovered_tile: TileController = null
+var _hovered_player: PlayerController = null
 
 func _ready() -> void:
 	#$PostProcessing/Compositor/GameWorldTexture.texture = game_sub_viewport.get_texture()
@@ -63,7 +64,16 @@ func _do_picking(viewport_pos: Vector2) -> void:
 					_hovered_tile.unhovered.emit(_hovered_tile.grid_pos)
 				_hovered_tile = collider
 				_hovered_tile.hovered.emit(_hovered_tile.grid_pos)
+		elif collider and collider is PlayerController:
+			if collider != _hovered_player:
+				if _hovered_player:
+					_hovered_player.unhovered.emit(_hovered_player.get_player_id())
+				_hovered_player = collider
+				_hovered_player.hovered.emit(_hovered_player.get_player_id())
 	else:
 		if _hovered_tile:
 			_hovered_tile.unhovered.emit(_hovered_tile.grid_pos)
 			_hovered_tile = null
+		if _hovered_player:
+			_hovered_player.unhovered.emit(_hovered_player.get_player_id())
+			_hovered_player = null

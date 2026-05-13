@@ -23,7 +23,7 @@ func show_player(id: int) -> void:
 	if not data:
 		return
 		
-	player_tooltip.populate(data)
+	#player_tooltip.populate(data)
 	_show(player_tooltip)
 	
 func hide_all() -> void:

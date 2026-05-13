@@ -279,6 +279,8 @@ texture = ExtResource("6_qkm1d")
 position = Vector2(607, 67)
 texture = ExtResource("7_p5fgu")
 
+[node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
+
 [node name="LogoViewport" type="SubViewport" parent="." unique_id=2057420778]
 unique_name_in_owner = true
 transparent_bg = true
@@ -308,7 +310,5 @@ script = ExtResource("6_sjxhf")
 script = ExtResource("8_ko0rf")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1142655336]
-
-[node name="Tooltips" parent="." unique_id=434041064 instance=ExtResource("15_tck0d")]
 
 [editable path="PostProcessing/Compositor/GameContainer/GameSubViewport/CameraRig"]
