@@ -43,6 +43,10 @@ func _spawn_player(id: int) -> void:
 	_players[id] = scene
 	_rotate_player_from_orientation(scene, player_data.orientation)
 	
+	#signal wiring
+	scene.hovered.connect(_on_player_hovered)
+	scene.unhovered.connect(_on_player_unhovered)
+	
 	return
 
 # signal responders
@@ -129,6 +133,15 @@ func _on_player_rotated(id: int, new_orientation: int) -> void:
 func _on_player_leveled_up(id: int, new_level: int) -> void:
 	print("player ", id, " leveled up and is now level ", new_level)
 	return
+	
+func _on_player_hovered(id: int) -> void:
+	print("Player hovered with id ", id)
+	TooltipManager.show_player(id)
+	
+func _on_player_unhovered(id: int) -> void:
+	print("Player UNhovered with id ", id)
+	TooltipManager.hide_all()
+	
 		
 # helpers
 func _rotate_player_from_orientation(scene: Area3D, orientation: int) -> void:

@@ -33,10 +33,6 @@ func _build_map() -> void:
 			var tile: Area3D = _tile_scenes[tile_type].instantiate()
 			tile.position = Vector3(x * spacing, 0.0, y * spacing)
 			tile.setup(pos)
-			tile.hovered.connect(func(tile_pos):
-				TooltipManager.show_tile(tile_pos))
-			tile.unhovered.connect(func(tile_pos):
-				TooltipManager.hide_all())
 			add_child(tile)
 			_tiles[pos] = tile
 				
@@ -54,6 +50,8 @@ func world_pos(grid: Vector2i) -> Vector3:
 	
 func _on_tile_hovered(pos: Vector2i) -> void:
 	print("TILE HOVERED at ", pos)
+	TooltipManager.show_tile(pos)
 
 func _on_tile_unhovered(pos: Vector2i) -> void:
 	print("TILE UNHOVERED at ", pos)
+	TooltipManager.hide_all()
