@@ -4,8 +4,12 @@ extends Node3D
 
 @export var debugMode: bool = false
 
+var _tooltip_manager: Control = null
 var _tiles: Dictionary = {} # Vector2i -> TileController
 var _tile_scenes: Dictionary # TileType -> PackedScene
+
+func set_tooltip_manager(tm: Control) -> void:
+	_tooltip_manager = tm
 
 func _ready() -> void:
 	_tile_scenes = {
@@ -50,8 +54,8 @@ func world_pos(grid: Vector2i) -> Vector3:
 	
 func _on_tile_hovered(pos: Vector2i) -> void:
 	print("TILE HOVERED at ", pos)
-	TooltipManager.show_tile(pos)
+	_tooltip_manager.show_tile(pos)
 
 func _on_tile_unhovered(pos: Vector2i) -> void:
 	print("TILE UNHOVERED at ", pos)
-	TooltipManager.hide_all()
+	_tooltip_manager.hide_all()

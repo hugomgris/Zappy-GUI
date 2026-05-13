@@ -2,11 +2,16 @@ extends Node3D
 
 @onready var world_root: Node3D = %WorldRoot
 
+var _tooltip_manager: Control = null
+
 const SCENES: Dictionary = {
 	"test": preload("res://scenes/world/players/test_player.tscn")
 }
 
 var _players: Dictionary = {}
+
+func set_tooltip_manager(tm: Control) -> void:
+	_tooltip_manager = tm
 
 func _ready() -> void:
 	GameData.world_initialized.connect(_spawn_players)
@@ -136,11 +141,11 @@ func _on_player_leveled_up(id: int, new_level: int) -> void:
 	
 func _on_player_hovered(id: int) -> void:
 	print("Player hovered with id ", id)
-	TooltipManager.show_player(id)
+	_tooltip_manager.show_player(id)
 	
 func _on_player_unhovered(id: int) -> void:
 	print("Player UNhovered with id ", id)
-	TooltipManager.hide_all()
+	_tooltip_manager.hide_all()
 	
 		
 # helpers

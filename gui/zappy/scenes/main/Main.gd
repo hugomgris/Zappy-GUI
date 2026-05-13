@@ -4,6 +4,9 @@ extends Control
 @onready var game_sub_viewport: SubViewport = %GameSubViewport
 @onready var logo_viewport: SubViewport = %LogoViewport
 @onready var post_processing: SubViewportContainer = $PostProcessing
+@onready var tooltips: Control = $PostProcessing/Compositor/Tooltips
+@onready var world_root: Node3D = %WorldRoot
+@onready var player_manager: Node3D = $PlayerManager
 
 @export var use_mock := false
 @export var map_size := Vector2i(10, 10)
@@ -13,7 +16,8 @@ var _hovered_tile: TileController = null
 var _hovered_player: PlayerController = null
 
 func _ready() -> void:
-	#$PostProcessing/Compositor/GameWorldTexture.texture = game_sub_viewport.get_texture()
+	world_root.set_tooltip_manager($PostProcessing/Compositor/Tooltips)
+	player_manager.set_tooltip_manager($PostProcessing/Compositor/Tooltips)
 	
 	var mat := $PostProcessing.material as ShaderMaterial
 	# Match your actual window size
@@ -31,15 +35,15 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		var pp_offset := post_processing.global_position
+		var compositor_pos: Vector2 = event.position - pp_offset
 		var game_offset := Vector2(135, 135)
 		var local_event := event.xformed_by(
 			Transform2D(0, -(pp_offset + game_offset))
 		)
 		game_sub_viewport.push_input(local_event)
-		
-		# Manual picking
 		if event is InputEventMouseMotion:
 			_do_picking(local_event.position)
+			tooltips.update_mouse_position(compositor_pos)
 
 func _do_picking(viewport_pos: Vector2) -> void:
 	var camera := game_sub_viewport.get_camera_3d()
