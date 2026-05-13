@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var tile_tooltip: Panel = $TileTooltip
 @onready var player_tooltip: Panel = $PlayerTooltip
@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var egg_tooltip: Panel = $EggTooltip
 
 var _active_panel: Panel = null
+var _compositor_mouse := Vector2.ZERO
 
 func _ready() -> void:
 	_hide_all()
@@ -47,10 +48,19 @@ func _hide_all() -> void:
 	_active_panel = null
 	
 func _track_cursor(panel: Panel) -> void:
-	var mouse := get_viewport().get_mouse_position()
-	var vp := get_viewport().get_visible_rect().size
-	var panel_offset := Vector2(16.0, -8.0)
-	var pos := mouse + panel_offset
-	pos.x = clamp(pos.x, 0.0, vp.x - panel.size.x)
-	pos.y = clamp(pos.y, 0.0, vp.y - panel.size.y)
-	panel.global_position = pos
+	var pos := _compositor_mouse + Vector2(16.0, -8.0)
+	pos.x = clamp(pos.x, 0.0, 1080.0 - panel.size.x)
+	pos.y = clamp(pos.y, 0.0, 1080.0 - panel.size.y)
+	panel.position = pos
+	
+func update_mouse_position(pos: Vector2) -> void:
+	_compositor_mouse = pos
+
+#func _track_cursor(panel: Panel) -> void:
+	#var mouse := get_viewport().get_mouse_position()
+	#var vp := get_viewport().get_visible_rect().size
+	#var panel_offset := Vector2(16.0, -8.0)
+	#var pos := mouse + panel_offset
+	#pos.x = clamp(pos.x, 0.0, vp.x - panel.size.x)
+	#pos.y = clamp(pos.y, 0.0, vp.y - panel.size.y)
+	#panel.global_position = pos
