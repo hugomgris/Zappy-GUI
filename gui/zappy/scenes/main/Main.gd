@@ -5,8 +5,6 @@ extends Control
 @onready var logo_viewport: SubViewport = %LogoViewport
 @onready var post_processing: SubViewportContainer = $PostProcessing
 @onready var tooltips: Control = $PostProcessing/Compositor/Tooltips
-@onready var world_root: Node3D = %WorldRoot
-@onready var player_manager: Node3D = $PlayerManager
 
 @export var use_mock := false
 @export var map_size := Vector2i(10, 10)
@@ -16,8 +14,7 @@ var _hovered_tile: TileController = null
 var _hovered_player: PlayerController = null
 
 func _ready() -> void:
-	world_root.set_tooltip_manager($PostProcessing/Compositor/Tooltips)
-	player_manager.set_tooltip_manager($PostProcessing/Compositor/Tooltips)
+	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
 	
 	var mat := $PostProcessing.material as ShaderMaterial
 	# Match your actual window size

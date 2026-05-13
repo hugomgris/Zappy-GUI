@@ -21,7 +21,7 @@ GameConfig="*uid://cid7tfmmb5fre"
 GameData="*uid://ugt4xoj4o7um"
 CommandProcessor="*uid://lyotwwm5mbvl"
 MockServer="*uid://boy3xd26y2nuh"
-TooltipManager="uid://bxe8mg447gnv3"
+TooltipManager="*uid://dcheyt5iuywil"
 
 [display]
 
