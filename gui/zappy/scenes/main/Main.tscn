@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d0xctmv1abu8k"]
 
 [ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
-[ext_resource type="Shader" uid="uid://5vjpxf8o6ymp" path="res://assets/shaders/Risograph.gdshader" id="2_gyg6b"]
 [ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
+[ext_resource type="Shader" uid="uid://5vjpxf8o6ymp" path="res://assets/shaders/Risograph.gdshader" id="2_tck0d"]
 [ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
 [ext_resource type="Texture2D" uid="uid://172mst56wayb" path="res://assets/UI_images/z_placeholder.png" id="4_3km4f"]
 [ext_resource type="Script" uid="uid://fpdwlffmkgsl" path="res://scenes/main/FrameBuilder.gd" id="4_ostsq"]
@@ -17,16 +17,16 @@
 [ext_resource type="PackedScene" uid="uid://bxe8mg447gnv3" path="res://scenes/ui/TooltipManager.tscn" id="15_tck0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
-shader = ExtResource("2_gyg6b")
-shader_parameter/ink1 = Vector3(0.96, -0.055, 0.3)
-shader_parameter/ink2 = Vector3(0, 0.575, 0.75)
-shader_parameter/ink3 = Vector3(0, 0.65, 0.285)
-shader_parameter/ink4 = Vector3(0.895, 0.545, 0.415)
+shader = ExtResource("2_tck0d")
+shader_parameter/ink1 = Vector3(0.85, 0.15, 0.3)
+shader_parameter/ink2 = Vector3(0.53, 0.85, 0.355)
+shader_parameter/ink3 = Vector3(0.175, 0.525, 0.65)
+shader_parameter/ink4 = Vector3(1.03, 0.77, 0.3)
 shader_parameter/ink5 = Vector3(0.9, 0.2, 0.6)
 shader_parameter/ink6 = Vector3(0.95, 0.75, 0.1)
 shader_parameter/ink7 = Vector3(0.15, 0.12, 0.1)
-shader_parameter/background = Vector3(0.865, 0.87, 0.815)
-shader_parameter/ink1_opacity = 0.9
+shader_parameter/background = Vector3(0.93, 0.91, 0.88)
+shader_parameter/ink1_opacity = 0.85
 shader_parameter/ink2_opacity = 0.85
 shader_parameter/ink3_opacity = 0.85
 shader_parameter/ink4_opacity = 0.85
@@ -60,7 +60,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.04
+shader_parameter/frame_ink_shimmer = 1.0
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsdfw"]
