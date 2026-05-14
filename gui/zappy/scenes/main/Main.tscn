@@ -60,7 +60,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 1.0
+shader_parameter/frame_ink_shimmer = 0.04
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsdfw"]
@@ -222,16 +222,6 @@ unique_name_in_owner = true
 [node name="Camera" parent="PostProcessing/Compositor/GameContainer/GameSubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.355984)
 current = true
-
-[node name="GameWorldTexture" type="TextureRect" parent="PostProcessing/Compositor" unique_id=902173941]
-visible = false
-offset_left = 135.0
-offset_top = 135.0
-offset_right = 945.0
-offset_bottom = 945.0
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="FrameRoot" type="Control" parent="PostProcessing/Compositor" unique_id=2144885571]
 layout_mode = 3

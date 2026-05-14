@@ -49,7 +49,7 @@ func _do_picking(viewport_pos: Vector2) -> void:
 	
 	var from := camera.project_ray_origin(viewport_pos)
 	var to := from + camera.project_ray_normal(viewport_pos) * 1000.0
-	
+		
 	var space := game_sub_viewport.find_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.collide_with_areas = true
