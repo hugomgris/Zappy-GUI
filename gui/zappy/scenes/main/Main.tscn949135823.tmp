@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="6_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://b2rp021riu6sp" path="res://assets/animations/players/cuby/Cuby_animation.png" id="6_p5fgu"]
 [ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
-[ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
 [ext_resource type="Script" uid="uid://b63b7cjar5ayy" path="res://scenes/world/players/PlayerManager.gd" id="8_ko0rf"]
 [ext_resource type="PackedScene" uid="uid://bxe8mg447gnv3" path="res://scenes/ui/TooltipManager.tscn" id="15_tck0d"]
 
@@ -109,30 +108,6 @@ region = Rect2(4320, 0, 1080, 1080)
 atlas = ExtResource("6_p5fgu")
 region = Rect2(5400, 0, 1080, 1080)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ftc2p"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(0, 0, 1080, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04n4k"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(1080, 0, 1080, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8dhb5"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(2160, 0, 1080, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ew7m7"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(3240, 0, 1080, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fg4ko"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(4320, 0, 1080, 1080)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1khv"]
-atlas = ExtResource("7_2tpxt")
-region = Rect2(5400, 0, 1080, 1080)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8lgh"]
 atlas = ExtResource("6_hjnkw")
 region = Rect2(0, 0, 1080, 1080)
@@ -203,29 +178,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"Cuby",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ftc2p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_04n4k")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8dhb5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ew7m7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fg4ko")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m1khv")
-}],
-"loop": true,
-"name": &"Octy",
 "speed": 2.0
 }, {
 "frames": [{
@@ -339,7 +291,7 @@ script = ExtResource("4_ostsq")
 
 [node name="Piry" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=1580180374]
 texture_filter = 1
-position = Vector2(67, 66)
+position = Vector2(66, 66)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Piry"
@@ -347,7 +299,7 @@ autoplay = "Piry"
 
 [node name="Bally" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=42402606]
 texture_filter = 1
-position = Vector2(67, 202.5)
+position = Vector2(72, 201)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Bally"
@@ -355,19 +307,11 @@ autoplay = "Bally"
 
 [node name="Cuby" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=320547051]
 texture_filter = 1
-position = Vector2(71, 337)
+position = Vector2(69, 325)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Cuby"
 autoplay = "Cuby"
-
-[node name="Octy" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=582312035]
-texture_filter = 1
-position = Vector2(71, 473)
-scale = Vector2(0.123, 0.123)
-sprite_frames = SubResource("SpriteFrames_vc03v")
-animation = &"Octy"
-autoplay = "Octy"
 
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
 visible = false

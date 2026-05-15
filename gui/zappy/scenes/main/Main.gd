@@ -16,10 +16,6 @@ var _hovered_player: PlayerController = null
 func _ready() -> void:
 	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
 	
-	var mat := $PostProcessing.material as ShaderMaterial
-	# Match your actual window size
-	mat.set_shader_parameter("screen_size", Vector2(1080, 1080))
-	
 	if use_mock:
 		MockServer.build_mock_initial_game_state()
 		MockServer.start()
