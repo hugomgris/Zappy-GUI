@@ -53,7 +53,7 @@ func _hide_all() -> void:
 	_active_panel = null
 	
 func _track_cursor(panel: Panel) -> void:
-	var pos := _compositor_mouse + Vector2(32.0, 8.0)
+	var pos := _compositor_mouse + Vector2(32.0, -panel.size.y / 2)
 	pos.x = clamp(pos.x, 0.0, 1080.0 - panel.size.x)
 	pos.y = clamp(pos.y, 0.0, 1080.0 - panel.size.y)
 	panel.position = pos

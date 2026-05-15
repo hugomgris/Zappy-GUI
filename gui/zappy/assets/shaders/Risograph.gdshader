@@ -1,10 +1,10 @@
 shader_type canvas_item;
 
 // Palette
-uniform vec3 ink1 = vec3(.85,  0.15, 0.3);
-uniform vec3 ink2 = vec3(0.1,  0.85, 0.0);
-uniform vec3 ink3 = vec3(.55,  0.525, 0.65);
-uniform vec3 ink4 = vec3(0.2,  0.8,  0.7);
+uniform vec3 ink1 = vec3(.89,  0.09, 0.465);
+uniform vec3 ink2 = vec3(1.0,  0.655, 0.355);
+uniform vec3 ink3 = vec3(0.485,  0.205, 0.57);
+uniform vec3 ink4 = vec3(1.0,  0.77,  0.3);
 uniform vec3 ink5 = vec3(0.9,  0.2,  0.6);
 uniform vec3 ink6 = vec3(0.95, 0.75, 0.1);
 uniform vec3 ink7 = vec3(0.15, 0.12, 0.10);
@@ -28,7 +28,7 @@ uniform float stipple_jitter   = 0.8;
 // Density
 uniform float density_dark          = 1.2;
 uniform float density_light         = 0.6;
-uniform float noise_density_scale   = 0.9;
+uniform float noise_density_scale   = 1;
 uniform float noise_threshold       = 0.7;
 uniform float noise_threshold_blend = 0.08;
 
@@ -64,14 +64,26 @@ uniform float frame_ink_shimmer     = 0.04;
 
 uniform bool transparent_background = false;
 
-// Detection
-bool is_red(vec3 c)        { return c.r > c.g * 2.0 && c.r > c.b * 2.0 && c.r > 0.15; }
-bool is_green(vec3 c)      { return c.g > c.r * 2.0 && c.g > c.b * 2.0 && c.g > 0.15; }
-bool is_blue(vec3 c)       { return c.b > c.r * 2.0 && c.b > c.g * 2.0 && c.b > 0.15; }
-bool is_cyan(vec3 c)       { return c.g > c.r * 2.0 && c.b > c.r * 2.0 && c.g > 0.15; }
-bool is_magenta(vec3 c)    { return c.r > c.g * 2.0 && c.b > c.g * 2.0 && c.r > 0.15; }
-bool is_yellow(vec3 c)     { return c.r > c.b * 2.0 && c.g > c.b * 2.0 && c.r > 0.15; }
-bool is_black(vec3 c)      { return c.r < 0.1 && c.g < 0.1 && c.b < 0.1; }
+// Detection 
+float lum(vec3 c) { return c.r + c.g + c.b; }
+
+bool is_red(vec3 c)     { return c.r > 0.12 && c.r > c.g * 1.8 && c.r > c.b * 1.8; }
+bool is_green(vec3 c)   { return c.g > 0.12 && c.g > c.r * 1.8 && c.g > c.b * 1.8; }
+bool is_blue(vec3 c)    { return c.b > 0.12 && c.b > c.r * 1.8 && c.b > c.g * 1.8; }
+
+bool is_cyan(vec3 c)    { return c.g > 0.10 && c.b > 0.10 
+                              && c.r < c.g * 0.4 && c.r < c.b * 0.4 
+                              && lum(c) > 0.15; }
+bool is_magenta(vec3 c) { return c.r > 0.10 && c.b > 0.10 
+                              && c.g < c.r * 0.4 && c.g < c.b * 0.4 
+                              && lum(c) > 0.15; }
+bool is_yellow(vec3 c)  { return c.r > 0.10 && c.g > 0.10 
+                              && c.b < c.r * 0.4 && c.b < c.g * 0.4 
+                              && lum(c) > 0.15; }
+
+bool is_black(vec3 c)   { return c.r < 0.12 && c.g < 0.12 && c.b < 0.12 
+                              && lum(c) < 0.25; }
+							
 bool is_background(vec3 c) { return c.r > 0.9 && c.g > 0.9 && c.b > 0.9; }
 
 // Noise base

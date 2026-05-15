@@ -2,7 +2,6 @@
     - Pending command pipelines (Command processor + Mock server)
 - Phase 4
     - Resource manager
-        - floating animation
         - placehold pending resourcess
     - Player manager
         - Movement

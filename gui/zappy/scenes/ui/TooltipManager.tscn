@@ -15,6 +15,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="PrismMesh" id="PrismMesh_vo5ey"]
+
+[sub_resource type="Gradient" id="Gradient_oxulp"]
+offsets = PackedFloat32Array(0.9259259)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r2bt5"]
+gradient = SubResource("Gradient_oxulp")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vo5ey"]
+color = Color(0.48452926, 0, 0, 1)
+thickness = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vo5ey"]
 bg_color = Color(0.48452926, 0, 0, 1)
 border_width_left = 5
@@ -32,6 +45,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 1.0
+offset_right = 24.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_16046")
@@ -42,7 +59,14 @@ offset_right = 200.0
 offset_bottom = 200.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_16046")
 script = ExtResource("2_vo5ey")
-tile_text_labels_1 = "[font_size={20}][left][b][color=#330000]*[/color][/b][/left][/font_size]"
+tile_text_labels_1 = "[font_size={15}][left][b][color=#330000]*[/color][/b][/left][/font_size]"
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="TileTooltip" unique_id=1048663493]
+position = Vector2(-4, 104)
+rotation = 1.5707964
+scale = Vector2(12.802501, 11.802499)
+mesh = SubResource("PrismMesh_vo5ey")
+texture = SubResource("GradientTexture1D_r2bt5")
 
 [node name="Title" type="RichTextLabel" parent="TileTooltip" unique_id=1092402919]
 layout_mode = 0
@@ -51,20 +75,29 @@ offset_top = 5.0
 offset_right = 190.0
 offset_bottom = 33.0
 bbcode_enabled = true
-text = "[font_size={20}][left][b][color=#330000]TILE[/color]
+text = "[font_size={20}][left][b][color=#330000]Tile info[/color]
 [/b][/left][/font_size]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="TileTooltip" unique_id=1644194524]
+visible = false
+layout_mode = 0
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 188.0
+offset_bottom = 39.0
+theme_override_styles/separator = SubResource("StyleBoxLine_vo5ey")
+
 [node name="Position" type="RichTextLabel" parent="TileTooltip" unique_id=1203053282]
 layout_mode = 0
-offset_top = 42.0
-offset_right = 200.0
-offset_bottom = 97.0
+offset_left = 10.0
+offset_top = 37.0
+offset_right = 190.0
+offset_bottom = 59.0
 bbcode_enabled = true
-text = "[font_size={40}][center][b][color=#330000]UNSET[/color]
-[/b][/center][/font_size]"
+text = "Position: "
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
