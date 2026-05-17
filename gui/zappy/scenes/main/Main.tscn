@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
 [ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
 [ext_resource type="Script" uid="uid://b63b7cjar5ayy" path="res://scenes/world/players/PlayerManager.gd" id="8_ko0rf"]
+[ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="9_jsdfw"]
 [ext_resource type="PackedScene" uid="uid://bxe8mg447gnv3" path="res://scenes/ui/TooltipManager.tscn" id="15_tck0d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
@@ -20,8 +21,8 @@ shader_parameter/ink1 = Vector3(0.89, 0.09, 0.465)
 shader_parameter/ink2 = Vector3(1, 0.655, 0.355)
 shader_parameter/ink3 = Vector3(0.485, 0.205, 0.57)
 shader_parameter/ink4 = Vector3(0.1, 0.275, 0.79)
-shader_parameter/ink5 = Vector3(0.9, 0.2, 0.6)
-shader_parameter/ink6 = Vector3(0.95, 0.75, 0.1)
+shader_parameter/ink5 = Vector3(1.61, 0.2, 0.6)
+shader_parameter/ink6 = Vector3(0, 0.63, 0.18)
 shader_parameter/ink7 = Vector3(0.15, 0.12, 0.1)
 shader_parameter/background = Vector3(0.93, 0.91, 0.88)
 shader_parameter/ink1_opacity = 0.85
@@ -157,6 +158,30 @@ region = Rect2(4320, 0, 1080, 1080)
 atlas = ExtResource("6_hjnkw")
 region = Rect2(5400, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs4dm"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwlw1"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vennj"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl125"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(3240, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcd1j"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12hjt"]
+atlas = ExtResource("9_jsdfw")
+region = Rect2(5400, 0, 1080, 1080)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_vc03v"]
 animations = [{
 "frames": [{
@@ -249,6 +274,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Piry",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs4dm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwlw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vennj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl125")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcd1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12hjt")
+}],
+"loop": true,
+"name": &"Thystame",
 "speed": 2.0
 }]
 
@@ -368,6 +416,14 @@ scale = Vector2(0.123, 0.123)
 sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Octy"
 autoplay = "Octy"
+
+[node name="Thystame" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=964119389]
+texture_filter = 1
+position = Vector2(1005.00006, 72)
+scale = Vector2(0.123, 0.123)
+sprite_frames = SubResource("SpriteFrames_vc03v")
+animation = &"Thystame"
+autoplay = "Thystame"
 
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
 visible = false
