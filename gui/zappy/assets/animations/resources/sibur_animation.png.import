@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dijx8kyg7c4ed"
-path="res://.godot/imported/phyras_test.png-f3f28a0a1e0c95eecd2ec057e2062d5e.ctex"
+uid="uid://cllf2ct16llvt"
+path="res://.godot/imported/sibur_animation.png-67cf4e9840621e0c1837d7645ca3e89b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/resources/phyras_test.png"
-dest_files=["res://.godot/imported/phyras_test.png-f3f28a0a1e0c95eecd2ec057e2062d5e.ctex"]
+source_file="res://assets/animations/resources/sibur_animation.png"
+dest_files=["res://.godot/imported/sibur_animation.png-67cf4e9840621e0c1837d7645ca3e89b.ctex"]
 
 [params]
 

@@ -30,9 +30,6 @@ func _draw():
 				continue
 				
 			fill_color = COLOR_A if (row + col) % 2 == 0 else COLOR_B
-			#draw_rect(
-			#_build_rect_outline(row, col, 1, 1),
-			#BORDER_COLOR, true)
 			draw_rect(_build_rect(row, col, 1, 1, cell_position.UNKNOWN), fill_color, true)
 	
 	fill_color = COLOR_A
@@ -42,16 +39,6 @@ func _draw():
 	
 	# draw lines
 	_draw_border_lines()
-	#for row in range(TOTAL_CELLS):
-		#for col in range(TOTAL_CELLS):
-			#if _is_grid(row, col):
-				#continue
-			#var x = col * CELL_SIZE
-			#var y = row * CELL_SIZE
-			#draw_line(Vector2(x, y),              Vector2(x + CELL_SIZE, y),              BORDER_COLOR, BORDER_WIDTH)
-			#draw_line(Vector2(x, y + CELL_SIZE),  Vector2(x + CELL_SIZE, y + CELL_SIZE),  BORDER_COLOR, BORDER_WIDTH)
-			#draw_line(Vector2(x, y),              Vector2(x, y + CELL_SIZE),              BORDER_COLOR, BORDER_WIDTH)
-			#draw_line(Vector2(x + CELL_SIZE, y),  Vector2(x + CELL_SIZE, y + CELL_SIZE),  BORDER_COLOR, BORDER_WIDTH)
 
 func _is_grid(row: int, col: int) -> bool:
 	return row >= GRID_START and row <= GRID_END \
