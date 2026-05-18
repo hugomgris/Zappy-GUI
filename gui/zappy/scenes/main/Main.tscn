@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
 [ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
 [ext_resource type="Script" uid="uid://b63b7cjar5ayy" path="res://scenes/world/players/PlayerManager.gd" id="8_ko0rf"]
+[ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="8_tck0d"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="9_jsdfw"]
 [ext_resource type="PackedScene" uid="uid://bxe8mg447gnv3" path="res://scenes/ui/TooltipManager.tscn" id="15_tck0d"]
 
@@ -21,8 +22,8 @@ shader_parameter/ink1 = Vector3(0.89, 0.09, 0.465)
 shader_parameter/ink2 = Vector3(1, 0.655, 0.355)
 shader_parameter/ink3 = Vector3(0.485, 0.205, 0.57)
 shader_parameter/ink4 = Vector3(0.1, 0.275, 0.79)
-shader_parameter/ink5 = Vector3(1.61, 0.2, 0.6)
-shader_parameter/ink6 = Vector3(0, 0.63, 0.18)
+shader_parameter/ink5 = Vector3(1, 0.2, 0.6)
+shader_parameter/ink6 = Vector3(0.16, 0.515, 0.465)
 shader_parameter/ink7 = Vector3(0.15, 0.12, 0.1)
 shader_parameter/background = Vector3(0.93, 0.91, 0.88)
 shader_parameter/ink1_opacity = 0.85
@@ -59,7 +60,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.04
+shader_parameter/frame_ink_shimmer = 1.0
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5fgu"]
@@ -132,6 +133,30 @@ region = Rect2(4320, 0, 1080, 1080)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1khv"]
 atlas = ExtResource("7_2tpxt")
+region = Rect2(5400, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7vst"]
+atlas = ExtResource("8_tck0d")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gxhd"]
+atlas = ExtResource("8_tck0d")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1ohc"]
+atlas = ExtResource("8_tck0d")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_botte"]
+atlas = ExtResource("8_tck0d")
+region = Rect2(3240, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cgg3"]
+atlas = ExtResource("8_tck0d")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wke70"]
+atlas = ExtResource("8_tck0d")
 region = Rect2(5400, 0, 1080, 1080)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8lgh"]
@@ -251,6 +276,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Octy",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7vst")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gxhd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1ohc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_botte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cgg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wke70")
+}],
+"loop": true,
+"name": &"Phyras",
 "speed": 2.0
 }, {
 "frames": [{
@@ -381,6 +429,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(146, 106)
 script = ExtResource("4_ostsq")
 
 [node name="FrameContents" type="Node2D" parent="PostProcessing/Compositor" unique_id=199669347]
@@ -424,6 +473,14 @@ scale = Vector2(0.123, 0.123)
 sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Thystame"
 autoplay = "Thystame"
+
+[node name="Phyras" type="AnimatedSprite2D" parent="PostProcessing/Compositor/FrameContents" unique_id=743478737]
+texture_filter = 1
+position = Vector2(1006.00006, 204.00002)
+scale = Vector2(0.123, 0.123)
+sprite_frames = SubResource("SpriteFrames_vc03v")
+animation = &"Phyras"
+autoplay = "Phyras"
 
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
 visible = false
