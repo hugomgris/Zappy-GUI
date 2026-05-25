@@ -96,10 +96,6 @@ func _handle_authenticating(text: String) -> void:
 		_state = State.CONNECTED
 		connection_established.emit()
 
-	elif t == "error":
-		push_error("[SCM] Login rejected: %s" % str(d))
-		connection_failed.emit()
-
 	elif d.has("map"):
 		# Snapshot arrived before "ok" — forward it anyway
 		print("[SCM] Snapshot received early (before ok) — forwarding")

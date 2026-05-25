@@ -36,8 +36,15 @@ func _on_snapshot_ready() -> void:
 	GameData.world_initialized.emit()
 
 func _on_server_event(event_type: String, data: Dictionary) -> void:
-	# Placeholder
-	print("[Main] Server event: %s" % event_type)
+	print("GOT AN EVENT")
+	var status: String = data.get("status", "")
+	var msg_type: String = data.get("type", "")
+
+	# Mirror MockServer's dispatch filter exactly
+	if status == "ok" or (msg_type == "event" and status == "level_up"):
+		CommandProcessor.process_command(data)
+	elif msg_type == "game_end":
+		CommandProcessor.process_command(data)  # when you uncomment _game_end
 
 func _on_world_initialized() -> void:
 	_camera_rig.initialize_for_map(GameData.map_size)
