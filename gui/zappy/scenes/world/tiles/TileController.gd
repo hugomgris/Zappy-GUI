@@ -5,6 +5,8 @@ class_name TileController
 
 extends Area3D
 
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+
 var grid_pos: Vector2i
 var _resource_slots: Array[Marker3D] = []
 var _player_slots: Array[Marker3D] = []
@@ -22,7 +24,6 @@ func _ready() -> void:
 	# slot population from child Marker3D nodes
 	_resource_slots = _collect_markers("ResourceSlots")
 	_player_slots = _collect_markers("PlayerSlots")
-
 	
 	_resource_slot_occupied.resize(_resource_slots.size())
 	_resource_slot_occupied.fill(false)

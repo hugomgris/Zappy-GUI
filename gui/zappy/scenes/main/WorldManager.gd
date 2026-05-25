@@ -19,7 +19,6 @@ func _ready() -> void:
 func _on_world_initialized() -> void:
 	_build_map()
 
-
 func _build_map() -> void:
 	for child in get_children():
 		child.queue_free()
@@ -49,8 +48,10 @@ func world_pos(grid: Vector2i) -> Vector3:
 	var spacing: float = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
 	return Vector3(grid.x * spacing, 0.0, grid.y * spacing)
 	
-func _on_tile_hovered() -> void:
-	print("TILE HOVERED")
+func _on_tile_hovered(pos: Vector2i) -> void:
+	print("TILE HOVERED at ", pos)
+	TooltipManager.show_tile(pos)
 
-func _on_tile_unhovered() -> void:
-	print("TILE UNHOVERED")
+func _on_tile_unhovered(pos: Vector2i) -> void:
+	print("TILE UNHOVERED at ", pos)
+	TooltipManager.hide_all()
