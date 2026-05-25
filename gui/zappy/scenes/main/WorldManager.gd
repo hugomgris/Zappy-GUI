@@ -6,6 +6,7 @@ extends Node3D
 
 var _tiles: Dictionary = {} # Vector2i -> TileController
 var _tile_scenes: Dictionary # TileType -> PackedScene
+var _built_once: bool = false
 
 func _ready() -> void:
 	_tile_scenes = {
@@ -15,8 +16,14 @@ func _ready() -> void:
 			preload("res://scenes/world/tiles/tile_RED_dark.tscn")
 	}
 	GameData.world_initialized.connect(_on_world_initialized)
+	if not GameData.map_size == Vector2i.ZERO and not GameData.tiles.is_empty():
+		_on_world_initialized()
 	
 func _on_world_initialized() -> void:
+	print("[WM] world_initialized received — map_size=", GameData.map_size, " tiles=", GameData.tiles.size())
+	if _built_once:
+		return
+	_built_once = true
 	_build_map()
 
 func _build_map() -> void:
@@ -49,9 +56,7 @@ func world_pos(grid: Vector2i) -> Vector3:
 	return Vector3(grid.x * spacing, 0.0, grid.y * spacing)
 	
 func _on_tile_hovered(pos: Vector2i) -> void:
-	print("TILE HOVERED at ", pos)
 	TooltipManager.show_tile(pos)
 
 func _on_tile_unhovered(pos: Vector2i) -> void:
-	print("TILE UNHOVERED at ", pos)
 	TooltipManager.hide_all()

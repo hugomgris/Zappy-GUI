@@ -46,7 +46,7 @@ func process_command(cmd: Dictionary) -> void:
 
 func _avance(cmd: Dictionary) -> void:
 	var id: int = cmd.get("player_id", -1)
-	var player := GameData.get_player(id)
+	var player: GameData.PlayerData = GameData.get_player(id)
 	if not player:
 		push_error("CommandProcessor._avance: player %d not found" % id)
 		return
@@ -55,8 +55,8 @@ func _avance(cmd: Dictionary) -> void:
 	var to: Vector2i = _advance_pos(from, player.orientation)
 
 	# always update data before signal emission
-	var old_tile := GameData.get_tile(from)
-	var new_tile := GameData.get_tile(to)
+	var old_tile: GameData.TileState = GameData.get_tile(from)
+	var new_tile: GameData.TileState = GameData.get_tile(to)
 	if old_tile: old_tile.player_ids.erase(id)
 	if new_tile and not new_tile.player_ids.has(id):
 		new_tile.player_ids.append(id)

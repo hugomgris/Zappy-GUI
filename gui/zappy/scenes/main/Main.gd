@@ -5,8 +5,9 @@ extends Control
 @onready var logo_viewport: SubViewport = %LogoViewport
 @onready var post_processing: SubViewportContainer = $PostProcessing
 @onready var tooltips: Control = $PostProcessing/Compositor/Tooltips
+@onready var start_button: Button = $CanvasLayer/StartButton
 
-@export var use_mock := false
+
 @export var map_size := Vector2i(10, 10)
 @export var logo_scale := 1.0
 
@@ -15,28 +16,52 @@ var _hovered_player: PlayerController = null
 
 func _ready() -> void:
 	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
-	
-	if use_mock:
+	GameData.world_initialized.connect(_on_world_initialized, CONNECT_ONE_SHOT)
+
+	if AppState.use_mock:
 		MockServer.build_mock_initial_game_state()
 		MockServer.start()
+		GameData.world_initialized.emit()
 	else:
-		GameData.map_size = map_size
-	
+		ServerConnectionManager.raw_message_received.connect(ProtocolParser.handle)
+		ServerConnectionManager.connection_established.connect(_on_server_connection_established, CONNECT_ONE_SHOT)
+		ProtocolParser.snapshot_ready.connect(_on_snapshot_ready, CONNECT_ONE_SHOT)
+		ProtocolParser.event_received.connect(_on_server_event)
+
+func _on_server_connection_established() -> void:
+	print("[Main] Connection established — snapshot incoming")
+
+func _on_snapshot_ready() -> void:
+	print("[Main] Snapshot ready — firing world_initialized")
 	GameData.world_initialized.emit()
+
+func _on_server_event(event_type: String, data: Dictionary) -> void:
+	# Placeholder
+	print("[Main] Server event: %s" % event_type)
+
+func _on_world_initialized() -> void:
 	_camera_rig.initialize_for_map(GameData.map_size)
+	if not AppState.use_mock:
+		start_button.show()
+		start_button.pressed.connect(_on_start_game_pressed)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		var pp_offset := post_processing.global_position
-		var compositor_pos: Vector2 = event.position - pp_offset
-		var game_offset := Vector2(135, 135)
-		var local_event := event.xformed_by(
-			Transform2D(0, -(pp_offset + game_offset))
-		)
-		game_sub_viewport.push_input(local_event)
-		if event is InputEventMouseMotion:
-			_do_picking(local_event.position)
-			tooltips.update_mouse_position(compositor_pos)
+	if not (event is InputEventMouse):
+		return
+
+	if event is InputEventMouseButton:
+		var control_at_pos := get_viewport().gui_get_hovered_control()
+		if control_at_pos != null:
+			return
+
+	var pp_offset := post_processing.global_position
+	var compositor_pos: Vector2 = event.position - pp_offset
+	var game_offset := Vector2(135, 135)
+	var local_event := event.xformed_by(Transform2D(0, -(pp_offset + game_offset)))
+	game_sub_viewport.push_input(local_event)
+	if event is InputEventMouse:
+		_do_picking(local_event.position)
+		tooltips.update_mouse_position(compositor_pos)
 
 func _do_picking(viewport_pos: Vector2) -> void:
 	var camera := game_sub_viewport.get_camera_3d()
@@ -74,3 +99,14 @@ func _do_picking(viewport_pos: Vector2) -> void:
 		if _hovered_player:
 			_hovered_player.unhovered.emit(_hovered_player.get_player_id())
 			_hovered_player = null
+
+
+func _on_start_game_pressed() -> void:
+	start_button.hide()
+	var script_path = ProjectSettings.globalize_path("/home/hmunoz-g/42-OuterCore/zappy/server/run.sh")
+	var output = []
+	var exit_code = OS.execute("bash", [script_path], output, true, true)
+	if exit_code != 0:
+		push_error("[Main] run.sh failed (exit %d): %s" % [exit_code, "\n".join(output)])
+	else:
+		print("[Main] Server time API started")

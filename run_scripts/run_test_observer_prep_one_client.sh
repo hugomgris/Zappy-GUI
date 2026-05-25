@@ -19,22 +19,14 @@ echo "=== Building Server ==="
 make -C "$ROOT_DIR/server"
 
 echo "=== Starting Server ==="
-pkill -f "./zappy -p"  || true
+pkill -f "./zappy -p" || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 20 -f 10 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
+(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > "$ROOT_DIR/logs/server_log_observer_prep_one_client.txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
-
-echo "=== Running server/run.sh ==="
-(cd "$ROOT_DIR/server" && ./run.sh)
 
 echo "=== Building Client ==="
 make -C "$ROOT_DIR/client"
 
-echo "=== Running Clients ==="
-for i in {1..14}; do
-    "$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_probe_fifteen_clients_${i}.txt" &
-    sleep 0.5
-done
-"$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_probe_fifteen_clients_15.txt"
-wait
+echo "=== Running Client ==="
+(cd "$ROOT_DIR/client" && ./client localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_observer_prep_one_client.txt")

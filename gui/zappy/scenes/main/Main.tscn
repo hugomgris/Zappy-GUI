@@ -552,8 +552,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1xfj")
-use_mock = true
-map_size = Vector2i(50, 10)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1031470465]
 layout_mode = 1
@@ -747,5 +745,27 @@ script = ExtResource("6_sjxhf")
 script = ExtResource("8_ko0rf")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1142655336]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1182230075]
+
+[node name="StartButton" type="Button" parent="CanvasLayer" unique_id=318195123]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -25.0
+offset_right = 51.5
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.3491902, 0, 1)
+theme_override_colors/icon_normal_color = Color(1, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 1, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "START"
 
 [editable path="PostProcessing/Compositor/GameContainer/GameSubViewport/CameraRig"]

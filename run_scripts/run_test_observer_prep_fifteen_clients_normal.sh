@@ -19,14 +19,11 @@ echo "=== Building Server ==="
 make -C "$ROOT_DIR/server"
 
 echo "=== Starting Server ==="
-pkill -f "./zappy -p"  || true
+pkill -f "./zappy -p" || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
 (cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 20 -f 10 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
-
-echo "=== Running server/run.sh ==="
-(cd "$ROOT_DIR/server" && ./run.sh)
 
 echo "=== Building Client ==="
 make -C "$ROOT_DIR/client"

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zappy"
-run/main_scene="uid://d0xctmv1abu8k"
+run/main_scene="res://scenes/screens/TitleScreen.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,12 +22,14 @@ GameData="*uid://ugt4xoj4o7um"
 CommandProcessor="*uid://lyotwwm5mbvl"
 MockServer="*uid://boy3xd26y2nuh"
 TooltipManager="*uid://dcheyt5iuywil"
+AppState="*uid://catugv4dee0t5"
+ServerConnectionManager="*uid://cpkmjlvu2jaoq"
+ProtocolParser="*uid://byy76evbwp5hq"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1080
-window/size/mode=3
 window/size/borderless=true
 
 [input]

@@ -33,7 +33,6 @@ func show_player(id: int) -> void:
 	_show(player_tooltip)
 	
 func hide_all() -> void:
-	print("HIDING PANELSS")
 	_hide_all()
 	
 func _process(delta:float) -> void:

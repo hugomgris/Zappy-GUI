@@ -279,7 +279,7 @@ Result SecureSocket::performHandshake() {
     }
 
     // ret < 0: error or need to retry
-    const int ssl_err = SSL_get_error(_ssl, ret); std::cout << "SSL ret=" << ret << " err=" << ssl_err << std::endl;
+    const int ssl_err = SSL_get_error(_ssl, ret);
 
     if (ssl_err == SSL_ERROR_WANT_READ || ssl_err == SSL_ERROR_WANT_WRITE) {
         // Handshake in progress, need more data

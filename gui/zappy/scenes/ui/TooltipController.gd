@@ -23,7 +23,6 @@ func populate(data: GameData.TileState) -> void:
 	
 	var pos_string = str(data.pos)
 	var fed_text = "Position: " + pos_string
-	print(fed_text)
 	position_label.text = tile_text_labels_1.replacen("*", fed_text)
 	
 	
