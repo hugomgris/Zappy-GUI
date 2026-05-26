@@ -9,13 +9,12 @@ const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)
 const BORDER_COLOR = Color(0.854, 0.854, 0.854, 1.0)
 const BORDER_WIDTH = 8.0
 
-@onready var _root: Area2D = $"."
 @onready var _positions: Node2D = $Positions
 @onready var _animations: Node2D = $Animations
 
 @export var odd: bool = true
-@export var fixed_position: String = "none"
-@export var fixed_animation: String = "none"
+@export var fixed_position: String = "mid_left"
+@export var fixed_animation: String = "Cuby"
 
 var _selected_position: Node2D = null
 var _selected_animation: AnimatedSprite2D = null
@@ -25,15 +24,18 @@ func _ready() -> void:
 	pick_animation()
 	set_outer_color()
 	set_inner_color()
-	#_root.global_position = Vector2(GameConfig.WINDOW_SIZE.x / 2.0, GameConfig.WINDOW_SIZE.y / 2.0)
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	#mouse_entered.connect(_on_mouse_entered)
+	#mouse_exited.connect(_on_mouse_exited)
 	
-func _on_mouse_entered() -> void:
-	_root.scale *= 2
+func on_mouse_entered() -> void:
+	print("MOUSE ON CELL")
+	_positions.scale = Vector2(2.0, 2.0)
+	_animations.scale = Vector2(2.0, 2.0)
 	
-func _on_mouse_exited() -> void:
-	_root.scale /= 2
+func on_mouse_exited() -> void:
+	print("MOUSE OUT OF CELL")
+	_positions.scale = Vector2(1.0, 1.0)
+	_animations.scale = Vector2(1.0, 1.0)
 		
 func pick_position() -> void:
 	for i in range (_positions.get_children().size()):

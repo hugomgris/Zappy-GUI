@@ -6,15 +6,18 @@ extends Control
 @onready var post_processing: SubViewportContainer = $PostProcessing
 @onready var tooltips: Control = $PostProcessing/Compositor/Tooltips
 @onready var start_button: Button = $CanvasLayer/StartButton
-
+@onready var compositor: SubViewport = $PostProcessing/Compositor
 
 @export var map_size := Vector2i(10, 10)
 @export var logo_scale := 1.0
 
 var _hovered_tile: TileController = null
 var _hovered_player: PlayerController = null
+var _hovered_cell: FrameCellController = null
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
 	GameData.world_initialized.connect(_on_world_initialized, CONNECT_ONE_SHOT)
 
@@ -56,7 +59,16 @@ func _input(event: InputEvent) -> void:
 	if not (event is InputEventMouse):
 		return
 
-	if event is InputEventMouseButton:
+	var is_scroll = (
+		event is InputEventMouseButton and (
+			event.button_index == MOUSE_BUTTON_WHEEL_UP or
+			event.button_index == MOUSE_BUTTON_WHEEL_DOWN or
+			event.button_index == MOUSE_BUTTON_WHEEL_LEFT or
+			event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
+		)
+	)
+
+	if event is InputEventMouseButton and not is_scroll:
 		var control_at_pos := get_viewport().gui_get_hovered_control()
 		if control_at_pos != null:
 			return
@@ -65,12 +77,36 @@ func _input(event: InputEvent) -> void:
 	var compositor_pos: Vector2 = event.position - pp_offset
 	var game_offset := Vector2(135, 135)
 	var local_event := event.xformed_by(Transform2D(0, -(pp_offset + game_offset)))
+
 	game_sub_viewport.push_input(local_event)
-	if event is InputEventMouse:
-		_do_picking(local_event.position)
+
+	if event is InputEventMouseMotion:
+		_do_picking_3d(local_event.position)
+		_do_picking_2d(compositor_pos)
 		tooltips.update_mouse_position(compositor_pos)
 
-func _do_picking(viewport_pos: Vector2) -> void:
+func _do_picking_2d(compositor_pos: Vector2) -> void:
+	var space2d := compositor.find_world_2d().direct_space_state
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = compositor_pos
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	var results := space2d.intersect_point(query)
+
+	var hit_cell: FrameCellController = null
+	for r in results:
+		if r.collider is FrameCellController:
+			hit_cell = r.collider
+			break
+
+	if hit_cell != _hovered_cell:
+		if _hovered_cell:
+			_hovered_cell.on_mouse_exited()
+		_hovered_cell = hit_cell
+		if _hovered_cell:
+			_hovered_cell.on_mouse_entered()
+
+func _do_picking_3d(viewport_pos: Vector2) -> void:
 	var camera := game_sub_viewport.get_camera_3d()
 	if not camera:
 		return
