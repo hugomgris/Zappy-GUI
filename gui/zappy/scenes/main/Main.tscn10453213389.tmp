@@ -760,230 +760,23 @@ sprite_frames = SubResource("SpriteFrames_vc03v")
 animation = &"Nourriture"
 autoplay = "Nourriture"
 
-[node name="Left" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=635844952]
+[node name="Piry" parent="PostProcessing/Compositor/FrameRoot" unique_id=417018103 instance=ExtResource("21_yub1f")]
+position = Vector2(63, 63)
 
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=417018103 instance=ExtResource("21_yub1f")]
-position = Vector2(67, 67)
-fixed_position = "top_left"
-fixed_animation = "Piry"
-
-[node name="top_left" parent="PostProcessing/Compositor/FrameRoot/Left/Piry/Positions" parent_id_path=PackedInt32Array(417018103, 1546582834) index="0" unique_id=9179269]
+[node name="top_left" parent="PostProcessing/Compositor/FrameRoot/Piry/Positions" parent_id_path=PackedInt32Array(417018103, 1546582834) index="0" unique_id=9179269]
 visible = true
 
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Left/Piry" index="2" unique_id=151270721]
-visible = true
+[node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Piry/Positions" parent_id_path=PackedInt32Array(417018103, 1546582834) index="4" unique_id=470731466]
+visible = false
 
-[node name="Cuby" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=2032854151 instance=ExtResource("21_yub1f")]
+[node name="Cuby" parent="PostProcessing/Compositor/FrameRoot" unique_id=2032854151 instance=ExtResource("21_yub1f")]
 position = Vector2(67, 202)
-odd = false
-fixed_position = "mid_left"
-fixed_animation = "Cuby"
 
-[node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Cuby/Positions" parent_id_path=PackedInt32Array(2032854151, 1546582834) index="4" unique_id=470731466]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Left/Cuby" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Left/Cuby/Animations" index="0" unique_id=2078386481]
+[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Cuby/Animations" parent_id_path=PackedInt32Array(2032854151, 151270721) index="0" unique_id=2078386481]
 visible = false
 
-[node name="Cuby" parent="PostProcessing/Compositor/FrameRoot/Left/Cuby/Animations" index="2" unique_id=1907141796]
+[node name="Cuby" parent="PostProcessing/Compositor/FrameRoot/Cuby/Animations" parent_id_path=PackedInt32Array(2032854151, 151270721) index="2" unique_id=1907141796]
 visible = true
-
-[node name="Bally" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1939270029 instance=ExtResource("21_yub1f")]
-position = Vector2(67, 337)
-fixed_position = "mid_left"
-fixed_animation = "Bally"
-
-[node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Bally/Positions" parent_id_path=PackedInt32Array(1939270029, 1546582834) index="4" unique_id=470731466]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Left/Bally" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Left/Bally/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Bally" parent="PostProcessing/Compositor/FrameRoot/Left/Bally/Animations" index="1" unique_id=59100107]
-visible = true
-
-[node name="Octy" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1267157834 instance=ExtResource("21_yub1f")]
-position = Vector2(67, 472)
-odd = false
-fixed_position = "mid_left"
-fixed_animation = "Octy"
-
-[node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Octy/Positions" parent_id_path=PackedInt32Array(1267157834, 1546582834) index="4" unique_id=470731466]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Left/Octy" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Left/Octy/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Octy" parent="PostProcessing/Compositor/FrameRoot/Left/Octy/Animations" index="3" unique_id=2075142830]
-visible = true
-
-[node name="Top" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=626724000]
-
-[node name="Z" parent="PostProcessing/Compositor/FrameRoot/Top" unique_id=1132453456 instance=ExtResource("21_yub1f")]
-position = Vector2(202, 67)
-odd = false
-fixed_position = "mid_top"
-fixed_animation = "Piryasdasd"
-
-[node name="mid_top" parent="PostProcessing/Compositor/FrameRoot/Top/Z/Positions" parent_id_path=PackedInt32Array(1132453456, 1546582834) index="6" unique_id=2053796655]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Top/Z" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Top/Z/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Right" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=582061672]
-
-[node name="Nourriture" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=2036051851 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 67)
-odd = false
-fixed_position = "top_right"
-fixed_animation = "Nourriture"
-
-[node name="top_right" parent="PostProcessing/Compositor/FrameRoot/Right/Nourriture/Positions" parent_id_path=PackedInt32Array(2036051851, 1546582834) index="1" unique_id=1234926954]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Nourriture" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Nourriture/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Nourriture" parent="PostProcessing/Compositor/FrameRoot/Right/Nourriture/Animations" index="10" unique_id=1555915489]
-visible = true
-
-[node name="Linemate" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=168491031 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 202)
-fixed_position = "mid_right"
-fixed_animation = "Linemate"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Linemate/Positions" parent_id_path=PackedInt32Array(168491031, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Linemate" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Linemate/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Linemate" parent="PostProcessing/Compositor/FrameRoot/Right/Linemate/Animations" index="8" unique_id=260705012]
-visible = true
-
-[node name="Deraumere" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=1177250854 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 337)
-odd = false
-fixed_position = "mid_right"
-fixed_animation = "Deraumere"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Deraumere/Positions" parent_id_path=PackedInt32Array(1177250854, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Deraumere" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Deraumere/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Deraumere" parent="PostProcessing/Compositor/FrameRoot/Right/Deraumere/Animations" index="9" unique_id=1237873825]
-visible = true
-
-[node name="Sibur" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=832996051 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 472)
-fixed_position = "mid_right"
-fixed_animation = "Sibur"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Sibur/Positions" parent_id_path=PackedInt32Array(832996051, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Sibur" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Sibur/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Sibur" parent="PostProcessing/Compositor/FrameRoot/Right/Sibur/Animations" index="6" unique_id=1824973957]
-visible = true
-
-[node name="Mendiane" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=2136520773 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 607)
-odd = false
-fixed_position = "mid_right"
-fixed_animation = "Mendiane"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Mendiane/Positions" parent_id_path=PackedInt32Array(2136520773, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Mendiane" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Mendiane/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Mendiane" parent="PostProcessing/Compositor/FrameRoot/Right/Mendiane/Animations" index="7" unique_id=62365398]
-visible = true
-
-[node name="Phiras" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=2135096260 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 742)
-fixed_position = "mid_right"
-fixed_animation = "Phiras"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Phiras/Positions" parent_id_path=PackedInt32Array(2135096260, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Phiras" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Phiras/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Phiras" parent="PostProcessing/Compositor/FrameRoot/Right/Phiras/Animations" index="5" unique_id=447056496]
-visible = true
-
-[node name="Thystame" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=927160429 instance=ExtResource("21_yub1f")]
-position = Vector2(1013, 877)
-odd = false
-fixed_position = "mid_right"
-fixed_animation = "Thystame"
-
-[node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame/Positions" parent_id_path=PackedInt32Array(927160429, 1546582834) index="5" unique_id=856551653]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame/Animations" index="0" unique_id=2078386481]
-visible = false
-
-[node name="Thystame" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame/Animations" index="4" unique_id=1543688896]
-visible = true
-
-[node name="Bottom" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=1465732276]
-
-[node name="???" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=427420589 instance=ExtResource("21_yub1f")]
-position = Vector2(878, 1013)
-odd = false
-fixed_position = "mid_bottom"
-fixed_animation = "Piryasdasd"
-
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/???/Positions" parent_id_path=PackedInt32Array(427420589, 1546582834) index="7" unique_id=617585592]
-visible = true
-
-[node name="Animations" parent="PostProcessing/Compositor/FrameRoot/Bottom/???" index="2" unique_id=151270721]
-visible = true
-
-[node name="Piry" parent="PostProcessing/Compositor/FrameRoot/Bottom/???/Animations" index="0" unique_id=2078386481]
-visible = false
 
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
 visible = false
@@ -1050,16 +843,5 @@ theme_override_font_sizes/font_size = 30
 text = "START"
 
 [editable path="PostProcessing/Compositor/GameContainer/GameSubViewport/CameraRig"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Piry"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Cuby"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Bally"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Octy"]
-[editable path="PostProcessing/Compositor/FrameRoot/Top/Z"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Nourriture"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Linemate"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Deraumere"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Sibur"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Mendiane"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Phiras"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Thystame"]
-[editable path="PostProcessing/Compositor/FrameRoot/Bottom/???"]
+[editable path="PostProcessing/Compositor/FrameRoot/Piry"]
+[editable path="PostProcessing/Compositor/FrameRoot/Cuby"]

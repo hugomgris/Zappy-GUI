@@ -99,6 +99,9 @@ func _do_picking(viewport_pos: Vector2) -> void:
 					_hovered_player.unhovered.emit(_hovered_player.get_player_id())
 				_hovered_player = collider
 				_hovered_player.hovered.emit(_hovered_player.get_player_id())
+		# TODO: Fix this
+		#elif collider and collider is FrameCellController:
+			#print("FOUND CELL")
 	else:
 		if _hovered_tile:
 			_hovered_tile.unhovered.emit(_hovered_tile.grid_pos)

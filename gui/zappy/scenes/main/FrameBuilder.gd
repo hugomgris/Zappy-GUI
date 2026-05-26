@@ -13,7 +13,8 @@ const BORDER_WIDTH = 8.0
 enum cell_position { UNKNOWN = -1, TL_CORNER = 0, TR_CORNER = 1, BR_CORNER = 2, BL_CORNER = 3, TOP = 4, RIGHT = 5, BOTTOM = 6, LEFT = 7}
 
 func _ready():
-	_build_frame()
+	#_build_frame()
+	return
 
 func _build_frame():
 	queue_redraw()
