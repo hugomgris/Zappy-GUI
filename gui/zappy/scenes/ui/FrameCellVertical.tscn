@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_6tao2"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_s5bbr"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="12_c7hxk"]
+[ext_resource type="Texture2D" uid="uid://cd5y637sel4hj" path="res://assets/animations/players/Cily/Cily_animation.png" id="13_ukmpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
 size = Vector2(135, 405)
@@ -536,6 +537,30 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukmpn"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(0, 0, 1080, 3240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttknt"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(1080, 0, 1080, 3240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubs5q"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(2160, 0, 1080, 3240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srptj"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(3240, 0, 1080, 3240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4j7a"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(4320, 0, 1080, 3240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p5pn"]
+atlas = ExtResource("13_ukmpn")
+region = Rect2(5400, 0, 1080, 3240)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xwgh3"]
 animations = [{
 "frames": [{
@@ -559,6 +584,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Bally",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukmpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttknt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubs5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srptj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4j7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p5pn")
+}],
+"loop": true,
+"name": &"Cily",
 "speed": 2.0
 }, {
 "frames": [{
@@ -1129,6 +1177,14 @@ scale = Vector2(0.123, 0.123)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Octy"
 autoplay = "Octy"
+
+[node name="Cily" type="AnimatedSprite2D" parent="Animations" unique_id=1492835556]
+texture_filter = 1
+position = Vector2(1.5600009, -0.32000732)
+scale = Vector2(0.117481485, 0.11748148)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Cily"
+autoplay = "Cily"
 
 [node name="Thystame" type="AnimatedSprite2D" parent="Animations" unique_id=1543688896]
 visible = false

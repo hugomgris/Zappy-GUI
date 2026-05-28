@@ -104,7 +104,7 @@ func set_scaled_inner_color() -> void:
 		push_warning("FrameCellController: failed to find target inner ColorRect node")
 		
 func pick_animation() -> void:
-	for i in range(_animations.get_children().size()):
+	for i in range(_animations.get_children().size() - 1):
 		var child: AnimatedSprite2D = _animations.get_child(i)
 		child.visible = false
 	
