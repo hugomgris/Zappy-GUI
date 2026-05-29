@@ -18,7 +18,7 @@ func _ready() -> void:
 func show_tile(pos: Vector2i) -> void:
 	var data := GameData.get_tile(pos)
 	if not data:
-		push_warning("TooltipManager: show_tile failed to fetch tile data at ", pos)
+		push_error("TooltipManager: show_tile failed to fetch tile data at ", pos)
 		return
 		
 	tile_tooltip.populate(data)

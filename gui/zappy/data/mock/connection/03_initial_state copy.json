@@ -1,0 +1,76 @@
+{
+  "map": {
+    "width": 8,
+    "height": 8,
+    "tiles": [
+      { "x": 0, "y": 0, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
+      { "x": 1, "y": 0, "resources": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 2, "y": 0, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
+      { "x": 3, "y": 0, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 4, "y": 0, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 5, "y": 0, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 0, "y": 1, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
+      { "x": 1, "y": 1, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 2, "y": 1, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
+      { "x": 3, "y": 1, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 4, "y": 1, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 0, "y": 2, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
+      { "x": 1, "y": 2, "resources": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 2, "y": 2, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
+      { "x": 3, "y": 2, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 4, "y": 2, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 0, "y": 3, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
+      { "x": 1, "y": 3, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 2, "y": 3, "resources": { "nourriture": 0, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
+      { "x": 3, "y": 3, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 4, "y": 3, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 0, "y": 4, "resources": { "nourriture": 3, "linemate": 1, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [1] },
+      { "x": 1, "y": 4, "resources": { "nourriture": 1, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 2, "y": 4, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2, 3, 4] },
+      { "x": 3, "y": 4, "resources": { "nourriture": 5, "linemate": 10, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
+      { "x": 4, "y": 4, "resources": { "nourriture": 2, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] }
+    ]
+  },
+  "players": [
+    {
+      "id": 1,
+      "position": { "x": 1, "y": 1 },
+      "orientation": 1,
+      "level": 1,
+      "team": "team1",
+      "inventory": { "nourriture": 10, "linemate": 0, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }
+    },
+    {
+      "id": 2,
+      "position": { "x": 3, "y": 1 },
+      "orientation": 2,
+      "level": 2,
+      "team": "team1",
+      "inventory": { "nourriture": 5, "linemate": 2, "deraumere": 0, "sibur": 1, "mendiane": 0, "phiras": 0, "thystame": 0 }
+    },
+    {
+      "id": 3,
+      "position": { "x": 1, "y": 3 },
+      "orientation": 4,
+      "level": 1,
+      "team": "team2",
+      "inventory": { "nourriture": 20, "linemate": 0, "deraumere": 0, "sibur": 3, "mendiane": 0, "phiras": 0, "thystame": 2 }
+    },
+    {
+      "id": 4,
+      "position": { "x": 3, "y": 3 },
+      "orientation": 3,
+      "level": 1,
+      "team": "team2",
+      "inventory": { "nourriture": 50, "linemate": 0, "deraumere": 3, "sibur": 3, "mendiane": 0, "phiras": 0, "thystame": 0 }
+    }
+  ],
+  "game": {
+    "tick": 42,
+    "time_unit": 100,
+    "teams": [
+      { "name": "team1", "player_count": 2, "remaining_connections": 5 },
+      { "name": "team2",  "player_count": 2, "remaining_connections": 5 }
+    ]
+  }
+}

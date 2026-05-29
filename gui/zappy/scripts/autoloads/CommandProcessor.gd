@@ -1,6 +1,7 @@
 extends Node
 
 # Signals
+signal tile_updated(tile_pos: Vector2i, new_state: Array)
 signal player_moved(id: int, from: Vector2i, to: Vector2i)
 signal player_rotated(id: int, new_orientation: int)
 signal player_died(id: int)
@@ -16,6 +17,14 @@ signal incantation_ended(tile_pos: Vector2i, success:bool)
 signal broadcast_sent(player_id: int, message: String)
 signal game_over(winning_team: String)
 
+func process_resource_update(data) -> void:
+	var new_data: Array = data["tiles"]
+	
+	for i in range(new_data.size()):
+		var tile_pos := Vector2i(new_data[i]["x"], new_data[i]["y"])
+		var tile_resources: Dictionary = new_data[i]["resources"]
+		tile_updated.emit(tile_pos, tile_resources)
+
 func process_command(cmd: Dictionary) -> void:
 	var command: String = cmd.get("cmd", "")
 	if command.is_empty():
@@ -23,7 +32,7 @@ func process_command(cmd: Dictionary) -> void:
 			cmd.has("status") and cmd.get("status") == "level_up"):
 			command = cmd.get("status")
 		else:
-			push_warning("CommandProcessor: received command with no value")
+			push_error("CommandProcessor: received command with no value")
 			return
 
 	match command:
@@ -48,7 +57,7 @@ func _avance(cmd: Dictionary) -> void:
 	var id: int = cmd.get("player_id", -1)
 	var player: GameData.PlayerData = GameData.get_player(id)
 	if not player:
-		push_error("CommandProcessor._avance: player %d not found" % id)
+		push_error("CommandProcessor: avance: player %d not found" % id)
 		return
 
 	var from: Vector2i = player.pos
@@ -68,6 +77,10 @@ func _avance(cmd: Dictionary) -> void:
 	
 func _rotate(cmd: Dictionary, direction: int) -> void:
 	var id: int = cmd.get("player_id", -1)
+	var player: GameData.PlayerData = GameData.get_player(id)
+	if not player:
+		push_error("CommandProcessor: rotate: player %d not found" % id)
+	
 	var new_orientation: int = GameData.players[id].orientation + 1 if direction > 0 else GameData.players[id].orientation - 1
 	
 	if new_orientation > 4:
@@ -85,13 +98,15 @@ func _prend(cmd: Dictionary) -> void:
 	var id: int = cmd.get("player_id")
 	var pos: Vector2i = GameData.players[id].pos
 	var target: String = cmd.get("arg")
+	
+	print("%d is picking up %s at %d-%d" % [id, target, pos.x, pos.y])
 
 	var tile_reserve: int = GameData.tiles[pos].resources[target]
 	if tile_reserve > 0:
 		# Take resource from tile, add it to player inventory
 		GameData.tiles[pos].resources[target] -= 1
 		GameData.players[id].inventory[target] += 1
-		resource_taken.emit(id, pos, target, tile_reserve)
+		resource_taken.emit(pos, target, tile_reserve)
 
 	return
 
@@ -100,11 +115,13 @@ func _pose(cmd: Dictionary) -> void:
 	var pos: Vector2i = GameData.players[id].pos
 	var target: String = cmd.get("arg")
 
+	print("%d is putting down %s at %d-%d" % [id, target, pos.x, pos.y])
+
 	var player_reserve: int = GameData.players[id].inventory[target]
 	if (player_reserve > 0):
 		GameData.tiles[pos].resources[target] += 1
 		GameData.players[id].inventory[target] -= 1
-		resource_placed.emit(id, pos, target, GameData.tiles[pos].resources[target])
+		resource_placed.emit(pos, target, GameData.tiles[pos].resources[target])
 
 	return
 

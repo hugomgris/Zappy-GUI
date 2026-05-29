@@ -15,7 +15,7 @@ var _port := 0
 
 enum State { IDLE, CONNECTING, AUTHENTICATING, CONNECTED, CLOSED }
 
-# ── Public API ────────────────────────────────────────────────────────────────
+# Public API 
 
 func connect_to_server(ip: String, port: int) -> void:
 	_ip = ip
@@ -36,7 +36,7 @@ func disconnect_from_server() -> void:
 		_ws.close()
 	_state = State.CLOSED
 
-# ── Main loop ─────────────────────────────────────────────────────────────────
+# Main loop 
 
 func _process(_delta: float) -> void:
 	if not _ws:

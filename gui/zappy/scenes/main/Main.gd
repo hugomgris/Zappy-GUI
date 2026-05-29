@@ -42,12 +42,12 @@ func _on_server_event(event_type: String, data: Dictionary) -> void:
 	print("GOT AN EVENT")
 	var status: String = data.get("status", "")
 	var msg_type: String = data.get("type", "")
-
-	# Mirror MockServer's dispatch filter exactly
+	if msg_type == "resource_update":
+		CommandProcessor.process_resource_update(data)
 	if status == "ok" or (msg_type == "event" and status == "level_up"):
 		CommandProcessor.process_command(data)
 	elif msg_type == "game_end":
-		CommandProcessor.process_command(data)  # when you uncomment _game_end
+		CommandProcessor.process_command(data)  # TODO: game end pipeline
 
 func _on_world_initialized() -> void:
 	_camera_rig.initialize_for_map(GameData.map_size)

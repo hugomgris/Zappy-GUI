@@ -64,14 +64,14 @@ func pick_position() -> void:
 		final_position.visible = true
 		_selected_position = final_position
 	else:
-		push_warning("FrameCellController: couldn't find position node from string {%s}" % fixed_position)
+		push_error("FrameCellController: couldn't find position node from string {%s}" % fixed_position)
 
 func set_outer_color() -> void:
 	var selected_outer: ColorRect = _selected_position.get_node_or_null("Outer")
 	if selected_outer:
 		selected_outer.color = BORDER_COLOR
 	else:
-		push_warning("FrameCellController: failed to find target inner ColorRect node")
+		push_error("FrameCellController: failed to find target inner ColorRect node")
 
 func set_inner_color() -> void:
 	var selected_color: Color = Color.BLACK
@@ -85,7 +85,7 @@ func set_inner_color() -> void:
 	if selected_inner:
 		selected_inner.color = selected_color
 	else:
-		push_warning("FrameCellController: failed to find target inner ColorRect node")
+		push_error("FrameCellController: failed to find target inner ColorRect node")
 		
 func set_scaled_inner_color() -> void:
 	if not _is_scaled: return
@@ -101,7 +101,7 @@ func set_scaled_inner_color() -> void:
 	if selected_inner:
 		selected_inner.color = selected_color
 	else:
-		push_warning("FrameCellController: failed to find target inner ColorRect node")
+		push_error("FrameCellController: failed to find target inner ColorRect node")
 		
 func pick_animation() -> void:
 	for i in range(_animations.get_children().size() - 1):
@@ -113,7 +113,7 @@ func pick_animation() -> void:
 		selected.visible = true
 		_selected_animation = selected
 	else:
-		push_warning("FrameCellController: couldn't find animation node from string {%s}" % selected)
+		push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
 
 func _move_to_scaled_position() -> void:
 	print(_selected_position.name)

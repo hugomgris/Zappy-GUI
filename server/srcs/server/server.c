@@ -154,6 +154,7 @@ int server_send(int fd, char *msg)
 /*  Observer notification                                              */
 /* ------------------------------------------------------------------ */
 
+// HUGO WAS HERE
 void m_server_notify_observers(int fd, cJSON *notification)
 {
     int       i;
@@ -178,6 +179,30 @@ void m_server_notify_observers(int fd, cJSON *notification)
         log_msg(LOG_LEVEL_TRACE,
             "[SERVER][OBS_NOTIFY] observer_fd=%d player_fd=%d\n",
             o->socket_fd, fd);
+    }
+    free(msg);
+}
+
+void server_notify_observers_broadcast(cJSON *notification)
+{
+    int       i;
+    char     *msg;
+    observer **observers;
+    observer  *o;
+
+    observers = game_get_observers();
+    if (!observers)
+        return;
+
+    msg = cJSON_PrintUnformatted(notification);
+    if (!msg)
+        return;
+
+    for (i = 0; observers[i]; i++)
+    {
+        o = observers[i];
+        if (!o) continue;
+        send(o->socket_fd, msg, strlen(msg), 0);
     }
     free(msg);
 }
