@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_j1va3"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="12_arc1x"]
+[ext_resource type="Texture2D" uid="uid://bd54t04noe2ua" path="res://assets/animations/players/Plusy/Plusy_animation.png" id="13_0tb8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
 size = Vector2(135, 135)
@@ -536,6 +537,30 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y0d8"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsfyw"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01oj0"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3qvr"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(3240, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqq4r"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoan6"]
+atlas = ExtResource("13_0tb8h")
+region = Rect2(5400, 0, 1080, 1080)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xwgh3"]
 animations = [{
 "frames": [{
@@ -743,6 +768,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Piry",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y0d8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsfyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01oj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3qvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqq4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoan6")
+}],
+"loop": true,
+"name": &"Plusy",
 "speed": 2.0
 }, {
 "frames": [{
@@ -1188,3 +1236,12 @@ scale = Vector2(0.123, 0.123)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Nourriture"
 autoplay = "Nourriture"
+
+[node name="Plusy" type="AnimatedSprite2D" parent="Animations" unique_id=104353311]
+visible = false
+texture_filter = 1
+position = Vector2(-6.1035156e-05, 0)
+scale = Vector2(0.123, 0.123)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Plusy"
+autoplay = "Plusy"

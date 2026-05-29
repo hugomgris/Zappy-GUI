@@ -867,7 +867,6 @@ mouse_filter = 2
 color = Color(0, 0.9309246, 0.11207495, 1)
 
 [node name="bot_right" type="Node2D" parent="Positions" unique_id=179197810]
-visible = false
 
 [node name="Outer" type="ColorRect" parent="Positions/bot_right" unique_id=661953420]
 anchors_preset = 8
@@ -876,7 +875,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -202.5
-offset_top = -67.5
+offset_top = -71.5
 offset_right = 202.5
 offset_bottom = 67.5
 grow_horizontal = 2
@@ -1065,6 +1064,7 @@ mouse_filter = 2
 color = Color(0, 0.9309246, 0.11207495, 1)
 
 [node name="scaled" type="Node2D" parent="Positions" unique_id=1575449968]
+visible = false
 
 [node name="Outer" type="ColorRect" parent="Positions/scaled" unique_id=537362033]
 anchors_preset = 8

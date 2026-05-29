@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="5_srptj"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="6_j4j7a"]
 [ext_resource type="Texture2D" uid="uid://drv5ia4xelgm5" path="res://assets/animations/resources/nourriture_animation.png" id="7_6p5pn"]
-[ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_mkcej"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/octy/Octi_animation.png" id="8_mkcej"]
 [ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="9_8qxg1"]
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_6tao2"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_s5bbr"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="12_c7hxk"]
-[ext_resource type="Texture2D" uid="uid://cd5y637sel4hj" path="res://assets/animations/players/Cily/Cily_animation.png" id="13_ukmpn"]
+[ext_resource type="Texture2D" uid="uid://cflymkea5lq51" path="res://assets/animations/players/cily/Cily_animation.png" id="13_ukmpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
 size = Vector2(135, 405)

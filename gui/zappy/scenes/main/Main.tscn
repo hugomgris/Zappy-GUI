@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="6_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://b2rp021riu6sp" path="res://assets/animations/players/cuby/Cuby_animation.png" id="6_p5fgu"]
 [ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
-[ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="7_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="7_rikml"]
 [ext_resource type="Texture2D" uid="uid://bd0a7gm14jl80" path="res://assets/animations/resources/deraumere_animation.png" id="7_vc03v"]
@@ -811,13 +811,16 @@ visible = true
 position = Vector2(67, 742)
 fixed_animation = "Cily"
 
-[node name="Placeholder" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1242434133 instance=ExtResource("21_yub1f")]
+[node name="Penty" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1242434133 instance=ExtResource("21_yub1f")]
 position = Vector2(67, 1012)
 odd = false
 fixed_position = "bot_left"
-fixed_animation = "nothing"
+fixed_animation = "Plusy"
 
-[node name="bot_left" parent="PostProcessing/Compositor/FrameRoot/Left/Placeholder/Positions" parent_id_path=PackedInt32Array(1242434133, 1546582834) index="3" unique_id=1835682971]
+[node name="bot_left" parent="PostProcessing/Compositor/FrameRoot/Left/Penty/Positions" parent_id_path=PackedInt32Array(1242434133, 1546582834) index="3" unique_id=1835682971]
+visible = true
+
+[node name="Plusy" parent="PostProcessing/Compositor/FrameRoot/Left/Penty/Animations" parent_id_path=PackedInt32Array(1242434133, 151270721) index="11" unique_id=104353311]
 visible = true
 
 [node name="Top" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=626724000]
@@ -1067,7 +1070,7 @@ text = "START"
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Bally"]
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Octy"]
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Cily"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Placeholder"]
+[editable path="PostProcessing/Compositor/FrameRoot/Left/Penty"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/Z"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/A"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/P1"]
