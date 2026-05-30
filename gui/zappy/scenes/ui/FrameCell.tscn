@@ -7,12 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="5_jsfyw"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="6_01oj0"]
 [ext_resource type="Texture2D" uid="uid://drv5ia4xelgm5" path="res://assets/animations/resources/nourriture_animation.png" id="7_u3qvr"]
-[ext_resource type="Texture2D" uid="uid://bvwxpm0dlhi85" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_oqq4r"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="9_qoan6"]
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_j1va3"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="12_arc1x"]
-[ext_resource type="Texture2D" uid="uid://bd54t04noe2ua" path="res://assets/animations/players/Plusy/Plusy_animation.png" id="13_0tb8h"]
+[ext_resource type="Texture2D" uid="uid://21gu40tgovhf" path="res://assets/animations/players/Plusy/Plusy_animation.png" id="13_0tb8h"]
+[ext_resource type="Texture2D" uid="uid://b514jmhmqmni7" path="res://assets/animations/logo/A_test.png" id="13_jsfyw"]
+[ext_resource type="Texture2D" uid="uid://cpdyyg3cgg6xo" path="res://assets/animations/logo/EX_test.png" id="13_oqq4r"]
+[ext_resource type="Texture2D" uid="uid://c4fx76pkjfn" path="res://assets/animations/logo/P_test.png" id="14_01oj0"]
+[ext_resource type="Texture2D" uid="uid://b2qyvg4cs1i7c" path="res://assets/animations/logo/Z_test.png" id="14_1y0d8"]
+[ext_resource type="Texture2D" uid="uid://dh8ftg1qkjx82" path="res://assets/animations/logo/Y_test.png" id="17_qoan6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
 size = Vector2(135, 135)
@@ -537,6 +542,22 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4urvs"]
+atlas = ExtResource("13_oqq4r")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1va3"]
+atlas = ExtResource("13_jsfyw")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arc1x"]
+atlas = ExtResource("14_01oj0")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c2x1"]
+atlas = ExtResource("14_01oj0")
+region = Rect2(0, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1y0d8"]
 atlas = ExtResource("13_0tb8h")
 region = Rect2(0, 0, 1080, 1080)
@@ -561,8 +582,32 @@ region = Rect2(4320, 0, 1080, 1080)
 atlas = ExtResource("13_0tb8h")
 region = Rect2(5400, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_auitv"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgno6"]
+atlas = ExtResource("14_1y0d8")
+region = Rect2(0, 0, 1080, 1080)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xwgh3"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4urvs")
+}],
+"loop": true,
+"name": &"!",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1va3")
+}],
+"loop": true,
+"name": &"A",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p5fgu")
@@ -726,6 +771,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_arc1x")
+}],
+"loop": true,
+"name": &"P1",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c2x1")
+}],
+"loop": true,
+"name": &"P2",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_n7vst")
 }, {
 "duration": 1.0,
@@ -837,6 +898,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"Thystame",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auitv")
+}],
+"loop": true,
+"name": &"Y",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgno6")
+}],
+"loop": true,
+"name": &"Z",
 "speed": 2.0
 }]
 
@@ -1047,7 +1124,6 @@ mouse_filter = 2
 color = Color(0, 0.9309246, 0.11207495, 1)
 
 [node name="mid_top" type="Node2D" parent="Positions" unique_id=2053796655]
-visible = false
 
 [node name="Outer" type="ColorRect" parent="Positions/mid_top" unique_id=835065191]
 anchors_preset = 8
@@ -1113,6 +1189,7 @@ mouse_filter = 2
 color = Color(0, 0.9309246, 0.11207495, 1)
 
 [node name="scaled" type="Node2D" parent="Positions" unique_id=1575449968]
+visible = false
 
 [node name="Outer" type="ColorRect" parent="Positions/scaled" unique_id=1239927824]
 anchors_preset = 8
@@ -1245,3 +1322,57 @@ scale = Vector2(0.123, 0.123)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Plusy"
 autoplay = "Plusy"
+
+[node name="Z" type="AnimatedSprite2D" parent="Animations" unique_id=1336359279]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Z"
+autoplay = "Z"
+
+[node name="A" type="AnimatedSprite2D" parent="Animations" unique_id=182379326]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"A"
+autoplay = "A"
+
+[node name="P" type="AnimatedSprite2D" parent="Animations" unique_id=672774830]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"P1"
+autoplay = "P1"
+
+[node name="P2" type="AnimatedSprite2D" parent="Animations" unique_id=326334869]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"P2"
+autoplay = "P2"
+
+[node name="Y" type="AnimatedSprite2D" parent="Animations" unique_id=1035757190]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Y"
+autoplay = "Y"
+
+[node name="!" type="AnimatedSprite2D" parent="Animations" unique_id=248720333]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"!"
+autoplay = "!"

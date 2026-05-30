@@ -3,7 +3,7 @@ extends Area3D
 @export var float_height: float = 0.08
 @export var float_speed: float = 1.2
 @export var animation_fps: float = 12.0
-@export var scale_quantity_factor: float = 0.5
+@export var scale_quantity_factor: float = 0.1
 
 var _anim_accum: float = 0.0
 
