@@ -67,7 +67,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.04
+shader_parameter/frame_ink_shimmer = 0.5
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5fgu"]
