@@ -77,9 +77,9 @@ func set_inner_color() -> void:
 	var selected_color: Color = Color.BLACK
 	
 	if odd:
-		selected_color = COLOR_A
-	else:
 		selected_color = COLOR_B
+	else:
+		selected_color = COLOR_A
 		
 	var selected_inner: ColorRect = _selected_position.get_node_or_null("Inner")
 	if selected_inner:
@@ -93,9 +93,9 @@ func set_scaled_inner_color() -> void:
 	var selected_color: Color = Color.BLACK
 	
 	if odd:
-		selected_color = COLOR_A
-	else:
 		selected_color = COLOR_B
+	else:
+		selected_color = COLOR_A
 		
 	var selected_inner: ColorRect = _scaled_position.get_node_or_null("Inner")
 	if selected_inner:

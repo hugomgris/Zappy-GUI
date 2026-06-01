@@ -25,11 +25,13 @@ TooltipManager="*uid://dcheyt5iuywil"
 AppState="*uid://catugv4dee0t5"
 ServerConnectionManager="*uid://cpkmjlvu2jaoq"
 ProtocolParser="*uid://byy76evbwp5hq"
+ConsoleManager="*uid://c126wwr0htpsb"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/borderless=true
 
 [input]

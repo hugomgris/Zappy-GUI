@@ -67,7 +67,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.5
+shader_parameter/frame_ink_shimmer = 0.04
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5fgu"]
@@ -959,10 +959,10 @@ visible = true
 [node name="Thystame" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame/Animations" parent_id_path=PackedInt32Array(927160429, 151270721) index="4" unique_id=1543688896]
 visible = true
 
-[node name="Controls" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=1173313668 instance=ExtResource("16_yub1f")]
+[node name="Console" parent="PostProcessing/Compositor/FrameRoot/Right" unique_id=1173313668 instance=ExtResource("16_yub1f")]
 position = Vector2(877, 1013)
 fixed_position = "bot_right"
-fixed_animation = "Controls"
+fixed_animation = "Console"
 
 [node name="Bottom" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=1465732276]
 
@@ -1084,7 +1084,7 @@ text = "START"
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Mendiane"]
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Phiras"]
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Thystame"]
-[editable path="PostProcessing/Compositor/FrameRoot/Right/Controls"]
+[editable path="PostProcessing/Compositor/FrameRoot/Right/Console"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder2"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder3"]

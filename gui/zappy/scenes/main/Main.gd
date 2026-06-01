@@ -39,7 +39,7 @@ func _on_snapshot_ready() -> void:
 	GameData.world_initialized.emit()
 
 func _on_server_event(event_type: String, data: Dictionary) -> void:
-	print("GOT AN EVENT")
+	ConsoleManager.console_update_received.emit(data) # TODO: check out where/when this should actually be emited
 	var status: String = data.get("status", "")
 	var msg_type: String = data.get("type", "")
 	if msg_type == "resource_update":
