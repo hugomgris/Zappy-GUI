@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="5_t7xb3"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="6_5egxp"]
 [ext_resource type="Texture2D" uid="uid://drv5ia4xelgm5" path="res://assets/animations/resources/nourriture_animation.png" id="7_idrrx"]
-[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_yephg"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/octy/Octi_animation.png" id="8_yephg"]
 [ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="9_5w0lw"]
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_47nih"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_cjhp7"]
@@ -1192,24 +1192,21 @@ sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Nourriture"
 autoplay = "Nourriture"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1389584792]
+[node name="ConsoleLog" type="RichTextLabel" parent="." unique_id=1389584792]
+z_index = 20
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.5
+offset_left = -187.5
 offset_top = -55.0
-offset_right = 192.5
+offset_right = 187.5
 offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("13_qfhjw")
 theme_override_fonts/bold_font = ExtResource("13_08pu1")
 bbcode_enabled = true
-text = "[color=white][b][Team1][2][/b]: Prend -> Nourriture
-[b][Team1][2][/b]: Avance
-[b][Team1][2][/b]: Incantation -> Level 4 -> Leader
-[b][Team1][2][/b]: Droit
-[b][Team1][2][/b]: Broadcast -> HERE[/color]"
+text = "I AM PLACEHOLDING THIS TEXT BOX"
 script = ExtResource("15_vcxig")

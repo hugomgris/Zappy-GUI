@@ -43,6 +43,9 @@ func on_mouse_entered() -> void:
 	
 	_collider.scale = Vector2(2.0, 2.0)
 	
+	if get_node_or_null("ConsoleLog"):
+		ConsoleManager.console_hovered.emit()
+	
 func on_mouse_exited() -> void:
 	_remove_scaled_layout()
 	_positions.scale = Vector2(1.0, 1.0)
@@ -53,6 +56,9 @@ func on_mouse_exited() -> void:
 	_animations.z_index -= 11
 	
 	_collider.scale = Vector2(1.0, 1.0)
+	
+	if get_node_or_null("ConsoleLog"):
+		ConsoleManager.console_unhovered.emit()
 		
 func pick_position() -> void:
 	for i in range (_positions.get_children().size()):
