@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_47nih"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_cjhp7"]
 [ext_resource type="Texture2D" uid="uid://cdfkooakqgvd" path="res://assets/animations/resources/thystame_animation.png" id="12_ticxc"]
-[ext_resource type="FontFile" uid="uid://1xuain1yyii" path="res://assets/fonts/Greycliff-CF-Extra-Bold.otf" id="13_08pu1"]
-[ext_resource type="FontFile" uid="uid://d4kb8jhkfn0sn" path="res://assets/fonts/Greycliff-CF-Demi-Bold.otf" id="13_qfhjw"]
+[ext_resource type="FontFile" uid="uid://dnlif1pxd12ml" path="res://assets/fonts/JetBrainsMono-Medium.ttf" id="13_vcxig"]
+[ext_resource type="FontFile" uid="uid://ddfy4ajw4sksp" path="res://assets/fonts/JetBrainsMono-ExtraBold.ttf" id="14_t7xb3"]
 [ext_resource type="Script" uid="uid://bu28pkwoe1ngi" path="res://scenes/ui/ConsoleController.gd" id="15_vcxig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
@@ -1193,20 +1193,19 @@ animation = &"Nourriture"
 autoplay = "Nourriture"
 
 [node name="ConsoleLog" type="RichTextLabel" parent="." unique_id=1389584792]
-z_index = 20
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -187.5
-offset_top = -55.0
+offset_top = -52.0
 offset_right = 187.5
-offset_bottom = 55.0
+offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("13_qfhjw")
-theme_override_fonts/bold_font = ExtResource("13_08pu1")
+theme_override_fonts/normal_font = ExtResource("13_vcxig")
+theme_override_fonts/bold_font = ExtResource("14_t7xb3")
 bbcode_enabled = true
 text = "I AM PLACEHOLDING THIS TEXT BOX"
 script = ExtResource("15_vcxig")

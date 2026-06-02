@@ -119,7 +119,8 @@ func pick_animation() -> void:
 		selected.visible = true
 		_selected_animation = selected
 	else:
-		push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
+		if fixed_animation != "NONE":
+			push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
 
 func _move_to_scaled_position() -> void:
 	print(_selected_position.name)

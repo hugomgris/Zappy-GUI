@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://m7uq08a2kfvy" path="res://assets/animations/logo/A_animation.png" id="14_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://cn4etso54o7i8" path="res://assets/animations/logo/P_animation.png" id="15_qoan6"]
 [ext_resource type="Texture2D" uid="uid://6a1ymyrudxs" path="res://assets/animations/logo/Y_animation.png" id="17_dgno6"]
+[ext_resource type="Texture2D" uid="uid://cr53mkkw7bo6c" path="res://assets/animations/icons/volume_animation.png" id="17_qoan6"]
 [ext_resource type="Texture2D" uid="uid://cihgoe01m0f5h" path="res://assets/animations/logo/Z_animation.png" id="18_oqq4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr1ea"]
@@ -662,6 +663,10 @@ region = Rect2(4320, 0, 1080, 1080)
 atlas = ExtResource("13_0tb8h")
 region = Rect2(5400, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpui1"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(0, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwp26"]
 atlas = ExtResource("17_dgno6")
 region = Rect2(2160, 0, 1080, 1080)
@@ -1078,6 +1083,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Thystame",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpui1")
+}],
+"loop": true,
+"name": &"Volume",
 "speed": 2.0
 }, {
 "frames": [{
@@ -1586,3 +1599,12 @@ scale = Vector2(0.11705562, 0.11612964)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"!"
 autoplay = "!"
+
+[node name="Volume" type="AnimatedSprite2D" parent="Animations" unique_id=223350750]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 1.7099993)
+scale = Vector2(0.11705562, 0.11612964)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Volume"
+autoplay = "Volume"
