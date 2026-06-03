@@ -969,7 +969,7 @@ fixed_animation = "NONE"
 [node name="Placeholder" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=427420589 instance=ExtResource("21_yub1f")]
 position = Vector2(203, 1013)
 fixed_position = "mid_bottom"
-fixed_animation = "Piryasdasd"
+fixed_animation = "NONE"
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder/Positions" parent_id_path=PackedInt32Array(427420589, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -978,7 +978,7 @@ visible = true
 position = Vector2(338, 1013)
 odd = false
 fixed_position = "mid_bottom"
-fixed_animation = "Piryasdasd"
+fixed_animation = "NONE"
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder2/Positions" parent_id_path=PackedInt32Array(323767246, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -986,7 +986,7 @@ visible = true
 [node name="Placeholder3" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=149038092 instance=ExtResource("21_yub1f")]
 position = Vector2(473, 1013)
 fixed_position = "mid_bottom"
-fixed_animation = "Piryasdasd"
+fixed_animation = "NONE"
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder3/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
 visible = true

@@ -667,6 +667,18 @@ region = Rect2(5400, 0, 1080, 1080)
 atlas = ExtResource("17_qoan6")
 region = Rect2(0, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4c3y"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lykk4"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66dd6"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(3240, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwp26"]
 atlas = ExtResource("17_dgno6")
 region = Rect2(2160, 0, 1080, 1080)
@@ -1088,6 +1100,15 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gpui1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4c3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lykk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66dd6")
 }],
 "loop": true,
 "name": &"Volume",

@@ -86,12 +86,37 @@ func _input(event: InputEvent) -> void:
 		tooltips.update_mouse_position(compositor_pos)
 
 func _do_picking_2d(compositor_pos: Vector2) -> void:
-	var space2d := compositor.find_world_2d().direct_space_state
-	var query := PhysicsPointQueryParameters2D.new()
+	var space2d: PhysicsDirectSpaceState2D
+	var query: PhysicsPointQueryParameters2D
+	var results: Array[Dictionary]
+	
+	# If a cell is already hovered, only check if the cursor is still inside it
+	if _hovered_cell != null:
+		space2d = compositor.find_world_2d().direct_space_state
+		query = PhysicsPointQueryParameters2D.new()
+		query.position = compositor_pos
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+		results = space2d.intersect_point(query)
+
+		var still_on_hovered := false
+		for r in results:
+			if r.collider == _hovered_cell:
+				still_on_hovered = true
+				break
+
+		if not still_on_hovered:
+			_hovered_cell.on_mouse_exited()
+			_hovered_cell = null
+		return  # don't try to hover anything new this frame
+
+	# Nothing hovered
+	space2d = compositor.find_world_2d().direct_space_state
+	query = PhysicsPointQueryParameters2D.new()
 	query.position = compositor_pos
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
-	var results := space2d.intersect_point(query)
+	results = space2d.intersect_point(query)
 
 	var hit_cell: FrameCellController = null
 	for r in results:

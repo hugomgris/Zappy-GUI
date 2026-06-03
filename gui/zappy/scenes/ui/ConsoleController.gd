@@ -25,7 +25,6 @@ func _ready() -> void:
 	ConsoleManager.console_unhovered.connect(_on_unhovered)
 
 func _on_console_update_received(data: Dictionary) -> void:
-	print(data)
 	# parse -> build -> push
 	if data.has("player_id") and data.has("cmd"):
 		var player_id: int = data.get("player_id")
