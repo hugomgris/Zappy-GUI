@@ -26,7 +26,8 @@ var _original_position: Vector2 = Vector2.ZERO
 var _is_scaled: bool = false
 var _scaled_position: Node2D = null
 
-var _slider: Area2D = null
+var _slider: HSlider = null
+var _current_volume_step: int = 0
 
 func _ready() -> void:
 	_original_position = position
@@ -186,28 +187,33 @@ func _remove_scaled_layout() -> void:
 		_reset_slider_to_regular_position()
 
 func set_up_sliders() -> void:
-	if not is_horizontal_controller and not is_vertical_controller:
+	if not is_horizontal_controller:
 		return
-	
-	if is_horizontal_controller:
-		_slider = get_node_or_null("HorizontalSlider")
-	elif is_vertical_controller:
-		_slider = get_node_or_null("VerticalSlider")
-	
-	if _slider:
-		_slider.visible = true
-		_slider.z_index = 12
-		
-		var slider_outline: ColorRect = _slider.get_node_or_null("Outline")
-		if slider_outline:
-			slider_outline.color = COLOR_B if odd else COLOR_A
+
+	_slider = get_node_or_null("HorizontalSlider")
+	if not _slider:
+		return
+
+	_slider.min_value = 0
+	_slider.max_value = SoundManager.SNAP_STEPS
+	_slider.step = 1
+	_slider.value = _current_volume_step
+	_slider.visible = true
+
+	_slider.value_changed.connect(func(v):
+		_current_volume_step = int(v)
+		@warning_ignore("integer_division")
+		SoundManager.volume = int(v) * (100 / SoundManager.SNAP_STEPS)
+	)
 
 func _set_slider_to_hovered_position() -> void:
-	if is_horizontal_controller:
-		_slider.global_position.x +=  GameConfig.CELL_SIZE / 4.0
-		_slider.scale = Vector2(2.0, 2.0)
+	_slider.z_index += 30
+	_slider.position.x -= 35
+	_slider.position.y += 37
+	_slider.scale = Vector2(2.0, 2.0)
 	
 func _reset_slider_to_regular_position() -> void:
-	if is_horizontal_controller:
-		_slider.global_position.x -= GameConfig.CELL_SIZE / 4.0
-		_slider.scale = Vector2(1.0, 1.0)
+	_slider.z_index -= 30
+	_slider.position.x += 35
+	_slider.position.y -= 37
+	_slider.scale = Vector2(1.0, 1.0)
