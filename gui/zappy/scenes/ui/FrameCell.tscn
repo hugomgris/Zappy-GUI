@@ -1161,6 +1161,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qoan6"]
+size = Vector2(6, 20)
+
 [node name="Area2D" type="Area2D" unique_id=417018103]
 script = ExtResource("1_2o04i")
 
@@ -1629,3 +1632,24 @@ scale = Vector2(0.11705562, 0.11612964)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Volume"
 autoplay = "Volume"
+
+[node name="HorizontalSlider" type="Area2D" parent="." unique_id=2030686851]
+visible = false
+position = Vector2(32, 0)
+
+[node name="Outline" type="ColorRect" parent="HorizontalSlider" unique_id=1042685032]
+offset_left = -35.0
+offset_top = 36.0
+offset_right = -29.0
+offset_bottom = 56.0
+color = Color(0, 0.48452926, 0, 1)
+
+[node name="SliderRect" type="ColorRect" parent="HorizontalSlider" unique_id=1126200462]
+offset_left = -34.0
+offset_top = 37.0
+offset_right = -30.0
+offset_bottom = 55.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalSlider" unique_id=1042961540]
+position = Vector2(-32, 46)
+shape = SubResource("RectangleShape2D_qoan6")

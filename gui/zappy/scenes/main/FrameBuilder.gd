@@ -1,9 +1,9 @@
 extends Control
 
-const CELL_SIZE   = 135
-const TOTAL_CELLS = 8
+const CELL_SIZE   = GameConfig.CELL_SIZE
+const TOTAL_CELLS = GameConfig.TOTAL_CELLS
 const GRID_START  = 1
-const GRID_END    = 6        # inclusive, 6 cells = 810px
+const GRID_END    = 6
 
 const COLOR_A      = Color(0.0, 0.485, 0.0, 1.0)
 const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)

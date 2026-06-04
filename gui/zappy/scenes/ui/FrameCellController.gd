@@ -13,6 +13,8 @@ const BORDER_WIDTH = 8.0
 @onready var _animations: Node2D = $Animations
 @onready var _collider: CollisionShape2D = $Collider
 
+@export var is_horizontal_controller: bool = false
+@export var is_vertical_controller: bool = false
 @export var odd: bool = true
 @export var fixed_position: String = "mid_left"
 @export var fixed_animation: String = "Cuby"
@@ -24,6 +26,8 @@ var _original_position: Vector2 = Vector2.ZERO
 var _is_scaled: bool = false
 var _scaled_position: Node2D = null
 
+var _slider: Area2D = null
+
 func _ready() -> void:
 	_original_position = position
 	
@@ -31,6 +35,7 @@ func _ready() -> void:
 	pick_animation()
 	set_outer_color()
 	set_inner_color()
+	set_up_sliders()
 	
 func on_mouse_entered() -> void:
 	_positions.scale = Vector2(2.0, 2.0)
@@ -38,8 +43,8 @@ func on_mouse_entered() -> void:
 	_move_to_scaled_position()
 	_switch_to_scaled_layout()
 	
-	_positions.z_index += 10
-	_animations.z_index += 11
+	_positions.z_index = _positions.z_index + 20 if name == "Console" else _positions.z_index + 10
+	_animations.z_index = _animations.z_index + 21 if name == "Console" else _animations.z_index + 11
 	
 	_collider.scale = Vector2(2.0, 2.0)
 	
@@ -52,8 +57,8 @@ func on_mouse_exited() -> void:
 	_animations.scale = Vector2(1.0, 1.0)
 	position = _original_position
 	
-	_positions.z_index -= 10
-	_animations.z_index -= 11
+	_positions.z_index = _positions.z_index - 20 if name == "Console" else _positions.z_index - 10
+	_animations.z_index = _animations.z_index - 21 if name == "Console" else _animations.z_index - 11
 	
 	_collider.scale = Vector2(1.0, 1.0)
 	
@@ -160,12 +165,12 @@ func _switch_to_scaled_layout() -> void:
 	var scaled_position = _positions.get_node_or_null("scaled")
 	scaled_position.visible = true
 	
-	#var scaled_inner: ColorRect = scaled_position.get_node("Inner")
-	#scaled_inner.size = Vector2(_scaled_sizes["mid_top"] / 2, _scaled_sizes["mid_top"] / 2)
-	
 	_scaled_position = scaled_position
 	_is_scaled = true
 	set_scaled_inner_color()
+	
+	if _slider:
+		_set_slider_to_hovered_position()
 
 func _remove_scaled_layout() -> void:
 	var current_position_name = String(_selected_position.name)
@@ -176,3 +181,33 @@ func _remove_scaled_layout() -> void:
 	_scaled_position = null
 	var scale_position_node = _positions.get_node_or_null("scaled")
 	scale_position_node.visible = false
+	
+	if _slider:
+		_reset_slider_to_regular_position()
+
+func set_up_sliders() -> void:
+	if not is_horizontal_controller and not is_vertical_controller:
+		return
+	
+	if is_horizontal_controller:
+		_slider = get_node_or_null("HorizontalSlider")
+	elif is_vertical_controller:
+		_slider = get_node_or_null("VerticalSlider")
+	
+	if _slider:
+		_slider.visible = true
+		_slider.z_index = 12
+		
+		var slider_outline: ColorRect = _slider.get_node_or_null("Outline")
+		if slider_outline:
+			slider_outline.color = COLOR_B if odd else COLOR_A
+
+func _set_slider_to_hovered_position() -> void:
+	if is_horizontal_controller:
+		_slider.global_position.x +=  GameConfig.CELL_SIZE / 4.0
+		_slider.scale = Vector2(2.0, 2.0)
+	
+func _reset_slider_to_regular_position() -> void:
+	if is_horizontal_controller:
+		_slider.global_position.x -= GameConfig.CELL_SIZE / 4.0
+		_slider.scale = Vector2(1.0, 1.0)

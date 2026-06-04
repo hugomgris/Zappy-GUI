@@ -993,6 +993,7 @@ visible = true
 
 [node name="Volumen" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=959719795 instance=ExtResource("21_yub1f")]
 position = Vector2(608, 1013)
+is_horizontal_controller = true
 odd = false
 fixed_position = "mid_bottom"
 fixed_animation = "Volume"

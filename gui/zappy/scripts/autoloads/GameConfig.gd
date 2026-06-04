@@ -4,6 +4,10 @@ extends Node
 # Window
 const WINDOW_SIZE := Vector2i(1080, 1080)
 
+# Frame
+const CELL_SIZE   = 135
+const TOTAL_CELLS = 8
+
 # MAP
 const TILE_SIZE: float = 2.0
 const TILE_GAP: float = 0.0

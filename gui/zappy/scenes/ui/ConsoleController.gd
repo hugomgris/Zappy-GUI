@@ -6,6 +6,8 @@ const LINES_HOVERED = 7
 const REGULAR_FONT_SIZE = 16
 const HOVERED_FONT_SIZE = 24
 
+@onready var _animations: Node2D = $"../Animations"
+
 var _raw_messages: Array[String] = []  # Store without font size tags
 var _is_hovered := false
 var _current_font_size := REGULAR_FONT_SIZE
@@ -16,7 +18,7 @@ var _size_shift_x = 400
 var _size_shift_y = 110
 
 func _ready() -> void:
-	z_index = 2
+	z_index = _animations.z_index + 1
 	text= ""
 	scroll_active = false
 	
@@ -68,12 +70,12 @@ func _refresh_display() -> void:
 func _on_hovered() -> void:
 	_is_hovered = true
 	_current_font_size = HOVERED_FONT_SIZE
-	z_index = 12
+	z_index = _animations.z_index + 1
 	_set_to_hovered_layout()
 	_refresh_display()
 
 func _on_unhovered() -> void:
-	z_index = 2
+	z_index = _animations.z_index + 1
 	_is_hovered = false
 	_current_font_size = REGULAR_FONT_SIZE
 	_set_to_regular_layout()

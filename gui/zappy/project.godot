@@ -26,6 +26,7 @@ AppState="*uid://catugv4dee0t5"
 ServerConnectionManager="*uid://cpkmjlvu2jaoq"
 ProtocolParser="*uid://byy76evbwp5hq"
 ConsoleManager="*uid://c126wwr0htpsb"
+SoundManager="*uid://cqoypvqw2cppa"
 
 [display]
 
