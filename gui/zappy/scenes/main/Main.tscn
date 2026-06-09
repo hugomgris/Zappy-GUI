@@ -67,7 +67,7 @@ shader_parameter/halftone_opacity_anim = 0.5
 shader_parameter/global_frame_jitter = 0.003
 shader_parameter/frame_density_jitter = 0.06
 shader_parameter/frame_warp_strength = 0.004
-shader_parameter/frame_ink_shimmer = 0.04
+shader_parameter/frame_ink_shimmer = 0.5
 shader_parameter/transparent_background = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5fgu"]
@@ -983,12 +983,15 @@ fixed_animation = "NONE"
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder2/Positions" parent_id_path=PackedInt32Array(323767246, 1546582834) index="7" unique_id=617585592]
 visible = true
 
-[node name="Placeholder3" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=149038092 instance=ExtResource("21_yub1f")]
+[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=149038092 instance=ExtResource("21_yub1f")]
 position = Vector2(473, 1013)
 fixed_position = "mid_bottom"
-fixed_animation = "NONE"
+fixed_animation = "Colors"
 
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder3/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
+[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
+visible = true
+
+[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Animations" parent_id_path=PackedInt32Array(149038092, 151270721) index="19" unique_id=1284122128]
 visible = true
 
 [node name="Volumen" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=959719795 instance=ExtResource("21_yub1f")]
@@ -1091,5 +1094,5 @@ text = "START"
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Console"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder2"]
-[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder3"]
+[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Colors"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Volumen"]

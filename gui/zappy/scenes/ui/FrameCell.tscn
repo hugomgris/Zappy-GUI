@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://21gu40tgovhf" path="res://assets/animations/players/Plusy/Plusy_animation.png" id="13_0tb8h"]
 [ext_resource type="Texture2D" uid="uid://cqg06a8fufbe1" path="res://assets/animations/logo/EX_animation.png" id="13_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://m7uq08a2kfvy" path="res://assets/animations/logo/A_animation.png" id="14_oqq4r"]
+[ext_resource type="Texture2D" uid="uid://d1os3l10oe5xv" path="res://assets/animations/icons/colors_animation.png" id="15_j1va3"]
 [ext_resource type="Texture2D" uid="uid://cn4etso54o7i8" path="res://assets/animations/logo/P_animation.png" id="15_qoan6"]
 [ext_resource type="Texture2D" uid="uid://6a1ymyrudxs" path="res://assets/animations/logo/Y_animation.png" id="17_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cr53mkkw7bo6c" path="res://assets/animations/icons/volume_animation.png" id="17_qoan6"]
@@ -592,6 +593,30 @@ region = Rect2(3240, 0, 1080, 1080)
 atlas = ExtResource("14_oqq4r")
 region = Rect2(4320, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_o87hq"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhm5h"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4u28"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh4jy"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(3240, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0ioj"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srhu2"]
+atlas = ExtResource("15_j1va3")
+region = Rect2(5400, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gewo"]
 atlas = ExtResource("15_qoan6")
 region = Rect2(4320, 0, 1080, 1080)
@@ -797,6 +822,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Bally",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o87hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhm5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4u28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh4jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0ioj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srhu2")
+}],
+"loop": true,
+"name": &"Colors",
 "speed": 2.0
 }, {
 "frames": [{
@@ -1647,6 +1695,15 @@ scale = Vector2(0.11705562, 0.11547224)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Volume"
 autoplay = "Volume"
+
+[node name="Colors" type="AnimatedSprite2D" parent="Animations" unique_id=1284122128]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 4.645005)
+scale = Vector2(0.11705562, 0.11547224)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Colors"
+autoplay = "Colors"
 
 [node name="HorizontalSlider" type="HSlider" parent="." unique_id=977905092]
 visible = false
