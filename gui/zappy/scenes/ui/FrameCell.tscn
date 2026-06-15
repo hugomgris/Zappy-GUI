@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cn4etso54o7i8" path="res://assets/animations/logo/P_animation.png" id="15_qoan6"]
 [ext_resource type="Texture2D" uid="uid://6a1ymyrudxs" path="res://assets/animations/logo/Y_animation.png" id="17_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cr53mkkw7bo6c" path="res://assets/animations/icons/volume_animation.png" id="17_qoan6"]
+[ext_resource type="Texture2D" uid="uid://dfd4uttuliokr" path="res://assets/animations/icons/time_animation.png" id="18_arc1x"]
 [ext_resource type="Texture2D" uid="uid://cihgoe01m0f5h" path="res://assets/animations/logo/Z_animation.png" id="18_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://enwc4vwyvniu" path="res://assets/textures/slider_grabber_horizontal.png" id="20_dgno6"]
 
@@ -689,6 +690,30 @@ region = Rect2(4320, 0, 1080, 1080)
 atlas = ExtResource("13_0tb8h")
 region = Rect2(5400, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_msvfl"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(0, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hhc6"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(1080, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr466"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(2160, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rymp"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(3240, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo2bo"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkh0v"]
+atlas = ExtResource("18_arc1x")
+region = Rect2(5400, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gpui1"]
 atlas = ExtResource("17_qoan6")
 region = Rect2(0, 0, 1080, 1080)
@@ -1144,6 +1169,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"Thystame",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msvfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hhc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr466")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rymp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo2bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkh0v")
+}],
+"loop": true,
+"name": &"Time",
 "speed": 2.0
 }, {
 "frames": [{
@@ -1704,6 +1752,15 @@ scale = Vector2(0.11705562, 0.11547224)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Colors"
 autoplay = "Colors"
+
+[node name="Time" type="AnimatedSprite2D" parent="Animations" unique_id=1874333937]
+visible = false
+texture_filter = 1
+position = Vector2(-0.21002793, 4.645005)
+scale = Vector2(0.11705562, 0.11547224)
+sprite_frames = SubResource("SpriteFrames_xwgh3")
+animation = &"Time"
+autoplay = "Time"
 
 [node name="HorizontalSlider" type="HSlider" parent="." unique_id=977905092]
 visible = false
