@@ -4,6 +4,10 @@ extends Node
 # Window
 const WINDOW_SIZE := Vector2i(1080, 1080)
 
+# Frame
+const CELL_SIZE   = 135
+const TOTAL_CELLS = 8
+
 # MAP
 const TILE_SIZE: float = 2.0
 const TILE_GAP: float = 0.0
@@ -24,6 +28,9 @@ const RESOURCE_NAMES: Array[String]  = [
 	"nourriture", "linemate", "deraumere",
 	"sibur", "mendiane", "phiras", "thystame"
 ]
+
+# COMMAND STATES
+const COMMAND_STATUSES = ["ok","ko", "level_up", "in_progress", "died"]
 
 # ENUMS
 enum Orientation { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 }

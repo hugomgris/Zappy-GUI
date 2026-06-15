@@ -18,7 +18,7 @@ func _get_labels() -> void:
 func populate(data: GameData.TileState) -> void:
 	var position_label: RichTextLabel = labels["Position"]
 	if not position_label:
-		push_warning("TooltipController: Failed to find requested label for 'position_label'")
+		push_error("TooltipController: Failed to find requested label for 'position_label'")
 		return
 	
 	var pos_string = str(data.pos)

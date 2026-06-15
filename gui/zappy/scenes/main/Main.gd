@@ -6,17 +6,27 @@ extends Control
 @onready var post_processing: SubViewportContainer = $PostProcessing
 @onready var tooltips: Control = $PostProcessing/Compositor/Tooltips
 @onready var start_button: Button = $CanvasLayer/StartButton
-
+@onready var compositor: SubViewport = $PostProcessing/Compositor
 
 @export var map_size := Vector2i(10, 10)
 @export var logo_scale := 1.0
 
 var _hovered_tile: TileController = null
 var _hovered_player: PlayerController = null
+var _hovered_cell: FrameCellController = null
+
+var _shader: ShaderMaterial = null
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
 	GameData.world_initialized.connect(_on_world_initialized, CONNECT_ONE_SHOT)
+	
+	ColorManager.ink_shimmer_changed.connect(_on_ink_shimmer_changed)
+	TimeManager.time_value_changed.connect(_on_time_value_changed)
+	
+	_fetch_shader_material()
 
 	if AppState.use_mock:
 		MockServer.build_mock_initial_game_state()
@@ -36,8 +46,15 @@ func _on_snapshot_ready() -> void:
 	GameData.world_initialized.emit()
 
 func _on_server_event(event_type: String, data: Dictionary) -> void:
-	# Placeholder
-	print("[Main] Server event: %s" % event_type)
+	ConsoleManager.console_update_received.emit(data) # TODO: check out where/when this should actually be emited
+	var status: String = data.get("status", "")
+	var msg_type: String = data.get("type", "")
+	if msg_type == "resource_update":
+		CommandProcessor.process_resource_update(data)
+	if status == "ok" or (msg_type == "event" and status == "level_up"):
+		CommandProcessor.process_command(data)
+	elif msg_type == "game_end":
+		CommandProcessor.process_command(data)  # TODO: game end pipeline
 
 func _on_world_initialized() -> void:
 	_camera_rig.initialize_for_map(GameData.map_size)
@@ -49,7 +66,16 @@ func _input(event: InputEvent) -> void:
 	if not (event is InputEventMouse):
 		return
 
-	if event is InputEventMouseButton:
+	var is_scroll = (
+		event is InputEventMouseButton and (
+			event.button_index == MOUSE_BUTTON_WHEEL_UP or
+			event.button_index == MOUSE_BUTTON_WHEEL_DOWN or
+			event.button_index == MOUSE_BUTTON_WHEEL_LEFT or
+			event.button_index == MOUSE_BUTTON_WHEEL_RIGHT
+		)
+	)
+
+	if event is InputEventMouseButton and not is_scroll:
 		var control_at_pos := get_viewport().gui_get_hovered_control()
 		if control_at_pos != null:
 			return
@@ -58,12 +84,61 @@ func _input(event: InputEvent) -> void:
 	var compositor_pos: Vector2 = event.position - pp_offset
 	var game_offset := Vector2(135, 135)
 	var local_event := event.xformed_by(Transform2D(0, -(pp_offset + game_offset)))
+
 	game_sub_viewport.push_input(local_event)
-	if event is InputEventMouse:
-		_do_picking(local_event.position)
+
+	if event is InputEventMouseMotion:
+		_do_picking_3d(local_event.position)
+		_do_picking_2d(compositor_pos)
 		tooltips.update_mouse_position(compositor_pos)
 
-func _do_picking(viewport_pos: Vector2) -> void:
+func _do_picking_2d(compositor_pos: Vector2) -> void:
+	var space2d: PhysicsDirectSpaceState2D
+	var query: PhysicsPointQueryParameters2D
+	var results: Array[Dictionary]
+	
+	# If a cell is already hovered, only check if the cursor is still inside it
+	if _hovered_cell != null:
+		space2d = compositor.find_world_2d().direct_space_state
+		query = PhysicsPointQueryParameters2D.new()
+		query.position = compositor_pos
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+		results = space2d.intersect_point(query)
+
+		var still_on_hovered := false
+		for r in results:
+			if r.collider == _hovered_cell:
+				still_on_hovered = true
+				break
+
+		if not still_on_hovered:
+			_hovered_cell.on_mouse_exited()
+			_hovered_cell = null
+		return  # don't try to hover anything new this frame
+
+	# Nothing hovered
+	space2d = compositor.find_world_2d().direct_space_state
+	query = PhysicsPointQueryParameters2D.new()
+	query.position = compositor_pos
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	results = space2d.intersect_point(query)
+
+	var hit_cell: FrameCellController = null
+	for r in results:
+		if r.collider is FrameCellController:
+			hit_cell = r.collider
+			break
+
+	if hit_cell != _hovered_cell:
+		if _hovered_cell:
+			_hovered_cell.on_mouse_exited()
+		_hovered_cell = hit_cell
+		if _hovered_cell:
+			_hovered_cell.on_mouse_entered()
+
+func _do_picking_3d(viewport_pos: Vector2) -> void:
 	var camera := game_sub_viewport.get_camera_3d()
 	if not camera:
 		return
@@ -92,6 +167,9 @@ func _do_picking(viewport_pos: Vector2) -> void:
 					_hovered_player.unhovered.emit(_hovered_player.get_player_id())
 				_hovered_player = collider
 				_hovered_player.hovered.emit(_hovered_player.get_player_id())
+		# TODO: Fix this
+		#elif collider and collider is FrameCellController:
+			#print("FOUND CELL")
 	else:
 		if _hovered_tile:
 			_hovered_tile.unhovered.emit(_hovered_tile.grid_pos)
@@ -100,6 +178,8 @@ func _do_picking(viewport_pos: Vector2) -> void:
 			_hovered_player.unhovered.emit(_hovered_player.get_player_id())
 			_hovered_player = null
 
+func _fetch_shader_material() -> void:
+	_shader = post_processing.material
 
 func _on_start_game_pressed() -> void:
 	start_button.hide()
@@ -110,3 +190,12 @@ func _on_start_game_pressed() -> void:
 		push_error("[Main] run.sh failed (exit %d): %s" % [exit_code, "\n".join(output)])
 	else:
 		print("[Main] Server time API started")
+		
+func _on_ink_shimmer_changed(value: float) -> void:
+	_shader.set_shader_parameter("frame_ink_shimmer", value)
+	
+func _on_time_value_changed(value: float) -> void:
+	if AppState.use_mock:
+		MockServer.set_new_interval(value)
+	else:
+		print("TIME MANAGEMENT WITH SERVER PENDING")

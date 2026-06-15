@@ -1,9 +1,9 @@
 extends Node
 
-@export var commands_path: String = "res://data/mock/"
-@export var connection_path: String = commands_path + "connection/"
-@export var interval: float = 0.5
-@export var auto_start: bool = false
+var commands_path: String = "res://data/mock/"
+var connection_path: String = commands_path + "connection/"
+var interval: float = 1.0
+var auto_start: bool = false
 
 var _files: Array[String] = []
 var _index: int = 0
@@ -42,6 +42,7 @@ func _dispatch_next() -> void:
 	if data.has("status"):
 		var status: String = data.get("status", "ko")
 		if (status == "ok" or status == "level_up"):
+			ConsoleManager.console_update_received.emit(data)
 			CommandProcessor.process_command(data)
 	
 
@@ -175,3 +176,6 @@ func _load_game_data_from_file(game: Dictionary) -> void:
 		GameData.teams[team.get("name")] = { "player_count": team.get("player_count"), "remaining_connections": team.get("remaining_connections")}
 
 	return
+	
+func set_new_interval(new_interval: float) -> void:
+	interval = new_interval

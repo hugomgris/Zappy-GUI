@@ -1,9 +1,9 @@
 extends Control
 
-const CELL_SIZE   = 135
-const TOTAL_CELLS = 8
+const CELL_SIZE   = GameConfig.CELL_SIZE
+const TOTAL_CELLS = GameConfig.TOTAL_CELLS
 const GRID_START  = 1
-const GRID_END    = 6        # inclusive, 6 cells = 810px
+const GRID_END    = 6
 
 const COLOR_A      = Color(0.0, 0.485, 0.0, 1.0)
 const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)
@@ -13,7 +13,8 @@ const BORDER_WIDTH = 8.0
 enum cell_position { UNKNOWN = -1, TL_CORNER = 0, TR_CORNER = 1, BR_CORNER = 2, BL_CORNER = 3, TOP = 4, RIGHT = 5, BOTTOM = 6, LEFT = 7}
 
 func _ready():
-	_build_frame()
+	#_build_frame()
+	return
 
 func _build_frame():
 	queue_redraw()

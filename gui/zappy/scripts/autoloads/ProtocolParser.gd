@@ -17,10 +17,16 @@ func handle(text: String) -> void:
 		push_error("[PP] JSON parse error in: %s" % text)
 		return
 	var d: Dictionary = j.data
-
+	
+	print("[PP] handle() — snapshot_received=%s, has_map=%s, type=%s" % [
+		str(_snapshot_received), str(d.has("map")), str(d.get("type", "?"))
+	])
+	
 	if not _snapshot_received and d.has("map") and d.has("players") and d.has("game"):
+		print("parsing SNAPSHOT")
 		_parse_snapshot(d)
 	else:
+		print("parsing event")
 		_parse_event(d)
 
 # initial snapshot processing

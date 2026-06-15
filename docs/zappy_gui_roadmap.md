@@ -644,7 +644,7 @@ signal game_over(winning_team: String)
 func process_command(cmd: Dictionary) -> void:
     var type: String = cmd.get("type", "")
     if type.is_empty():
-        push_warning("CommandProcessor: received command with no type")
+        push_error("CommandProcessor: received command with no type")
         return
 
     match type:
@@ -663,13 +663,13 @@ func process_command(cmd: Dictionary) -> void:
         "egg_death":        _egg_death(cmd)
         "game_end":         _game_end(cmd)
         _:
-            push_warning("CommandProcessor: unknown command type '%s'" % type)
+            push_error("CommandProcessor: unknown command type '%s'" % type)
 
 func _avance(cmd: Dictionary) -> void:
     var id: int = cmd.get("player_id", -1)
     var player := GameData.get_player(id)
     if not player:
-        push_warning("CommandProcessor._avance: player %d not found" % id)
+        push_error("CommandProcessor._avance: player %d not found" % id)
         return
 
     var from: Vector2i = player.pos
@@ -1275,13 +1275,13 @@ func _reset() -> void:
 func parse_message(text: String) -> void:
     var json := JSON.new()
     if json.parse(text) != OK:
-        push_warning("ProtocolParser: failed to parse JSON: %s" % text.left(80))
+        push_error("ProtocolParser: failed to parse JSON: %s" % text.left(80))
         return
 
     var msg: Dictionary = json.data
     var type: String = msg.get("type", "")
     if type.is_empty():
-        push_warning("ProtocolParser: message has no 'type' field")
+        push_error("ProtocolParser: message has no 'type' field")
         return
 
     match type:
@@ -1609,7 +1609,7 @@ signal.connect(handler, CONNECT_ONE_SHOT)
 - Add `## Documentation comments` to all public methods using GDScript's
   built-in doc comment syntax (double `#`). Godot's editor will show these
   in the inspector.
-- Replace all `print()` calls with `push_warning()` or `push_error()` for
+- Replace all `print()` calls with `push_error()` or `push_error()` for
   things that shouldn't happen, and remove debug prints entirely. The Output
   log becomes signal noise very quickly in a running game.
 - Run `Project → Tools → GDScript` → check for any typed warnings and resolve

@@ -23,18 +23,18 @@ func _spawn_players() -> void:
 func _spawn_player(id: int) -> void:
 	var player_data: GameData.PlayerData = GameData.get_player(id)
 	if not player_data:
-		push_warning("PlayerManager: failed to get player data from id ", id)
+		push_error("PlayerManager: failed to get player data from id ", id)
 		return
 		
 	var pos: Vector2i = player_data.pos
 	var tile : TileController = world_root.get_tile(pos)
 	if not tile:
-		push_warning("PlayerManager: tile not found at pos ", pos)
+		push_error("PlayerManager: tile not found at pos ", pos)
 		return
 	
 	var slot := tile.get_free_player_slot()
 	if slot == -1:
-		push_warning("PlayerManager: Tile full when attempting to place player ", id)
+		push_error("PlayerManager: Tile full when attempting to place player ", id)
 		return
 	
 	var scene: Area3D = SCENES["test"].instantiate()
@@ -53,17 +53,17 @@ func _spawn_player(id: int) -> void:
 func _on_player_moved(id: int, from: Vector2i, to: Vector2i) -> void:		
 	var scene = _players[id]
 	if not scene:
-		push_warning("PlayerManager: player scene not found for id ", id)
+		push_error("PlayerManager: player scene not found for id ", id)
 		return
 	
 	var from_tile : TileController = world_root.get_tile(from)
 	if not from_tile:
-		push_warning("PlayerManager: from_tile not found at pos ", from)
+		push_error("PlayerManager: from_tile not found at pos ", from)
 		return
 		
 	var to_tile : TileController = world_root.get_tile(to)
 	if not to_tile:
-		push_warning("PlayerManager: to_tile not found at pos ", to)
+		push_error("PlayerManager: to_tile not found at pos ", to)
 		return
 	
 	var spacing: float = GameConfig.TILE_SIZE + GameConfig.TILE_GAP
@@ -100,12 +100,12 @@ func _on_player_rotated(id: int, new_orientation: int) -> void:
 	
 	var tile : TileController = world_root.get_tile(pos)
 	if not tile:
-		push_warning("PlayerManager: tile not found at pos ", pos)
+		push_error("PlayerManager: tile not found at pos ", pos)
 		return
 	
 	var player_scene: Area3D = tile.get_player_scene_from_id(id)
 	if not player_scene:
-		push_warning("PlayerManager: failed to fetch player_scene from id ", id)
+		push_error("PlayerManager: failed to fetch player_scene from id ", id)
 		return
 	
 	var target_y: float = _calculate_rotation_radians(new_orientation)
@@ -158,24 +158,24 @@ func _calculate_rotation_radians(orientation: int) -> float:
 func _move_player_between_tiles(id: int, from: Vector2i, to: Vector2i) -> void:
 	var from_tile : TileController = world_root.get_tile(from)
 	if not from_tile:
-		push_warning("PlayerManager: from_tile not found at pos ", from)
+		push_error("PlayerManager: from_tile not found at pos ", from)
 		return
 		
 	var to_tile : TileController = world_root.get_tile(to)
 	if not to_tile:
-		push_warning("PlayerManager: to_tile not found at pos ", to)
+		push_error("PlayerManager: to_tile not found at pos ", to)
 		return
 		
 	var from_slot: int = from_tile.find_player_occupied_index_from_player_id(id)
 	if from_slot == -1:
-		push_warning("PlayerManager: player ", id, " not found in any slot on from_tile")
+		push_error("PlayerManager: player ", id, " not found in any slot on from_tile")
 			
 	var scene = from_tile.get_player_scene_from_id(id)
 	from_tile.free_player_slot(from_slot)
 	
 	var to_slot: int = to_tile.get_free_player_slot()
 	if to_slot == -1:
-		push_warning("PlayerManager: no free slot on to_tile at ", to)
+		push_error("PlayerManager: no free slot on to_tile at ", to)
 		
 	to_tile.occupy_player_slot(to_slot, scene)
 	

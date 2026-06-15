@@ -1,0 +1,249 @@
+class_name FrameCellController
+
+extends Area2D
+
+const CELL_SIZE: int = 135
+
+const COLOR_A      = Color(0.0, 0.485, 0.0, 1.0)
+const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)
+const BORDER_COLOR = Color(0.854, 0.854, 0.854, 1.0)
+const BORDER_WIDTH = 8.0
+
+@onready var _positions: Node2D = $Positions
+@onready var _animations: Node2D = $Animations
+@onready var _collider: CollisionShape2D = $Collider
+@onready var _odd_slider: Texture2D = preload("res://assets/textures/slider_grabber_horizontal_blue.png")
+
+@export var is_horizontal_controller: bool = false
+@export var is_vertical_controller: bool = false
+@export var odd: bool = true
+@export var fixed_position: String = "mid_left"
+@export var fixed_animation: String = "Cuby"
+
+var _selected_position: Node2D = null
+var _selected_animation: AnimatedSprite2D = null
+var _original_position: Vector2 = Vector2.ZERO
+
+var _is_scaled: bool = false
+var _scaled_position: Node2D = null
+
+var _slider: HSlider = null
+var _current_volume_step: int = 5
+var _current_color_step: int = 0
+var _current_time_step: int = 0
+
+func _ready() -> void:
+	_original_position = position
+	
+	pick_position()
+	pick_animation()
+	set_outer_color()
+	set_inner_color()
+	set_up_sliders()
+	
+func on_mouse_entered() -> void:
+	_positions.scale = Vector2(2.0, 2.0)
+	_animations.scale = Vector2(2.0, 2.0)
+	_move_to_scaled_position()
+	_switch_to_scaled_layout()
+	
+	_positions.z_index = _positions.z_index + 20 if name == "Console" else _positions.z_index + 10
+	_animations.z_index = _animations.z_index + 21 if name == "Console" else _animations.z_index + 11
+	
+	_collider.scale = Vector2(2.0, 2.0)
+	
+	if get_node_or_null("ConsoleLog"):
+		ConsoleManager.console_hovered.emit()
+	
+func on_mouse_exited() -> void:
+	_remove_scaled_layout()
+	_positions.scale = Vector2(1.0, 1.0)
+	_animations.scale = Vector2(1.0, 1.0)
+	position = _original_position
+	
+	_positions.z_index = _positions.z_index - 20 if name == "Console" else _positions.z_index - 10
+	_animations.z_index = _animations.z_index - 21 if name == "Console" else _animations.z_index - 11
+	
+	_collider.scale = Vector2(1.0, 1.0)
+	
+	if get_node_or_null("ConsoleLog"):
+		ConsoleManager.console_unhovered.emit()
+		
+func pick_position() -> void:
+	for i in range (_positions.get_children().size()):
+		var child: Node2D = _positions.get_child(i)
+		child.visible = false
+		
+	var final_position = _positions.get_node_or_null(fixed_position)
+	if final_position:
+		final_position.visible = true
+		_selected_position = final_position
+	else:
+		push_error("FrameCellController: couldn't find position node from string {%s}" % fixed_position)
+
+func set_outer_color() -> void:
+	var selected_outer: ColorRect = _selected_position.get_node_or_null("Outer")
+	if selected_outer:
+		selected_outer.color = BORDER_COLOR
+	else:
+		push_error("FrameCellController: failed to find target inner ColorRect node")
+
+func set_inner_color() -> void:
+	var selected_color: Color = Color.BLACK
+	
+	if odd:
+		selected_color = COLOR_B
+	else:
+		selected_color = COLOR_A
+		
+	var selected_inner: ColorRect = _selected_position.get_node_or_null("Inner")
+	if selected_inner:
+		selected_inner.color = selected_color
+	else:
+		push_error("FrameCellController: failed to find target inner ColorRect node")
+		
+func set_scaled_inner_color() -> void:
+	if not _is_scaled: return
+	
+	var selected_color: Color = Color.BLACK
+	
+	if odd:
+		selected_color = COLOR_B
+	else:
+		selected_color = COLOR_A
+		
+	var selected_inner: ColorRect = _scaled_position.get_node_or_null("Inner")
+	if selected_inner:
+		selected_inner.color = selected_color
+	else:
+		push_error("FrameCellController: failed to find target inner ColorRect node")
+		
+func pick_animation() -> void:
+	for i in range(_animations.get_children().size() - 1):
+		var child: AnimatedSprite2D = _animations.get_child(i)
+		child.visible = false
+	
+	var selected: AnimatedSprite2D = _animations.get_node_or_null(fixed_animation)
+	if selected:
+		selected.visible = true
+		_selected_animation = selected
+	else:
+		if fixed_animation != "NONE":
+			push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
+
+func _move_to_scaled_position() -> void:
+	match _selected_position.name:
+		"top_left":
+			position.x = position.x + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+			position.y = position.y + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+		"top_right":
+			position.x = position.x - (CELL_SIZE / 2.0) - BORDER_WIDTH / 2
+			position.y = position.y + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+		"bot_right":
+			position.x = position.x - (CELL_SIZE / 2.0) - CELL_SIZE
+			position.y = position.y - (CELL_SIZE / 2.0) - BORDER_WIDTH / 4
+		"bot_left":
+			position.x = position.x + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+			position.y = position.y - (CELL_SIZE / 2.0) - BORDER_WIDTH / 4
+		"mid_left":
+			if _collider.shape.get_rect().size.y == 135.0:
+				position.x = position.x + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+			else:
+				position.x = position.x + (CELL_SIZE / 2.0) + BORDER_WIDTH / 2
+				position.y = position.y - (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+		"mid_top":
+			position.y = position.y + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
+		"mid_right":
+			position.x = position.x - (CELL_SIZE / 2.0) - BORDER_WIDTH / 4
+		"mid_bottom":
+			position.y = position.y - (CELL_SIZE / 2.0) - BORDER_WIDTH / 4
+		_:
+			position.y = position.y - (CELL_SIZE / 2.0) + BORDER_WIDTH
+		
+func _switch_to_scaled_layout() -> void:
+	var current_position_name = String(_selected_position.name)
+	var current_position: Node2D = _positions.get_node_or_null(current_position_name)
+	current_position.visible = false
+	
+	var scaled_position = _positions.get_node_or_null("scaled")
+	scaled_position.visible = true
+	
+	_scaled_position = scaled_position
+	_is_scaled = true
+	set_scaled_inner_color()
+	
+	if _slider:
+		_set_slider_to_hovered_position()
+
+func _remove_scaled_layout() -> void:
+	var current_position_name = String(_selected_position.name)
+	var current_position: Node2D = _positions.get_node_or_null(current_position_name)
+	current_position.visible = true
+	
+	_is_scaled = false
+	_scaled_position = null
+	var scale_position_node = _positions.get_node_or_null("scaled")
+	scale_position_node.visible = false
+	
+	if _slider:
+		_reset_slider_to_regular_position()
+
+func set_up_sliders() -> void:
+	if not is_horizontal_controller:
+		return
+
+	_slider = get_node_or_null("HorizontalSlider")
+	if not _slider:
+		return
+
+	if odd:
+		_slider.add_theme_icon_override("grabber", _odd_slider)
+		_slider.add_theme_icon_override("grabber_highlight", _odd_slider)
+		_slider.add_theme_icon_override("grabber_disabled", _odd_slider)
+		
+	_slider.min_value = 0
+	_slider.step = 1
+	_slider.visible = true
+	match _selected_animation.name:
+		"Volume":
+			
+			_slider.max_value = SoundManager.SNAP_STEPS
+			_slider.value = _current_volume_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_volume_step = int(v)
+				@warning_ignore("integer_division")
+				SoundManager.volume = int(v) * (100 / SoundManager.SNAP_STEPS)
+			)
+
+		"Colors":
+			_slider.max_value = ColorManager.SNAP_STEPS
+			_slider.value = _current_color_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_color_step = int(v)
+				ColorManager.set_ink_shimmer(v / (100.0 / SoundManager.SNAP_STEPS))
+			)
+			
+		"Time":
+			_slider.max_value = TimeManager.TIME_STEPS
+			_slider.value = _current_time_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_time_step = int(v)
+				print("value of the time interval:", v)
+				TimeManager.set_time_value(int(v))
+			)
+			
+
+func _set_slider_to_hovered_position() -> void:
+	_slider.z_index += 30
+	_slider.position.x -= 35
+	_slider.position.y += 37
+	_slider.scale = Vector2(2.0, 2.0)
+	
+func _reset_slider_to_regular_position() -> void:
+	_slider.z_index -= 30
+	_slider.position.x += 35
+	_slider.position.y -= 37
+	_slider.scale = Vector2(1.0, 1.0)

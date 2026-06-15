@@ -262,6 +262,48 @@ static cJSON* m_serialize_tile(tile* t)
     return o;
 }
 
+static cJSON* m_serialize_tile_resources_only(int x, int y)
+{
+    cJSON *o;
+    tile *t;
+
+    t = MAP(x, y);
+    o = cJSON_CreateObject();
+    cJSON_AddNumberToObject(o, "x", x);
+    cJSON_AddNumberToObject(o, "y", y);
+    cJSON_AddItemToObject(o, "resources", m_serialize_inventory(&t->items));
+    return o;
+}
+
+static void m_notify_resource_update(int *changed_indices, int count)
+{
+    cJSON *notification;
+    cJSON *tiles_array;
+    int i;
+    int x;
+    int y;
+
+    if (count <= 0)
+        return;
+
+    notification = cJSON_CreateObject();
+    if (!notification)
+        return;
+
+    cJSON_AddStringToObject(notification, "type", "resource_update");
+    tiles_array = cJSON_AddArrayToObject(notification, "tiles");
+
+    for (i = 0; i < count; i++)
+    {
+        x = changed_indices[i] % m_server.map_x;
+        y = changed_indices[i] / m_server.map_x;
+        cJSON_AddItemToArray(tiles_array, m_serialize_tile_resources_only(x, y));
+    }
+
+    server_notify_observers_broadcast(notification);
+    
+    cJSON_Delete(notification);
+}
 static cJSON* m_serialize_player(const player* p)
 {
     cJSON* o;
@@ -1030,7 +1072,6 @@ static int minimal_delta(int delta, int max)
     return delta;
 }
 
-// Hugo was here AND FIXED THIS
 int compute_broadcast_direction(int listener_x, int listener_y, int listener_dir,
         int emitter_x, int emitter_y, int width, int height)
 {
@@ -1736,16 +1777,38 @@ void game_get_player_spawn(int fd, int *x, int *y, int *orientation)
 int game_register_observer(int fd)
 {
     observer* o;
+    observer** new_observers;
+    int count;
 
     o = malloc(sizeof(observer));
+    if (!o)
+        return ERROR;
     memset(o, 0, sizeof(observer));
 
     o->socket_fd = fd;
 
+    count = 0;
+    if (m_server.observers)
+    {
+        while (m_server.observers[count])
+            count++;
+    }
+
+    new_observers = realloc(m_server.observers, sizeof(observer*) * (count + 2));
+    if (!new_observers)
+    {
+        free(o);
+        return ERROR;
+    }
+
+    m_server.observers = new_observers;
+    m_server.observers[count] = o;
+    m_server.observers[count + 1] = NULL;
+
     /* time_api_schedule_client_event(NULL, &o->event_buffer,\
       0, m_send_map_observer, o, NULL);
     */
-    
+
     m_send_map_observer(o, NULL);
     log_msg(LOG_LEVEL_DEBUG, "Registered observer %d\n", fd);
     return SUCCESS;
@@ -2077,6 +2140,14 @@ int m_game_spawn_resources(void* data, void* arg)
     if (batch < 1) batch = 1;
 
     if (batch > 1000) batch = 1000;
+    int *changed_indices;
+    int changed_count;
+
+    changed_indices = malloc(sizeof(int) * batch);
+    if (!changed_indices)
+        return 0;
+    changed_count = 0;
+
 
     for (i = 0; i < batch; i++)
     {
@@ -2095,7 +2166,12 @@ int m_game_spawn_resources(void* data, void* arg)
         T->items.mendiane += m_game_random_resource_count(m_ctx.d_mendiane);
         T->items.phiras += m_game_random_resource_count(m_ctx.d_phiras);
         T->items.thystame += m_game_random_resource_count(m_ctx.d_thystame);
+        changed_indices[changed_count++] = idx;
     }
+
+    log_msg(LOG_LEVEL_DEBUG, "[RESOURCES][SPAWN] updated %d tiles\n", changed_count);
+    m_notify_resource_update(changed_indices, changed_count);
+    free(changed_indices);
 
     m_ctx.next_idx = (m_ctx.next_idx + batch) % MAP_SZ;
 
@@ -2145,6 +2221,7 @@ void game_clean()
 {
     int i;
     int j;
+    int k;
 
     for (i = 0; i < m_server.client_count; i++)
     {
@@ -2159,6 +2236,12 @@ void game_clean()
             free(m_server.clients[i]);
         }
     }
+    if (m_server.observers)
+    {
+        for (k = 0; m_server.observers[k]; k++)
+            free(m_server.observers[k]);
+        free(m_server.observers);
+    }
     for (i = 0; i < m_server.team_count; i++)
     {
         free(m_server.teams[i].players);
@@ -2171,6 +2254,7 @@ void game_clean()
     m_server.teams = NULL;
     free(m_server.map);
     m_server.map = NULL;
+    m_server.observers = NULL;
 }
 
 int game_init(int width, int height, char **teams, int nb_teams)
