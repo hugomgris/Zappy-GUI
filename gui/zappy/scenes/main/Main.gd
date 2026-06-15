@@ -15,11 +15,18 @@ var _hovered_tile: TileController = null
 var _hovered_player: PlayerController = null
 var _hovered_cell: FrameCellController = null
 
+var _shader: ShaderMaterial = null
+
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	TooltipManager.initialize($PostProcessing/Compositor/Tooltips)
 	GameData.world_initialized.connect(_on_world_initialized, CONNECT_ONE_SHOT)
+	
+	ColorManager.ink_shimmer_changed.connect(_on_ink_shimmer_changed)
+	TimeManager.time_value_changed.connect(_on_time_value_changed)
+	
+	_fetch_shader_material()
 
 	if AppState.use_mock:
 		MockServer.build_mock_initial_game_state()
@@ -171,6 +178,8 @@ func _do_picking_3d(viewport_pos: Vector2) -> void:
 			_hovered_player.unhovered.emit(_hovered_player.get_player_id())
 			_hovered_player = null
 
+func _fetch_shader_material() -> void:
+	_shader = post_processing.material
 
 func _on_start_game_pressed() -> void:
 	start_button.hide()
@@ -181,3 +190,12 @@ func _on_start_game_pressed() -> void:
 		push_error("[Main] run.sh failed (exit %d): %s" % [exit_code, "\n".join(output)])
 	else:
 		print("[Main] Server time API started")
+		
+func _on_ink_shimmer_changed(value: float) -> void:
+	_shader.set_shader_parameter("frame_ink_shimmer", value)
+	
+func _on_time_value_changed(value: float) -> void:
+	if AppState.use_mock:
+		MockServer.set_new_interval(value)
+	else:
+		print("TIME MANAGEMENT WITH SERVER PENDING")

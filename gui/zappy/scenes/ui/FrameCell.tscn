@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="5_jsfyw"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="6_01oj0"]
 [ext_resource type="Texture2D" uid="uid://drv5ia4xelgm5" path="res://assets/animations/resources/nourriture_animation.png" id="7_u3qvr"]
-[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/octy/Octi_animation.png" id="8_oqq4r"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="9_qoan6"]
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_j1va3"]
@@ -1277,6 +1277,11 @@ bg_color = Color(1, 1, 1, 1)
 
 [node name="Area2D" type="Area2D" unique_id=417018103]
 script = ExtResource("1_2o04i")
+is_horizontal_controller = null
+is_vertical_controller = null
+odd = null
+fixed_position = null
+fixed_animation = null
 
 [node name="Collider" type="CollisionShape2D" parent="." unique_id=90038359]
 shape = SubResource("RectangleShape2D_nr1ea")
@@ -1747,7 +1752,7 @@ autoplay = "Volume"
 [node name="Colors" type="AnimatedSprite2D" parent="Animations" unique_id=1284122128]
 visible = false
 texture_filter = 1
-position = Vector2(-0.21002793, 4.645005)
+position = Vector2(-0.21002793, 2.6450045)
 scale = Vector2(0.11705562, 0.11547224)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Colors"
@@ -1756,7 +1761,7 @@ autoplay = "Colors"
 [node name="Time" type="AnimatedSprite2D" parent="Animations" unique_id=1874333937]
 visible = false
 texture_filter = 1
-position = Vector2(-0.21002793, 4.645005)
+position = Vector2(-0.21002793, 2.6450045)
 scale = Vector2(0.11705562, 0.11547224)
 sprite_frames = SubResource("SpriteFrames_xwgh3")
 animation = &"Time"

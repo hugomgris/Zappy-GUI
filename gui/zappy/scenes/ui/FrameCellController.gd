@@ -12,6 +12,7 @@ const BORDER_WIDTH = 8.0
 @onready var _positions: Node2D = $Positions
 @onready var _animations: Node2D = $Animations
 @onready var _collider: CollisionShape2D = $Collider
+@onready var _odd_slider: Texture2D = preload("res://assets/textures/slider_grabber_horizontal_blue.png")
 
 @export var is_horizontal_controller: bool = false
 @export var is_vertical_controller: bool = false
@@ -27,7 +28,9 @@ var _is_scaled: bool = false
 var _scaled_position: Node2D = null
 
 var _slider: HSlider = null
-var _current_volume_step: int = 0
+var _current_volume_step: int = 5
+var _current_color_step: int = 0
+var _current_time_step: int = 0
 
 func _ready() -> void:
 	_original_position = position
@@ -129,7 +132,6 @@ func pick_animation() -> void:
 			push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
 
 func _move_to_scaled_position() -> void:
-	print(_selected_position.name)
 	match _selected_position.name:
 		"top_left":
 			position.x = position.x + (CELL_SIZE / 2.0) + BORDER_WIDTH / 4
@@ -194,17 +196,45 @@ func set_up_sliders() -> void:
 	if not _slider:
 		return
 
+	if odd:
+		_slider.add_theme_icon_override("grabber", _odd_slider)
+		_slider.add_theme_icon_override("grabber_highlight", _odd_slider)
+		_slider.add_theme_icon_override("grabber_disabled", _odd_slider)
+		
 	_slider.min_value = 0
-	_slider.max_value = SoundManager.SNAP_STEPS
 	_slider.step = 1
-	_slider.value = _current_volume_step
 	_slider.visible = true
+	match _selected_animation.name:
+		"Volume":
+			
+			_slider.max_value = SoundManager.SNAP_STEPS
+			_slider.value = _current_volume_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_volume_step = int(v)
+				@warning_ignore("integer_division")
+				SoundManager.volume = int(v) * (100 / SoundManager.SNAP_STEPS)
+			)
 
-	_slider.value_changed.connect(func(v):
-		_current_volume_step = int(v)
-		@warning_ignore("integer_division")
-		SoundManager.volume = int(v) * (100 / SoundManager.SNAP_STEPS)
-	)
+		"Colors":
+			_slider.max_value = ColorManager.SNAP_STEPS
+			_slider.value = _current_color_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_color_step = int(v)
+				ColorManager.set_ink_shimmer(v / (100.0 / SoundManager.SNAP_STEPS))
+			)
+			
+		"Time":
+			_slider.max_value = TimeManager.TIME_STEPS
+			_slider.value = _current_time_step
+			
+			_slider.value_changed.connect(func(v):
+				_current_time_step = int(v)
+				print("value of the time interval:", v)
+				TimeManager.set_time_value(int(v))
+			)
+			
 
 func _set_slider_to_hovered_position() -> void:
 	_slider.z_index += 30

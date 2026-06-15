@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cflymkea5lq51"
-path="res://.godot/imported/Cily_animation.png-73435db1abf4bd8bce11fd0c17a6cbde.ctex"
+path="res://.godot/imported/Cily_animation.png-5bcb78bce5b2f08b7343f70781c3e977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/players/cily/Cily_animation.png"
-dest_files=["res://.godot/imported/Cily_animation.png-73435db1abf4bd8bce11fd0c17a6cbde.ctex"]
+source_file="res://assets/animations/players/Cily/Cily_animation.png"
+dest_files=["res://.godot/imported/Cily_animation.png-5bcb78bce5b2f08b7343f70781c3e977.ctex"]
 
 [params]
 
