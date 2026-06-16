@@ -1014,57 +1014,57 @@ fixed_animation = "NONE"
 
 [node name="Bottom" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=1465732276]
 
-[node name="Placeholder" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=427420589 instance=ExtResource("21_yub1f")]
+[node name="Time" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=427420589 instance=ExtResource("21_yub1f")]
 position = Vector2(203, 1013)
-is_horizontal_controller = false
+is_horizontal_controller = true
 is_vertical_controller = false
 odd = true
 fixed_position = "mid_bottom"
-fixed_animation = "NONE"
+fixed_animation = "Time"
 
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder/Positions" parent_id_path=PackedInt32Array(427420589, 1546582834) index="7" unique_id=617585592]
+[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Time/Positions" parent_id_path=PackedInt32Array(427420589, 1546582834) index="7" unique_id=617585592]
 visible = true
 
-[node name="Time" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=323767246 instance=ExtResource("21_yub1f")]
+[node name="Time" parent="PostProcessing/Compositor/FrameRoot/Bottom/Time/Animations" parent_id_path=PackedInt32Array(427420589, 151270721) index="20" unique_id=1874333937]
+visible = true
+
+[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=323767246 instance=ExtResource("21_yub1f")]
 position = Vector2(338, 1013)
 is_horizontal_controller = true
 is_vertical_controller = false
 odd = false
 fixed_position = "mid_bottom"
-fixed_animation = "Time"
+fixed_animation = "Colors"
 
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Time/Positions" parent_id_path=PackedInt32Array(323767246, 1546582834) index="7" unique_id=617585592]
+[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Positions" parent_id_path=PackedInt32Array(323767246, 1546582834) index="7" unique_id=617585592]
 visible = true
 
-[node name="Time" parent="PostProcessing/Compositor/FrameRoot/Bottom/Time/Animations" parent_id_path=PackedInt32Array(323767246, 151270721) index="20" unique_id=1874333937]
+[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Animations" parent_id_path=PackedInt32Array(323767246, 151270721) index="19" unique_id=1284122128]
 visible = true
 
-[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=149038092 instance=ExtResource("21_yub1f")]
+[node name="Volume" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=149038092 instance=ExtResource("21_yub1f")]
 position = Vector2(473, 1013)
 is_horizontal_controller = true
 is_vertical_controller = false
 odd = true
 fixed_position = "mid_bottom"
-fixed_animation = "Colors"
+fixed_animation = "Volume"
 
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
+[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Volume/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
 visible = true
 
-[node name="Colors" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Animations" parent_id_path=PackedInt32Array(149038092, 151270721) index="19" unique_id=1284122128]
+[node name="Volume" parent="PostProcessing/Compositor/FrameRoot/Bottom/Volume/Animations" parent_id_path=PackedInt32Array(149038092, 151270721) index="18" unique_id=223350750]
 visible = true
 
-[node name="Volumen" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=959719795 instance=ExtResource("21_yub1f")]
+[node name="Leader" parent="PostProcessing/Compositor/FrameRoot/Bottom" unique_id=959719795 instance=ExtResource("21_yub1f")]
 position = Vector2(608, 1013)
-is_horizontal_controller = true
+is_horizontal_controller = false
 is_vertical_controller = false
 odd = false
 fixed_position = "mid_bottom"
-fixed_animation = "Volume"
+fixed_animation = "NONE"
 
-[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Volumen/Positions" parent_id_path=PackedInt32Array(959719795, 1546582834) index="7" unique_id=617585592]
-visible = true
-
-[node name="Volume" parent="PostProcessing/Compositor/FrameRoot/Bottom/Volumen/Animations" parent_id_path=PackedInt32Array(959719795, 151270721) index="18" unique_id=223350750]
+[node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Leader/Positions" parent_id_path=PackedInt32Array(959719795, 1546582834) index="7" unique_id=617585592]
 visible = true
 
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
@@ -1152,7 +1152,7 @@ text = "START"
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Phiras"]
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Thystame"]
 [editable path="PostProcessing/Compositor/FrameRoot/Right/Console"]
-[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Placeholder"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Time"]
 [editable path="PostProcessing/Compositor/FrameRoot/Bottom/Colors"]
-[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Volumen"]
+[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Volume"]
+[editable path="PostProcessing/Compositor/FrameRoot/Bottom/Leader"]
