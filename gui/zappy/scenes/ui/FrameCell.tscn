@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="5_jsfyw"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="6_01oj0"]
 [ext_resource type="Texture2D" uid="uid://drv5ia4xelgm5" path="res://assets/animations/resources/nourriture_animation.png" id="7_u3qvr"]
-[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="8_oqq4r"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/octy/Octi_animation.png" id="8_oqq4r"]
 [ext_resource type="Texture2D" uid="uid://clicrs2x3idi7" path="res://assets/animations/resources/phyras_animation.png" id="9_qoan6"]
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="10_dgno6"]
 [ext_resource type="Texture2D" uid="uid://cllf2ct16llvt" path="res://assets/animations/resources/sibur_animation.png" id="11_j1va3"]
@@ -730,6 +730,14 @@ region = Rect2(2160, 0, 1080, 1080)
 atlas = ExtResource("17_qoan6")
 region = Rect2(3240, 0, 1080, 1080)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvrcj"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(4320, 0, 1080, 1080)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itlgq"]
+atlas = ExtResource("17_qoan6")
+region = Rect2(5400, 0, 1080, 1080)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwp26"]
 atlas = ExtResource("17_dgno6")
 region = Rect2(2160, 0, 1080, 1080)
@@ -1206,6 +1214,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_66dd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvrcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itlgq")
 }],
 "loop": true,
 "name": &"Volume",

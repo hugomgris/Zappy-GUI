@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://drvkwiuovexbs" path="res://assets/animations/players/piry/Piry_animation.png" id="6_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://b2rp021riu6sp" path="res://assets/animations/players/cuby/Cuby_animation.png" id="6_p5fgu"]
 [ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
-[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/Octy/Octi_animation.png" id="7_2tpxt"]
+[ext_resource type="Texture2D" uid="uid://hd8ayf1lvi2o" path="res://assets/animations/players/octy/Octi_animation.png" id="7_2tpxt"]
 [ext_resource type="Texture2D" uid="uid://bw2aip00a3vi2" path="res://assets/animations/resources/mendiane_animation.png" id="7_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://c0f2icbj4rfsw" path="res://assets/animations/resources/linemate_animation.png" id="7_rikml"]
 [ext_resource type="Texture2D" uid="uid://bd0a7gm14jl80" path="res://assets/animations/resources/deraumere_animation.png" id="7_vc03v"]
