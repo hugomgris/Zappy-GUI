@@ -27,26 +27,42 @@ func _ready() -> void:
 	ConsoleManager.console_unhovered.connect(_on_unhovered)
 
 func _on_console_update_received(data: Dictionary) -> void:
-	# parse -> build -> push
-	if data.has("player_id") and data.has("cmd"):
-		var player_id: int = data.get("player_id")
-		var player_team: String = GameData.get_player(player_id).team
-		var player_position: Vector2i = GameData.players[player_id].pos
-		var console_string = "[%d,%d][%s][%d]" % [player_position.x, player_position.y, player_team, player_id] + ": "
-		var command_string = data.get("cmd")
-		var status_string: String = ""
-		if data.has("status"):
-			status_string = data.get("status")
-		
-		console_string = TextHelper.bold(console_string) + "%s" % command_string
+	if not data.has("player_id"):
+		return
 
-		if (command_string == "prend" or command_string == "pose") && data.has("arg"):
-			var arg_string = data.get("arg")
-			console_string += " → %s" % arg_string
+	var player_id: int = data.get("player_id")
+	var player = GameData.get_player(player_id)
+	if not player:
+		push_warning("ConsoleLog: received event for unknown player_id %d" % player_id)
+		return
+
+	var player_team: String = player.team
+	var player_position: Vector2i = GameData.players[player_id].pos
+	
+	if data.has("player_id"):
+		var console_string = "[%d,%d][%s][%d]" % [player_position.x, player_position.y, player_team, player_id] + ": "
 		
-		console_string += status_string
+		if data.has("cmd"):
+			var command_string = data.get("cmd")
+			var status_string: String = ""
+			if data.has("status"):
+				status_string = data.get("status")
 		
-		push_message(console_string)
+			console_string = TextHelper.bold(console_string) + "%s" % command_string
+
+			if (command_string == "prend" or command_string == "pose") && data.has("arg"):
+				var arg_string = data.get("arg")
+				console_string += " → %s" % arg_string
+		
+			console_string += status_string
+		
+			push_message(console_string)
+		elif data.has("status") and data.get("status") == "level_up":
+			var new_level: int = player.level
+			var dots := ".".repeat(12)
+			console_string = TextHelper.bold(console_string) + "level up%s%d" % [dots, new_level]
+			push_message(console_string)
+			
 	return
 
 func push_message(msg: String) -> void:

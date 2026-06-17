@@ -39,7 +39,7 @@ func process_command(cmd: Dictionary) -> void:
 		"avance":				_avance(cmd)
 		"gauche":				_rotate(cmd, -1)
 		"droite":				_rotate(cmd, 1)
-		"prend":				_prend(cmd)
+		"prend":					_prend(cmd)
 		"pose":					_pose(cmd)
 		"fork":					_fork(cmd) # egg laid here
 		#"incantation_start":	_incantation_start(cmd)
@@ -161,7 +161,11 @@ func _level_up(cmd: Dictionary) -> void:
 	GameData.players[id].level = min(8, GameData.players[id].level + 1)
 
 	player_leveled_up.emit(id, GameData.players[id].level)
-
+	
+	#leader cell management
+	if GameData.leader_team != GameData.players[id].team:
+		MockServer.update_leader_status.emit(GameData.players[id].team, GameData.players[id].level)
+		
 	return
 
 func _egg_hatch(cmd: Dictionary) -> void:

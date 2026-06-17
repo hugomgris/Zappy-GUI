@@ -4,6 +4,10 @@ extends Area2D
 
 const CELL_SIZE: int = 135
 
+const LEADER_PULSE_SCALES: Array[float] = [1.0, 0.98, 0.96, 0.94, 0.96, 0.98]
+const LEADER_PULSE_SCALES_HOVERED: Array[float] = [1.0, 0.95, 0.90, 0.85, 0.90, 0.95]
+const LEADER_PULSE_FPS: float = 2.0
+
 const COLOR_A      = Color(0.0, 0.485, 0.0, 1.0)
 const COLOR_B      = Color(0.0, 0.0, 0.485, 1.0)
 const BORDER_COLOR = Color(0.854, 0.854, 0.854, 1.0)
@@ -40,8 +44,11 @@ var _current_volume_step: int = 5
 var _current_color_step: int = 0
 var _current_time_step: int = 0
 
+var _pulse_step: int = 0
+var _pulse_timer: float = 0.0
+
 func _ready() -> void:
-	MockServer.update_leader_status.connect(_on_leader_update)
+	GameData.update_leader_status.connect(_on_leader_update)
 	
 	_original_position = position
 	
@@ -68,7 +75,23 @@ func _ready() -> void:
 	set_outer_color()
 	set_inner_color()
 	set_up_sliders()
+
+func _process(delta: float) -> void:
+	if not is_number_cell:
+		return
+		
+	_pulse_timer += delta
+	if _pulse_timer >= 1.0 / LEADER_PULSE_FPS:
+		_pulse_timer -= 1.0 / LEADER_PULSE_FPS
+		_pulse_step = (_pulse_step + 1) % LEADER_PULSE_SCALES.size()
+		if _leader_cell.scale.x > 1.0:
+			var s: float = LEADER_PULSE_SCALES_HOVERED[_pulse_step]
+			_leader_cell.scale = Vector2(1.0 + s, 1.0 + s)
+		else:
+			var s: float = LEADER_PULSE_SCALES[_pulse_step]
+			_leader_cell.scale = Vector2(s, s)
 	
+
 func on_mouse_entered() -> void:
 	_positions.scale = Vector2(2.0, 2.0)
 	if is_number_cell:
@@ -303,6 +326,10 @@ func _reset_slider_to_regular_position() -> void:
 func _on_leader_update(new_leader: String, new_level: int) -> void:
 	if not is_number_cell:
 		return
+	
+	GameData.leader_team = new_leader
+	GameData.leading_level = new_level
+	
 	new_leader = new_leader.to_upper()
 	_leader_name.text = TextHelper.bold(new_leader)
 	_leader_name.text = TextHelper.center(_leader_name.text)

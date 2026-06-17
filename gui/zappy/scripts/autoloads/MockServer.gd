@@ -10,8 +10,6 @@ var _index: int = 0
 var _timer: float = 0.0
 var _running: bool = false
 
-signal update_leader_status(new_leader: String, new_level: int)
-
 func build_mock_initial_game_state() -> void:
 	_load_mock_initial_state()
 	return
@@ -162,7 +160,7 @@ func _load_player_data_from_file(players: Array) -> void:
 		data.status = GameConfig.PlayerStatus.NORMAL
 		
 		if i == 0:
-			update_leader_status.emit(data.team, data.level)
+			GameData.update_leader_status.emit(data.team, data.level)
 
 		GameData.players[id] = data
 	

@@ -1013,9 +1013,6 @@ fixed_animation = "1"
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Leader/Positions" parent_id_path=PackedInt32Array(959719795, 1546582834) index="7" unique_id=617585592]
 visible = true
 
-[node name="1" parent="PostProcessing/Compositor/FrameRoot/Bottom/Leader/Levels" parent_id_path=PackedInt32Array(959719795, 1926616563) index="0" unique_id=213819965]
-visible = true
-
 [node name="Tooltips" parent="PostProcessing/Compositor" unique_id=434041064 instance=ExtResource("15_tck0d")]
 visible = false
 anchors_preset = 0

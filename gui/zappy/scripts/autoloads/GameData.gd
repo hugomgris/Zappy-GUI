@@ -11,6 +11,7 @@ var tiles: Dictionary = {} # Vector2i -> TileState
 var players: Dictionary = {} # int (id) -> PlayerData
 var eggs: Dictionary = {} # int (id) -> EggData
 var leader_team: String = ""
+var leading_level: int = 0
 
 # SIGNALS
 # Emitted once when the initial full state burst is complete
@@ -25,6 +26,8 @@ signal team_changed(name: String)
 signal tick_updated(tick: int)
 signal time_unit_changed(t: int)
 signal game_over(winning_team: String)
+
+signal update_leader_status(new_leader: String, new_level: int)
 
 # INNER CLASSES FOR TYPED DATA
 class TileState:
