@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hd8ayf1lvi2o"
-path="res://.godot/imported/Octi_animation.png-b5bebe760dcd4bcbcced349983cd85c7.ctex"
+uid="uid://dpieilpyf15vx"
+path="res://.godot/imported/numbers_8_sprite.png-0b800a4b5eaef7f897af18bbcfeafe76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/players/Octy/Octi_animation.png"
-dest_files=["res://.godot/imported/Octi_animation.png-b5bebe760dcd4bcbcced349983cd85c7.ctex"]
+source_file="res://assets/animations/numbers/numbers_8_sprite.png"
+dest_files=["res://.godot/imported/numbers_8_sprite.png-0b800a4b5eaef7f897af18bbcfeafe76.ctex"]
 
 [params]
 

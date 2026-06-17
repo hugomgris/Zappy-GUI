@@ -29,6 +29,7 @@ func _ready() -> void:
 	_fetch_shader_material()
 
 	if AppState.use_mock:
+		GameData.using_mock = true
 		MockServer.build_mock_initial_game_state()
 		MockServer.start()
 		GameData.world_initialized.emit()

@@ -38,7 +38,7 @@ func _on_console_update_received(data: Dictionary) -> void:
 		if data.has("status"):
 			status_string = data.get("status")
 		
-		console_string = _bold(console_string) + "%s" % command_string
+		console_string = TextHelper.bold(console_string) + "%s" % command_string
 
 		if (command_string == "prend" or command_string == "pose") && data.has("arg"):
 			var arg_string = data.get("arg")
@@ -63,7 +63,7 @@ func _refresh_display() -> void:
 	var display_lines = []
 	for line in slice:
 		line = _occupy_cell_width(line)
-		display_lines.append(_scale(line, _current_font_size))
+		display_lines.append(TextHelper.size(line, _current_font_size))
 	
 	text = "\n".join(display_lines)
 
@@ -92,19 +92,6 @@ func _set_to_regular_layout() -> void:
 	position.y += _position_shift_y
 	size.x -= _size_shift_x
 	size.y -= _size_shift_y
-
-# Text format helpers
-func _bold(string: String) -> String:
-	var bold_text: String = "[b]" + string + "[/b]"
-	return bold_text
-
-func _color(string: String, color: String) -> String:
-	var colored_text = "[color=" + color + "]" + string + "[/color]"
-	return colored_text
-
-func _scale(string: String, font_size: int) -> String:
-	var scaled_text = "[font_size={%d}]" % font_size + string + "[/font_size]"
-	return scaled_text
 	
 func _occupy_cell_width(string: String) -> String:
 	var status_chunk: String = string.substr(string.length() - 2, 2)

@@ -2,6 +2,7 @@
 extends Node
 
 # STATE
+var using_mock: bool = false
 var map_size: Vector2i = Vector2i.ZERO
 var time_unit: int = 100
 var tick: int = 0
@@ -9,6 +10,7 @@ var teams: Dictionary = {} # team_name -> { player_count, connections }
 var tiles: Dictionary = {} # Vector2i -> TileState
 var players: Dictionary = {} # int (id) -> PlayerData
 var eggs: Dictionary = {} # int (id) -> EggData
+var leader_team: String = ""
 
 # SIGNALS
 # Emitted once when the initial full state burst is complete

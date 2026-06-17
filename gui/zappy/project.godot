@@ -29,6 +29,7 @@ ConsoleManager="*uid://c126wwr0htpsb"
 SoundManager="*uid://cqoypvqw2cppa"
 ColorManager="*uid://c5eqrc3rxtkp6"
 TimeManager="*uid://b63f2mts7wbuv"
+TextHelper="*uid://c32bwlrdbbe5f"
 
 [display]
 

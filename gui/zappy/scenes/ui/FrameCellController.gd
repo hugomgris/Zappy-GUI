@@ -14,11 +14,19 @@ const BORDER_WIDTH = 8.0
 @onready var _collider: CollisionShape2D = $Collider
 @onready var _odd_slider: Texture2D = preload("res://assets/textures/slider_grabber_horizontal_blue.png")
 
+@export var is_number_cell: bool = false
 @export var is_horizontal_controller: bool = false
 @export var is_vertical_controller: bool = false
 @export var odd: bool = true
 @export var fixed_position: String = "mid_left"
 @export var fixed_animation: String = "Cuby"
+@export var number_sprites: Array[Texture2D] = []
+
+var _leader_cell: Node2D = null
+var _top_text: RichTextLabel = null
+var _level_sprites: Dictionary = {}
+var _leader_name: RichTextLabel = null
+var _current_max_level: Sprite2D = null
 
 var _selected_position: Node2D = null
 var _selected_animation: AnimatedSprite2D = null
@@ -33,22 +41,47 @@ var _current_color_step: int = 0
 var _current_time_step: int = 0
 
 func _ready() -> void:
+	MockServer.update_leader_status.connect(_on_leader_update)
+	
 	_original_position = position
 	
+	if is_number_cell:
+		_leader_cell	 = get_node_or_null("Leader")
+		_top_text = _leader_cell.get_node_or_null("top_text")
+		_leader_name = _leader_cell.get_node_or_null("leader_name")
+		
+		if not _leader_cell:
+			push_error("FrameCellController: number cell: couldn't find levels node")
+			return
+		elif not _top_text:
+			push_error("FrameCellController: number cell: couldn't find top_text node")
+			return
+		elif not _leader_name:
+			push_error("FrameCellController: number cell: couldn't find leader_name node")
+			return
+			
 	pick_position()
-	pick_animation()
+	if is_number_cell:
+		preload_number_sprites()
+	else:
+		pick_animation()
 	set_outer_color()
 	set_inner_color()
 	set_up_sliders()
 	
 func on_mouse_entered() -> void:
 	_positions.scale = Vector2(2.0, 2.0)
-	_animations.scale = Vector2(2.0, 2.0)
+	if is_number_cell:
+		_leader_cell.scale = Vector2(2.0, 2.0)
+		_leader_cell.z_index = _leader_cell.z_index + 11
+		_positions.z_index = _positions.z_index + 10
+	else:
+		_animations.scale = Vector2(2.0, 2.0)
+		_animations.z_index = _animations.z_index + 21 if name == "Console" else _animations.z_index + 11
+		_positions.z_index = _positions.z_index + 20 if name == "Console" else _positions.z_index + 10
+		
 	_move_to_scaled_position()
 	_switch_to_scaled_layout()
-	
-	_positions.z_index = _positions.z_index + 20 if name == "Console" else _positions.z_index + 10
-	_animations.z_index = _animations.z_index + 21 if name == "Console" else _animations.z_index + 11
 	
 	_collider.scale = Vector2(2.0, 2.0)
 	
@@ -58,11 +91,16 @@ func on_mouse_entered() -> void:
 func on_mouse_exited() -> void:
 	_remove_scaled_layout()
 	_positions.scale = Vector2(1.0, 1.0)
-	_animations.scale = Vector2(1.0, 1.0)
+	if is_number_cell:
+		_leader_cell.scale = Vector2(1.0, 1.0)
+		_leader_cell.z_index = _leader_cell.z_index - 11
+		_positions.z_index = _positions.z_index - 10
+	else:
+		_animations.scale = Vector2(1.0, 1.0)
+		_animations.z_index = _animations.z_index - 21 if name == "Console" else _animations.z_index - 11	
+		_positions.z_index = _positions.z_index - 20 if name == "Console" else _positions.z_index - 10
+		
 	position = _original_position
-	
-	_positions.z_index = _positions.z_index - 20 if name == "Console" else _positions.z_index - 10
-	_animations.z_index = _animations.z_index - 21 if name == "Console" else _animations.z_index - 11
 	
 	_collider.scale = Vector2(1.0, 1.0)
 	
@@ -122,15 +160,29 @@ func pick_animation() -> void:
 	for i in range(_animations.get_children().size() - 1):
 		var child: AnimatedSprite2D = _animations.get_child(i)
 		child.visible = false
-	
+		
 	var selected: AnimatedSprite2D = _animations.get_node_or_null(fixed_animation)
 	if selected:
 		selected.visible = true
 		_selected_animation = selected
-	else:
-		if fixed_animation != "NONE":
-			push_error("FrameCellController: couldn't find animation node from string {%s}" % selected)
+		return
+	
+	if fixed_animation != "NONE":
+		push_error("FrameCellController: couldn't find animation node from string {%s}" % fixed_animation)
 
+func preload_number_sprites() -> void:
+	for i in range(8):
+		_level_sprites[i + 1] = number_sprites[i]
+		
+	_current_max_level = _leader_cell.get_node_or_null("level")
+	if not _current_max_level:
+		push_error("FrameCellController: preload_number_sprite: failed to fetch level number sprite node")
+	
+	_current_max_level.texture = _level_sprites[1]
+	_current_max_level.visible = true
+	_top_text.visible = true
+	_leader_name.visible = true
+	
 func _move_to_scaled_position() -> void:
 	match _selected_position.name:
 		"top_left":
@@ -247,3 +299,12 @@ func _reset_slider_to_regular_position() -> void:
 	_slider.position.x += 35
 	_slider.position.y -= 37
 	_slider.scale = Vector2(1.0, 1.0)
+
+func _on_leader_update(new_leader: String, new_level: int) -> void:
+	if not is_number_cell:
+		return
+	new_leader = new_leader.to_upper()
+	_leader_name.text = TextHelper.bold(new_leader)
+	_leader_name.text = TextHelper.center(_leader_name.text)
+	_leader_name.text = TextHelper.size(_leader_name.text, 16)
+	_current_max_level.texture = _level_sprites[new_level]
