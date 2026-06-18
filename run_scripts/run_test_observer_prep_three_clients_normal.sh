@@ -22,7 +22,7 @@ echo "=== Starting Server ==="
 pkill -f "./zappy -p" || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 20 -f 10 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
+(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 20 -f 10 -t 1 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
 echo "=== Building Client ==="

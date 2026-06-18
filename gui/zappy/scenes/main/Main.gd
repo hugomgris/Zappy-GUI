@@ -187,7 +187,7 @@ func _fetch_shader_material() -> void:
 
 func _on_start_game_pressed() -> void:
 	start_button.hide()
-	var script_path = ProjectSettings.globalize_path("/home/hmunoz-g/42-OuterCore/zappy/server/run.sh")
+	var script_path = ProjectSettings.globalize_path("/home/jareste/hugo/zappy/server/run.sh")
 	var output = []
 	var exit_code = OS.execute("bash", [script_path], output, true, true)
 	if exit_code != 0:

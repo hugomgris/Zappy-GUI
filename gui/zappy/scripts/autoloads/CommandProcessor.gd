@@ -42,11 +42,14 @@ func process_command(cmd: Dictionary) -> void:
 		"prend":					_prend(cmd)
 		"pose":					_pose(cmd)
 		"fork":					_fork(cmd) # egg laid here
-		#"incantation_start":	_incantation_start(cmd)
-		#"incantation_end":		_incantation_end(cmd)
+		"incantation":
+			if cmd.get("status") == "in_progress":
+				_incantation_start(cmd)
+			elif cmd.get("status") == "ok":
+				_incantation_end(cmd)
 		#"broadcast":			_broadcast(cmd)
 		#"death":				_death(cmd)
-		"level_up":				_level_up(cmd)
+		#"level_up":				_level_up(cmd)
 		#"egg_hatch":			_egg_hatch(cmd)
 		#"egg_death":			_egg_death(cmd)
 		#"game_end":				_game_end(cmd)
@@ -141,11 +144,14 @@ func _fork(cmd: Dictionary) -> void:
 	return
 
 func _incantation_start(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd", ""))
+	var player_id: int = cmd.get("player_id")
+	print("Player [%d] went into incantation" % player_id)
 	return
 
 func _incantation_end(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd", ""))
+	# TODO: manage the visual transitions et all
+	# TODO: manage KO
+	_level_up(cmd)
 	return
 
 func _broadcast(cmd: Dictionary) -> void:

@@ -45,10 +45,9 @@ func _dispatch_next() -> void:
 		return
 
 	if data.has("status"):
-		var status: String = data.get("status", "ko")
-		if (status == "ok" or status == "level_up"):
-			ConsoleManager.console_update_received.emit(data)
-			CommandProcessor.process_command(data)
+		print(data)
+		ConsoleManager.console_update_received.emit(data)
+		CommandProcessor.process_command(data)
 	
 
 func _load_mock_initial_state() -> void:
