@@ -1056,7 +1056,6 @@ script = ExtResource("8_ko0rf")
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1142655336]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1182230075]
-visible = false
 
 [node name="StartButton" type="Button" parent="CanvasLayer" unique_id=318195123]
 anchors_preset = 8

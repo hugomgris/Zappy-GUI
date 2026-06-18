@@ -40,13 +40,16 @@ func _ready() -> void:
 		ProtocolParser.event_received.connect(_on_server_event)
 
 func _on_server_connection_established() -> void:
-	print("[Main] Connection established — snapshot incoming")
+	print("[Main] Connection established - snapshot incoming")
 
 func _on_snapshot_ready() -> void:
-	print("[Main] Snapshot ready — firing world_initialized")
+	print("[Main] Snapshot ready - firing world_initialized")
 	GameData.world_initialized.emit()
 
 func _on_server_event(event_type: String, data: Dictionary) -> void:
+	print("RECEVIED:")
+	print(data)
+	
 	ConsoleManager.console_update_received.emit(data) # TODO: check out where/when this should actually be emited
 	var status: String = data.get("status", "")
 	var msg_type: String = data.get("type", "")

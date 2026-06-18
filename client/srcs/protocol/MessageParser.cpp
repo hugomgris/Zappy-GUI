@@ -4,10 +4,12 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 using json = nlohmann::json;
 
 ServerMessage MessageParser::parse(const std::string& raw) {
+	std::cout << raw << std::endl;
 	ServerMessage msg;
 	msg.raw = raw;
 

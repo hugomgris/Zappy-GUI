@@ -25,9 +25,6 @@ sleep 1
 (cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 10 -f 10 > "$ROOT_DIR/logs/server_log_easy_probe_single_client.txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
-echo "=== Running server/run.sh ==="
-(cd "$ROOT_DIR/server" && ./run.sh)
-
 echo "=== Building Client ==="
 make -C "$ROOT_DIR/client"
 

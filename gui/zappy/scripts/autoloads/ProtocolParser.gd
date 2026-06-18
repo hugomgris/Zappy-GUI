@@ -52,12 +52,18 @@ func _parse_snapshot(d: Dictionary) -> void:
 	for p in d["players"]:
 		var pid: int = int(p["id"])
 		var pd := GameData.PlayerData.new(pid)         # ← typed object, not a dict
-		pd.team        = str(p["team"])
-		pd.pos         = Vector2i(int(p["position"]["x"]), int(p["position"]["y"]))
-		pd.orientation = int(p["orientation"])
-		pd.level       = int(p["level"])
+		pd.id			= pid
+		pd.team			= str(p["team"])
+		pd.pos			= Vector2i(int(p["position"]["x"]), int(p["position"]["y"]))
+		pd.orientation	= int(p["orientation"])
+		pd.level			= int(p["level"])
+		
 		_fill_inventory(pd.inventory, p["inventory"])
+		
 		GameData.players[pid] = pd
+		print("PID:", pid)
+		if pid == 5:
+			GameData.update_leader_status.emit(pd.team, pd.level)
 
 	# Game meta
 	var game_data: Dictionary = d["game"]
