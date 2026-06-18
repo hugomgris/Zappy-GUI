@@ -13,6 +13,8 @@ var _state := State.IDLE
 var _ip := ""
 var _port := 0
 
+var _game_ended: bool = false
+
 enum State { IDLE, CONNECTING, AUTHENTICATING, CONNECTED, CLOSED }
 
 # Public API 
@@ -37,9 +39,13 @@ func disconnect_from_server() -> void:
 	_state = State.CLOSED
 
 # Main loop 
+func _ready() -> void:
+	CommandProcessor.game_over.connect(func (winner: String) -> void:
+		_game_ended = true
+	)
 
 func _process(_delta: float) -> void:
-	if not _ws:
+	if not _ws or _game_ended:
 		return
 	_ws.poll()
 	_check_state()

@@ -11,7 +11,7 @@
       { "x": 2, "y": 1, "resources": { "nourriture": 0, "linemate": 2, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
       { "x": 0, "y": 2, "resources": { "nourriture": 3, "linemate": 2, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 1, "thystame": 0 }, "players": [] },
       { "x": 1, "y": 2, "resources": { "nourriture": 2, "linemate": 2, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] },
-      { "x": 2, "y": 2, "resources": { "nourriture": 0, "linemate": 2, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [] }
+      { "x": 2, "y": 2, "resources": { "nourriture": 0, "linemate": 2, "deraumere": 1, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }, "players": [2] }
     ]
   },
   "players": [
@@ -22,13 +22,22 @@
       "level": 1,
       "team": "team1",
       "inventory": { "nourriture": 2, "linemate": 20, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }
+    },
+    {
+      "id": 2,
+      "position": { "x": 2, "y": 2 },
+      "orientation": 3,
+      "level": 1,
+      "team": "team2",
+      "inventory": { "nourriture": 2, "linemate": 20, "deraumere": 0, "sibur": 0, "mendiane": 0, "phiras": 0, "thystame": 0 }
     }
   ],
   "game": {
     "tick": 42,
     "time_unit": 20,
     "teams": [
-      { "name": "team1", "player_count": 2, "remaining_connections": 2 }
+      { "name": "team1", "player_count": 1, "remaining_connections": 3 },
+      { "name": "team2", "player_count": 1, "remaining_connections": 3 }
     ]
   }
 }

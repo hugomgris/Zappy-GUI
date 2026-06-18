@@ -58,7 +58,7 @@ func _on_console_update_received(data: Dictionary) -> void:
 		
 			push_message(console_string)
 		elif data.has("status") and data.get("status") == "level_up":
-			var new_level: int = player.level
+			var new_level: int = player.level + 1 # TODO: maybe the level should already be updated at this point.
 			var dots := ".".repeat(12)
 			console_string = TextHelper.bold(console_string) + "level up%s%d" % [dots, new_level]
 			push_message(console_string)

@@ -158,13 +158,18 @@ func _death(cmd: Dictionary) -> void:
 
 func _level_up(cmd: Dictionary) -> void:
 	var id: int = cmd.get("player_id")
+	print(cmd)
 	GameData.players[id].level = min(8, GameData.players[id].level + 1)
 
 	player_leveled_up.emit(id, GameData.players[id].level)
 	
 	#leader cell management
-	if GameData.leader_team != GameData.players[id].team:
-		MockServer.update_leader_status.emit(GameData.players[id].team, GameData.players[id].level)
+	if GameData.leading_level < GameData.players[id].level:
+		GameData.update_leader_status.emit(GameData.players[id].team, GameData.players[id].level)
+		
+	if GameData.players[id].level == 8:
+		print("GAME ENDING WITH WINNER:", GameData.players[id].team)
+		game_over.emit(GameData.players[id].team)
 		
 	return
 

@@ -10,6 +10,11 @@ var _index: int = 0
 var _timer: float = 0.0
 var _running: bool = false
 
+func _ready() -> void:
+	CommandProcessor.game_over.connect(func (winner: String) -> void:
+		_running = false
+	)
+
 func build_mock_initial_game_state() -> void:
 	_load_mock_initial_state()
 	return
@@ -152,6 +157,7 @@ func _load_player_data_from_file(players: Array) -> void:
 		var id: int = player.id
 		var data = GameData.PlayerData.new(id)
 
+		data.id = id
 		data.pos = Vector2i( player.position.get("x"),  player.position.get("y"))
 		data.orientation = player.orientation
 		data.level = player.level
