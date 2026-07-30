@@ -38,6 +38,7 @@ typedef enum
 {
     type_cmd = 0,
     type_login,
+    type_observer,
     type_unknown
 } client_message_type;
 
@@ -62,6 +63,7 @@ typedef int (*login_handler)(int fd, cJSON *root);
 
 static int m_handle_login(int fd, cJSON *root);
 static int m_handle_cmd(int fd, cJSON *root);
+static int m_handle_obs_event(int fd, cJSON *root);
 
 static int m_handle_login_client(int fd, cJSON *root);
 static int m_handle_login_admin(int fd, cJSON *root);
@@ -73,8 +75,9 @@ static int m_handle_login_observer(int fd, cJSON *root);
 
 const client_message client_messages[] =
 {
-    {type_cmd,     "cmd"},
-    {type_login,   "login"},
+    {type_cmd, "cmd"},
+    {type_login, "login"},
+    {type_observer, "observer"},
     {type_unknown, "unknown"}
 };
 
@@ -82,6 +85,7 @@ static client_message_handler m_handlers[type_unknown] =
 {
     m_handle_cmd,
     m_handle_login,
+    m_handle_obs_event
 };
 
 static const char *login_roles[MAX_LOGIN_ROLES] =
@@ -330,9 +334,25 @@ static int m_handle_new_client(int fd)
     return SUCCESS;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Message handlers                                                   */
-/* ------------------------------------------------------------------ */
+static int m_handle_obs_event(int fd, cJSON *root)
+{
+    cJSON*  key_value;
+    cJSON*  arg;
+    int     ret;
+
+    key_value = cJSON_GetObjectItem(root, "action");
+    if (!key_value || !cJSON_IsString(key_value))
+        return ERROR;
+
+    arg = cJSON_GetObjectItem(root, "arg");
+
+    if (arg && cJSON_IsString(arg))
+        ret = game_execute_obs_action(fd, key_value->valuestring, arg->valuestring);
+    else
+        ret = game_execute_obs_action(fd, key_value->valuestring, NULL);
+
+    return ret;
+}
 
 static int m_handle_cmd(int fd, cJSON *root)
 {
