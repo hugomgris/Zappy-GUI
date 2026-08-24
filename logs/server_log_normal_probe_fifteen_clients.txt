@@ -1,0 +1,1586 @@
+[1;35m[18446744073709551615][BOOT ] [INIT] Server configuration:
+       port=8674  width=10  height=10
+       nb_clients=20  time_unit=100
+       cert='certs/cert.pem'  key='certs/key.pem'
+       ZAPPY_EASY_ASCENSION=0
+[0m[1;35m[18446744073709551615][BOOT ] [SSL_AL] Loaded cert='certs/cert.pem' key='certs/key.pem'
+[0m[1;35m[18446744073709551615][BOOT ] [SSL_AL] WSS server listening on port 8674 (fd=4)
+[0m[1;35m[18446744073709551615][BOOT ] [WORKER] Handshake pool ready (1 thread(s))
+[0m[1;35m[18446744073709551615][BOOT ] [SSL_AL] Initialised — handshake pool running
+[0m[1;35m[18446744073709551615][BOOT ] [SERVER] Listening socket ready: fd=4 port=8674
+[0m[1;35m[0][BOOT ] [TIME] Initialised: t=100 (1 time_unit = 10.0 ms real)
+[0m[1;35m[0][BOOT ] [INIT] Time API paused — send SIGUSR1 (pid=38715) to start the game
+[0m[1;35m[0][BOOT ] [INIT] Server ready on port 8674 — waiting for connections
+[0m[1;35m[0][BOOT ] [MAIN_LOOP] Entering main loop — time API is PAUSED, waiting for SIGUSR1 to start
+[0mServer started on port 8674 (pid=38715)
+[0;37m[0][INFO ] [MAIN_LOOP] Heartbeat — time_units=0 paused=yes
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [NET][CONNECT] fd=5 remote=127.0.0.1
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=5 elapsed=11174us
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=5 elapsed=0us
+[0m[0;37m[0][INFO ] [SERVER][ACCEPT] New connection accepted: fd=5
+[0m[0;37m[0][INFO ] [AUTH][ATTEMPT] fd=5 role='player' team='team1'
+[0m[0;37m[0][INFO ] [AUTH][OK] fd=5 role='player' team='team1'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [NET][CONNECT] fd=6 remote=127.0.0.1
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=6 elapsed=11128us
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=6 elapsed=0us
+[0m[0;37m[0][INFO ] [SERVER][ACCEPT] New connection accepted: fd=6
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [AUTH][ATTEMPT] fd=6 role='player' team='team1'
+[0m[0;37m[0][INFO ] [AUTH][OK] fd=6 role='player' team='team1'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [NET][CONNECT] fd=7 remote=127.0.0.1
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=7 elapsed=11358us
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=7 elapsed=0us
+[0m[0;37m[0][INFO ] [SERVER][ACCEPT] New connection accepted: fd=7
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [AUTH][ATTEMPT] fd=7 role='player' team='team1'
+[0m[0;37m[0][INFO ] [AUTH][OK] fd=7 role='player' team='team1'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [MAIN_LOOP] Heartbeat — time_units=0 paused=yes
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [MAIN_LOOP] Heartbeat — time_units=0 paused=yes
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [MAIN_LOOP] Heartbeat — time_units=0 paused=yes
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [NET][CONNECT] fd=8 remote=127.0.0.1
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=8 elapsed=16143us
+[0m[0;37m[0][INFO ] [SSL][HANDSHAKE_DONE] fd=8 elapsed=0us
+[0m[0;37m[0][INFO ] [SERVER][ACCEPT] New connection accepted: fd=8
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] [AUTH][ATTEMPT] fd=8 role='observer' team='N/A'
+[0m[0;37m[0][INFO ] [AUTH][OK] fd=8 role='observer' team='N/A'
+[0m[0;37m[0][INFO ] [OBS][CONNECT] fd=8
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] game_play: current_time=0
+[0m[0;37m[0][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;33m[0][WARN ] [SIGNAL] Received signal 10 (SIGINT=2 SIGTERM=15 SIGUSR1=10)
+[0m[0;37m[0][INFO ] [TIME][RESUMED] at_units=0 paused_for=19779ms
+[0m[0;37m[0][INFO ] [TIME][RESUMED] at_units=0 paused_for=0ms
+[0m[0;37m[0][INFO ] [SIGNAL] Game STARTED via SIGUSR1 — time API resumed
+[0m[0;37m[7][INFO ] game_play: current_time=7
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (3)
+[0m[0;37m[7][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[7][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[12][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[12][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[13][INFO ] Executing inventaire for player 5  at level 1
+[0m[0;37m[13][INFO ] Executing inventaire for player 7  at level 1
+[0m[0;37m[13][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[14][INFO ] Executing inventaire for player 6  at level 1
+[0m[0;37m[19][INFO ] game_play: current_time=19
+[0m[0;37m[22][INFO ] [MAIN_LOOP] Heartbeat — time_units=22 paused=no
+[0m[0;37m[31][INFO ] game_play: current_time=31
+[0m[0;37m[42][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[43][INFO ] game_play: current_time=43
+[0m[0;37m[48][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[48][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[49][INFO ] Executing avance for player 7  at level 3 at (3,3) facing 0
+[0m[0;37m[49][INFO ] Player 7 moved to (2,3)
+[0m[1;33m[55][WARN ] Player 5 picked nourriture at tile 1-6
+[0m[1;33m[55][WARN ] Player 6 picked nourriture at tile 8-1
+[0mTile contents (1,6): Players: 5
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+Tile contents (8,1): Players: 6
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[56][INFO ] game_play: current_time=56
+[0m[0;37m[58][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[63][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[63][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[64][INFO ] Executing voir for player 7  at level 1 at (2,3) with orientation (3)
+[0m[0;37m[68][INFO ] game_play: current_time=68
+[0m[0;37m[70][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (1)
+[0m[0;37m[70][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[73][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[78][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[78][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[79][INFO ] Executing inventaire for player 5  at level 1
+[0m[0;37m[79][INFO ] Executing inventaire for player 6  at level 1
+[0m[1;33m[80][WARN ] Player 7 picked nourriture at tile 2-3
+[0mTile contents (2,3): Players: 7
+Items: Nourriture: 0, Linemate: 1, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[80][INFO ] game_play: current_time=80
+[0m[0;37m[88][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[88][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[88][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[93][INFO ] game_play: current_time=93
+[0m[1;33m[95][WARN ] Player 6 picked nourriture at tile 8-1
+[0mTile contents (8,1): Players: 6
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[95][INFO ] Executing voir for player 7  at level 1 at (2,3) with orientation (3)
+[0m[0;37m[103][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[103][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[103][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[104][INFO ] Executing inventaire for player 7  at level 1
+[0m[0;37m[105][INFO ] game_play: current_time=105
+[0m[0;37m[110][INFO ] Executing voir for player 5  at level 1 at (1,6) with orientation (2)
+[0m[0;37m[110][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (3)
+[0m[0;37m[113][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[118][INFO ] game_play: current_time=118
+[0m[0;37m[118][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[119][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[120][INFO ] Executing inventaire for player 6  at level 1
+[0m[0;37m[120][INFO ] Executing avance for player 7  at level 2 at (3,3) facing 0
+[0m[0;37m[120][INFO ] Player 7 moved to (1,3)
+[0m[0;37m[125][INFO ] Executing avance for player 5  at level 1 at (6,2) facing 0
+[0m[0;37m[125][INFO ] Player 5 moved to (1,7)
+[0m[0;37m[128][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[130][INFO ] game_play: current_time=130
+[0m[0;37m[133][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[134][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[135][INFO ] Executing voir for player 7  at level 1 at (1,3) with orientation (3)
+[0m[0;37m[140][INFO ] Executing voir for player 5  at level 1 at (1,7) with orientation (2)
+[0m[0;37m[144][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[144][INFO ] game_play: current_time=144
+[0m[0;37m[148][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[149][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;33m[150][WARN ] Player 7 picked nourriture at tile 1-3
+[0mTile contents (1,3): Players: 7
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[155][INFO ] game_play: current_time=155
+[0m[0;37m[156][INFO ] Executing voir for player 6  at level 1 at (8,1) with orientation (0)
+[0m[0;37m[159][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[164][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[164][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[165][INFO ] Executing voir for player 7  at level 1 at (1,3) with orientation (3)
+[0m[0;37m[167][INFO ] game_play: current_time=167
+[0m[0;37m[171][INFO ] Executing voir for player 5  at level 1 at (1,7) with orientation (3)
+[0m[0;37m[171][INFO ] Executing avance for player 6  at level 8 at (1,0) facing 0
+[0m[0;37m[171][INFO ] Player 6 moved to (8,0)
+[0m[0;37m[174][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[175][INFO ] Executing inventaire for player 7  at level 1
+[0m[0;37m[179][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[179][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[180][INFO ] game_play: current_time=180
+[0m[0;37m[186][INFO ] Executing avance for player 5  at level 1 at (7,3) facing 0
+[0m[0;37m[186][INFO ] Player 5 moved to (0,7)
+[0m[0;37m[186][INFO ] Executing voir for player 6  at level 1 at (8,0) with orientation (0)
+[0m[0;37m[189][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[192][INFO ] game_play: current_time=192
+[0m[0;37m[194][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[201][INFO ] Executing voir for player 5  at level 1 at (0,7) with orientation (3)
+[0m[0;37m[204][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[204][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[205][INFO ] game_play: current_time=205
+[0m[0;37m[209][INFO ] Received command from fd=5: cmd='gauche', arg='NULL'
+[0m[0;37m[211][INFO ] Executing voir for player 6  at level 1 at (8,0) with orientation (0)
+[0m[0;37m[211][INFO ] Executing voir for player 7  at level 1 at (1,3) with orientation (0)
+[0m[0;37m[218][INFO ] game_play: current_time=218
+[0m[0;37m[219][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[219][INFO ] Received command from fd=6: cmd='incantation', arg='NULL'
+[0m[0;37m[224][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[226][INFO ] Executing avance for player 7  at level 1 at (3,0) facing 0
+[0m[0;37m[226][INFO ] Player 7 moved to (1,2)
+[0m[0;37m[231][INFO ] Executing voir for player 5  at level 1 at (0,7) with orientation (2)
+[0m[0;37m[231][INFO ] game_play: current_time=231
+[0m[0;37m[234][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[239][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[241][INFO ] Executing voir for player 7  at level 1 at (1,2) with orientation (0)
+[0m[0;37m[245][INFO ] game_play: current_time=245
+[0m[0;37m[246][INFO ] Executing avance for player 5  at level 0 at (7,2) facing 0
+[0m[0;37m[246][INFO ] Player 5 moved to (0,8)
+[0m[0;37m[250][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[254][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[258][INFO ] game_play: current_time=258
+[0m[0;37m[261][INFO ] Executing voir for player 5  at level 1 at (0,8) with orientation (2)
+[0m[0;37m[265][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[270][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[270][INFO ] game_play: current_time=270
+[0m[0;37m[271][INFO ] Executing voir for player 7  at level 1 at (1,2) with orientation (1)
+[0m[0;37m[280][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[282][INFO ] game_play: current_time=282
+[0m[0;37m[285][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[287][INFO ] Executing avance for player 7  at level 1 at (2,1) facing 0
+[0m[0;37m[287][INFO ] Player 7 moved to (2,2)
+[0m[0;37m[292][INFO ] Executing voir for player 5  at level 1 at (0,8) with orientation (3)
+[0m[0;37m[294][INFO ] game_play: current_time=294
+[0m[0;37m[295][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[300][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[302][INFO ] Executing voir for player 7  at level 1 at (2,2) with orientation (1)
+[0m[0;37m[307][INFO ] Executing avance for player 5  at level 0 at (8,3) facing 0
+[0m[0;37m[307][INFO ] Player 5 moved to (9,8)
+[0m[0;37m[307][INFO ] game_play: current_time=307
+[0m[0;37m[310][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[315][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[317][INFO ] Executing avance for player 7  at level 2 at (2,1) facing 0
+[0m[0;37m[317][INFO ] Player 7 moved to (3,2)
+[0m[0;37m[319][INFO ] game_play: current_time=319
+[0m[0;37m[322][INFO ] Executing voir for player 5  at level 1 at (9,8) with orientation (3)
+[0m[0;37m[325][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[330][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[332][INFO ] game_play: current_time=332
+[0m[0;37m[332][INFO ] Executing voir for player 7  at level 1 at (3,2) with orientation (1)
+[0m[1;33m[337][WARN ] Player 5 picked nourriture at tile 9-8
+[0mTile contents (9,8): Players: 5
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[340][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[344][INFO ] game_play: current_time=344
+[0m[0;37m[345][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[350][INFO ] Received command from fd=6: cmd='prend', arg='linemate'
+[0m[0;37m[352][INFO ] Executing voir for player 5  at level 1 at (9,8) with orientation (3)
+[0m[0;37m[355][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[357][INFO ] game_play: current_time=357
+[0m[0;37m[360][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[361][INFO ] Executing inventaire for player 5  at level 1
+[0m[0;37m[362][INFO ] Executing voir for player 7  at level 1 at (3,2) with orientation (2)
+[0m[0;37m[365][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[369][INFO ] game_play: current_time=369
+[0m[0;37m[370][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[372][INFO ] Executing voir for player 6  at level 2 at (8,0) with orientation (0)
+[0m[0;37m[375][INFO ] Received command from fd=5: cmd='gauche', arg='NULL'
+[0m[0;37m[377][INFO ] Executing avance for player 7  at level 3 at (2,2) facing 0
+[0m[0;37m[377][INFO ] Player 7 moved to (3,3)
+[0m[0;37m[380][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[381][INFO ] game_play: current_time=381
+[0m[0;37m[386][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[391][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[392][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (2)
+[0m[0;37m[394][INFO ] game_play: current_time=394
+[0m[0;37m[395][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[398][INFO ] Executing voir for player 5  at level 1 at (9,8) with orientation (2)
+[0m[0;37m[401][INFO ] Received command from fd=7: cmd='gauche', arg='NULL'
+[0m[0;37m[402][INFO ] Executing voir for player 6  at level 2 at (8,0) with orientation (3)
+[0m[0;37m[406][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[407][INFO ] game_play: current_time=407
+[0m[0;37m[411][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[413][INFO ] Executing avance for player 5  at level 9 at (8,2) facing 0
+[0m[0;37m[413][INFO ] Player 5 moved to (9,9)
+[0m[0;37m[416][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[418][INFO ] Executing avance for player 6  at level 8 at (0,3) facing 0
+[0m[0;37m[418][INFO ] Player 6 moved to (7,0)
+[0m[0;37m[420][INFO ] game_play: current_time=420
+[0m[0;37m[422][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[423][INFO ] Executing voir for player 7  at level 1 at (3,3) with orientation (1)
+[0m[0;37m[426][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[428][INFO ] Executing voir for player 5  at level 1 at (9,9) with orientation (2)
+[0m[0;37m[431][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[432][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (3)
+[0m[0;37m[432][INFO ] game_play: current_time=432
+[0m[0;37m[436][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[438][INFO ] Executing avance for player 7  at level 3 at (3,1) facing 0
+[0m[0;37m[438][INFO ] Player 7 moved to (4,3)
+[0m[0;37m[441][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[443][INFO ] Executing avance for player 5  at level 9 at (9,2) facing 0
+[0m[0;37m[443][INFO ] Player 5 moved to (9,0)
+[0m[0;37m[444][INFO ] game_play: current_time=444
+[0m[0;37m[446][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[452][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[453][INFO ] Executing inventaire for player 5  at level 1
+[0m[0;37m[453][INFO ] Executing voir for player 7  at level 1 at (4,3) with orientation (1)
+[0m[0;37m[456][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[457][INFO ] game_play: current_time=457
+[0m[0;37m[462][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[463][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (2)
+[0m[0;37m[469][INFO ] Executing voir for player 5  at level 1 at (9,0) with orientation (2)
+[0m[0;37m[470][INFO ] game_play: current_time=470
+[0m[0;37m[471][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[471][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[477][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[478][INFO ] Executing avance for player 6  at level 7 at (0,2) facing 0
+[0m[0;37m[478][INFO ] Player 6 moved to (7,1)
+[0m[0;37m[478][INFO ] Executing voir for player 7  at level 1 at (4,3) with orientation (1)
+[0m[0;37m[482][INFO ] game_play: current_time=482
+[0m[0;37m[484][INFO ] Executing avance for player 5  at level 9 at (0,2) facing 0
+[0m[0;37m[484][INFO ] Player 5 moved to (9,1)
+[0m[0;37m[486][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[486][INFO ] Received command from fd=7: cmd='incantation', arg='NULL'
+[0m[0;37m[492][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[493][INFO ] Executing voir for player 6  at level 2 at (7,1) with orientation (2)
+[0m[0;37m[495][INFO ] game_play: current_time=495
+[0m[0;37m[499][INFO ] Executing voir for player 5  at level 1 at (9,1) with orientation (2)
+[0m[0;37m[501][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[502][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[508][INFO ] game_play: current_time=508
+[0m[0;37m[511][INFO ] Received command from fd=6: cmd='prend', arg='sibur'
+[0m[0;37m[518][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[1;33m[518][WARN ] Player 6 picked sibur at tile 7-1
+[0mTile contents (7,1): Players: 6
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[521][INFO ] game_play: current_time=521
+[0m[0;37m[522][INFO ] [MAIN_LOOP] Heartbeat — time_units=522 paused=no
+[0m[0;37m[524][INFO ] Executing voir for player 5  at level 1 at (9,1) with orientation (2)
+[0m[0;37m[527][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[533][INFO ] Received command from fd=5: cmd='incantation', arg='NULL'
+[0m[0;37m[533][INFO ] game_play: current_time=533
+[0m[0;37m[534][INFO ] Executing voir for player 6  at level 2 at (7,1) with orientation (2)
+[0m[0;37m[542][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[543][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[546][INFO ] game_play: current_time=546
+[0m[0;37m[552][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[559][INFO ] game_play: current_time=559
+[0m[0;37m[567][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[571][INFO ] game_play: current_time=571
+[0m[0;37m[574][INFO ] Executing voir for player 6  at level 2 at (7,1) with orientation (1)
+[0m[0;37m[582][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[584][INFO ] game_play: current_time=584
+[0m[0;37m[596][INFO ] game_play: current_time=596
+[0m[0;37m[597][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[604][INFO ] Executing voir for player 6  at level 2 at (7,1) with orientation (0)
+[0m[0;37m[608][INFO ] game_play: current_time=608
+[0m[0;37m[613][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[618][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[618][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[619][INFO ] Executing avance for player 6  at level 7 at (1,0) facing 0
+[0m[0;37m[619][INFO ] Player 6 moved to (7,0)
+[0m[0;37m[621][INFO ] game_play: current_time=621
+[0m[0;37m[628][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[628][INFO ] Received command from fd=7: cmd='prend', arg='linemate'
+[0m[0;37m[634][INFO ] game_play: current_time=634
+[0m[0;37m[635][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[643][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[643][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[646][INFO ] game_play: current_time=646
+[0m[0;37m[650][INFO ] Executing voir for player 7  at level 2 at (4,3) with orientation (1)
+[0m[0;37m[658][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[658][INFO ] Received command from fd=7: cmd='gauche', arg='NULL'
+[0m[0;37m[659][INFO ] game_play: current_time=659
+[0m[0;37m[663][INFO ] Received command from fd=5: cmd='prend', arg='linemate'
+[0m[0;37m[665][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[672][INFO ] game_play: current_time=672
+[0m[0;37m[673][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[673][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[678][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[680][INFO ] Executing voir for player 7  at level 2 at (4,3) with orientation (0)
+[0m[0;37m[684][INFO ] game_play: current_time=684
+[0m[0;37m[685][INFO ] Executing voir for player 5  at level 2 at (9,1) with orientation (2)
+[0m[0;37m[688][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[688][INFO ] Received command from fd=7: cmd='gauche', arg='NULL'
+[0m[0;37m[693][INFO ] Received command from fd=5: cmd='gauche', arg='NULL'
+[0m[0;37m[695][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[697][INFO ] game_play: current_time=697
+[0m[0;37m[703][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[703][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[708][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[709][INFO ] game_play: current_time=709
+[0m[0;37m[710][INFO ] Executing voir for player 7  at level 2 at (4,3) with orientation (3)
+[0m[0;37m[715][INFO ] Executing voir for player 5  at level 2 at (9,1) with orientation (1)
+[0m[0;37m[718][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[718][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[722][INFO ] game_play: current_time=722
+[0m[0;37m[724][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[725][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[725][INFO ] Executing avance for player 7  at level 4 at (3,3) facing 0
+[0m[0;37m[725][INFO ] Player 7 moved to (3,3)
+[0m[0;37m[731][INFO ] Executing avance for player 5  at level 9 at (1,1) facing 0
+[0m[0;37m[731][INFO ] Player 5 moved to (0,1)
+[0m[0;37m[733][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[733][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[735][INFO ] game_play: current_time=735
+[0m[0;37m[739][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[740][INFO ] Executing voir for player 7  at level 2 at (3,3) with orientation (3)
+[0m[0;37m[745][INFO ] Executing voir for player 5  at level 2 at (0,1) with orientation (1)
+[0m[0;37m[747][INFO ] game_play: current_time=747
+[0m[0;37m[749][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[749][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[754][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[756][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[760][INFO ] game_play: current_time=760
+[0m[0;37m[764][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[764][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[769][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[771][INFO ] Executing voir for player 7  at level 2 at (3,3) with orientation (0)
+[0m[0;37m[772][INFO ] game_play: current_time=772
+[0m[0;37m[776][INFO ] Executing voir for player 5  at level 2 at (0,1) with orientation (2)
+[0m[0;37m[779][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[779][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[784][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[784][INFO ] game_play: current_time=784
+[0m[0;37m[786][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[786][INFO ] Executing avance for player 7  at level 3 at (3,0) facing 0
+[0m[0;37m[786][INFO ] Player 7 moved to (3,2)
+[0m[0;37m[791][INFO ] Executing avance for player 5  at level 0 at (1,2) facing 0
+[0m[0;37m[791][INFO ] Player 5 moved to (0,2)
+[0m[0;37m[794][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[794][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[796][INFO ] game_play: current_time=796
+[0m[0;37m[800][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[801][INFO ] Executing voir for player 7  at level 2 at (3,2) with orientation (0)
+[0m[0;37m[806][INFO ] Executing voir for player 5  at level 2 at (0,2) with orientation (2)
+[0m[0;37m[809][INFO ] game_play: current_time=809
+[0m[0;37m[810][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[810][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[815][INFO ] Received command from fd=5: cmd='prend', arg='linemate'
+[0m[0;37m[816][INFO ] Executing avance for player 7  at level 3 at (2,0) facing 0
+[0m[0;37m[816][INFO ] Player 7 moved to (3,1)
+[0m[0;37m[817][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[1;33m[822][WARN ] Player 5 picked linemate at tile 0-2
+[0mTile contents (0,2): Players: 5
+Items: Nourriture: 8, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[823][INFO ] game_play: current_time=823
+[0m[0;37m[825][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[825][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[830][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[831][INFO ] Executing voir for player 7  at level 2 at (3,1) with orientation (0)
+[0m[0;37m[836][INFO ] game_play: current_time=836
+[0m[0;37m[837][INFO ] Executing voir for player 5  at level 2 at (0,2) with orientation (2)
+[0m[0;37m[840][INFO ] Received command from fd=7: cmd='prend', arg='sibur'
+[0m[0;37m[840][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[845][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[846][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[847][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[1;33m[847][WARN ] Player 7 picked sibur at tile 3-1
+[0mTile contents (3,1): Players: 7
+Items: Nourriture: 4, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[848][INFO ] game_play: current_time=848
+[0m[0;37m[855][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[855][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[855][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[861][INFO ] game_play: current_time=861
+[0m[0;37m[862][INFO ] Executing avance for player 5  at level 0 at (2,2) facing 0
+[0m[0;37m[862][INFO ] Player 5 moved to (0,3)
+[0m[0;37m[862][INFO ] Executing voir for player 7  at level 2 at (3,1) with orientation (0)
+[0m[0;37m[870][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[870][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[870][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[871][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[873][INFO ] game_play: current_time=873
+[0m[0;37m[877][INFO ] Executing voir for player 5  at level 2 at (0,3) with orientation (2)
+[0m[0;37m[877][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[881][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[885][INFO ] Received command from fd=5: cmd='prend', arg='sibur'
+[0m[0;37m[885][INFO ] game_play: current_time=885
+[0m[0;37m[885][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[888][INFO ] Executing avance for player 7  at level 3 at (1,0) facing 0
+[0m[0;37m[888][INFO ] Player 7 moved to (3,0)
+[0m[1;33m[892][WARN ] Player 5 picked sibur at tile 0-3
+[0mTile contents (0,3): Players: 5
+Items: Nourriture: 7, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[896][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[898][INFO ] game_play: current_time=898
+[0m[0;37m[901][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[901][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[903][INFO ] Executing voir for player 7  at level 2 at (3,0) with orientation (0)
+[0m[0;37m[908][INFO ] Executing voir for player 5  at level 2 at (0,3) with orientation (2)
+[0m[0;37m[908][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[910][INFO ] game_play: current_time=910
+[0m[0;37m[911][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[916][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[916][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[917][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[918][INFO ] Executing avance for player 7  at level 3 at (0,0) facing 0
+[0m[0;37m[918][INFO ] Player 7 moved to (3,9)
+[0m[0;37m[923][INFO ] game_play: current_time=923
+[0m[0;37m[926][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[926][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[931][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[933][INFO ] Executing avance for player 5  at level 0 at (3,2) facing 0
+[0m[0;37m[933][INFO ] Player 5 moved to (0,4)
+[0m[0;37m[933][INFO ] Executing voir for player 7  at level 2 at (3,9) with orientation (0)
+[0m[0;37m[935][INFO ] game_play: current_time=935
+[0m[0;37m[938][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[941][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[941][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[946][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[948][INFO ] Executing voir for player 5  at level 2 at (0,4) with orientation (2)
+[0m[0;37m[948][INFO ] game_play: current_time=948
+[0m[0;37m[956][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[956][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[957][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[960][INFO ] game_play: current_time=960
+[0m[0;37m[961][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[963][INFO ] Executing voir for player 7  at level 2 at (3,9) with orientation (1)
+[0m[0;37m[966][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[968][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[972][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[973][INFO ] game_play: current_time=973
+[0m[0;37m[973][INFO ] Executing avance for player 5  at level 0 at (4,2) facing 0
+[0m[0;37m[973][INFO ] Player 5 moved to (0,5)
+[0m[0;37m[976][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[978][INFO ] Executing avance for player 7  at level 3 at (9,1) facing 0
+[0m[0;37m[978][INFO ] Player 7 moved to (4,9)
+[0m[0;37m[982][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[985][INFO ] game_play: current_time=985
+[0m[0;37m[987][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[988][INFO ] Executing voir for player 5  at level 2 at (0,5) with orientation (2)
+[0m[0;37m[991][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[994][INFO ] Executing voir for player 7  at level 2 at (4,9) with orientation (1)
+[0m[0;37m[997][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[997][INFO ] game_play: current_time=997
+[0m[0;37m[998][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1002][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[1004][INFO ] Executing avance for player 5  at level 0 at (5,2) facing 0
+[0m[0;37m[1004][INFO ] Player 5 moved to (0,6)
+[0m[0;37m[1007][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1007][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1009][INFO ] Executing avance for player 7  at level 4 at (9,1) facing 0
+[0m[0;37m[1009][INFO ] Player 7 moved to (5,9)
+[0m[0;37m[1010][INFO ] game_play: current_time=1010
+[0m[0;37m[1012][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1017][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1017][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1019][INFO ] Executing voir for player 5  at level 2 at (0,6) with orientation (2)
+[0m[0;37m[1022][INFO ] game_play: current_time=1022
+[0m[0;37m[1022][INFO ] [MAIN_LOOP] Heartbeat — time_units=1022 paused=no
+[0m[0;37m[1024][INFO ] Executing voir for player 7  at level 2 at (5,9) with orientation (1)
+[0m[0;37m[1027][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1032][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1032][INFO ] Received command from fd=7: cmd='droite', arg='NULL'
+[0m[0;37m[1034][INFO ] Executing avance for player 5  at level 0 at (6,2) facing 0
+[0m[0;37m[1034][INFO ] Player 5 moved to (0,7)
+[0m[0;37m[1035][INFO ] game_play: current_time=1035
+[0m[0;37m[1039][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1042][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1047][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1047][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1048][INFO ] game_play: current_time=1048
+[0m[0;37m[1049][INFO ] Executing voir for player 5  at level 2 at (0,7) with orientation (2)
+[0m[0;37m[1054][INFO ] Executing voir for player 7  at level 2 at (5,9) with orientation (2)
+[0m[0;37m[1057][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[1060][INFO ] game_play: current_time=1060
+[0m[0;37m[1062][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1062][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[1069][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1069][INFO ] Executing avance for player 7  at level 5 at (9,2) facing 0
+[0m[0;37m[1069][INFO ] Player 7 moved to (5,0)
+[0m[0;37m[1073][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1073][INFO ] game_play: current_time=1073
+[0m[0;37m[1077][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1078][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1079][INFO ] Executing voir for player 5  at level 2 at (0,7) with orientation (3)
+[0m[0;37m[1084][INFO ] Executing voir for player 7  at level 2 at (5,0) with orientation (2)
+[0m[0;37m[1085][INFO ] game_play: current_time=1085
+[0m[0;37m[1088][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[1093][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1093][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[1097][INFO ] game_play: current_time=1097
+[0m[0;37m[1099][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1100][INFO ] Executing avance for player 7  at level 5 at (0,2) facing 0
+[0m[0;37m[1100][INFO ] Player 7 moved to (5,1)
+[0m[0;37m[1103][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1108][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1108][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1110][INFO ] Executing voir for player 5  at level 2 at (0,7) with orientation (0)
+[0m[0;37m[1110][INFO ] game_play: current_time=1110
+[0m[0;37m[1115][INFO ] Executing voir for player 7  at level 2 at (5,1) with orientation (2)
+[0m[0;37m[1118][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1122][INFO ] game_play: current_time=1122
+[0m[0;37m[1123][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1123][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1124][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1125][INFO ] Executing avance for player 5  at level 0 at (7,0) facing 0
+[0m[0;37m[1125][INFO ] Player 5 moved to (0,6)
+[0m[0;37m[1130][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1133][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[1133][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1134][INFO ] game_play: current_time=1134
+[0m[0;37m[1138][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1140][INFO ] Executing voir for player 5  at level 2 at (0,6) with orientation (0)
+[0m[0;37m[1140][INFO ] Executing avance for player 7  at level 5 at (1,2) facing 0
+[0m[0;37m[1140][INFO ] Player 7 moved to (5,2)
+[0m[0;37m[1147][INFO ] game_play: current_time=1147
+[0m[0;37m[1148][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1149][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[1153][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1155][INFO ] Executing voir for player 7  at level 2 at (5,2) with orientation (2)
+[0m[0;37m[1159][INFO ] game_play: current_time=1159
+[0m[0;37m[1160][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1163][INFO ] Received command from fd=7: cmd='prend', arg='deraumere'
+[0m[0;37m[1164][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1168][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[1;33m[1170][WARN ] Player 7 picked deraumere at tile 5-2
+[0mTile contents (5,2): Players: 7
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1171][INFO ] Executing voir for player 5  at level 2 at (0,6) with orientation (1)
+[0m[0;37m[1171][INFO ] game_play: current_time=1171
+[0m[0;37m[1178][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1179][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1183][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1184][INFO ] game_play: current_time=1184
+[0m[0;37m[1185][INFO ] Executing voir for player 7  at level 2 at (5,2) with orientation (2)
+[0m[0;37m[1186][INFO ] Executing avance for player 5  at level 0 at (6,1) facing 0
+[0m[0;37m[1186][INFO ] Player 5 moved to (1,6)
+[0m[0;37m[1190][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1193][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1194][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1194][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1196][INFO ] game_play: current_time=1196
+[0m[0;37m[1198][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1201][INFO ] Executing voir for player 5  at level 2 at (1,6) with orientation (1)
+[0m[0;37m[1204][INFO ] Received command from fd=7: cmd='avance', arg='NULL'
+[0m[0;37m[1208][INFO ] game_play: current_time=1208
+[0m[0;37m[1209][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1210][INFO ] Executing avance for player 7  at level 5 at (2,2) facing 0
+[0m[0;37m[1210][INFO ] Player 7 moved to (5,3)
+[0m[0;37m[1214][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1216][INFO ] Executing avance for player 5  at level 1 at (6,1) facing 0
+[0m[0;37m[1216][INFO ] Player 5 moved to (2,6)
+[0m[0;37m[1219][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1220][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1221][INFO ] game_play: current_time=1221
+[0m[0;37m[1224][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1226][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1229][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1231][INFO ] Executing voir for player 5  at level 2 at (2,6) with orientation (1)
+[0m[0;37m[1233][INFO ] game_play: current_time=1233
+[0m[0;37m[1234][INFO ] Received command from fd=7: cmd='prend', arg='linemate'
+[0m[0;37m[1239][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[1;33m[1241][WARN ] Player 7 picked linemate at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 7, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1244][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1245][INFO ] game_play: current_time=1245
+[0m[0;37m[1249][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1250][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1254][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1256][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1257][INFO ] game_play: current_time=1257
+[0m[0;37m[1259][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1261][INFO ] Executing voir for player 5  at level 2 at (2,6) with orientation (2)
+[0m[0;37m[1264][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1265][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1269][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1270][INFO ] game_play: current_time=1270
+[0m[0;37m[1274][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1276][INFO ] Executing avance for player 5  at level 2 at (6,2) facing 0
+[0m[0;37m[1276][INFO ] Player 5 moved to (2,7)
+[0m[0;37m[1279][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1281][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1283][INFO ] game_play: current_time=1283
+[0m[0;37m[1284][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[1;33m[1286][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1289][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1291][INFO ] Executing voir for player 5  at level 2 at (2,7) with orientation (2)
+[0m[0;37m[1294][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1296][INFO ] game_play: current_time=1296
+[0m[0;37m[1300][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1301][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1304][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1307][INFO ] Executing avance for player 5  at level 2 at (7,2) facing 0
+[0m[0;37m[1307][INFO ] Player 5 moved to (2,8)
+[0m[0;37m[1308][INFO ] game_play: current_time=1308
+[0m[0;37m[1309][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1310][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1311][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1315][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1320][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1320][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1321][INFO ] game_play: current_time=1321
+[0m[0;37m[1322][INFO ] Executing voir for player 5  at level 2 at (2,8) with orientation (2)
+[0m[1;33m[1327][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 5, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1330][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1334][INFO ] game_play: current_time=1334
+[0m[0;37m[1335][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1335][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1337][INFO ] Executing avance for player 5  at level 2 at (8,2) facing 0
+[0m[0;37m[1337][INFO ] Player 5 moved to (2,9)
+[0m[0;37m[1342][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1342][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1345][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1346][INFO ] game_play: current_time=1346
+[0m[0;37m[1350][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1350][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1351][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1352][INFO ] Executing voir for player 5  at level 2 at (2,9) with orientation (2)
+[0m[0;37m[1359][INFO ] game_play: current_time=1359
+[0m[0;37m[1360][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1360][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[1365][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;33m[1367][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 4, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1371][INFO ] game_play: current_time=1371
+[0m[0;37m[1372][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1375][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1375][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1380][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1382][INFO ] Executing voir for player 5  at level 2 at (2,9) with orientation (3)
+[0m[0;37m[1382][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1384][INFO ] game_play: current_time=1384
+[0m[0;37m[1390][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1391][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1391][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1395][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1396][INFO ] game_play: current_time=1396
+[0m[0;37m[1398][INFO ] Executing avance for player 5  at level 2 at (9,3) facing 0
+[0m[0;37m[1398][INFO ] Player 5 moved to (1,9)
+[0m[0;37m[1400][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1402][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1406][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[1;33m[1407][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 14, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1408][INFO ] game_play: current_time=1408
+[0m[0;37m[1410][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1413][INFO ] Executing voir for player 5  at level 2 at (1,9) with orientation (3)
+[0m[0;37m[1416][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1421][INFO ] game_play: current_time=1421
+[0m[0;37m[1421][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1423][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1425][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1428][INFO ] Executing avance for player 5  at level 1 at (9,3) facing 0
+[0m[0;37m[1428][INFO ] Player 5 moved to (0,9)
+[0m[0;37m[1431][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1432][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1432][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1433][INFO ] game_play: current_time=1433
+[0m[0;37m[1436][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1441][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1441][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1443][INFO ] Executing voir for player 5  at level 2 at (0,9) with orientation (3)
+[0m[0;37m[1445][INFO ] game_play: current_time=1445
+[0m[1;33m[1448][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 13, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1451][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1456][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1456][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1457][INFO ] game_play: current_time=1457
+[0m[0;37m[1458][INFO ] Executing avance for player 5  at level 0 at (9,3) facing 0
+[0m[0;37m[1458][INFO ] Player 5 moved to (9,9)
+[0m[0;37m[1463][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1463][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1466][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1467][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1470][INFO ] game_play: current_time=1470
+[0m[0;37m[1471][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1471][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1472][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1476][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1481][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1482][INFO ] game_play: current_time=1482
+[0m[0;37m[1483][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1486][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;33m[1488][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 12, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1492][INFO ] Received command from fd=5: cmd='prend', arg='deraumere'
+[0m[0;37m[1493][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (0)
+[0m[0;37m[1493][INFO ] game_play: current_time=1493
+[0m[0;37m[1496][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[1;33m[1498][WARN ] Player 5 picked deraumere at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1501][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1503][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1505][INFO ] game_play: current_time=1505
+[0m[0;37m[1507][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1511][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1512][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1513][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1516][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1517][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1518][INFO ] game_play: current_time=1518
+[0m[0;37m[1521][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1522][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1522][INFO ] [MAIN_LOOP] Heartbeat — time_units=1522 paused=no
+[0m[0;37m[1523][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1526][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;33m[1528][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 11, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1531][INFO ] game_play: current_time=1531
+[0m[0;37m[1533][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1537][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1537][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1541][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[1543][INFO ] game_play: current_time=1543
+[0m[1;33m[1544][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 5, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1544][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[1;33m[1548][WARN ] Player 6 picked nourriture at tile 7-0
+[0mTile contents (7,0): Players: 6
+Items: Nourriture: 8, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1552][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1552][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1553][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1555][INFO ] game_play: current_time=1555
+[0m[0;37m[1557][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1559][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1562][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1563][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1567][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1568][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1568][INFO ] game_play: current_time=1568
+[0m[1;33m[1569][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 10, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1572][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1573][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1577][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1578][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1581][INFO ] game_play: current_time=1581
+[0m[0;37m[1582][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[1;33m[1584][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 4, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1584][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[1;33m[1589][WARN ] Player 6 picked nourriture at tile 7-0
+[0mTile contents (7,0): Players: 6
+Items: Nourriture: 7, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1593][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1593][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1593][INFO ] game_play: current_time=1593
+[0m[0;37m[1594][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1597][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1600][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1603][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1604][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1606][INFO ] game_play: current_time=1606
+[0m[0;37m[1608][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1609][INFO ] Executing inventaire for player 5  at level 2
+[0m[1;33m[1610][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 9, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1612][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1613][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1617][INFO ] game_play: current_time=1617
+[0m[0;37m[1618][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1618][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1622][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[1;33m[1625][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 3, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1625][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[1;33m[1629][WARN ] Player 6 picked nourriture at tile 7-0
+[0mTile contents (7,0): Players: 6
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1630][INFO ] game_play: current_time=1630
+[0m[0;37m[1633][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1633][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1634][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1637][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1640][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1642][INFO ] game_play: current_time=1642
+[0m[0;37m[1643][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1644][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1648][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1649][INFO ] Executing inventaire for player 5  at level 2
+[0m[1;33m[1650][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 8, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1652][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1653][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1655][INFO ] game_play: current_time=1655
+[0m[0;37m[1658][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1658][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1663][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[1;33m[1665][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 2, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1665][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1666][INFO ] game_play: current_time=1666
+[0m[1;33m[1670][WARN ] Player 6 picked nourriture at tile 7-0
+[0mTile contents (7,0): Players: 6
+Items: Nourriture: 5, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1673][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1674][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1675][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1678][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1679][INFO ] game_play: current_time=1679
+[0m[0;37m[1680][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1684][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1685][INFO ] Executing voir for player 6  at level 2 at (7,0) with orientation (1)
+[0m[0;37m[1689][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1690][INFO ] Executing inventaire for player 5  at level 2
+[0m[1;33m[1691][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 7, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1692][INFO ] game_play: current_time=1692
+[0m[0;37m[1693][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1694][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1699][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1699][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1703][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[1704][INFO ] game_play: current_time=1704
+[0m[1;33m[1706][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1706][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1710][INFO ] Executing avance for player 6  at level 7 at (0,1) facing 0
+[0m[0;37m[1710][INFO ] Player 6 moved to (8,0)
+[0m[0;37m[1714][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1714][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1715][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1716][INFO ] game_play: current_time=1716
+[0m[0;37m[1718][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1721][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1724][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1725][INFO ] Executing voir for player 6  at level 2 at (8,0) with orientation (1)
+[0m[0;37m[1729][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1730][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1730][INFO ] game_play: current_time=1730
+[0m[1;33m[1731][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1734][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1739][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1739][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[1743][INFO ] game_play: current_time=1743
+[0m[1;33m[1746][WARN ] Player 5 picked nourriture at tile 9-9
+[0mTile contents (9,9): Players: 5
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1746][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1749][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1754][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1754][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1755][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1755][INFO ] game_play: current_time=1755
+[0m[0;37m[1756][INFO ] Executing voir for player 6  at level 2 at (8,0) with orientation (0)
+[0m[0;37m[1761][INFO ] Executing voir for player 5  at level 2 at (9,9) with orientation (3)
+[0m[0;37m[1764][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[1764][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1768][INFO ] game_play: current_time=1768
+[0m[0;37m[1770][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1770][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1771][INFO ] Executing avance for player 6  at level 8 at (0,0) facing 0
+[0m[0;37m[1771][INFO ] Player 6 moved to (8,9)
+[0m[1;33m[1771][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 5, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1779][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1779][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1780][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[1780][INFO ] game_play: current_time=1780
+[0m[0;37m[1786][INFO ] Executing avance for player 5  at level 9 at (9,3) facing 0
+[0m[0;37m[1786][INFO ] Player 5 moved to (8,9)
+[0m[0;37m[1786][INFO ] Executing voir for player 6  at level 2 at (8,9) with orientation (0)
+[0m[0;37m[1786][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1793][INFO ] game_play: current_time=1793
+[0m[0;37m[1794][INFO ] Received command from fd=6: cmd='prend', arg='linemate'
+[0m[0;37m[1794][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1795][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1795][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[1;33m[1801][WARN ] Player 6 picked linemate at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 6, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1802][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[1804][INFO ] game_play: current_time=1804
+[0m[0;37m[1805][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1809][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1810][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[1;33m[1812][WARN ] Player 7 picked nourriture at tile 5-3
+[0m[1;33m[1816][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 4, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+Tile contents (8,9): Players: 5
+Items: Nourriture: 5, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1816][INFO ] Executing voir for player 6  at level 2 at (8,9) with orientation (0)
+[0m[0;37m[1817][INFO ] game_play: current_time=1817
+[0m[0;37m[1820][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1825][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1825][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1825][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1827][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1830][INFO ] game_play: current_time=1830
+[0m[0;37m[1832][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[1834][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[1835][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1836][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1840][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1841][INFO ] Executing inventaire for player 5  at level 2
+[0m[1;33m[1841][WARN ] Player 6 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 4, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1843][INFO ] game_play: current_time=1843
+[0m[0;37m[1845][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1849][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1850][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[1;33m[1852][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 3, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1855][INFO ] game_play: current_time=1855
+[0m[0;37m[1856][INFO ] Executing voir for player 6  at level 2 at (8,9) with orientation (0)
+[0m[1;33m[1857][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 3, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1860][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1864][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[1865][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[1865][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1867][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1868][INFO ] game_play: current_time=1868
+[0m[0;37m[1872][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[1875][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[0;37m[1875][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1876][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1880][INFO ] game_play: current_time=1880
+[0m[0;37m[1880][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1881][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1885][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1890][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1891][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[1;33m[1892][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 2, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1892][INFO ] game_play: current_time=1892
+[0m[0;37m[1897][INFO ] Executing voir for player 6  at level 2 at (8,9) with orientation (3)
+[0m[1;33m[1898][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 2, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1900][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1904][INFO ] game_play: current_time=1904
+[0m[0;37m[1905][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[1906][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1907][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1912][INFO ] Executing avance for player 6  at level 8 at (9,3) facing 0
+[0m[0;37m[1912][INFO ] Player 6 moved to (7,9)
+[0m[0;37m[1913][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[1915][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1916][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1917][INFO ] game_play: current_time=1917
+[0m[0;37m[1920][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1921][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1922][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1926][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1927][INFO ] Executing voir for player 6  at level 2 at (7,9) with orientation (3)
+[0m[0;37m[1929][INFO ] game_play: current_time=1929
+[0m[0;37m[1931][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[1;33m[1933][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1935][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[1;33m[1938][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1941][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1942][INFO ] Executing avance for player 6  at level 7 at (9,3) facing 0
+[0m[0;37m[1942][INFO ] Player 6 moved to (6,9)
+[0m[0;37m[1942][INFO ] game_play: current_time=1942
+[0m[0;37m[1946][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1948][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1951][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1953][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[1955][INFO ] game_play: current_time=1955
+[0m[0;37m[1956][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1957][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[1958][INFO ] Executing voir for player 6  at level 2 at (6,9) with orientation (3)
+[0m[0;37m[1961][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1962][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[1966][INFO ] Received command from fd=6: cmd='droite', arg='NULL'
+[0m[0;37m[1966][INFO ] Received command from fd=7: cmd='prend', arg='nourriture'
+[0m[0;37m[1967][INFO ] game_play: current_time=1967
+[0m[0;37m[1971][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[1972][INFO ] Executing inventaire for player 5  at level 2
+[0m[1;33m[1973][WARN ] Player 7 picked nourriture at tile 5-3
+[0mTile contents (5,3): Players: 7
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1980][INFO ] game_play: current_time=1980
+[0m[0;37m[1981][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[1981][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[1981][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[1;33m[1988][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 0, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[1988][INFO ] Executing voir for player 6  at level 2 at (6,9) with orientation (0)
+[0m[0;37m[1988][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[1993][INFO ] game_play: current_time=1993
+[0m[0;37m[1996][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[1996][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[1997][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[1997][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[2003][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[2003][INFO ] Executing avance for player 6  at level 6 at (9,0) facing 0
+[0m[0;37m[2003][INFO ] Player 6 moved to (6,8)
+[0m[0;37m[2005][INFO ] game_play: current_time=2005
+[0m[0;37m[2011][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2012][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[2012][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[2018][INFO ] Executing voir for player 6  at level 2 at (6,8) with orientation (0)
+[0m[0;37m[2018][INFO ] game_play: current_time=2018
+[0m[0;37m[2022][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[2023][INFO ] [MAIN_LOOP] Heartbeat — time_units=2023 paused=no
+[0m[0;37m[2026][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[2027][INFO ] Executing inventaire for player 6  at level 2
+[0m[1;33m[2029][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 3, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2030][INFO ] game_play: current_time=2030
+[0m[0;37m[2037][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[2037][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2042][INFO ] game_play: current_time=2042
+[0m[1;33m[2043][WARN ] Player 6 picked nourriture at tile 6-8
+[0mTile contents (6,8): Players: 6
+Items: Nourriture: 3, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2044][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[2052][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2052][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[2053][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[2055][INFO ] game_play: current_time=2055
+[0m[0;37m[2059][INFO ] Executing voir for player 6  at level 2 at (6,8) with orientation (0)
+[0m[0;37m[2062][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[2067][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[2068][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[2068][INFO ] game_play: current_time=2068
+[0m[1;33m[2069][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 2, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2077][INFO ] Received command from fd=6: cmd='prend', arg='nourriture'
+[0m[0;37m[2077][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2080][INFO ] game_play: current_time=2080
+[0m[0;37m[2084][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[1;33m[2084][WARN ] Player 6 picked nourriture at tile 6-8
+[0mTile contents (6,8): Players: 6
+Items: Nourriture: 2, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2087][INFO ] Received command from fd=7: cmd='claim_leader', arg='NULL'
+[0m[0;37m[2087][INFO ] claim_leader: player 7 (team team1, level 2) — OK, now leader
+[0m[0;37m[2092][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2092][INFO ] game_play: current_time=2092
+[0m[0;37m[2092][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[2093][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[2097][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2099][INFO ] Executing voir for player 6  at level 2 at (6,8) with orientation (0)
+[0m[0;37m[2103][INFO ] Received command from fd=5: cmd='prend', arg='nourriture'
+[0m[0;37m[2105][INFO ] game_play: current_time=2105
+[0m[0;37m[2107][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[2108][INFO ] Executing inventaire for player 6  at level 2
+[0m[1;33m[2110][WARN ] Player 5 picked nourriture at tile 8-9
+[0mTile contents (8,9): Players: 5
+Items: Nourriture: 1, Linemate: 0, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2112][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[2113][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[2113][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2117][INFO ] game_play: current_time=2117
+[0m[0;37m[2120][INFO ] Executing voir for player 5  at level 2 at (8,9) with orientation (3)
+[0m[0;37m[2122][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2129][INFO ] Executing avance for player 6  at level 6 at (8,0) facing 0
+[0m[0;37m[2129][INFO ] Player 6 moved to (6,7)
+[0m[0;37m[2131][INFO ] game_play: current_time=2131
+[0m[0;37m[2133][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2137][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[2138][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2138][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[2140][INFO ] Executing avance for player 5  at level 8 at (9,3) facing 0
+[0m[0;37m[2140][INFO ] Player 5 moved to (7,9)
+[0m[0;37m[2143][INFO ] game_play: current_time=2143
+[0m[0;37m[2144][INFO ] Executing voir for player 6  at level 2 at (6,7) with orientation (0)
+[0m[0;37m[2147][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2148][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2155][INFO ] Executing voir for player 5  at level 2 at (7,9) with orientation (3)
+[0m[0;37m[2155][INFO ] game_play: current_time=2155
+[0m[0;37m[2163][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2167][INFO ] game_play: current_time=2167
+[0m[0;37m[2168][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2170][INFO ] Executing avance for player 6  at level 6 at (7,0) facing 0
+[0m[0;37m[2170][INFO ] Player 6 moved to (6,6)
+[0m[0;37m[2175][INFO ] Executing avance for player 5  at level 7 at (9,3) facing 0
+[0m[0;37m[2175][INFO ] Player 5 moved to (6,9)
+[0m[0;37m[2178][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2180][INFO ] game_play: current_time=2180
+[0m[0;37m[2183][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2185][INFO ] Executing voir for player 6  at level 2 at (6,6) with orientation (0)
+[0m[0;37m[2190][INFO ] Executing voir for player 5  at level 2 at (6,9) with orientation (3)
+[0m[0;37m[2193][INFO ] game_play: current_time=2193
+[0m[0;37m[2198][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2205][INFO ] game_play: current_time=2205
+[0m[0;37m[2213][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2214][INFO ] Received command from fd=5: cmd='gauche', arg='NULL'
+[0m[0;37m[2216][INFO ] game_play: current_time=2216
+[0m[1;31m[2217][ERROR] [WS][READ] fd=8 — SSL_read header failed: ret=0 ssl_err=1
+[0m[0;37m[2217][INFO ] [NET][DISCONNECT] fd=8 reason='recv error'
+[0m[0;37m[2217][INFO ] [NET][DISCONNECT] fd=8 reason='server-initiated remove'
+[0m[0;37m[2220][INFO ] Executing avance for player 6  at level 6 at (6,0) facing 0
+[0m[0;37m[2220][INFO ] Player 6 moved to (6,5)
+[0m[1;31m[2220][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;31m[2221][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2227][INFO ] game_play: current_time=2227
+[0m[0;37m[2228][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2228][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2229][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2235][INFO ] Executing voir for player 6  at level 2 at (6,5) with orientation (0)
+[0m[0;37m[2235][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2236][INFO ] Executing avance for player 5  at level 6 at (9,2) facing 0
+[0m[0;37m[2236][INFO ] Player 5 moved to (6,0)
+[0m[1;31m[2236][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2239][INFO ] game_play: current_time=2239
+[0m[0;37m[2244][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2248][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[1;31m[2250][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2250][INFO ] game_play: current_time=2250
+[0m[0;37m[2251][INFO ] Executing voir for player 5  at level 2 at (6,0) with orientation (2)
+[0m[0;37m[2255][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2261][INFO ] game_play: current_time=2261
+[0m[0;37m[2263][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[1;31m[2270][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2273][INFO ] game_play: current_time=2273
+[0m[0;37m[2278][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2279][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2284][INFO ] game_play: current_time=2284
+[0m[0;37m[2285][INFO ] Executing avance for player 6  at level 6 at (5,0) facing 0
+[0m[0;37m[2285][INFO ] Player 6 moved to (6,4)
+[0m[1;31m[2285][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2286][INFO ] Executing avance for player 5  at level 6 at (0,2) facing 0
+[0m[0;37m[2286][INFO ] Player 5 moved to (6,1)
+[0m[1;31m[2286][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2288][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2293][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2294][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2295][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2295][INFO ] game_play: current_time=2295
+[0m[0;37m[2300][INFO ] Executing voir for player 6  at level 2 at (6,4) with orientation (0)
+[0m[1;31m[2300][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2301][INFO ] Executing voir for player 5  at level 2 at (6,1) with orientation (2)
+[0m[0;37m[2306][INFO ] game_play: current_time=2306
+[0m[0;37m[2308][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2315][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2318][INFO ] game_play: current_time=2318
+[0m[0;37m[2323][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2329][INFO ] game_play: current_time=2329
+[0m[1;31m[2330][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2339][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2339][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2340][INFO ] game_play: current_time=2340
+[0m[0;37m[2346][INFO ] Executing avance for player 5  at level 6 at (1,2) facing 0
+[0m[0;37m[2346][INFO ] Player 5 moved to (6,2)
+[0m[1;31m[2346][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2346][INFO ] Executing avance for player 6  at level 6 at (4,0) facing 0
+[0m[0;37m[2346][INFO ] Player 6 moved to (6,3)
+[0m[1;31m[2346][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2349][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[1;31m[2350][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2351][INFO ] game_play: current_time=2351
+[0m[0;37m[2354][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2354][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2356][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2361][INFO ] Executing voir for player 5  at level 2 at (6,2) with orientation (2)
+[0m[0;37m[2361][INFO ] Executing voir for player 6  at level 2 at (6,3) with orientation (0)
+[0m[0;37m[2363][INFO ] game_play: current_time=2363
+[0m[0;37m[2369][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2374][INFO ] game_play: current_time=2374
+[0m[0;37m[2376][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2384][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2385][INFO ] game_play: current_time=2385
+[0m[1;31m[2391][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2396][INFO ] game_play: current_time=2396
+[0m[0;37m[2399][INFO ] Received command from fd=6: cmd='gauche', arg='NULL'
+[0m[1;31m[2400][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2400][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[1;31m[2406][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2407][INFO ] Executing avance for player 5  at level 6 at (2,2) facing 0
+[0m[0;37m[2407][INFO ] Player 5 moved to (6,3)
+[0m[1;31m[2407][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2408][INFO ] game_play: current_time=2408
+[0m[0;37m[2409][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2414][INFO ] Received command from fd=6: cmd='avance', arg='NULL'
+[0m[0;37m[2415][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2416][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2419][INFO ] game_play: current_time=2419
+[0m[0;37m[2421][INFO ] Executing avance for player 6  at level 6 at (3,3) facing 0
+[0m[0;37m[2421][INFO ] Player 6 moved to (5,3)
+[0m[1;31m[2421][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2422][INFO ] Executing voir for player 5  at level 2 at (6,3) with orientation (2)
+[0m[0;37m[2429][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2429][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2430][INFO ] game_play: current_time=2430
+[0m[0;37m[2436][INFO ] Executing voir for player 6  at level 2 at (5,3) with orientation (3)
+[0m[0;37m[2436][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2441][INFO ] game_play: current_time=2441
+[0m[0;37m[2444][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[1;31m[2450][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;31m[2451][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2452][INFO ] game_play: current_time=2452
+[0m[0;37m[2459][INFO ] Received command from fd=6: cmd='broadcast', arg='HERE:team1:2'
+[0m[0;37m[2460][INFO ] Received command from fd=5: cmd='droite', arg='NULL'
+[0m[0;37m[2463][INFO ] game_play: current_time=2463
+[0m[0;37m[2464][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[1;31m[2466][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;31m[2467][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2469][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2471][INFO ] Executing voir for player 6  at level 2 at (5,3) with orientation (3)
+[0m[0;37m[2475][INFO ] game_play: current_time=2475
+[0m[0;37m[2476][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2480][INFO ] Received command from fd=5: cmd='inventaire', arg='NULL'
+[0m[0;37m[2481][INFO ] Executing inventaire for player 5  at level 2
+[0m[0;37m[2486][INFO ] game_play: current_time=2486
+[0m[0;37m[2489][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2490][INFO ] Received command from fd=5: cmd='avance', arg='NULL'
+[0m[0;37m[2496][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2497][INFO ] Executing avance for player 5  at level 6 at (3,3) facing 0
+[0m[0;37m[2497][INFO ] Player 5 moved to (5,3)
+[0m[1;31m[2497][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2497][INFO ] game_play: current_time=2497
+[0m[1;31m[2500][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2505][INFO ] Received command from fd=7: cmd='broadcast', arg='RALLY:team1:2'
+[0m[0;37m[2505][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2509][INFO ] game_play: current_time=2509
+[0m[0;37m[2512][INFO ] Executing voir for player 5  at level 2 at (5,3) with orientation (3)
+[0m[1;31m[2512][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2520][INFO ] game_play: current_time=2520
+[0m[0;37m[2523][INFO ] [MAIN_LOOP] Heartbeat — time_units=2523 paused=no
+[0m[0;37m[2525][INFO ] Received command from fd=6: cmd='voir', arg='NULL'
+[0m[0;37m[2525][INFO ] Received command from fd=5: cmd='broadcast', arg='HERE:team1:2'
+[0m[0;37m[2530][INFO ] Received command from fd=5: cmd='voir', arg='NULL'
+[0m[0;37m[2531][INFO ] Executing voir for player 6  at level 2 at (5,3) with orientation (3)
+[0m[0;37m[2531][INFO ] game_play: current_time=2531
+[0m[1;31m[2532][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2535][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2537][INFO ] Executing voir for player 5  at level 2 at (5,3) with orientation (3)
+[0m[0;37m[2540][INFO ] Received command from fd=6: cmd='inventaire', arg='NULL'
+[0m[0;37m[2541][INFO ] Executing inventaire for player 6  at level 2
+[0m[0;37m[2542][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2542][INFO ] game_play: current_time=2542
+[0m[1;31m[2550][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2550][INFO ] Received command from fd=7: cmd='pose', arg='linemate'
+[0m[0;37m[2554][INFO ] game_play: current_time=2554
+[0m[1;31m[2557][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;33m[2557][WARN ] Player 7 POSED linemate at tile 5-3
+[0mTile contents (5,3): Players: 5
+Items: Nourriture: 5, Linemate: 1, Deraumere: 0, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2565][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2565][INFO ] game_play: current_time=2565
+[0m[0;37m[2572][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2576][INFO ] game_play: current_time=2576
+[0m[0;37m[2580][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[2581][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[2588][INFO ] game_play: current_time=2588
+[0m[0;37m[2590][INFO ] Received command from fd=7: cmd='pose', arg='deraumere'
+[0m[1;31m[2597][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;33m[2597][WARN ] Player 7 POSED deraumere at tile 5-3
+[0mTile contents (5,3): Players: 5
+Items: Nourriture: 5, Linemate: 1, Deraumere: 1, Sibur: 0, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2599][INFO ] game_play: current_time=2599
+[0m[1;31m[2600][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2605][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2610][INFO ] game_play: current_time=2610
+[0m[0;37m[2612][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2620][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[2621][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[2621][INFO ] game_play: current_time=2621
+[0m[0;37m[2630][INFO ] Received command from fd=7: cmd='pose', arg='sibur'
+[0m[0;37m[2632][INFO ] game_play: current_time=2632
+[0m[1;31m[2637][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[1;33m[2637][WARN ] Player 7 POSED sibur at tile 5-3
+[0mTile contents (5,3): Players: 5
+Items: Nourriture: 5, Linemate: 1, Deraumere: 1, Sibur: 1, Mendiane: 0, Phiras: 0, Thystame: 0
+[0;37m[2643][INFO ] game_play: current_time=2643
+[0m[0;37m[2645][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[1;31m[2650][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2652][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2655][INFO ] game_play: current_time=2655
+[0m[0;37m[2660][INFO ] Received command from fd=7: cmd='inventaire', arg='NULL'
+[0m[0;37m[2661][INFO ] Executing inventaire for player 7  at level 2
+[0m[0;37m[2666][INFO ] game_play: current_time=2666
+[0m[0;37m[2676][INFO ] Received command from fd=7: cmd='voir', arg='NULL'
+[0m[0;37m[2677][INFO ] game_play: current_time=2677
+[0m[0;37m[2683][INFO ] Executing voir for player 7  at level 2 at (5,3) with orientation (2)
+[0m[0;37m[2688][INFO ] game_play: current_time=2688
+[0m[0;37m[2691][INFO ] Received command from fd=7: cmd='incantation', arg='NULL'
+[0m[1;31m[2691][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2699][INFO ] game_play: current_time=2699
+[0m[1;31m[2700][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2711][INFO ] game_play: current_time=2711
+[0m[0;37m[2722][INFO ] game_play: current_time=2722
+[0m[0;37m[2733][INFO ] game_play: current_time=2733
+[0m[0;37m[2744][INFO ] game_play: current_time=2744
+[0m[1;31m[2750][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2755][INFO ] game_play: current_time=2755
+[0m[0;37m[2767][INFO ] game_play: current_time=2767
+[0m[0;37m[2778][INFO ] game_play: current_time=2778
+[0m[0;37m[2789][INFO ] game_play: current_time=2789
+[0m[1;31m[2800][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2801][INFO ] game_play: current_time=2801
+[0m[1;31m[2811][ERROR] [WS][SEND] fd=8 — no SSL context, dropping message
+[0m[0;37m[2812][INFO ] game_play: current_time=2812
+[0m[1;33m[2813][WARN ] [SIGNAL] Received signal 2 (SIGINT=2 SIGTERM=15 SIGUSR1=10)
+[0m[0;37m[2813][INFO ] [MAIN_LOOP] Exiting — cleaning up
+[0m[0;37m[18446744073709551615][INFO ] [NET][DISCONNECT] fd=4 reason='server-initiated remove'
+[0m[0;37m[18446744073709551615][INFO ] [NET][DISCONNECT] fd=5 reason='server-initiated remove'
+[0m[0;37m[18446744073709551615][INFO ] [NET][DISCONNECT] fd=6 reason='server-initiated remove'
+[0m[0;37m[18446744073709551615][INFO ] [NET][DISCONNECT] fd=7 reason='server-initiated remove'
+[0m[0;37m[18446744073709551615][INFO ] [SSL_AL] Cleaned up
+[0m[0;37m[18446744073709551615][INFO ] [SERVER] Cleaned up
+[0m[0;37m[18446744073709551615][INFO ] [SSL_AL] Cleaned up
+[0m[0;37m[18446744073709551615][INFO ] [MAIN] Clean exit
+[0m

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bamb6iox60d6h"]
+
+[ext_resource type="Script" uid="uid://di8r1s1nc6242" path="res://scenes/world/players/playerController.gd" id="1_w3nuy"]
+[ext_resource type="PackedScene" uid="uid://d0ms7bup5ce1g" path="res://scenes/world/players/test_player_model.tscn" id="2_iphl7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w3nuy"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="PlayerTest" type="Area3D" unique_id=1801139543]
+script = ExtResource("1_w3nuy")
+
+[node name="test_player2" parent="." unique_id=591658142 instance=ExtResource("2_iphl7")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1344276078]
+shape = SubResource("BoxShape3D_w3nuy")

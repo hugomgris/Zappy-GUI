@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dtiuwcujfeh8h"]
+
+[ext_resource type="PackedScene" uid="uid://c513ow2s5lta4" path="res://assets/models/tiles/tile_GREEN_dark.glb" id="1_l7aob"]
+
+[node name="tile_GREEN_dark" unique_id=356640597 instance=ExtResource("1_l7aob")]

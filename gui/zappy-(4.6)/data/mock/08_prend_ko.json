@@ -1,0 +1,7 @@
+{
+  "type": "response",
+  "cmd": "prend",
+  "arg": "thystame",
+  "status": "ko",
+  "player_id": 1
+}

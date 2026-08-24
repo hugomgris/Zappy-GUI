@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://d0xctmv1abu8k"]
+
+[ext_resource type="Script" uid="uid://cgyuqmeu8ak46" path="res://scenes/main/Main.gd" id="1_u1xfj"]
+[ext_resource type="Shader" uid="uid://5vjpxf8o6ymp" path="res://assets/shaders/Risograph.gdshader" id="2_gyg6b"]
+[ext_resource type="PackedScene" uid="uid://b5nsmlb226g46" path="res://scenes/camera/CameraRig.tscn" id="2_nha0i"]
+[ext_resource type="Script" uid="uid://dnfup02hmdbsw" path="res://scenes/ui/hud/LogoHandler.gd" id="3_1rhdn"]
+[ext_resource type="Script" uid="uid://c45fm6cwll2il" path="res://scenes/main/WorldManager.gd" id="3_q24mn"]
+[ext_resource type="PackedScene" uid="uid://4uiuigixqyqy" path="res://assets/models/UI/zappyLogo_MonoColors.glb" id="5_dc040"]
+[ext_resource type="Script" uid="uid://dg8kvnga5v5af" path="res://scenes/world/resources/ResourceManager.gd" id="6_sjxhf"]
+[ext_resource type="Script" uid="uid://b63b7cjar5ayy" path="res://scenes/world/players/PlayerManager.gd" id="8_ko0rf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyg6b"]
+shader = ExtResource("2_gyg6b")
+shader_parameter/ink1 = Vector3(0.85, 0.15, 0.3)
+shader_parameter/ink2 = Vector3(0.82, 0.44, 1.17)
+shader_parameter/ink3 = Vector3(-0.285, 0.65, 0.15)
+shader_parameter/ink4 = Vector3(0.405, 0.8, 0.7)
+shader_parameter/ink5 = Vector3(0.9, 0.2, 0.6)
+shader_parameter/ink6 = Vector3(0.95, 0.75, 0.1)
+shader_parameter/background = Vector3(0.865, 0.87, 0.815)
+shader_parameter/ink1_opacity = 0.85
+shader_parameter/ink2_opacity = 0.85
+shader_parameter/ink3_opacity = 0.85
+shader_parameter/ink4_opacity = 0.85
+shader_parameter/ink5_opacity = 0.85
+shader_parameter/ink6_opacity = 0.85
+shader_parameter/stipple_scale = 1200.0
+shader_parameter/stipple_size = 1.2
+shader_parameter/stipple_softness = 1.15
+shader_parameter/stipple_jitter = 0.8
+shader_parameter/density_dark = 0.9
+shader_parameter/density_light = 0.6
+shader_parameter/noise_density_scale = 0.9
+shader_parameter/noise_threshold = 0.7
+shader_parameter/noise_threshold_blend = 0.08
+shader_parameter/dot_size_variation = 0.5
+shader_parameter/dot_opacity_variation = 0.75
+shader_parameter/dot_shape_variation = 0.9
+shader_parameter/paper_grain_amount = 0.07
+shader_parameter/paper_grain_size = 1.0
+shader_parameter/offset_top_px = Vector2(0, 0)
+shader_parameter/offset_left_px = Vector2(0, 0)
+shader_parameter/offset_right_px = Vector2(0, 0)
+shader_parameter/screen_size = Vector2(1920, 1080)
+shader_parameter/anim_speed = 2.0
+shader_parameter/anim_strength = 0.15
+shader_parameter/anim_density_jitter = 0.0
+shader_parameter/halftone_anim_strength = 0.4
+shader_parameter/halftone_size_anim = 0.5
+shader_parameter/halftone_opacity_anim = 0.5
+shader_parameter/global_frame_jitter = 0.003
+shader_parameter/frame_density_jitter = 0.06
+shader_parameter/frame_warp_strength = 0.004
+shader_parameter/frame_ink_shimmer = 0.04
+shader_parameter/transparent_background = false
+
+[sub_resource type="Environment" id="Environment_vyk5b"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[node name="Main" type="Control" unique_id=1298653520]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_u1xfj")
+use_mock = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1031470465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9999998, 0.9993431, 0.9046173, 1)
+
+[node name="PostProcessing" type="SubViewportContainer" parent="." unique_id=1405036999]
+material = SubResource("ShaderMaterial_gyg6b")
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Compositor" type="SubViewport" parent="PostProcessing" unique_id=1713541890]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="GameWorldTexture" type="TextureRect" parent="PostProcessing/Compositor" unique_id=902173941]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LogoTexture" type="Sprite2D" parent="PostProcessing/Compositor" unique_id=982580421]
+position = Vector2(296, 102)
+script = ExtResource("3_1rhdn")
+
+[node name="GameSubViewport" type="SubViewport" parent="." unique_id=308586066]
+unique_name_in_owner = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 3
+
+[node name="CameraRig" parent="GameSubViewport" unique_id=2126781270 instance=ExtResource("2_nha0i")]
+unique_name_in_owner = true
+
+[node name="Camera" parent="GameSubViewport/CameraRig/Pitch/ZoomArm" parent_id_path=PackedInt32Array(2126781270, 434484253) index="0" unique_id=559500220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.355984)
+current = true
+
+[node name="LogoViewport" type="SubViewport" parent="." unique_id=2057420778]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(529, 140)
+
+[node name="LogoCamera" type="Camera3D" parent="LogoViewport" unique_id=315319403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.202, 0.11969566, 20.972458)
+projection = 1
+size = 3.373
+
+[node name="LogoRoot" type="Node3D" parent="LogoViewport" unique_id=2065157317]
+
+[node name="zappyLogo_MonoColors" parent="LogoViewport/LogoRoot" unique_id=390385628 instance=ExtResource("5_dc040")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -141.07346, -0.845, 18.1664)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=110986714]
+environment = SubResource("Environment_vyk5b")
+
+[node name="WorldRoot" type="Node3D" parent="." unique_id=2016771896]
+unique_name_in_owner = true
+script = ExtResource("3_q24mn")
+
+[node name="ResourceManager" type="Node3D" parent="." unique_id=451965037]
+script = ExtResource("6_sjxhf")
+
+[node name="PlayerManager" type="Node3D" parent="." unique_id=2011238981]
+script = ExtResource("8_ko0rf")
+
+[editable path="GameSubViewport/CameraRig"]

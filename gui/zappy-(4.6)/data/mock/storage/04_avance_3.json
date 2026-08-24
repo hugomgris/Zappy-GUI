@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "avance",
+  "status": "ok",
+  "player_id": 3
+}

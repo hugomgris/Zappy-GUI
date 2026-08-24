@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c1k2ntcl5kxxf"]
+
+[ext_resource type="PackedScene" uid="uid://deec5bmvnhuqa" path="res://assets/models/tiles/tile_RED_light.glb" id="1_hepua"]
+
+[node name="tile_RED_light" unique_id=1197458402 instance=ExtResource("1_hepua")]

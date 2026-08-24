@@ -1,0 +1,6 @@
+{
+  "type": "response",
+  "cmd": "incantation",
+  "status": "in_progress",
+  "player_id": 1
+}
