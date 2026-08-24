@@ -355,7 +355,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_grv7h")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Bally",
 "speed": 2.0
 }, {
@@ -378,7 +378,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ilqpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Cuby",
 "speed": 2.0
 }, {
@@ -401,7 +401,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dudpu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Deraumere",
 "speed": 2.0
 }, {
@@ -424,7 +424,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7wpoh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Linemate",
 "speed": 2.0
 }, {
@@ -447,7 +447,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_afy01")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Mendiane",
 "speed": 2.0
 }, {
@@ -470,7 +470,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_seotk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Nourriture",
 "speed": 2.0
 }, {
@@ -493,7 +493,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m1khv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Octy",
 "speed": 2.0
 }, {
@@ -516,7 +516,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wke70")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Phyras",
 "speed": 2.0
 }, {
@@ -539,7 +539,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n12rl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Piry",
 "speed": 2.0
 }, {
@@ -562,7 +562,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0sk6p")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Sibur",
 "speed": 2.0
 }, {
@@ -585,7 +585,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_12hjt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Thystame",
 "speed": 2.0
 }]
@@ -769,6 +769,7 @@ autoplay = "Nourriture"
 position = Vector2(67, 67)
 fixed_position = "top_left"
 fixed_animation = "Piry"
+number_sprites = Array[Texture2D]([])
 
 [node name="top_right" parent="PostProcessing/Compositor/FrameRoot/Left/Piry/Positions" parent_id_path=PackedInt32Array(417018103, 1546582834) index="1" unique_id=1234926954]
 visible = true
@@ -779,6 +780,7 @@ visible = true
 [node name="Cuby" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=2032854151 instance=ExtResource("21_yub1f")]
 position = Vector2(67, 202)
 odd = false
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Cuby/Positions" parent_id_path=PackedInt32Array(2032854151, 1546582834) index="4" unique_id=470731466]
 visible = true
@@ -789,6 +791,7 @@ visible = true
 [node name="Bally" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1939270029 instance=ExtResource("21_yub1f")]
 position = Vector2(67, 337)
 fixed_animation = "Bally"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Bally/Positions" parent_id_path=PackedInt32Array(1939270029, 1546582834) index="4" unique_id=470731466]
 visible = true
@@ -800,6 +803,7 @@ visible = true
 position = Vector2(67, 472)
 odd = false
 fixed_animation = "Octy"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_left" parent="PostProcessing/Compositor/FrameRoot/Left/Octy/Positions" parent_id_path=PackedInt32Array(1267157834, 1546582834) index="4" unique_id=470731466]
 visible = true
@@ -811,16 +815,17 @@ visible = true
 position = Vector2(67, 742)
 fixed_animation = "Cily"
 
-[node name="Penty" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1242434133 instance=ExtResource("21_yub1f")]
+[node name="Plusy" parent="PostProcessing/Compositor/FrameRoot/Left" unique_id=1242434133 instance=ExtResource("21_yub1f")]
 position = Vector2(67, 1012)
 odd = false
 fixed_position = "bot_left"
 fixed_animation = "Plusy"
+number_sprites = Array[Texture2D]([])
 
-[node name="bot_left" parent="PostProcessing/Compositor/FrameRoot/Left/Penty/Positions" parent_id_path=PackedInt32Array(1242434133, 1546582834) index="3" unique_id=1835682971]
+[node name="bot_left" parent="PostProcessing/Compositor/FrameRoot/Left/Plusy/Positions" parent_id_path=PackedInt32Array(1242434133, 1546582834) index="3" unique_id=1835682971]
 visible = true
 
-[node name="Plusy" parent="PostProcessing/Compositor/FrameRoot/Left/Penty/Animations" parent_id_path=PackedInt32Array(1242434133, 151270721) index="11" unique_id=104353311]
+[node name="Plusy" parent="PostProcessing/Compositor/FrameRoot/Left/Plusy/Animations" parent_id_path=PackedInt32Array(1242434133, 151270721) index="11" unique_id=104353311]
 visible = true
 
 [node name="Top" type="Node2D" parent="PostProcessing/Compositor/FrameRoot" unique_id=626724000]
@@ -830,6 +835,7 @@ position = Vector2(202, 67)
 odd = false
 fixed_position = "mid_top"
 fixed_animation = "Z"
+number_sprites = Array[Texture2D]([])
 
 [node name="Z" parent="PostProcessing/Compositor/FrameRoot/Top/Z/Animations" parent_id_path=PackedInt32Array(1132453456, 151270721) index="12" unique_id=1336359279]
 visible = true
@@ -838,6 +844,7 @@ visible = true
 position = Vector2(337, 67)
 fixed_position = "mid_top"
 fixed_animation = "A"
+number_sprites = Array[Texture2D]([])
 
 [node name="A" parent="PostProcessing/Compositor/FrameRoot/Top/A/Animations" parent_id_path=PackedInt32Array(1023303656, 151270721) index="13" unique_id=182379326]
 visible = true
@@ -847,6 +854,7 @@ position = Vector2(472, 67)
 odd = false
 fixed_position = "mid_top"
 fixed_animation = "P"
+number_sprites = Array[Texture2D]([])
 
 [node name="P" parent="PostProcessing/Compositor/FrameRoot/Top/P1/Animations" parent_id_path=PackedInt32Array(136661781, 151270721) index="14" unique_id=672774830]
 visible = true
@@ -854,7 +862,8 @@ visible = true
 [node name="P2" parent="PostProcessing/Compositor/FrameRoot/Top" unique_id=657691106 instance=ExtResource("21_yub1f")]
 position = Vector2(607, 67)
 fixed_position = "mid_top"
-fixed_animation = "P2"
+fixed_animation = "P"
+number_sprites = Array[Texture2D]([])
 
 [node name="P2" parent="PostProcessing/Compositor/FrameRoot/Top/P2/Animations" parent_id_path=PackedInt32Array(657691106, 151270721) index="15" unique_id=326334869]
 visible = true
@@ -864,6 +873,7 @@ position = Vector2(742, 67)
 odd = false
 fixed_position = "mid_top"
 fixed_animation = "Y"
+number_sprites = Array[Texture2D]([])
 
 [node name="Y" parent="PostProcessing/Compositor/FrameRoot/Top/Y/Animations" parent_id_path=PackedInt32Array(1593922207, 151270721) index="16" unique_id=1035757190]
 visible = true
@@ -872,6 +882,7 @@ visible = true
 position = Vector2(877, 67)
 fixed_position = "mid_top"
 fixed_animation = "!"
+number_sprites = Array[Texture2D]([])
 
 [node name="!" parent="PostProcessing/Compositor/FrameRoot/Top/!/Animations" parent_id_path=PackedInt32Array(1316536827, 151270721) index="17" unique_id=248720333]
 visible = true
@@ -883,6 +894,7 @@ position = Vector2(1013, 67)
 odd = false
 fixed_position = "top_right"
 fixed_animation = "Nourriture"
+number_sprites = Array[Texture2D]([])
 
 [node name="top_right" parent="PostProcessing/Compositor/FrameRoot/Right/Nourriture/Positions" parent_id_path=PackedInt32Array(2036051851, 1546582834) index="1" unique_id=1234926954]
 visible = true
@@ -894,6 +906,7 @@ visible = true
 position = Vector2(1013, 202)
 fixed_position = "mid_right"
 fixed_animation = "Linemate"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Linemate/Positions" parent_id_path=PackedInt32Array(168491031, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -906,6 +919,7 @@ position = Vector2(1013, 337)
 odd = false
 fixed_position = "mid_right"
 fixed_animation = "Deraumere"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Deraumere/Positions" parent_id_path=PackedInt32Array(1177250854, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -917,6 +931,7 @@ visible = true
 position = Vector2(1013, 472)
 fixed_position = "mid_right"
 fixed_animation = "Sibur"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Sibur/Positions" parent_id_path=PackedInt32Array(832996051, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -929,6 +944,7 @@ position = Vector2(1013, 607)
 odd = false
 fixed_position = "mid_right"
 fixed_animation = "Mendiane"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Mendiane/Positions" parent_id_path=PackedInt32Array(2136520773, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -940,6 +956,7 @@ visible = true
 position = Vector2(1013, 742)
 fixed_position = "mid_right"
 fixed_animation = "Phiras"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Phiras/Positions" parent_id_path=PackedInt32Array(2135096260, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -952,6 +969,7 @@ position = Vector2(1013, 877)
 odd = false
 fixed_position = "mid_right"
 fixed_animation = "Thystame"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_right" parent="PostProcessing/Compositor/FrameRoot/Right/Thystame/Positions" parent_id_path=PackedInt32Array(927160429, 1546582834) index="5" unique_id=856551653]
 visible = true
@@ -971,6 +989,7 @@ position = Vector2(203, 1013)
 is_horizontal_controller = true
 fixed_position = "mid_bottom"
 fixed_animation = "Time"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Time/Positions" parent_id_path=PackedInt32Array(427420589, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -984,6 +1003,7 @@ is_horizontal_controller = true
 odd = false
 fixed_position = "mid_bottom"
 fixed_animation = "Colors"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Colors/Positions" parent_id_path=PackedInt32Array(323767246, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -996,6 +1016,7 @@ position = Vector2(473, 1013)
 is_horizontal_controller = true
 fixed_position = "mid_bottom"
 fixed_animation = "Volume"
+number_sprites = Array[Texture2D]([])
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Volume/Positions" parent_id_path=PackedInt32Array(149038092, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -1008,7 +1029,6 @@ position = Vector2(608, 1013)
 is_number_cell = true
 odd = false
 fixed_position = "mid_bottom"
-fixed_animation = "1"
 
 [node name="mid_bottom" parent="PostProcessing/Compositor/FrameRoot/Bottom/Leader/Positions" parent_id_path=PackedInt32Array(959719795, 1546582834) index="7" unique_id=617585592]
 visible = true
@@ -1082,7 +1102,7 @@ text = "START"
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Bally"]
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Octy"]
 [editable path="PostProcessing/Compositor/FrameRoot/Left/Cily"]
-[editable path="PostProcessing/Compositor/FrameRoot/Left/Penty"]
+[editable path="PostProcessing/Compositor/FrameRoot/Left/Plusy"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/Z"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/A"]
 [editable path="PostProcessing/Compositor/FrameRoot/Top/P1"]
