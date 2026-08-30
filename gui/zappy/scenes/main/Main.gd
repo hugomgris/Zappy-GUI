@@ -29,6 +29,7 @@ func _ready() -> void:
 	_fetch_shader_material()
 
 	if AppState.use_mock:
+		GameData.using_mock = true
 		MockServer.build_mock_initial_game_state()
 		MockServer.start()
 		GameData.world_initialized.emit()
@@ -39,13 +40,16 @@ func _ready() -> void:
 		ProtocolParser.event_received.connect(_on_server_event)
 
 func _on_server_connection_established() -> void:
-	print("[Main] Connection established — snapshot incoming")
+	print("[Main] Connection established - snapshot incoming")
 
 func _on_snapshot_ready() -> void:
-	print("[Main] Snapshot ready — firing world_initialized")
+	print("[Main] Snapshot ready - firing world_initialized")
 	GameData.world_initialized.emit()
 
 func _on_server_event(event_type: String, data: Dictionary) -> void:
+	print("RECEVIED:")
+	print(data)
+	
 	ConsoleManager.console_update_received.emit(data) # TODO: check out where/when this should actually be emited
 	var status: String = data.get("status", "")
 	var msg_type: String = data.get("type", "")
@@ -183,7 +187,7 @@ func _fetch_shader_material() -> void:
 
 func _on_start_game_pressed() -> void:
 	start_button.hide()
-	var script_path = ProjectSettings.globalize_path("/home/hmunoz-g/42-OuterCore/zappy/server/run.sh")
+	var script_path = ProjectSettings.globalize_path("/home/jareste/hugo/zappy/server/run.sh")
 	var output = []
 	var exit_code = OS.execute("bash", [script_path], output, true, true)
 	if exit_code != 0:
@@ -194,8 +198,8 @@ func _on_start_game_pressed() -> void:
 func _on_ink_shimmer_changed(value: float) -> void:
 	_shader.set_shader_parameter("frame_ink_shimmer", value)
 	
-func _on_time_value_changed(value: float) -> void:
+func _on_time_value_changed(value: int) -> void:
 	if AppState.use_mock:
 		MockServer.set_new_interval(value)
 	else:
-		print("TIME MANAGEMENT WITH SERVER PENDING")
+		ServerConnectionManager.send_time_change_request(value)

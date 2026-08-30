@@ -2,4 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b2rcwbht7vapu" path="res://assets/models/resources/test_nourriture.glb" id="1_v217c"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v217c"]
+
 [node name="test_nourriture" unique_id=1521815445 instance=ExtResource("1_v217c")]
+
+[node name="test_linemate" parent="." index="0" unique_id=434273439]
+surface_material_override/0 = SubResource("StandardMaterial3D_v217c")

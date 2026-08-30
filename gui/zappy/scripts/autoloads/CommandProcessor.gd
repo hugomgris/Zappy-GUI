@@ -39,14 +39,17 @@ func process_command(cmd: Dictionary) -> void:
 		"avance":				_avance(cmd)
 		"gauche":				_rotate(cmd, -1)
 		"droite":				_rotate(cmd, 1)
-		"prend":				_prend(cmd)
+		"prend":					_prend(cmd)
 		"pose":					_pose(cmd)
 		"fork":					_fork(cmd) # egg laid here
-		#"incantation_start":	_incantation_start(cmd)
-		#"incantation_end":		_incantation_end(cmd)
+		"incantation":
+			if cmd.get("status") == "in_progress":
+				_incantation_start(cmd)
+			elif cmd.get("status") == "ok":
+				_incantation_end(cmd)
 		#"broadcast":			_broadcast(cmd)
 		#"death":				_death(cmd)
-		"level_up":				_level_up(cmd)
+		#"level_up":				_level_up(cmd)
 		#"egg_hatch":			_egg_hatch(cmd)
 		#"egg_death":			_egg_death(cmd)
 		#"game_end":				_game_end(cmd)
@@ -141,11 +144,14 @@ func _fork(cmd: Dictionary) -> void:
 	return
 
 func _incantation_start(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd", ""))
+	var player_id: int = cmd.get("player_id")
+	print("Player [%d] went into incantation" % player_id)
 	return
 
 func _incantation_end(cmd: Dictionary) -> void:
-	print("Processing ", cmd.get("cmd", ""))
+	# TODO: manage the visual transitions et all
+	# TODO: manage KO
+	_level_up(cmd)
 	return
 
 func _broadcast(cmd: Dictionary) -> void:
@@ -158,10 +164,19 @@ func _death(cmd: Dictionary) -> void:
 
 func _level_up(cmd: Dictionary) -> void:
 	var id: int = cmd.get("player_id")
+	print(cmd)
 	GameData.players[id].level = min(8, GameData.players[id].level + 1)
 
 	player_leveled_up.emit(id, GameData.players[id].level)
-
+	
+	#leader cell management
+	if GameData.leading_level < GameData.players[id].level:
+		GameData.update_leader_status.emit(GameData.players[id].team, GameData.players[id].level)
+		
+	if GameData.players[id].level == 8:
+		print("GAME ENDING WITH WINNER:", GameData.players[id].team)
+		game_over.emit(GameData.players[id].team)
+		
 	return
 
 func _egg_hatch(cmd: Dictionary) -> void:

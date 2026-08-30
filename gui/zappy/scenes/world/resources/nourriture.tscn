@@ -6,7 +6,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_il1yl"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[node name="Nourriture" type="Area3D" unique_id=333200656]
+[node name="nourriture" type="Area3D" unique_id=333200656]
 script = ExtResource("1_i3rcq")
 
 [node name="test_nourriture2" parent="." unique_id=1521815445 instance=ExtResource("2_il1yl")]

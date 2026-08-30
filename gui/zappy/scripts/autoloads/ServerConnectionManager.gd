@@ -7,11 +7,18 @@ signal connection_closed        # emitted when server closes gracefully
 signal raw_message_received(text: String)
 
 const SERVER_KEY := "SOME_KEY"
+const TIME_CHANGE_MIN_INTERVAL_MS := 120
 
 var _ws: WebSocketPeer = null
 var _state := State.IDLE
 var _ip := ""
 var _port := 0
+
+var _game_ended: bool = false
+
+var _last_time_send_ms: int = -TIME_CHANGE_MIN_INTERVAL_MS
+var _pending_time_unit: int = -1
+var _time_send_pending: bool = false
 
 enum State { IDLE, CONNECTING, AUTHENTICATING, CONNECTED, CLOSED }
 
@@ -37,12 +44,19 @@ func disconnect_from_server() -> void:
 	_state = State.CLOSED
 
 # Main loop 
+func _ready() -> void:
+	CommandProcessor.game_over.connect(func (winner: String) -> void:
+		_game_ended = true
+	)
 
 func _process(_delta: float) -> void:
-	if not _ws:
+	if not _ws or _game_ended:
 		return
 	_ws.poll()
 	_check_state()
+
+	if _time_send_pending and Time.get_ticks_msec() - _last_time_send_ms >= TIME_CHANGE_MIN_INTERVAL_MS:
+		_dispatch_time_change(_pending_time_unit, Time.get_ticks_msec())
 
 func _check_state() -> void:
 	var ws_state := _ws.get_ready_state()
@@ -113,6 +127,28 @@ func _send_login() -> void:
 	})
 	_ws.send_text(payload)
 	print("[SCM] → login sent")
+	
+func send_time_change_request(new_time_unit: int) -> void:
+	var now := Time.get_ticks_msec()
+	var elapsed := now - _last_time_send_ms
+	
+	if elapsed >= TIME_CHANGE_MIN_INTERVAL_MS:
+		_dispatch_time_change(new_time_unit, now)
+	else:
+		# Too soon -> remember the new unit, flush once the window closes
+		_pending_time_unit = new_time_unit
+		_time_send_pending = true
+		
+func _dispatch_time_change(value: int, now: int) -> void:
+	var payload := JSON.stringify({
+		"type": "observer",
+		"action": "time",
+		"arg": str(value)
+	})
+	_ws.send_text(payload)
+	_last_time_send_ms = now
+	_time_send_pending = false
+	print("Sending time change request to server with new time unit value of ", value)
 
 func _exit_tree() -> void:
 	disconnect_from_server()

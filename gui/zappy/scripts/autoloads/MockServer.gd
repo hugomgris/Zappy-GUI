@@ -10,6 +10,11 @@ var _index: int = 0
 var _timer: float = 0.0
 var _running: bool = false
 
+func _ready() -> void:
+	CommandProcessor.game_over.connect(func (winner: String) -> void:
+		_running = false
+	)
+
 func build_mock_initial_game_state() -> void:
 	_load_mock_initial_state()
 	return
@@ -40,10 +45,9 @@ func _dispatch_next() -> void:
 		return
 
 	if data.has("status"):
-		var status: String = data.get("status", "ko")
-		if (status == "ok" or status == "level_up"):
-			ConsoleManager.console_update_received.emit(data)
-			CommandProcessor.process_command(data)
+		print(data)
+		ConsoleManager.console_update_received.emit(data)
+		CommandProcessor.process_command(data)
 	
 
 func _load_mock_initial_state() -> void:
@@ -152,12 +156,16 @@ func _load_player_data_from_file(players: Array) -> void:
 		var id: int = player.id
 		var data = GameData.PlayerData.new(id)
 
+		data.id = id
 		data.pos = Vector2i( player.position.get("x"),  player.position.get("y"))
 		data.orientation = player.orientation
 		data.level = player.level
 		data.team = player.team
 		data.inventory = player.inventory
 		data.status = GameConfig.PlayerStatus.NORMAL
+		
+		if i == 0:
+			GameData.update_leader_status.emit(data.team, data.level)
 
 		GameData.players[id] = data
 	
