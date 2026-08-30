@@ -7,6 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 export ZAPPY_EASY_ASCENSION=0
+export ZAPPY_ROOT_DIR="$ROOT_DIR"
 
 # Cleanup function to kill the server when the script exits
 cleanup() {
@@ -19,22 +20,21 @@ echo "=== Building Server ==="
 make -C "$ROOT_DIR/server"
 
 echo "=== Starting Server ==="
-pkill -f "./zappy -p"  || true
+pkill -f "./zappy -p" || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 10 -y 10 -n team1 -c 20 -f 10 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
+(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 15 -y 15 -n team1 team2 -c 100 -f 10 -t 1 > "$ROOT_DIR/logs/[SERVER]---[teams=2][clients=15][fork=YES].txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
-echo "=== Running server/run.sh ==="
-(cd "$ROOT_DIR/server" && ./run.sh)
-
 echo "=== Building Client ==="
-make -C "$ROOT_DIR/client"
-
-echo "=== Running Clients ==="
-for i in {1..14}; do
-    "$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_probe_fifteen_clients_${i}.txt" &
+for i in {1..15}; do
+    "$ROOT_DIR/client/client" localhost 8674 team1 2> "$ROOT_DIR/logs/[CLIENT-team1-${i}]---[teams=2][clients=15][fork=YES].txt" &
     sleep 0.5
 done
-"$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_probe_fifteen_clients_15.txt"
+
+for i in {1..14}; do
+    "$ROOT_DIR/client/client" localhost 8674 team2 2> "$ROOT_DIR/logs/[CLIENT-team2-${i}]---[teams=2][clients=15][fork=YES].txt" &
+    sleep 0.5
+done
+"$ROOT_DIR/client/client" localhost 8674 team2 2> "$ROOT_DIR/logs/[CLIENT-team2-15]---[teams=2][clients=15][fork=YES].txt" &
 wait

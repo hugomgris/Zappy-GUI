@@ -22,24 +22,25 @@ echo "=== Starting Server ==="
 pkill -f zappy || true
 sleep 1
 # Run the server from its own directory so it finds its assets/certs
-(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 15 -y 15 -n team1 team2 -c 30 -f 10 > "$ROOT_DIR/logs/server_log_normal_probe_fifteen_clients.txt" 2>&1 &)
+(cd "$ROOT_DIR/server" && ./zappy -p 8674 -x 15 -y 15 -n team1 team2 -c 30 -f 10 > "$ROOT_DIR/logs/[SERVER]---[teams=2][clients=15][fork=NO].txt" 2>&1 &)
 sleep 1 # Wait a moment for the server to fully start and bind the port
 
-echo "=== Running server/run.sh ==="
-(cd "$ROOT_DIR/server" && ./run.sh)
-
-echo "=== Building Client ==="
+echo "=== Building Clients ==="
 make -C "$ROOT_DIR/client"
 
 echo "=== Running Clients ==="
 for i in {1..15}; do
-    "$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_fifteen_team1_${i}.txt" &
+    "$ROOT_DIR/client/client" localhost 8674 team1 --no-fork 2> "$ROOT_DIR/logs/[CLIENT-team1-${i}]---[teams=2][clients=15][fork=NO].txt" &
     sleep 0.5
 done
 
 for i in {1..14}; do
-    "$ROOT_DIR/client/client" localhost 8674 team2 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_fifteen_team2_${i}.txt" &
+    "$ROOT_DIR/client/client" localhost 8674 team2 --no-fork 2> "$ROOT_DIR/logs/[CLIENT-team2-${i}]---[teams=2][clients=15][fork=NO].txt" &
     sleep 0.5
 done
-"$ROOT_DIR/client/client" localhost 8674 team2 --no-fork 2> "$ROOT_DIR/logs/client_log_normal_probe_fifteen_clients_team2_15.txt"
+"$ROOT_DIR/client/client" localhost 8674 team2 --no-fork 2> "$ROOT_DIR/logs/[CLIENT-team2-15]---[teams=2][clients=15][fork=NO].txt" &
+
+echo "=== Running server/run.sh ==="
+(cd "$ROOT_DIR/server" && ./run.sh)
+
 wait
