@@ -198,8 +198,8 @@ func _on_start_game_pressed() -> void:
 func _on_ink_shimmer_changed(value: float) -> void:
 	_shader.set_shader_parameter("frame_ink_shimmer", value)
 	
-func _on_time_value_changed(value: float) -> void:
+func _on_time_value_changed(value: int) -> void:
 	if AppState.use_mock:
 		MockServer.set_new_interval(value)
 	else:
-		print("TIME MANAGEMENT WITH SERVER PENDING")
+		ServerConnectionManager.send_time_change_request(value)

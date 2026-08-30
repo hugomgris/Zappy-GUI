@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://cmn2itfsokxt1"]
-
-[ext_resource type="PackedScene" uid="uid://cj1m5l5830ny0" path="res://assets/models/resources/test_linemate.glb" id="1_i4wgc"]
-
-[node name="test_linemate" unique_id=118672033 instance=ExtResource("1_i4wgc")]

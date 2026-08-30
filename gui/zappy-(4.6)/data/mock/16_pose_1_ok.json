@@ -1,7 +1,0 @@
-{
-  "type": "response",
-  "cmd": "pose",
-  "arg": "linemate",
-  "status": "ok",
-  "player_id": 1
-}

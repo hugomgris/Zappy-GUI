@@ -306,7 +306,6 @@ func set_up_sliders() -> void:
 			
 			_slider.value_changed.connect(func(v):
 				_current_time_step = int(v)
-				print("value of the time interval:", v)
 				TimeManager.set_time_value(int(v))
 			)
 			

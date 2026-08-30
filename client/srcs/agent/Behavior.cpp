@@ -397,10 +397,12 @@ void Behavior::tickCollectStones() {
 	}
 
 	if (shouldFork()) {
+		Logger::info("FORKING");
 		_aiState = AIState::Forking;
 		clearNavPlan();
 		return;
-	}
+	} else
+		Logger::info("FORKING attempt FAILED");
 
 	computeMissingStones();
 
@@ -1288,20 +1290,25 @@ void Behavior::spawnChildClient() {
 
     if (pid == 0) {
         std::string teamNumber = _teamName.substr(4);
-        std::string logFile = "logs/client_log_normal_egg_team" + teamNumber + "_" + std::to_string(getpid()) + ".txt";
+        const char *root = std::getenv("ZAPPY_ROOT_DIR");
+		std::string base = root ? root : ".";
+		std::string logFile = base + "/logs/" + "[CHILD-team" + teamNumber+ "-" + std::to_string(getpid())+ "].txt";
+		//std::string logFile = base + "/logs/client_log_normal_egg_team" + teamNumber + "_" + std::to_string(getpid()) + ".txt";
+		std::string clientBin = base + "/client/client";
         
         int fd = open(logFile.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (fd >= 0) {
-            dup2(fd, STDERR_FILENO);
-            close(fd);
-        }
-        
+		if (fd >= 0) {
+			dup2(fd, STDERR_FILENO);
+			close(fd);
+		} else {
+			Logger::error("Behavior: failed to open child log file " + logFile + ": " + strerror(errno));
+		}
         std::string host = _state.serverHost;
         std::string port = std::to_string(_state.serverPort);
         std::string team = _teamName;
 
-        execl("./client/client",
-              "./client/client",
+        execl(clientBin.c_str(),
+              clientBin.c_str(),
               host.c_str(),
               port.c_str(),
               team.c_str(),
